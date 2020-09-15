@@ -1,0 +1,30 @@
+// To produce these binaries, in latest AOSP source tree, run
+// $ m
+def aospDeps = fileTree(include: [
+        // For more information about this module:
+        // https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-11.0.0_r3/Android.bp#507
+        // framework_intermediates/classes-header.jar works for gradle build as well,
+        // but not unit tests, so we use the actual classes (without updatable modules).
+        //
+        // out/target/common/obj/JAVA_LIBRARIES/framework-minus-apex_intermediates/classes.jar
+        'android.jar',
+        // out/target/common/obj/JAVA_LIBRARIES/core-libart.com.android.art.release_intermediates/classes.jar
+        'libcore.jar'
+], dir: 'libs')
+
+dependencies {
+    compileOnly aospDeps
+
+    /**
+     * Dependencies in AOSP
+     *
+     * We try to keep the dependencies in sync with what AOSP ships as SystemUpdater is meant to be built
+     * with the AOSP build system and gradle builds are just for more pleasant development.
+     * Using the AOSP versions in gradle builds allows us to spot issues early on.
+     */
+
+    implementation("com.google.guava:guava:") {
+        // https://android.googlesource.com/platform/external/guava/+/refs/tags/android-11.0.0_r38/android/guava/pom.xml#8
+        version { strictly '27.1-android' }
+    }
+}
