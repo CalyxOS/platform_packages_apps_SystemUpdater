@@ -61,7 +61,32 @@ android {
     }
 }
 
+// To produce these binaries, in latest AOSP source tree, run
+// $ m
+def aospDeps = fileTree(include: [
+        // For more information about this module:
+        // https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-11.0.0_r3/Android.bp#507
+        // framework_intermediates/classes-header.jar works for gradle build as well,
+        // but not unit tests, so we use the actual classes (without updatable modules).
+        //
+        // out/target/common/obj/JAVA_LIBRARIES/framework-minus-apex_intermediates/classes.jar
+        'android.jar',
+        // out/target/common/obj/JAVA_LIBRARIES/core-libart.com.android.art.release_intermediates/classes.jar
+        'libcore.jar'
+], dir: 'libs')
+
 dependencies {
+    compileOnly aospDeps
+
     // external/guava/android/guava-bom/pom.xml
     implementation("com.google.guava:guava:27.1-android")
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        if (JavaVersion.current() >= JavaVersion.VERSION_1_9) {
+            options.compilerArgs.addAll(['--release', '8'])
+        }
+        options.compilerArgs.add('-Xbootclasspath/p:libs/android.jar:libs/libcore.jar')
+    }
 }
