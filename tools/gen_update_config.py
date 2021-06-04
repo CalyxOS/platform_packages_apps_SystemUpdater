@@ -19,7 +19,7 @@ Given a OTA package file, produces update config JSON file.
 
 Example:
       $ PYTHONPATH=$ANDROID_BUILD_TOP/build/make/tools/releasetools:$PYTHONPATH \\
-            bootable/recovery/updater_sample/tools/gen_update_config.py \\
+            packages/apps/SystemUpdater/tools/gen_update_config.py \\
                 --ab_install_type=STREAMING \\
                 ota-build-001.zip  \\
                 my-config-001.json \\

@@ -237,7 +237,7 @@ public class UpdateConfig implements Parcelable {
         private PackageFile[] mPropertyFiles;
 
         /**
-         * SystemUpdaterSample receives the authorization token from the OTA server, in addition
+         * System updater receives the authorization token from the OTA server, in addition
          * to the package URL. It passes on the info to update_engine, so that the latter can
          * fetch the data from the package server directly with the token.
          */

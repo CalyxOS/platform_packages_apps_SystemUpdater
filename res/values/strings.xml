@@ -14,7 +14,7 @@
 -->
 
 <resources>
-    <string name="app_name">SystemUpdaterSample</string>
+    <string name="app_name">System updater</string>
     <string name="action_reload">Reload</string>
     <string name="unknown">Unknown</string>
     <string name="close">CLOSE</string>
