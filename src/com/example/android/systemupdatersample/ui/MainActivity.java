@@ -42,7 +42,7 @@ import com.example.android.systemupdatersample.util.UpdateEngineStatuses;
 import java.util.List;
 
 /**
- * UI for SystemUpdaterSample app.
+ * UI for system updater app.
  */
 public class MainActivity extends Activity {
 
@@ -245,7 +245,7 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Invoked when SystemUpdaterSample app state changes.
+     * Invoked when system updater app state changes.
      * Value of {@code state} will be one of the
      * values from {@link UpdaterState}.
      */

@@ -123,7 +123,7 @@ public class UpdateManager {
     }
 
     /**
-     * Sets SystemUpdaterSample app state change callback. Value of {@code state} will be one
+     * Sets system updater app state change callback. Value of {@code state} will be one
      * of the values from {@link UpdaterState}.
      *
      * @param onStateChangeCallback a callback with parameter {@code state}.

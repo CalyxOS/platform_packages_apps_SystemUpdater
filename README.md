@@ -1,4 +1,4 @@
-# SystemUpdaterSample
+# System updater
 
 This app demonstrates how to use Android system updates APIs to install
 [OTA updates](https://source.android.com/devices/tech/ota/). It contains a
@@ -10,7 +10,7 @@ targets the latest android.
 
 ## Workflow
 
-SystemUpdaterSample app shows list of available updates on the UI. User is allowed
+System updater app shows list of available updates on the UI. User is allowed
 to select an update and apply it to the device. App shows installation progress,
 logs can be found in `adb logcat`. User can stop or reset an update. Resetting
 the update requests update engine to cancel any ongoing update, and revert
@@ -29,7 +29,7 @@ to the app, but in this sample, the config files are stored on the device.
 The directory can be found in logs or on the UI. In most cases it should be located at
 `/data/user/0/com.example.android.systemupdatersample/files/configs/`.
 
-SystemUpdaterSample app downloads OTA package from `url`. In this sample app
+System updater app downloads OTA package from `url`. In this sample app
 `url` is expected to point to file system, e.g. `file:///data/my-sample-ota-builds-dir/ota-002.zip`.
 
 If `ab_install_type` is `NON_STREAMING` then app checks if `url` starts
@@ -83,7 +83,7 @@ callback. The second problem is solved by adding `PAUSED` updater state.
 ### Text fields
 
 - `Current Build:` - shows current active build.
-- `Updater state:` - SystemUpdaterSample app state.
+- `Updater state:` - system updater app state.
 - `Engine status:` - last reported update_engine status.
 - `Engine error:` - last reported payload application error.
 
@@ -161,7 +161,7 @@ purpose only.
 
 ### Without the privileged system permissions
 
-1. Compile the app `mmma -j bootable/recovery/updater_sample`.
+1. Compile the app `mmma -j packages/apps/SystemUpdater`.
 2. Install the app to the device using `adb install <APK_PATH>`.
 3. Change permissions on `/data/ota_package/` to `0777` on the device.
 4. Set SELinux mode to permissive. See instructions below.
@@ -179,9 +179,9 @@ privileged system app, so it's granted the required permissions to access
 `update_engine` service as well as OTA package files. Detailed steps are as follows:
 
 1. [Prepare to build](https://source.android.com/setup/build/building)
-2. Add the module (SystemUpdaterSample) to the `PRODUCT_PACKAGES` list for the
+2. Add the module (CalyxSystemUpdater) to the `PRODUCT_PACKAGES` list for the
    lunch target.
-   e.g. add a line containing `PRODUCT_PACKAGES += SystemUpdaterSample`
+   e.g. add a line containing `PRODUCT_PACKAGES += CalyxSystemUpdater`
    to `device/google/marlin/device-common.mk`.
 3. [Whitelist the sample app](https://source.android.com/devices/tech/config/perms-whitelist)
    * Add
@@ -191,9 +191,8 @@ privileged system app, so it's granted the required permissions to access
     </privapp-permissions>
    ```
    to `frameworks/base/data/etc/privapp-permissions-platform.xml`
-4. Add `privileged: true` to SystemUpdaterSample
-   [building rule](https://android.googlesource.com/platform/bootable/recovery/+/refs/heads/master/updater_sample/Android.bp).
-5. Build sample app `make -j SystemUpdaterSample`.
+4. Add `privileged: true` to CalyxSystemUpdater Android.bp
+5. Build sample app `make -j CalyxSystemUpdater`.
 6. Build Android `make -j`
 7. [Flash the device](https://source.android.com/setup/build/running)
 8. Add update config files; look above at `## Update Config file`;
@@ -229,11 +228,11 @@ privileged system app, so it's granted the required permissions to access
 
 The commands are expected to be run from `$ANDROID_BUILD_TOP`.
 
-1. Build `make -j SystemUpdaterSample` and `make -j SystemUpdaterSampleTests`.
+1. Build `make -j CalyxSystemUpdater` and `make -j CalyxSystemUpdaterTests`.
 2. Install app
-   `adb install $OUT/system/app/SystemUpdaterSample/SystemUpdaterSample.apk`
+   `adb install $OUT/system/app/CalyxSystemUpdater/CalyxSystemUpdater.apk`
 3. Install tests
-   `adb install $OUT/testcases/SystemUpdaterSampleTests/arm64/SystemUpdaterSampleTests.apk`
+   `adb install $OUT/testcases/CalyxSystemUpdaterTests/arm64/CalyxSystemUpdaterTests.apk`
 4. Run tests
    `adb shell am instrument -w com.example.android.systemupdatersample.tests/android.support.test.runner.AndroidJUnitRunner`
 5. Run a test file
@@ -267,5 +266,5 @@ android# getenforce
 
 ## License
 
-SystemUpdaterSample app is released under
+System updater app is released under
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).

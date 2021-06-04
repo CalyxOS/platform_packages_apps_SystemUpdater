@@ -28,6 +28,6 @@
 
     <instrumentation android:name="androidx.test.runner.AndroidJUnitRunner"
                      android:targetPackage="com.example.android.systemupdatersample"
-                     android:label="Tests for SystemUpdaterSample."/>
+                     android:label="Tests for System updater."/>
 
 </manifest>
