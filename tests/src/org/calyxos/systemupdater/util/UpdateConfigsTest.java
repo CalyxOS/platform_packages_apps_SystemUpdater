@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.example.android.systemupdatersample.util;
+package org.calyxos.systemupdater.util;
 
 import static org.junit.Assert.assertArrayEquals;
 
 import androidx.test.filters.SmallTest;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.example.android.systemupdatersample.UpdateConfig;
+import org.calyxos.systemupdater.UpdateConfig;
 
 import org.junit.Rule;
 import org.junit.Test;

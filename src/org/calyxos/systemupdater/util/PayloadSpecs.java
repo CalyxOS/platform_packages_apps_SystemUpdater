@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.example.android.systemupdatersample.util;
+package org.calyxos.systemupdater.util;
 
-import com.example.android.systemupdatersample.PayloadSpec;
+import org.calyxos.systemupdater.PayloadSpec;
 
 import java.io.BufferedReader;
 import java.io.File;
