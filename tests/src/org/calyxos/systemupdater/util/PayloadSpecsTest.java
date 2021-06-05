@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.example.android.systemupdatersample.util;
+package org.calyxos.systemupdater.util;
 
-import static com.example.android.systemupdatersample.util.PackageFiles.PAYLOAD_BINARY_FILE_NAME;
+import static org.calyxos.systemupdater.util.PackageFiles.PAYLOAD_BINARY_FILE_NAME;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -27,8 +27,8 @@ import androidx.test.InstrumentationRegistry;
 import androidx.test.filters.SmallTest;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.example.android.systemupdatersample.PayloadSpec;
-import com.example.android.systemupdatersample.tests.R;
+import org.calyxos.systemupdater.PayloadSpec;
+import org.calyxos.systemupdater.tests.R;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 

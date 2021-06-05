@@ -15,7 +15,7 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.android.systemupdatersample">
+          package="org.calyxos.systemupdater">
 
     <uses-sdk android:minSdkVersion="27" android:targetSdkVersion="27" />
 

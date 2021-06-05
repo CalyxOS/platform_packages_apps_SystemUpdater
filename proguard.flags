@@ -13,12 +13,12 @@
 # limitations under the License.
 
 # Keep, used in tests.
--keep public class com.example.android.systemupdatersample.UpdateManager {
+-keep public class org.calyxos.systemupdater.UpdateManager {
    public int getUpdaterState();
 }
 
 # Keep, used in tests.
--keep public class com.example.android.systemupdatersample.UpdateConfig {
+-keep public class org.calyxos.systemupdater.UpdateConfig {
    public <init>(java.lang.String, java.lang.String, int);
 }
 

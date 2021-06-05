@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.example.android.systemupdatersample.util;
+package org.calyxos.systemupdater.util;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.example.android.systemupdatersample.UpdateConfig;
+import org.calyxos.systemupdater.UpdateConfig;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;

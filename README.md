@@ -21,13 +21,13 @@ if the update has been applied. Stopping does not revert the applied update.
 
 In this sample updates are defined in JSON update config files.
 The structure of a config file is defined in
-`com.example.android.systemupdatersample.UpdateConfig`, example file is located
+`org.calyxos.systemupdater.UpdateConfig`, example file is located
 at `res/raw/sample.json`.
 
 In real-life update system the config files expected to be served from a server
 to the app, but in this sample, the config files are stored on the device.
 The directory can be found in logs or on the UI. In most cases it should be located at
-`/data/user/0/com.example.android.systemupdatersample/files/configs/`.
+`/data/user/0/org.calyxos.systemupdater/files/configs/`.
 
 System updater app downloads OTA package from `url`. In this sample app
 `url` is expected to point to file system, e.g. `file:///data/my-sample-ota-builds-dir/ota-002.zip`.
@@ -186,7 +186,7 @@ privileged system app, so it's granted the required permissions to access
 3. [Whitelist the sample app](https://source.android.com/devices/tech/config/perms-whitelist)
    * Add
    ```
-    <privapp-permissions package="com.example.android.systemupdatersample">
+    <privapp-permissions package="org.calyxos.systemupdater">
         <permission name="android.permission.ACCESS_CACHE_FILESYSTEM"/>
     </privapp-permissions>
    ```
@@ -234,12 +234,12 @@ The commands are expected to be run from `$ANDROID_BUILD_TOP`.
 3. Install tests
    `adb install $OUT/testcases/CalyxSystemUpdaterTests/arm64/CalyxSystemUpdaterTests.apk`
 4. Run tests
-   `adb shell am instrument -w com.example.android.systemupdatersample.tests/android.support.test.runner.AndroidJUnitRunner`
+   `adb shell am instrument -w org.calyxos.systemupdater.tests/android.support.test.runner.AndroidJUnitRunner`
 5. Run a test file
    ```
    adb shell am instrument \
-     -w -e class com.example.android.systemupdatersample.UpdateManagerTest#applyUpdate_appliesPayloadToUpdateEngine \
-     com.example.android.systemupdatersample.tests/android.support.test.runner.AndroidJUnitRunner
+     -w -e class org.calyxos.systemupdater.UpdateManagerTest#applyUpdate_appliesPayloadToUpdateEngine \
+     org.calyxos.systemupdater.tests/android.support.test.runner.AndroidJUnitRunner
    ```
 
 

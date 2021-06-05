@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.systemupdatersample.ui;
+package org.calyxos.systemupdater.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -31,13 +31,13 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.android.systemupdatersample.R;
-import com.example.android.systemupdatersample.UpdateConfig;
-import com.example.android.systemupdatersample.UpdateManager;
-import com.example.android.systemupdatersample.UpdaterState;
-import com.example.android.systemupdatersample.util.UpdateConfigs;
-import com.example.android.systemupdatersample.util.UpdateEngineErrorCodes;
-import com.example.android.systemupdatersample.util.UpdateEngineStatuses;
+import org.calyxos.systemupdater.R;
+import org.calyxos.systemupdater.UpdateConfig;
+import org.calyxos.systemupdater.UpdateManager;
+import org.calyxos.systemupdater.UpdaterState;
+import org.calyxos.systemupdater.util.UpdateConfigs;
+import org.calyxos.systemupdater.util.UpdateEngineErrorCodes;
+import org.calyxos.systemupdater.util.UpdateEngineStatuses;
 
 import java.util.List;
 
