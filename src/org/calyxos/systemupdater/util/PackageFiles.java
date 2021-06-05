@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.systemupdatersample.util;
+package org.calyxos.systemupdater.util;
 
 /** Utility class for an OTA package. */
 public final class PackageFiles {

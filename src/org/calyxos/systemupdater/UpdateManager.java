@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.systemupdatersample;
+package org.calyxos.systemupdater;
 
 import android.content.Context;
 import android.os.Handler;
@@ -22,9 +22,9 @@ import android.os.UpdateEngine;
 import android.os.UpdateEngineCallback;
 import android.util.Log;
 
-import com.example.android.systemupdatersample.services.PrepareUpdateService;
-import com.example.android.systemupdatersample.util.UpdateEngineErrorCodes;
-import com.example.android.systemupdatersample.util.UpdateEngineProperties;
+import org.calyxos.systemupdater.services.PrepareUpdateService;
+import org.calyxos.systemupdater.util.UpdateEngineErrorCodes;
+import org.calyxos.systemupdater.util.UpdateEngineProperties;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.AtomicDouble;

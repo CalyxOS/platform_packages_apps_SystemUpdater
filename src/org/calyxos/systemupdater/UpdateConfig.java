@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.systemupdatersample;
+package org.calyxos.systemupdater;
 
 import android.os.Parcel;
 import android.os.Parcelable;
