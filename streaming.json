@@ -1,0 +1,37 @@
+{
+    "__": "*** Generated using tools/gen_update_config.py ***",
+    "ab_config": {
+        "force_switch_slot": true,
+        "property_files": [
+            {
+                "filename": "payload_metadata.bin",
+                "offset": 1338,
+                "size": 82006
+            },
+            {
+                "filename": "payload.bin",
+                "offset": 1338,
+                "size": 1317272075
+            },
+            {
+                "filename": "payload_properties.txt",
+                "offset": 1317273471,
+                "size": 155
+            },
+            {
+                "filename": "care_map.pb",
+                "offset": 710,
+                "size": 581
+            },
+            {
+                "filename": "metadata",
+                "offset": 69,
+                "size": 594
+            }
+        ],
+        "verify_payload_metadata": true
+    },
+    "ab_install_type": "STREAMING",
+    "name": "S calyx_flame-ota-eng.cdesai",
+    "url": "file:///data/ota_package/ota.zip"
+}
