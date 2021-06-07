@@ -2,15 +2,15 @@
 
 This app demonstrates how to use Android system updates APIs to install
 [OTA updates](https://source.android.com/devices/tech/ota/). It contains a
-sample client for `update_engine` to install A/B (seamless) updates.
+client for `update_engine` to install A/B (seamless) updates.
 
-A/B (seamless) update is available since Android Nougat (API 24), but this sample
+A/B (seamless) update is available since Android Nougat (API 24), but this app
 targets the latest android.
 
 
 ## Workflow
 
-System updater app shows list of available updates on the UI. User is allowed
+This app shows list of available updates on the UI. User is allowed
 to select an update and apply it to the device. App shows installation progress,
 logs can be found in `adb logcat`. User can stop or reset an update. Resetting
 the update requests update engine to cancel any ongoing update, and revert
@@ -19,17 +19,17 @@ if the update has been applied. Stopping does not revert the applied update.
 
 ## Update Config file
 
-In this sample updates are defined in JSON update config files.
+In this app updates are defined in JSON update config files.
 The structure of a config file is defined in
 `org.calyxos.systemupdater.UpdateConfig`, example file is located
 at `res/raw/sample.json`.
 
 In real-life update system the config files expected to be served from a server
-to the app, but in this sample, the config files are stored on the device.
+to the app, but in this app, the config files are stored on the device.
 The directory can be found in logs or on the UI. In most cases it should be located at
 `/data/user/0/org.calyxos.systemupdater/files/configs/`.
 
-System updater app downloads OTA package from `url`. In this sample app
+System updater app downloads OTA package from `url`. In this app
 `url` is expected to point to file system, e.g. `file:///data/my-sample-ota-builds-dir/ota-002.zip`.
 
 If `ab_install_type` is `NON_STREAMING` then app checks if `url` starts
@@ -51,34 +51,34 @@ Config files can be generated using `tools/gen_update_config.py`.
 Running `./tools/gen_update_config.py --help` shows usage of the script.
 
 
-## Sample App State vs UpdateEngine Status
+## System updater app State vs UpdateEngine Status
 
 UpdateEngine provides status for different stages of update application
 process. But it lacks of proper status codes when update fails.
 
 This creates two problems:
 
-1. If sample app is unbound from update_engine (MainActivity is paused, destroyed),
+1. If the app is unbound from update_engine (MainActivity is paused, destroyed),
    app doesn't receive onStatusUpdate and onPayloadApplicationCompleted notifications.
    If app binds to update_engine after update is completed,
    only onStatusUpdate is called, but status becomes IDLE in most cases.
    And there is no way to know if update was successful or not.
 
-2. This sample app demostrates suspend/resume using update_engins's
+2. This app demostrates suspend/resume using update_engine's
    `cancel` and `applyPayload` (which picks up from where it left).
    When `cancel` is called, status is set to `IDLE`, which doesn't allow
    tracking suspended state properly.
 
-To solve these problems sample app implements its own separate update
-state - `UpdaterState`. To solve the first problem, sample app persists
+To solve these problems the app implements its own separate update
+state - `UpdaterState`. To solve the first problem, the app persists
 `UpdaterState` on a device. When app is resumed, it checks if `UpdaterState`
 matches the update_engine's status (as onStatusUpdate is guaranteed to be called).
-If they doesn't match, sample app calls `applyPayload` again with the same
+If they doesn't match, the app calls `applyPayload` again with the same
 parameters, and handles update completion properly using `onPayloadApplicationCompleted`
 callback. The second problem is solved by adding `PAUSED` updater state.
 
 
-## Sample App UI
+## System updater app UI
 
 ### Text fields
 
@@ -107,7 +107,7 @@ callback. The second problem is solved by adding `PAUSED` updater state.
 Sometimes OTA package server might require some HTTP headers to be present,
 e.g. `Authorization` header to contain valid auth token. While performing
 streaming update, `UpdateEngine` allows passing on certain HTTP headers;
-as of writing this sample app, these headers are `Authorization` and `User-Agent`.
+as of writing this app, these headers are `Authorization` and `User-Agent`.
 
 `android.os.UpdateEngine#applyPayload` contains information on
 which HTTP headers are supported.
@@ -159,48 +159,23 @@ Called whenever an update attempt is completed or failed.
 The commands are expected to be run from `$ANDROID_BUILD_TOP` and for demo
 purpose only.
 
-### Without the privileged system permissions
-
-1. Compile the app `mmma -j packages/apps/SystemUpdater`.
-2. Install the app to the device using `adb install <APK_PATH>`.
-3. Change permissions on `/data/ota_package/` to `0777` on the device.
-4. Set SELinux mode to permissive. See instructions below.
-5. Add update config files; look above at [Update Config file](#Update-Config-file).
-6. Push OTA packages to the device.
-7. Run the sample app.
-
-### With the privileged system permissions
-
-To run sample app as a privileged system app, it needs to be installed in `/system/priv-app/`.
-This directory is expected to be read-only, unless explicitly remounted.
-
-The recommended way to run the app is to build and install it as a
-privileged system app, so it's granted the required permissions to access
-`update_engine` service as well as OTA package files. Detailed steps are as follows:
+The app is built and installed as a privileged system app, so it's granted the required
+permissions to access `update_engine` service as well as OTA package files.
+Detailed steps are as follows:
 
 1. [Prepare to build](https://source.android.com/setup/build/building)
 2. Add the module (CalyxSystemUpdater) to the `PRODUCT_PACKAGES` list for the
    lunch target.
    e.g. add a line containing `PRODUCT_PACKAGES += CalyxSystemUpdater`
-   to `device/google/marlin/device-common.mk`.
-3. [Whitelist the sample app](https://source.android.com/devices/tech/config/perms-whitelist)
-   * Add
-   ```
-    <privapp-permissions package="org.calyxos.systemupdater">
-        <permission name="android.permission.ACCESS_CACHE_FILESYSTEM"/>
-    </privapp-permissions>
-   ```
-   to `frameworks/base/data/etc/privapp-permissions-platform.xml`
-4. Add `privileged: true` to CalyxSystemUpdater Android.bp
-5. Build sample app `make -j CalyxSystemUpdater`.
-6. Build Android `make -j`
-7. [Flash the device](https://source.android.com/setup/build/running)
-8. Add update config files; look above at `## Update Config file`;
+   to `device/google/redbull/device-common.mk`.
+3. Build Android `make -j`
+4. [Flash the device](https://source.android.com/setup/build/running)
+5. Add update config files; look above at `## Update Config file`;
    `adb root` might be required.
-9. Push OTA packages to the device if there is no server to stream packages from;
+6. Push OTA packages to the device if there is no server to stream packages from;
    changing of SELinux labels of OTA packages directory might be required
    `chcon -R u:object_r:ota_package_file:s0 /data/my-sample-ota-builds-dir`
-10. Run the sample app.
+7. Run the system updater app.
 
 
 ## Development
@@ -218,10 +193,13 @@ privileged system app, so it's granted the required permissions to access
 - [x] [Package compatibility check](https://source.android.com/devices/architecture/vintf/match-rules)
 - [x] Deferred switch slot demo
 - [x] Add UpdateManager; extract update logic from MainActivity
-- [x] Add Sample app update state (separate from update_engine status)
+- [x] Add system updater app update state (separate from update_engine status)
 - [x] Add smart update completion detection using onStatusUpdate
 - [x] Add pause/resume demo
 - [x] Verify system partition checksum for package
+- [ ] Fetch config from URL instead of res/raw
+- [ ] Add changelog support
+- [ ] Improve UI
 
 
 ## Running tests
@@ -252,16 +230,6 @@ apps can access them.
 ## Getting read/write access to `/data/ota_package/`
 
 Access to cache filesystem is granted only to system apps.
-
-
-## Setting SELinux mode to permissive (0)
-
-```txt
-local$ adb root
-local$ adb shell
-android# setenforce 0
-android# getenforce
-```
 
 
 ## License
