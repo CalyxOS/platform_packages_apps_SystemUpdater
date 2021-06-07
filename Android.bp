@@ -15,6 +15,7 @@
 android_app {
     name: "CalyxSystemUpdater",
     sdk_version: "system_current",
+    privileged: true,
 
     srcs: ["src/**/*.java"],
 
@@ -29,4 +30,13 @@ android_app {
     },
 
     resource_dirs: ["res"],
+
+    required: ["privapp_whitelist_org.calyxos.systemupdater"],
+}
+
+prebuilt_etc {
+    name: "privapp_whitelist_org.calyxos.systemupdater",
+    src: "privapp_whitelist_org.calyxos.systemupdater.xml",
+    sub_dir: "permissions",
+    filename_from_src: true,
 }
