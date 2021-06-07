@@ -3,8 +3,8 @@
     "__url": "https:// or file:// uri to update package (zip, xz, ...)",
     "__ab_install_type": "NON_STREAMING (from a local file) OR STREAMING (on the fly)",
     "name": "SAMPLE-cake-release BUILD-12345",
-    "url": "http://foo.bar/builds/ota-001.zip",
-    "ab_install_type": "NON_STREAMING",
+    "url": "file:///data/ota_package/ota.zip",
+    "ab_install_type": "STREAMING",
     "ab_streaming_metadata": {
         "__": "streaming_metadata is required only for streaming update",
         "__property_files": "name, offset and size of files",
@@ -18,12 +18,12 @@
                 "offset": 531,
                 "size": 5012323
             }
-        ],
-        "authorization": "Basic my-secret-token"
+        ]
     },
     "ab_config": {
         "__": "A/B (seamless) update configurations",
         "__force_switch_slot": "if set true device will boot to a new slot, otherwise user manually switches slot on the screen",
-        "force_switch_slot": false
+        "force_switch_slot": true,
+        "verify_payload_metadata": true
     }
 }
