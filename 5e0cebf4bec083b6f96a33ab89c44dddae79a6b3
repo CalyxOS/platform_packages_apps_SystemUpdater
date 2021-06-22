@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1beb1fe9_550e368f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-06-22T15:25:31Z",
+      "side": 1,
+      "message": "There should be a flag to ignore this",
+      "revId": "5e0cebf4bec083b6f96a33ab89c44dddae79a6b3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
