@@ -23,8 +23,6 @@
           The version name is the targeted Android version followed by - and our own version name.
           -->
 
-    <uses-sdk android:minSdkVersion="30" android:targetSdkVersion="30" />
-
     <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
