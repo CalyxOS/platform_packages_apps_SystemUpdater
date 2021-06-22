@@ -1,10 +1,14 @@
-*~
-*.bak
-*.pyc
-*.pyc-2.4
-Thumbs.db
+/bin/
+/build/
+/gen/
+/local.properties
+
 *.iml
+**~
+**.DS_Store
+.gradle/
 .idea/
-gen/
-.vscode
-local.properties
+
+# apk export folders
+/debug/
+/release/
