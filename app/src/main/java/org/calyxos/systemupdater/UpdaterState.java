@@ -32,7 +32,6 @@ public class UpdaterState {
     public static final int ERROR = 1;
     public static final int RUNNING = 2;
     public static final int PAUSED = 3;
-    public static final int SLOT_SWITCH_REQUIRED = 4;
     public static final int REBOOT_REQUIRED = 5;
 
     private static final SparseArray<String> STATE_MAP = new SparseArray<>();
@@ -42,7 +41,6 @@ public class UpdaterState {
         STATE_MAP.put(1, "ERROR");
         STATE_MAP.put(2, "RUNNING");
         STATE_MAP.put(3, "PAUSED");
-        STATE_MAP.put(4, "SLOT_SWITCH_REQUIRED");
         STATE_MAP.put(5, "REBOOT_REQUIRED");
     }
 
@@ -55,9 +53,8 @@ public class UpdaterState {
                     .put(IDLE, ImmutableSet.of(IDLE, ERROR, RUNNING))
                     .put(ERROR, ImmutableSet.of(IDLE))
                     .put(RUNNING, ImmutableSet.of(
-                            IDLE, ERROR, PAUSED, REBOOT_REQUIRED, SLOT_SWITCH_REQUIRED))
+                            IDLE, ERROR, PAUSED, REBOOT_REQUIRED))
                     .put(PAUSED, ImmutableSet.of(ERROR, RUNNING, IDLE))
-                    .put(SLOT_SWITCH_REQUIRED, ImmutableSet.of(ERROR, REBOOT_REQUIRED, IDLE))
                     .put(REBOOT_REQUIRED, ImmutableSet.of(IDLE))
                     .build();
 
