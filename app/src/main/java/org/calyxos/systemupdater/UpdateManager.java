@@ -26,7 +26,6 @@ import androidx.annotation.GuardedBy;
 
 import org.calyxos.systemupdater.services.PrepareUpdateService;
 import org.calyxos.systemupdater.util.UpdateEngineErrorCodes;
-import org.calyxos.systemupdater.util.UpdateEngineProperties;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.AtomicDouble;
@@ -59,8 +58,6 @@ public class UpdateManager {
     private AtomicInteger mEngineErrorCode = new AtomicInteger(UpdateEngineErrorCodes.UNKNOWN);
     private AtomicDouble mProgress = new AtomicDouble(0);
     private UpdaterState mUpdaterState = new UpdaterState(UpdaterState.IDLE);
-
-    private AtomicBoolean mManualSwitchSlotRequired = new AtomicBoolean(true);
 
     /** Synchronize state with engine status only once when app binds to UpdateEngine. */
     private AtomicBoolean mStateSynchronized = new AtomicBoolean(false);
@@ -112,14 +109,6 @@ public class UpdateManager {
 
     public int getUpdaterState() {
         return mUpdaterState.get();
-    }
-
-    /**
-     * Returns true if manual switching slot is required. Value depends on
-     * the update config {@code ab_config.force_switch_slot}.
-     */
-    public boolean isManualSwitchSlotRequired() {
-        return mManualSwitchSlotRequired.get();
     }
 
     /**
@@ -291,12 +280,6 @@ public class UpdateManager {
             mLastUpdateData = null;
         }
 
-        if (!config.getAbConfig().getForceSwitchSlot()) {
-            mManualSwitchSlotRequired.set(true);
-        } else {
-            mManualSwitchSlotRequired.set(false);
-        }
-
         Log.d(TAG, "Starting PrepareUpdateService");
         PrepareUpdateService.startService(context, config, mHandler, (code, payloadSpec) -> {
             if (code != PrepareUpdateService.RESULT_CODE_SUCCESS) {
@@ -314,11 +297,6 @@ public class UpdateManager {
     private List<String> prepareExtraProperties(UpdateConfig config) {
         List<String> extraProperties = new ArrayList<>();
 
-        if (!config.getAbConfig().getForceSwitchSlot()) {
-            // Disable switch slot on reboot, which is enabled by default.
-            // User will enable it manually by clicking "Switch Slot" button on the screen.
-            extraProperties.add(UpdateEngineProperties.PROPERTY_DISABLE_SWITCH_SLOT_ON_REBOOT);
-        }
         if (config.getInstallType() == UpdateConfig.AB_INSTALL_TYPE_STREAMING) {
             extraProperties.add("USER_AGENT=" + HTTP_USER_AGENT);
             config.getAbConfig()
@@ -378,42 +356,6 @@ public class UpdateManager {
     }
 
     /**
-     * Sets the new slot that has the updated partitions as the active slot,
-     * which device will boot into next time.
-     * This method is only supposed to be called after the payload is applied.
-     *
-     * Invoking {@link UpdateEngine#applyPayload} with the same payload url, offset, size
-     * and payload metadata headers doesn't trigger new update. It can be used to just switch
-     * active A/B slot.
-     *
-     * {@link UpdateEngine#applyPayload} might take several seconds to finish, and it will
-     * invoke callbacks {@link this#onStatusUpdate} and {@link this#onPayloadApplicationComplete)}.
-     */
-    public synchronized void setSwitchSlotOnReboot() {
-        Log.d(TAG, "setSwitchSlotOnReboot invoked");
-
-        // When mManualSwitchSlotRequired set false, next time
-        // onApplicationPayloadComplete is called,
-        // it will set updater state to REBOOT_REQUIRED.
-        mManualSwitchSlotRequired.set(false);
-
-        UpdateData.Builder builder;
-        synchronized (mLock) {
-            // To make sample app simple, we don't handle it.
-            Preconditions.checkArgument(
-                    mLastUpdateData != null,
-                    "mLastUpdateData must be present.");
-            builder = mLastUpdateData.toBuilder();
-        }
-        // PROPERTY_SKIP_POST_INSTALL should be passed on to skip post-installation hooks.
-        builder.setExtraProperties(
-                Collections.singletonList(UpdateEngineProperties.PROPERTY_SKIP_POST_INSTALL));
-        // UpdateEngine sets property SWITCH_SLOT_ON_REBOOT=1 by default.
-        // HTTP headers are not required, UpdateEngine is not expected to stream payload.
-        updateEngineApplyPayload(builder.build());
-    }
-
-    /**
      * Synchronize UpdaterState with UpdateEngine status.
      * Apply necessary UpdateEngine operation if status are out of sync.
      *
@@ -436,7 +378,6 @@ public class UpdateManager {
             case UpdaterState.IDLE:
             case UpdaterState.ERROR:
             case UpdaterState.PAUSED:
-            case UpdaterState.SLOT_SWITCH_REQUIRED:
                 // It might happen when update is started not from the sample app.
                 // To make the sample app simple, we won't handle this case.
                 Preconditions.checkState(
@@ -510,9 +451,7 @@ public class UpdateManager {
         mEngineErrorCode.set(errorCode);
         if (errorCode == UpdateEngine.ErrorCodeConstants.SUCCESS
                 || errorCode == UpdateEngineErrorCodes.UPDATED_BUT_NOT_ACTIVE) {
-            setUpdaterStateSilent(isManualSwitchSlotRequired()
-                    ? UpdaterState.SLOT_SWITCH_REQUIRED
-                    : UpdaterState.REBOOT_REQUIRED);
+            setUpdaterStateSilent(UpdaterState.REBOOT_REQUIRED);
         } else if (errorCode != UpdateEngineErrorCodes.USER_CANCELLED) {
             setUpdaterStateSilent(UpdaterState.ERROR);
         }
