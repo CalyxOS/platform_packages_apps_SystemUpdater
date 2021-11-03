@@ -37,9 +37,9 @@
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SYSTEM_UPDATE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <service
