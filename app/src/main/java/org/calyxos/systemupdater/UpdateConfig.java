@@ -70,7 +70,6 @@ public class UpdateConfig implements Parcelable {
         }
 
         JSONObject ab = o.getJSONObject("ab_config");
-        boolean forceSwitchSlot = ab.getBoolean("force_switch_slot");
         boolean verifyPayloadMetadata = ab.getBoolean("verify_payload_metadata");
         ArrayList<PackageFile> propertyFiles = new ArrayList<>();
         if (ab.has("property_files")) {
@@ -85,7 +84,6 @@ public class UpdateConfig implements Parcelable {
         }
         String authorization = ab.optString("authorization");
         c.mAbConfig = new AbConfig(
-                forceSwitchSlot,
                 verifyPayloadMetadata,
                 propertyFiles.toArray(new PackageFile[0]),
                 authorization);
@@ -224,12 +222,6 @@ public class UpdateConfig implements Parcelable {
          * if set true device will boot to new slot, otherwise user manually
          * switches slot on the screen.
          */
-        private boolean mForceSwitchSlot;
-
-        /**
-         * if set true device will boot to new slot, otherwise user manually
-         * switches slot on the screen.
-         */
         private boolean mVerifyPayloadMetadata;
 
         /** defines beginning of update data in archive */
@@ -243,18 +235,12 @@ public class UpdateConfig implements Parcelable {
         private String mAuthorization;
 
         public AbConfig(
-                boolean forceSwitchSlot,
                 boolean verifyPayloadMetadata,
                 PackageFile[] propertyFiles,
                 String authorization) {
-            this.mForceSwitchSlot = forceSwitchSlot;
             this.mVerifyPayloadMetadata = verifyPayloadMetadata;
             this.mPropertyFiles = propertyFiles;
             this.mAuthorization = authorization;
-        }
-
-        public boolean getForceSwitchSlot() {
-            return mForceSwitchSlot;
         }
 
         public boolean getVerifyPayloadMetadata() {
