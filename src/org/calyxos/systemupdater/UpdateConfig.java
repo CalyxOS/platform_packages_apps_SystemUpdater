@@ -70,7 +70,6 @@ public class UpdateConfig implements Parcelable {
         }
 
         JSONObject ab = o.getJSONObject("ab_config");
-        boolean verifyPayloadMetadata = ab.getBoolean("verify_payload_metadata");
         ArrayList<PackageFile> propertyFiles = new ArrayList<>();
         if (ab.has("property_files")) {
             JSONArray propertyFilesJson = ab.getJSONArray("property_files");
@@ -84,7 +83,6 @@ public class UpdateConfig implements Parcelable {
         }
         String authorization = ab.optString("authorization");
         c.mAbConfig = new AbConfig(
-                verifyPayloadMetadata,
                 propertyFiles.toArray(new PackageFile[0]),
                 authorization);
 
@@ -218,12 +216,6 @@ public class UpdateConfig implements Parcelable {
 
         private static final long serialVersionUID = 31044L;
 
-        /**
-         * if set true device will boot to new slot, otherwise user manually
-         * switches slot on the screen.
-         */
-        private boolean mVerifyPayloadMetadata;
-
         /** defines beginning of update data in archive */
         private PackageFile[] mPropertyFiles;
 
@@ -235,16 +227,10 @@ public class UpdateConfig implements Parcelable {
         private String mAuthorization;
 
         public AbConfig(
-                boolean verifyPayloadMetadata,
                 PackageFile[] propertyFiles,
                 String authorization) {
-            this.mVerifyPayloadMetadata = verifyPayloadMetadata;
             this.mPropertyFiles = propertyFiles;
             this.mAuthorization = authorization;
-        }
-
-        public boolean getVerifyPayloadMetadata() {
-            return mVerifyPayloadMetadata;
         }
 
         public PackageFile[] getPropertyFiles() {
