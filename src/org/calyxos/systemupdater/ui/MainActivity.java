@@ -27,7 +27,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +35,7 @@ import org.calyxos.systemupdater.R;
 import org.calyxos.systemupdater.UpdateConfig;
 import org.calyxos.systemupdater.UpdateManager;
 import org.calyxos.systemupdater.UpdaterState;
-import org.calyxos.systemupdater.util.UpdateConfigs;
+import org.calyxos.systemupdater.util.UpdateConfigDownloader;
 import org.calyxos.systemupdater.util.UpdateEngineErrorCodes;
 import org.calyxos.systemupdater.util.UpdateEngineStatuses;
 
@@ -50,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private TextView mTextViewBuild;
-    private Spinner mSpinnerConfigs;
-    private TextView mTextViewConfigsDirHint;
     private Button mButtonReload;
     private Button mButtonApplyConfig;
     private Button mButtonStop;
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextViewEngineErrorCode;
     private TextView mTextViewUpdateInfo;
 
-    private List<UpdateConfig> mConfigs;
+    private UpdateConfig mConfig;
 
     private final UpdateManager mUpdateManager =
             new UpdateManager(new UpdateEngine(), new Handler());
@@ -75,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.mTextViewBuild = findViewById(R.id.textViewBuild);
-        this.mSpinnerConfigs = findViewById(R.id.spinnerConfigs);
-        this.mTextViewConfigsDirHint = findViewById(R.id.textViewConfigsDirHint);
         this.mButtonReload = findViewById(R.id.buttonReload);
         this.mButtonApplyConfig = findViewById(R.id.buttonApplyConfig);
         this.mButtonStop = findViewById(R.id.buttonStop);
@@ -89,10 +84,8 @@ public class MainActivity extends AppCompatActivity {
         this.mTextViewEngineErrorCode = findViewById(R.id.textViewEngineErrorCode);
         this.mTextViewUpdateInfo = findViewById(R.id.textViewUpdateInfo);
 
-        this.mTextViewConfigsDirHint.setText(UpdateConfigs.getConfigsRoot(this));
-
         uiResetWidgets();
-        loadUpdateConfigs();
+        loadUpdateConfig();
 
         this.mUpdateManager.setOnStateChangeCallback(this::onUpdaterStateChange);
         this.mUpdateManager.setOnEngineStatusUpdateCallback(this::onEngineStatusUpdate);
@@ -126,17 +119,16 @@ public class MainActivity extends AppCompatActivity {
      * reload button is clicked
      */
     public void onReloadClick(View view) {
-        loadUpdateConfigs();
+        loadUpdateConfig();
     }
 
     /**
      * view config button is clicked
      */
     public void onViewConfigClick(View view) {
-        UpdateConfig config = mConfigs.get(mSpinnerConfigs.getSelectedItemPosition());
         new AlertDialog.Builder(this)
-                .setTitle(config.getName())
-                .setMessage(config.getRawJson())
+                .setTitle(mConfig.getName())
+                .setMessage(mConfig.getRawJson())
                 .setPositiveButton(R.string.close, (dialog, id) -> dialog.dismiss())
                 .show();
     }
@@ -152,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
                     uiResetWidgets();
                     uiResetEngineText();
-                    applyUpdate(getSelectedConfig());
+                    applyUpdate(mConfig);
                 })
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
@@ -302,7 +294,6 @@ public class MainActivity extends AppCompatActivity {
     /** resets ui */
     private void uiResetWidgets() {
         mTextViewBuild.setText(Build.DISPLAY);
-        mSpinnerConfigs.setEnabled(false);
         mButtonReload.setEnabled(false);
         mButtonApplyConfig.setEnabled(false);
         mButtonStop.setEnabled(false);
@@ -323,7 +314,6 @@ public class MainActivity extends AppCompatActivity {
     private void uiStateIdle() {
         uiResetWidgets();
         mButtonReset.setEnabled(true);
-        mSpinnerConfigs.setEnabled(true);
         mButtonReload.setEnabled(true);
         mButtonApplyConfig.setEnabled(true);
         mProgressBar.setProgress(0);
@@ -358,11 +348,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * loads json configurations from configs dir that is defined in {@link UpdateConfigs}.
+     * loads json configurations from server in {@link R.string.server}.
      */
-    private void loadUpdateConfigs() {
-        mConfigs = UpdateConfigs.getUpdateConfigs(this);
-        loadConfigsToSpinner(mConfigs);
+    private void loadUpdateConfig() {
+        // TODO Move to another thread
+        mConfig = UpdateConfigDownloader.getUpdateConfig();
     }
 
     /**
@@ -388,19 +378,4 @@ public class MainActivity extends AppCompatActivity {
         String stateText = UpdaterState.getStateText(state);
         mTextViewUpdaterState.setText(stateText + "/" + state);
     }
-
-    private void loadConfigsToSpinner(List<UpdateConfig> configs) {
-        String[] spinnerArray = UpdateConfigs.configsToNames(configs);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item,
-                spinnerArray);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout
-                .simple_spinner_dropdown_item);
-        mSpinnerConfigs.setAdapter(spinnerArrayAdapter);
-    }
-
-    private UpdateConfig getSelectedConfig() {
-        return mConfigs.get(mSpinnerConfigs.getSelectedItemPosition());
-    }
-
 }
