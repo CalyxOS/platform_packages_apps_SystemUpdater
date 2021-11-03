@@ -148,11 +148,9 @@ public class PrepareUpdateService extends JobIntentService {
     private PayloadSpec execute(UpdateConfig config)
             throws IOException, PreparationFailedException {
 
-        if (config.getAbConfig().getVerifyPayloadMetadata()) {
-            Log.i(TAG, "Verifying payload metadata with UpdateEngine.");
-            if (!verifyPayloadMetadata(config)) {
-                throw new PreparationFailedException("Payload metadata is not compatible");
-            }
+        Log.i(TAG, "Verifying payload metadata with UpdateEngine.");
+        if (!verifyPayloadMetadata(config)) {
+            throw new PreparationFailedException("Payload metadata is not compatible");
         }
 
         if (config.getInstallType() == UpdateConfig.AB_INSTALL_TYPE_NON_STREAMING) {
