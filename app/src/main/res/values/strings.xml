@@ -18,4 +18,5 @@
     <string name="action_reload">Reload</string>
     <string name="unknown">Unknown</string>
     <string name="close">CLOSE</string>
+    <string name="server" translatable="false">https://release.calyxinstitute.org</string>
 </resources>
