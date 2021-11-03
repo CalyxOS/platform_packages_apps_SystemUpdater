@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextViewEngineStatus;
     private TextView mTextViewEngineErrorCode;
     private TextView mTextViewUpdateInfo;
-    private Button mButtonSwitchSlot;
 
     private List<UpdateConfig> mConfigs;
 
@@ -89,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         this.mTextViewEngineStatus = findViewById(R.id.textViewEngineStatus);
         this.mTextViewEngineErrorCode = findViewById(R.id.textViewEngineErrorCode);
         this.mTextViewUpdateInfo = findViewById(R.id.textViewUpdateInfo);
-        this.mButtonSwitchSlot = findViewById(R.id.buttonSwitchSlot);
 
         this.mTextViewConfigsDirHint.setText(UpdateConfigs.getConfigsRoot(this));
 
@@ -238,14 +236,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * switch slot button clicked
-     */
-    public void onSwitchSlotClick(View view) {
-        uiResetWidgets();
-        mUpdateManager.setSwitchSlotOnReboot();
-    }
-
-    /**
      * Invoked when system updater app state changes.
      * Value of {@code state} will be one of the
      * values from {@link UpdaterState}.
@@ -265,8 +255,6 @@ public class MainActivity extends AppCompatActivity {
                 uiStatePaused();
             } else if (state == UpdaterState.ERROR) {
                 uiStateError();
-            } else if (state == UpdaterState.SLOT_SWITCH_REQUIRED) {
-                uiStateSlotSwitchRequired();
             } else if (state == UpdaterState.REBOOT_REQUIRED) {
                 uiStateRebootRequired();
             }
@@ -323,7 +311,6 @@ public class MainActivity extends AppCompatActivity {
         mButtonResume.setEnabled(false);
         mProgressBar.setEnabled(false);
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-        mButtonSwitchSlot.setEnabled(false);
         mTextViewUpdateInfo.setTextColor(Color.parseColor("#aaaaaa"));
     }
 
@@ -356,15 +343,6 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar.setEnabled(true);
         mProgressBar.setVisibility(ProgressBar.VISIBLE);
         mButtonResume.setEnabled(true);
-    }
-
-    private void uiStateSlotSwitchRequired() {
-        uiResetWidgets();
-        mButtonReset.setEnabled(true);
-        mProgressBar.setEnabled(true);
-        mProgressBar.setVisibility(ProgressBar.VISIBLE);
-        mButtonSwitchSlot.setEnabled(true);
-        mTextViewUpdateInfo.setTextColor(Color.parseColor("#777777"));
     }
 
     private void uiStateError() {
