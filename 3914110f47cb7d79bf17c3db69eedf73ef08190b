@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f0b662f_34a52339",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-11-24T17:37:16Z",
+      "side": 1,
+      "message": "Remove this too?",
+      "range": {
+        "startLine": 96,
+        "startChar": 12,
+        "endLine": 97,
+        "endChar": 46
+      },
+      "revId": "3914110f47cb7d79bf17c3db69eedf73ef08190b",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
