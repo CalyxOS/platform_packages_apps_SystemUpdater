@@ -18,9 +18,8 @@ package org.calyxos.systemupdater;
 
 import android.util.SparseArray;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -50,16 +49,16 @@ public class UpdaterState {
      * Allowed state transitions. It's a map: key is a state, value is a set of states that
      * are allowed to transition to from key.
      */
-    private static final ImmutableMap<Integer, ImmutableSet<Integer>> TRANSITIONS =
-            ImmutableMap.<Integer, ImmutableSet<Integer>>builder()
-                    .put(IDLE, ImmutableSet.of(IDLE, ERROR, RUNNING))
-                    .put(ERROR, ImmutableSet.of(IDLE))
-                    .put(RUNNING, ImmutableSet.of(
-                            IDLE, ERROR, PAUSED, REBOOT_REQUIRED, SLOT_SWITCH_REQUIRED))
-                    .put(PAUSED, ImmutableSet.of(ERROR, RUNNING, IDLE))
-                    .put(SLOT_SWITCH_REQUIRED, ImmutableSet.of(ERROR, REBOOT_REQUIRED, IDLE))
-                    .put(REBOOT_REQUIRED, ImmutableSet.of(IDLE))
-                    .build();
+    private static final Map<Integer, Set<Integer>> TRANSITIONS =
+            Map.of(
+                    IDLE, Set.of(IDLE, ERROR, RUNNING),
+                    ERROR, Set.of(IDLE),
+                    RUNNING, Set.of(
+                            IDLE, ERROR, PAUSED, REBOOT_REQUIRED, SLOT_SWITCH_REQUIRED),
+                    PAUSED, Set.of(ERROR, RUNNING, IDLE),
+                    SLOT_SWITCH_REQUIRED, Set.of(ERROR, REBOOT_REQUIRED, IDLE),
+                    REBOOT_REQUIRED, Set.of(IDLE)
+            );
 
     private AtomicInteger mState;
 
