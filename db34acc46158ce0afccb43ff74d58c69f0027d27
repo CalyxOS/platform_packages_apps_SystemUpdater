@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd648612_a9673a0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-11-24T17:21:20Z",
+      "side": 1,
+      "message": "Proposed:\nhttps://release.calyxinstitute.org/sunfish/stable/update.json\nstable is the channel, could be beta (user selection) or testing (setprop, used internally), or just anything else really, like \u0027foo\u0027 or \u0027twelve\u0027\n\nhttps://release.calyxinstitute.org/sunfishota-filename.zip\n\nThis is configured in the json anyway, but all files are stored at the root, that keeps things easier I think.",
+      "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e06e3e9c_68e38551",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-11-24T17:21:20Z",
+      "side": 1,
+      "message": "For prod we\u0027d set this to https://release.calyxinstitute.org - that\u0027s the current OTA server.",
+      "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
