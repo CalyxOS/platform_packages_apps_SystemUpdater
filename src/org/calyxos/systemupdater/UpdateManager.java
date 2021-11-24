@@ -22,6 +22,8 @@ import android.os.UpdateEngine;
 import android.os.UpdateEngineCallback;
 import android.util.Log;
 
+import androidx.annotation.GuardedBy;
+
 import org.calyxos.systemupdater.services.PrepareUpdateService;
 import org.calyxos.systemupdater.util.UpdateEngineErrorCodes;
 import org.calyxos.systemupdater.util.UpdateEngineProperties;
@@ -37,8 +39,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
-
-import javax.annotation.concurrent.GuardedBy;
 
 /**
  * Manages the update flow. It has its own state (in memory), separate from
