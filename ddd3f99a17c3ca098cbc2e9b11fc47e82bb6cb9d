@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "859bb7f9_58908e00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-11-24T17:12:44Z",
+      "side": 1,
+      "message": "I\u0027ll defer this to you, but fwiw guava with gradle did work, https://review.calyxos.org/c/CalyxOS/platform_packages_apps_SystemUpdater/+/4106/1/build.gradle#64",
+      "revId": "ddd3f99a17c3ca098cbc2e9b11fc47e82bb6cb9d",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
