@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97dc2434_987af367",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-11-24T17:10:42Z",
+      "side": 1,
+      "message": "Oh wow, that explains why studio keeps putting this everywhere.",
+      "revId": "1aaad5dce83c691e1508234d01b68d62e5f93c55",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
