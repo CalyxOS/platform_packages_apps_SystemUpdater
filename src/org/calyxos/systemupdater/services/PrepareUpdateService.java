@@ -39,7 +39,6 @@ import org.calyxos.systemupdater.util.FileDownloader;
 import org.calyxos.systemupdater.util.PackageFiles;
 import org.calyxos.systemupdater.util.PayloadSpecs;
 import org.calyxos.systemupdater.util.UpdateConfigs;
-import com.google.common.collect.ImmutableSet;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +47,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * This IntentService will download/extract the necessary files from the package zip
@@ -113,8 +113,8 @@ public class PrepareUpdateService extends JobIntentService {
     /**
      * The files that should be downloaded before streaming.
      */
-    private static final ImmutableSet<String> PRE_STREAMING_FILES_SET =
-            ImmutableSet.of(
+    private static final Set<String> PRE_STREAMING_FILES_SET =
+            Set.of(
                     PackageFiles.CARE_MAP_FILE_NAME,
                     PackageFiles.COMPATIBILITY_ZIP_FILE_NAME,
                     PackageFiles.METADATA_FILE_NAME,
