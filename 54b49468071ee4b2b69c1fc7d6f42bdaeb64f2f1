@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "120a2ed8_41ac16d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-11-24T16:56:12Z",
+      "side": 1,
+      "message": "Let\u0027s stick with just SystemUpdater ?",
+      "revId": "54b49468071ee4b2b69c1fc7d6f42bdaeb64f2f1",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
