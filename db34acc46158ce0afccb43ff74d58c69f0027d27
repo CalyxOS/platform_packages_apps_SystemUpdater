@@ -69,6 +69,40 @@
       "parentUuid": "e06e3e9c_68e38551",
       "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "542ae19b_55deb555",
+        "filename": "src/org/calyxos/systemupdater/services/PrepareUpdateService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-11-24T17:39:20Z",
+      "side": 1,
+      "message": "100 chars",
+      "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2eea26_08465534",
+        "filename": "src/org/calyxos/systemupdater/util/JsonDownloader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-11-24T17:39:20Z",
+      "side": 1,
+      "message": "Newline at the end of file",
+      "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
