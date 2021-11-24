@@ -16,7 +16,6 @@
 
 package org.calyxos.systemupdater.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Build;
@@ -31,6 +30,8 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.calyxos.systemupdater.R;
 import org.calyxos.systemupdater.UpdateConfig;
 import org.calyxos.systemupdater.UpdateManager;
@@ -44,7 +45,7 @@ import java.util.List;
 /**
  * UI for system updater app.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
