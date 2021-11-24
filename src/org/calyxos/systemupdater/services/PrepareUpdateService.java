@@ -21,7 +21,6 @@ import static org.calyxos.systemupdater.util.PackageFiles.OTA_PACKAGE_DIR;
 import static org.calyxos.systemupdater.util.PackageFiles.PAYLOAD_BINARY_FILE_NAME;
 import static org.calyxos.systemupdater.util.PackageFiles.PAYLOAD_PROPERTIES_FILE_NAME;
 
-import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +29,9 @@ import android.os.RecoverySystem;
 import android.os.ResultReceiver;
 import android.os.UpdateEngine;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.JobIntentService;
 
 import org.calyxos.systemupdater.PayloadSpec;
 import org.calyxos.systemupdater.UpdateConfig;
@@ -55,7 +57,7 @@ import java.util.Optional;
  * PrepareUpdateService runs on it's own thread. It will notify activity
  * using interface {@link UpdateResultCallback} when update is ready to install.
  */
-public class PrepareUpdateService extends IntentService {
+public class PrepareUpdateService extends JobIntentService {
 
     /**
      * UpdateResultCallback result codes.
@@ -123,7 +125,7 @@ public class PrepareUpdateService extends IntentService {
     private final UpdateEngine mUpdateEngine = new UpdateEngine();
 
     @Override
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleWork(@NonNull Intent intent) {
         Log.d(TAG, "On handle intent is called");
         UpdateConfig config = intent.getParcelableExtra(EXTRA_PARAM_CONFIG);
         ResultReceiver resultReceiver = intent.getParcelableExtra(EXTRA_PARAM_RESULT_RECEIVER);
