@@ -38,7 +38,7 @@ public class UpdateConfig implements Parcelable {
     public static final int AB_INSTALL_TYPE_STREAMING = 1;
 
     public static final Parcelable.Creator<UpdateConfig> CREATOR =
-            new Parcelable.Creator<UpdateConfig>() {
+            new Parcelable.Creator<>() {
                 @Override
                 public UpdateConfig createFromParcel(Parcel source) {
                     return new UpdateConfig(source);
