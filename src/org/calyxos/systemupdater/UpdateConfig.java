@@ -69,7 +69,6 @@ public class UpdateConfig implements Parcelable {
                         + "NON_STREAMING or STREAMING, got " + o.getString("ab_install_type"));
         }
 
-        // TODO: parse only for A/B updates when non-A/B is implemented
         JSONObject ab = o.getJSONObject("ab_config");
         boolean forceSwitchSlot = ab.getBoolean("force_switch_slot");
         boolean verifyPayloadMetadata = ab.getBoolean("verify_payload_metadata");
@@ -84,7 +83,7 @@ public class UpdateConfig implements Parcelable {
                         p.getLong("size")));
             }
         }
-        String authorization = ab.optString("authorization", null);
+        String authorization = ab.optString("authorization");
         c.mAbConfig = new AbConfig(
                 forceSwitchSlot,
                 verifyPayloadMetadata,
