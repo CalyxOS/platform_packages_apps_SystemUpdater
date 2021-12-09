@@ -20,4 +20,5 @@
     <string name="close">CLOSE</string>
     <string name="finish_update_info">To finish the update press the button below</string>
     <string name="server" translatable="false"></string>
+    <string name="default_channel" translatable="false"></string>
 </resources>
