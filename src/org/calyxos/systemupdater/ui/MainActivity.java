@@ -17,7 +17,9 @@
 package org.calyxos.systemupdater.ui;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -351,8 +353,26 @@ public class MainActivity extends AppCompatActivity {
      * loads json configurations from server in {@link R.string.server}.
      */
     private void loadUpdateConfig() {
-        // TODO Move to another thread
-        mConfig = UpdateConfigDownloader.getUpdateConfig();
+        new DownloadJsonTask(this).execute();
+    }
+
+    private class DownloadJsonTask extends AsyncTask<Void, Void, UpdateConfig> {
+        private Context mContext;
+
+        public DownloadJsonTask(Context context) {
+            mContext = context;
+        }
+
+        @Override
+        protected UpdateConfig doInBackground(Void... params) {
+            return UpdateConfigDownloader.getUpdateConfig(mContext);
+        }
+
+        @Override
+        protected void onPostExecute(UpdateConfig updateConfig) {
+            mConfig = updateConfig;
+            uiResetWidgets();
+        }
     }
 
     /**
