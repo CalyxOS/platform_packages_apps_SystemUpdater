@@ -14,7 +14,7 @@
 -->
 
 <resources>
-    <string name="default_channel" translatable="false"></string>
+    <string name="default_channel" translatable="false">stable</string>
     <bool name="default_battery">true</bool>
     <bool name="default_reboot">false</bool>
     <bool name="default_roaming">false</bool>
