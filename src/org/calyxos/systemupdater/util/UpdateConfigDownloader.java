@@ -23,6 +23,7 @@ import android.util.Log;
 
 import org.calyxos.systemupdater.R;
 import org.calyxos.systemupdater.UpdateConfig;
+import org.calyxos.systemupdater.settings.SettingsManager;
 
 import org.json.JSONException;
 
@@ -43,8 +44,9 @@ public final class UpdateConfigDownloader {
      */
     public static UpdateConfig getUpdateConfig(Context context) {
         String server = context.getResources().getString(R.string.server);
+        String channel = SettingsManager.getChannel(context);
         try {
-            JsonDownloader d = new JsonDownloader(server + Build.DEVICE);
+            JsonDownloader d = new JsonDownloader(server + "/" + channel + "/" + Build.DEVICE);
             String json = d.download();
             return UpdateConfig.fromJson(json);
         } catch (IOException | JSONException e) {
