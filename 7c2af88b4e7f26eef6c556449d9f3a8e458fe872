@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c8b1013_def74a9b",
+        "filename": "res/values/config.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-10T15:39:13Z",
+      "side": 1,
+      "message": "stable",
+      "revId": "7c2af88b4e7f26eef6c556449d9f3a8e458fe872",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87a37f99_c511956e",
+        "filename": "res/values/config.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-10T15:39:13Z",
+      "side": 1,
+      "message": "This should be false",
+      "revId": "7c2af88b4e7f26eef6c556449d9f3a8e458fe872",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bc68580_7e5cd630",
+        "filename": "res/values/config.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-10T15:39:13Z",
+      "side": 1,
+      "message": "I think we should set this to false as well.",
+      "revId": "7c2af88b4e7f26eef6c556449d9f3a8e458fe872",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
