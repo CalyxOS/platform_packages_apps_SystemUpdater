@@ -103,6 +103,24 @@
       "message": "Newline at the end of file",
       "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bbcd5c2_0d604b15",
+        "filename": "src/org/calyxos/systemupdater/util/JsonDownloader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-10T15:40:07Z",
+      "side": 1,
+      "message": "Should just add editorconfig here to avoid these issues.",
+      "parentUuid": "fb2eea26_08465534",
+      "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
