@@ -16,6 +16,24 @@
       "message": "Oh wow, that explains why studio keeps putting this everywhere.",
       "revId": "1aaad5dce83c691e1508234d01b68d62e5f93c55",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4893b3c_89ae9869",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-29T22:41:43Z",
+      "side": 1,
+      "message": ".",
+      "parentUuid": "97dc2434_987af367",
+      "revId": "1aaad5dce83c691e1508234d01b68d62e5f93c55",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
