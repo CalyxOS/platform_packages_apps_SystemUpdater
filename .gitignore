@@ -1,10 +1,54 @@
-*~
-*.bak
-*.pyc
-*.pyc-2.4
-Thumbs.db
+## Java
+*.class
+*.war
+*.ear
+hs_err_pid*
+
+## Intellij
+out/
+/lib/
+.idea/*
+!.idea/runConfigurations*
+!.idea/inspectionProfiles*
+!.idea/codeStyles*
+!.idea/dictionaries*
+*.ipr
+*.iws
 *.iml
-.idea/
-gen/
-.vscode
+
+## Eclipse
+.classpath
+.project
+.metadata
+**/bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
 local.properties
+.settings/
+.loadpath
+.externalToolBuilders/
+*.launch
+
+## NetBeans
+**/nbproject/private/
+/build/
+/app/build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+## Gradle
+.gradle
+keystore.properties
+gradle-app.setting
+
+## OS Specific
+.DS_Store
+
+## Android
+gen/
