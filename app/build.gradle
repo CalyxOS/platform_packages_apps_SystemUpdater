@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 31
+        targetSdk 33
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        aosp {
+            // Generated from the AOSP testkey:
+            // https://android.googlesource.com/platform/build/+/refs/tags/android-11.0.0_r29/target/product/security/testkey.pk8
+            keyAlias "testkey"
+            keyPassword "testkey"
+            storeFile file("testkey.jks")
+            storePassword "testkey"
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.aosp
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+apply from: '../gradle/dependencies.gradle'
+dependencies {
+    /**
+     * Dependencies in AOSP
+     *
+     * We try to keep the dependencies in sync with what AOSP ships as SystemUpdater is meant to be
+     * built with the AOSP build system and gradle builds are just for more pleasant development.
+     * Using the AOSP versions in gradle builds allows us to spot issues early on.
+     */
+    compileOnly project.ext.aosp_libs
+    implementation project.ext.std_libs.androidx_core
+    implementation project.ext.std_libs.androidx_appcompat
+    implementation project.ext.std_libs.guava
+}
