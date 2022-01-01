@@ -1,0 +1,123 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        //noinspection JcenterRepositoryObsolete
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.17"
+        classpath 'com.android.tools.build:gradle:7.0.2'
+    }
+}
+
+ext {
+    buildToolsVersion = '31.0.0'
+    compileSdkVersion = 31
+    minSdkVersion = 31
+    targetSdkVersion = 31
+}
+
+apply from: 'gradle/dependencies.gradle'
+
+allprojects {
+    repositories {
+        mavenCentral()
+        //noinspection JcenterRepositoryObsolete
+        jcenter()
+        google()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+apply plugin: 'com.android.application'
+
+def gitDescribe = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--always', '--tags', '--dirty=-dirty'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion 31
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionNameSuffix "-$gitDescribe"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments disableAnalytics: 'true'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    lintOptions {
+        abortOnError true
+    }
+    compileOptions {
+        targetCompatibility 1.9
+        sourceCompatibility 1.9
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+
+            aidl.srcDirs = ['src']
+            assets.srcDirs = ['assets']
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+            resources.srcDirs = ['res']
+        }
+    }
+}
+
+dependencies {
+    compileOnly rootProject.ext.aosp_libs
+
+    /**
+     * Dependencies in AOSP
+     *
+     * We try to keep the dependencies in sync with what AOSP ships as SystemUpdater is meant to be built
+     * with the AOSP build system and gradle builds are just for more pleasant development.
+     * Using the AOSP versions in gradle builds allows us to spot issues early on.
+     */
+
+    implementation rootProject.ext.std_libs.androidx_core
+    implementation rootProject.ext.std_libs.androidx_appcompat
+    implementation rootProject.ext.std_libs.guava
+
+    /**
+     * External Dependencies
+     *
+     * If the dependencies below are updated,
+     * please make sure to update the prebuilt libraries and the Android.bp files
+     * in the top-level `libs` folder to reflect that.
+     * You can copy these libraries from ~/.gradle/caches/modules-2/files-2.1
+     */
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        if (JavaVersion.current() >= JavaVersion.VERSION_1_10) {
+            options.compilerArgs.addAll(['--release', '9'])
+        }
+        options.compilerArgs.add('-Xbootclasspath/p:libs/android.jar:libs/libcore.jar')
+    }
+}
+
+configurations {
+    all {
+        resolutionStrategy {
+            failOnNonReproducibleResolution()
+        }
+    }
+}
