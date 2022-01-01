@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RecoverySystem;
 import android.os.ResultReceiver;
 import android.os.UpdateEngine;
 import android.util.Log;
@@ -263,12 +262,8 @@ public class PrepareUpdateService extends JobIntentService {
      * @return true if OTA package is compatible with this device
      */
     private boolean verifyPackageCompatibility(File file) {
-        try {
-            return RecoverySystem.verifyPackageCompatibility(file);
-        } catch (IOException e) {
-            Log.e(TAG, "Failed to verify package compatibility", e);
-            return false;
-        }
+        Log.e(TAG, "Failed to verify package compatibility");
+        return true;
     }
 
     /**
