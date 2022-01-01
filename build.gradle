@@ -1,0 +1,45 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.3.1' apply true
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 31
+        targetSdk 33
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard.flags'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+
+            aidl.srcDirs = ['src']
+            assets.srcDirs = ['assets']
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+            resources.srcDirs = ['res']
+        }
+    }
+}
+
+dependencies {
+    implementation "androidx.core:core:1.9.0"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:1.5.1"
+    implementation group: 'com.google.guava', name: 'guava', version: '31.1-android'
+}
