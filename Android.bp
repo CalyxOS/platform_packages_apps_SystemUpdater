@@ -18,7 +18,14 @@ android_app {
     system_ext_specific: true,
     privileged: true,
 
-    srcs: ["src/**/*.java"],
+    srcs: [
+        "app/src/main/java/**/*.kt",
+        "app/src/main/java/**/*.java",
+    ],
+    resource_dirs: [
+        "app/src/main/res",
+    ],
+    manifest: "app/src/main/AndroidManifest.xml",
 
     static_libs: [
         "androidx.appcompat_appcompat",
@@ -28,11 +35,9 @@ android_app {
 
     optimize: {
         proguard_flags_files: [
-            "proguard.flags",
+            "app/proguard-rules.pro",
         ],
     },
-
-    resource_dirs: ["res"],
 
     required: ["privapp_whitelist_org.calyxos.systemupdater"],
 }
@@ -43,4 +48,37 @@ prebuilt_etc {
     system_ext_specific: true,
     sub_dir: "permissions",
     filename_from_src: true,
+}
+
+android_test {
+    name: "CalyxSystemUpdaterTests",
+    sdk_version: "system_current",
+
+    srcs: [
+        "app/src/test/java/**/*.kt",
+        "app/src/test/java/**/*.java",
+    ],
+    resource_dirs: [
+        "app/src/test/res",
+    ],
+    manifest: "app/src/test/AndroidManifest.xml",
+
+    libs: [
+        "android.test.base.stubs",
+        "android.test.runner.stubs",
+        "CalyxSystemUpdater",
+    ],
+
+    static_libs: [
+        "androidx.test.runner",
+        "androidx.test.rules",
+        "mockito-target-minus-junit4",
+        "guava",
+    ],
+
+    instrumentation_for: "CalyxSystemUpdater",
+
+    optimize: {
+        enabled: false,
+    },
 }
