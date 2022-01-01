@@ -1,0 +1,26 @@
+project.ext {
+    // To produce these binaries, in latest AOSP source tree, run
+    // $ m
+    // For more information about this module:
+    // https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-11.0.0_r3/Android.bp#507
+    // framework_intermediates/classes-header.jar works for gradle build as well,
+    // but not unit tests, so we use the actual classes (without updatable modules).
+    //
+    // android.jar: out/target/common/obj/JAVA_LIBRARIES/framework-minus-apex_intermediates/classes.jar
+    // libcore.jar: out/target/common/obj/JAVA_LIBRARIES/core-libart.com.android.art_intermediates/classes.jar
+    aosp_libs = fileTree(include: ['android.jar','libcore.jar'], dir: "$projectDir/libs")
+    std_libs = [
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#1761
+            androidx_core: dependencies.create('androidx.core:core') {
+                version { strictly '1.9.0' } // should be 1.9.0-alpha03, but that has minSDK issues
+            },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#195
+            androidx_appcompat: dependencies.create('androidx.appcompat:appcompat') {
+                version { strictly '1.4.0-alpha03' } // should be 1.4.0-alpha04, but that is not available via maven
+            },
+            // https://android.googlesource.com/platform/external/guava/+/refs/tags/android-13.0.0_r3/android/pom.xml
+            guava: dependencies.create('com.google.guava:guava') {
+                version { strictly '31.0.1-android' }
+            }
+    ]
+}
