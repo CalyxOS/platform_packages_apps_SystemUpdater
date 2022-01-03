@@ -16,6 +16,23 @@
       "message": "This breaks gradle build.\n\n",
       "revId": "0e8cebe846237a4cd06f87114f39abf423a282e3",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b34ed3f_81862d87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000034
+      },
+      "writtenOn": "2022-01-03T12:43:11Z",
+      "side": 1,
+      "message": "I forgot to make gradle target Java8\nsee https://developer.android.com/studio/write/java8-support#supported_features",
+      "revId": "0e8cebe846237a4cd06f87114f39abf423a282e3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
