@@ -33,6 +33,24 @@
       "message": "I forgot to make gradle target Java8\nsee https://developer.android.com/studio/write/java8-support#supported_features",
       "revId": "0e8cebe846237a4cd06f87114f39abf423a282e3",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9c3664a_d7945972",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-04T00:12:27Z",
+      "side": 1,
+      "message": "I ended up making it target java9, since that\u0027s what aosp sets and uses for android.jar/libcore.jar\n\nhttps://review.calyxos.org/c/CalyxOS/platform_packages_apps_SystemUpdater/+/7519",
+      "parentUuid": "2b34ed3f_81862d87",
+      "revId": "0e8cebe846237a4cd06f87114f39abf423a282e3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
