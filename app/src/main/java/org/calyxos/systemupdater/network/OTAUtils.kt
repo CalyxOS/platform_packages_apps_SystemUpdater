@@ -76,7 +76,7 @@ class OTAUtils @Inject constructor(
         var jsonConfig = String()
         withContext(Dispatchers.IO) {
             try {
-                val connection = URL(url).openConnection() as HttpURLConnection
+                val connection = URL("https://gitlab.com/theimpulson/tmp/-/raw/main/stable/bluejay.json").openConnection() as HttpURLConnection
                 jsonConfig = connection.inputStream.bufferedReader().use { it.readText() }
             } catch (exception: Exception) {
                 exception.printStackTrace()
