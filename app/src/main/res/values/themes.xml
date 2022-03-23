@@ -1,0 +1,21 @@
+<resources>
+    <!-- Base Theme -->
+    <style name="BaseTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:navigationBarColor">?android:colorBackground</item>
+        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceTheme</item>
+    </style>
+
+    <!-- Light Theme -->
+    <style name="AppTheme" parent="BaseTheme">
+        <item name="colorPrimary">@android:color/system_accent1_500</item>
+        <item name="colorAccent">@android:color/system_accent1_500</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="PreferenceTheme" parent="PreferenceThemeOverlay">
+        <item name="android:layout">@layout/fragment_settings</item>
+    </style>
+
+</resources>
