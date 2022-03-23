@@ -19,6 +19,7 @@ package org.calyxos.systemupdater.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.SystemClock;
 import android.os.SystemProperties;
 
 import org.calyxos.systemupdater.R;
@@ -43,8 +44,12 @@ public class SettingsManager {
         return getSharedPrefs(context).getString(key, fallback);
     }
 
-    private static int getInt(Context context, String key, int fallback) {
-        return getSharedPrefs(context).getInt(key, fallback);
+    private static long getLong(Context context, String key, int fallback) {
+        return getSharedPrefs(context).getLong(key, fallback);
+    }
+
+    private static void setLong(Context context, String key, long val) {
+        getSharedPrefs(context).edit().putLong(key, val).apply();
     }
 
     private static boolean getBoolean(Context context, String key, boolean fallback) {
@@ -65,8 +70,12 @@ public class SettingsManager {
         return SystemProperties.get(PROP_BASE + KEY_CHANNEL, pref);
     }
 
-    private static int getLastCheck(Context context) {
-        return getInt(context, KEY_LAST_CHECK, -1);
+    public static long getLastCheck(Context context) {
+        return getLong(context, KEY_LAST_CHECK, -1);
+    }
+
+    public static void setLastCheck(Context context) {
+        setLong(context, KEY_LAST_CHECK, SystemClock.elapsedRealtimeNanos());
     }
 
     public static boolean getBattery(Context context) {
