@@ -14,9 +14,29 @@ project.ext {
             androidx_core_ktx: dependencies.create('androidx.core:core-ktx') {
                 version { strictly '1.9.0' } // should be 1.9.0-alpha03, but that has minSDK issues
             },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#2159
+            androidx_fragment_ktx: dependencies.create('androidx.fragment:fragment-ktx') {
+                version { strictly '1.4.0-alpha09' }
+            },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#57
+            androidx_activity_ktx: dependencies.create('androidx.activity:activity-ktx') {
+                version { strictly '1.4.0-alpha02' }
+            },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#3220
+            androidx_navigation_fragment_ktx: dependencies.create('androidx.navigation:navigation-fragment-ktx') {
+                version { strictly '2.4.0-alpha09' }
+            },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#3358
+            androidx_navigation_ui_ktx: dependencies.create('androidx.navigation:navigation-ui-ktx') {
+                version { strictly '2.4.0-alpha09' }
+            },
             // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#195
             androidx_appcompat: dependencies.create('androidx.appcompat:appcompat') {
                 version { strictly '1.4.0-alpha03' } // should be 1.4.0-alpha04, but that is not available via maven
+            },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#2754
+            androidx_lifecycle_viewmodel_ktx: dependencies.create('androidx.lifecycle:lifecycle-viewmodel-ktx') {
+                version { strictly '2.4.0' } // 2.4.0-alpha04 in AOSP but was never released
             },
             // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#3597
             androidx_preference: dependencies.create('androidx.preference:preference') {
@@ -31,6 +51,10 @@ project.ext {
             // https://android.googlesource.com/platform/external/guava/+/refs/tags/android-13.0.0_r3/android/pom.xml
             guava: dependencies.create('com.google.guava:guava') {
                 version { strictly '31.0.1-android' }
+            },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/extras/material-design-x/Android.bp#6
+            com_google_android_material: dependencies.create('com.google.android.material:material') {
+                version { strictly '1.6.0' } // 1.6.0-alpha0301 in AOSP but that has minSDK issues
             },
     ]
     kotlinx = [
