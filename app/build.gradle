@@ -69,6 +69,13 @@ dependencies {
     compileOnly project.ext.aosp_libs
     implementation project.ext.std_libs.androidx_core_ktx
     implementation project.ext.std_libs.androidx_appcompat
+    implementation project.ext.std_libs.androidx_fragment_ktx
+    implementation project.ext.std_libs.androidx_activity_ktx
+    implementation project.ext.google.com_google_android_material
+    implementation project.ext.std_libs.androidx_lifecycle_viewmodel_ktx
+    implementation project.ext.std_libs.androidx_preference
+    implementation project.ext.std_libs.androidx_navigation_fragment_ktx
+    implementation project.ext.std_libs.androidx_navigation_ui_ktx
     implementation project.ext.google.guava
     implementation project.ext.google.gson
     implementation project.ext.kotlinx.coroutines
