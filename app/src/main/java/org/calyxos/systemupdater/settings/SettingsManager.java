@@ -23,6 +23,10 @@ import android.os.SystemProperties;
 
 import org.calyxos.systemupdater.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class SettingsManager {
     // Prop schema: ${PROP_BASE} + ${KEY_X}
     private static final String PROP_BASE = "sys.updater.";
@@ -39,12 +43,20 @@ public class SettingsManager {
                 context.getPackageName(), Context.MODE_PRIVATE);
     }
 
+    private static void setString(Context context, String key, String val) {
+        getSharedPrefs(context).edit().putString(key, val).apply();
+    }
+
     private static String getString(Context context, String key, String fallback) {
         return getSharedPrefs(context).getString(key, fallback);
     }
 
-    private static int getInt(Context context, String key, int fallback) {
-        return getSharedPrefs(context).getInt(key, fallback);
+    private static long getLong(Context context, String key, int fallback) {
+        return getSharedPrefs(context).getLong(key, fallback);
+    }
+
+    private static void setLong(Context context, String key, long val) {
+        getSharedPrefs(context).edit().putLong(key, val).apply();
     }
 
     private static boolean getBoolean(Context context, String key, boolean fallback) {
@@ -65,8 +77,14 @@ public class SettingsManager {
         return SystemProperties.get(PROP_BASE + KEY_CHANNEL, pref);
     }
 
-    private static int getLastCheck(Context context) {
-        return getInt(context, KEY_LAST_CHECK, -1);
+    public static String getLastCheck(Context context) {
+        return getString(context, KEY_LAST_CHECK, context.getString(R.string.na));
+    }
+
+    public static void setLastCheck(Context context) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, yyyy kk:mm", Locale.getDefault());
+        String date = simpleDateFormat.format(Calendar.getInstance().getTime());
+        setString(context, KEY_LAST_CHECK, date);
     }
 
     public static boolean getBattery(Context context) {
