@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The Calyx Institute
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.util;
+package org.calyxos.systemupdater.util
 
-/**
- * Utility class for properties that will be passed to {@code UpdateEngine#applyPayload}.
- */
-public final class UpdateEngineProperties {
-    private UpdateEngineProperties() {}
+enum class UpdateStatus {
+    IDLE,
+    CHECKING_FOR_UPDATE,
+    UPDATE_AVAILABLE,
+    DOWNLOADING,
+    VERIFYING,
+    FINALIZING,
+    UPDATED_NEED_REBOOT,
+    REPORTING_ERROR_EVENT,
+    ATTEMPTING_ROLLBACK,
+    SUSPENDED
 }
