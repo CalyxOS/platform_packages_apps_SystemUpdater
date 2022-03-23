@@ -16,10 +16,13 @@
 
 package org.calyxos.systemupdater.util
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.SystemProperties
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
@@ -29,6 +32,7 @@ import javax.inject.Singleton
 object CommonUtils {
 
     const val calyxOSVersion = "calyxOSVersion"
+    const val keyLastCheck = "last_check"
 
     /**
      * Provides current CalyxOS version
@@ -38,5 +42,14 @@ object CommonUtils {
     @Named(calyxOSVersion)
     fun provideCalyxOSVersion(): String {
         return SystemProperties.get("ro.calyxos.version")
+    }
+
+    /**
+     * Provides an instance of SharedPreferences
+     */
+    @Singleton
+    @Provides
+    fun provideSharedPrefInstance(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
     }
 }
