@@ -16,15 +16,15 @@
 
 package org.calyxos.systemupdater.network
 
-import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
-import androidx.preference.PreferenceManager
 import com.google.gson.Gson
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.calyxos.systemupdater.network.models.UpdateConfig
 import org.calyxos.systemupdater.util.CommonUtils
+import org.calyxos.systemupdater.util.CommonUtils.defaultChannel
+import org.calyxos.systemupdater.util.CommonUtils.updateChannel
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.inject.Inject
@@ -33,13 +33,12 @@ import javax.inject.Singleton
 
 @Singleton
 class OTAUtils @Inject constructor(
-    @ApplicationContext private val context: Context,
-    @Named(CommonUtils.calyxOSVersion) private val calyxOSVersion: String
+    private val sharedPreferences: SharedPreferences,
+    @Named(CommonUtils.calyxOSVersion) private val calyxOSVersion: String,
+
 ) {
 
     private val otaServerURL = "https://release.calyxinstitute.org"
-    private val updateChannel = "channel"
-    private val defaultUpdateChannel = "stable"
     private val gson = Gson()
 
     /**
@@ -49,8 +48,7 @@ class OTAUtils @Inject constructor(
      * @return An instance of [UpdateConfig], placeholder if remote update is N/A
      */
     suspend fun getUpdateConfig(): UpdateConfig {
-        val channel = PreferenceManager.getDefaultSharedPreferences(context)
-            .getString(updateChannel, defaultUpdateChannel)
+        val channel = sharedPreferences.getString(updateChannel, defaultChannel)
         val jsonConfig = fetchJsonConfig("$otaServerURL/$channel/${Build.DEVICE}")
         return if (jsonConfig.isNotEmpty()) {
             gson.fromJson(jsonConfig, UpdateConfig::class.java)
