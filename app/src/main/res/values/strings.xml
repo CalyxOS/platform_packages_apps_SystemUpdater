@@ -15,8 +15,18 @@
 
 <resources>
     <string name="app_name">System updater</string>
-    <string name="action_reload">Reload</string>
-    <string name="unknown">Unknown</string>
-    <string name="close">CLOSE</string>
+    <string name="android_version">Android version: %1$s</string>
+    <string name="security_version">Android security update: %1$s</string>
+    <string name="calyx_version">CalyxOS version: %1$s</string>
+    <string name="last_check">Last successful check for update:\n%1$s</string>
+    <string name="check_update">Check for update</string>
+    <string name="settings">Settings</string>
+    <string name="uptodate">Your system is up to date</string>
+    <string name="close">Close</string>
+    <string name="resume">Resume</string>
+    <string name="suspend">Suspend</string>
+    <string name="install">Install</string>
     <string name="server" translatable="false">https://release.calyxinstitute.org</string>
+    <string name="reboot">Reboot</string>
+    <string name="na">Not available</string>
 </resources>

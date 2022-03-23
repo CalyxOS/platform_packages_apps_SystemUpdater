@@ -16,17 +16,16 @@
 
 package org.calyxos.systemupdater.ui;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
+import android.os.SystemProperties;
 import android.os.UpdateEngine;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -37,11 +36,10 @@ import org.calyxos.systemupdater.R;
 import org.calyxos.systemupdater.UpdateConfig;
 import org.calyxos.systemupdater.UpdateManager;
 import org.calyxos.systemupdater.UpdaterState;
+import org.calyxos.systemupdater.settings.SettingsManager;
 import org.calyxos.systemupdater.util.UpdateConfigDownloader;
 import org.calyxos.systemupdater.util.UpdateEngineErrorCodes;
 import org.calyxos.systemupdater.util.UpdateEngineStatuses;
-
-import java.util.List;
 
 /**
  * UI for system updater app.
@@ -49,20 +47,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private static final String CALYXOS_VERSION_PROPERTY = "ro.calyxos.version";
 
-    private TextView mTextViewBuild;
-    private Button mButtonReload;
-    private Button mButtonApplyConfig;
-    private Button mButtonStop;
-    private Button mButtonReset;
-    private Button mButtonSuspend;
-    private Button mButtonResume;
+    private TextView mLastUpdate;
+    private Button mMultiButton;
     private ProgressBar mProgressBar;
-    private TextView mTextViewUpdaterState;
-    private TextView mTextViewEngineStatus;
-    private TextView mTextViewEngineErrorCode;
-    private TextView mTextViewUpdateInfo;
 
+    private PowerManager mPowerManager;
     private UpdateConfig mConfig;
 
     private final UpdateManager mUpdateManager =
@@ -73,21 +64,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.mTextViewBuild = findViewById(R.id.textViewBuild);
-        this.mButtonReload = findViewById(R.id.buttonReload);
-        this.mButtonApplyConfig = findViewById(R.id.buttonApplyConfig);
-        this.mButtonStop = findViewById(R.id.buttonStop);
-        this.mButtonReset = findViewById(R.id.buttonReset);
-        this.mButtonSuspend = findViewById(R.id.buttonSuspend);
-        this.mButtonResume = findViewById(R.id.buttonResume);
-        this.mProgressBar = findViewById(R.id.progressBar);
-        this.mTextViewUpdaterState = findViewById(R.id.textViewUpdaterState);
-        this.mTextViewEngineStatus = findViewById(R.id.textViewEngineStatus);
-        this.mTextViewEngineErrorCode = findViewById(R.id.textViewEngineErrorCode);
-        this.mTextViewUpdateInfo = findViewById(R.id.textViewUpdateInfo);
+        mPowerManager = getSystemService(PowerManager.class);
 
-        uiResetWidgets();
-        loadUpdateConfig();
+        // Once setup
+        TextView calyxVersion = findViewById(R.id.update_calyx_version);
+        String calyxVersionStr = SystemProperties.get(CALYXOS_VERSION_PROPERTY, "");
+        calyxVersion.setText(getString(R.string.calyx_version, calyxVersionStr));
+        TextView androidVersion = findViewById(R.id.update_android_version);
+        androidVersion.setText(getString(R.string.android_version, Build.VERSION.RELEASE));
+        TextView securityVersion = findViewById(R.id.update_security_version);
+        securityVersion.setText(getString(R.string.security_version, Build.VERSION.SECURITY_PATCH));
+
+        mLastUpdate = findViewById(R.id.last_update_check);
+        mLastUpdate.setText(getString(R.string.last_check, SettingsManager.getLastCheck(this)));
+
+        mProgressBar = findViewById(R.id.progress_bar);
+
+        mMultiButton = findViewById(R.id.multi_button);
+        mMultiButton.setText(R.string.check_update);
+        mMultiButton.setOnClickListener(v -> loadUpdateConfig());
 
         this.mUpdateManager.setOnStateChangeCallback(this::onUpdaterStateChange);
         this.mUpdateManager.setOnEngineStatusUpdateCallback(this::onEngineStatusUpdate);
@@ -117,41 +112,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    /**
-     * reload button is clicked
-     */
-    public void onReloadClick(View view) {
-        loadUpdateConfig();
-    }
-
-    /**
-     * view config button is clicked
-     */
-    public void onViewConfigClick(View view) {
-        new AlertDialog.Builder(this)
-                .setTitle(mConfig.getName())
-                .setMessage(mConfig.getRawJson())
-                .setPositiveButton(R.string.close, (dialog, id) -> dialog.dismiss())
-                .show();
-    }
-
-    /**
-     * apply config button is clicked
-     */
-    public void onApplyConfigClick(View view) {
-        new AlertDialog.Builder(this)
-                .setTitle("Apply Update")
-                .setMessage("Do you really want to apply this update?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                    uiResetWidgets();
-                    uiResetEngineText();
-                    applyUpdate(mConfig);
-                })
-                .setNegativeButton(android.R.string.cancel, null)
-                .show();
-    }
-
     private void applyUpdate(UpdateConfig config) {
         try {
             mUpdateManager.applyUpdate(this, config);
@@ -161,55 +121,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * stop button clicked
-     */
-    public void onStopClick(View view) {
-        new AlertDialog.Builder(this)
-                .setTitle("Stop Update")
-                .setMessage("Do you really want to cancel running update?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                    cancelRunningUpdate();
-                })
-                .setNegativeButton(android.R.string.cancel, null).show();
-    }
-
-    private void cancelRunningUpdate() {
-        try {
-            mUpdateManager.cancelRunningUpdate();
-        } catch (UpdaterState.InvalidTransitionException e) {
-            Log.e(TAG, "Failed to cancel running update", e);
-        }
-    }
-
-    /**
-     * reset button clicked
-     */
-    public void onResetClick(View view) {
-        new AlertDialog.Builder(this)
-                .setTitle("Reset Update")
-                .setMessage("Do you really want to cancel running update"
-                        + " and restore old version?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                    resetUpdate();
-                })
-                .setNegativeButton(android.R.string.cancel, null).show();
-    }
-
-    private void resetUpdate() {
-        try {
-            mUpdateManager.resetUpdate();
-        } catch (UpdaterState.InvalidTransitionException e) {
-            Log.e(TAG, "Failed to reset update", e);
-        }
-    }
-
-    /**
      * suspend button clicked
      */
-    public void onSuspendClick(View view) {
+    public void onSuspendUpdate() {
         try {
+            mMultiButton.setText(R.string.resume);
+            mMultiButton.setOnClickListener(v -> onResumeUpdate());
             mUpdateManager.suspend();
         } catch (UpdaterState.InvalidTransitionException e) {
             Log.e(TAG, "Failed to suspend running update", e);
@@ -219,10 +136,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * resume button clicked
      */
-    public void onResumeClick(View view) {
+    public void onResumeUpdate() {
         try {
-            uiResetWidgets();
-            uiResetEngineText();
+            mMultiButton.setText(R.string.suspend);
+            mMultiButton.setOnClickListener(v -> onSuspendUpdate());
             mUpdateManager.resume();
         } catch (UpdaterState.InvalidTransitionException e) {
             Log.e(TAG, "Failed to resume running update", e);
@@ -239,18 +156,18 @@ public class MainActivity extends AppCompatActivity {
                 + UpdaterState.getStateText(state)
                 + "/" + state);
         runOnUiThread(() -> {
-            setUiUpdaterState(state);
-
             if (state == UpdaterState.IDLE) {
-                uiStateIdle();
+                mProgressBar.setVisibility(View.GONE);
             } else if (state == UpdaterState.RUNNING) {
-                uiStateRunning();
+                mProgressBar.setVisibility(View.VISIBLE);
+                mMultiButton.setText(R.string.suspend);
+                mMultiButton.setOnClickListener(v -> onSuspendUpdate());
             } else if (state == UpdaterState.PAUSED) {
-                uiStatePaused();
+                // Nothing
             } else if (state == UpdaterState.ERROR) {
-                uiStateError();
+                // Nothing
             } else if (state == UpdaterState.REBOOT_REQUIRED) {
-                uiStateRebootRequired();
+
             }
         });
     }
@@ -264,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 + UpdateEngineStatuses.getStatusText(status)
                 + "/" + status);
         runOnUiThread(() -> {
-            setUiEngineStatus(status);
+            // Nothing
         });
     }
 
@@ -282,7 +199,15 @@ public class MainActivity extends AppCompatActivity {
                         + UpdateEngineErrorCodes.getCodeName(errorCode) + "/" + errorCode
                         + " " + completionState);
         runOnUiThread(() -> {
-            setUiEngineErrorCode(errorCode);
+            if (UpdateEngineErrorCodes.isUpdateSucceeded(errorCode)) {
+                // Reboot
+                mMultiButton.setText(R.string.reboot);
+                mMultiButton.setOnClickListener(v -> mPowerManager.reboot("reboot-ab-update"));
+            } else {
+                // Retry
+                mMultiButton.setText(R.string.install);
+                mMultiButton.setOnClickListener(v -> applyUpdate(mConfig));
+            }
         });
     }
 
@@ -290,77 +215,25 @@ public class MainActivity extends AppCompatActivity {
      * Invoked when update progress changes.
      */
     private void onProgressUpdate(double progress) {
-        mProgressBar.setProgress((int) (100 * progress));
-    }
-
-    /** resets ui */
-    private void uiResetWidgets() {
-        mTextViewBuild.setText(Build.DISPLAY);
-        mButtonReload.setEnabled(false);
-        mButtonApplyConfig.setEnabled(false);
-        mButtonStop.setEnabled(false);
-        mButtonReset.setEnabled(false);
-        mButtonSuspend.setEnabled(false);
-        mButtonResume.setEnabled(false);
-        mProgressBar.setEnabled(false);
-        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-        mTextViewUpdateInfo.setTextColor(Color.parseColor("#aaaaaa"));
-    }
-
-    private void uiResetEngineText() {
-        mTextViewEngineStatus.setText(R.string.unknown);
-        mTextViewEngineErrorCode.setText(R.string.unknown);
-        // Note: Do not reset mTextViewUpdaterState; UpdateManager notifies updater state properly.
-    }
-
-    private void uiStateIdle() {
-        uiResetWidgets();
-        mButtonReset.setEnabled(true);
-        mButtonReload.setEnabled(true);
-        mButtonApplyConfig.setEnabled(true);
-        mProgressBar.setProgress(0);
-    }
-
-    private void uiStateRunning() {
-        uiResetWidgets();
-        mProgressBar.setEnabled(true);
-        mProgressBar.setVisibility(ProgressBar.VISIBLE);
-        mButtonStop.setEnabled(true);
-        mButtonSuspend.setEnabled(true);
-    }
-
-    private void uiStatePaused() {
-        uiResetWidgets();
-        mButtonReset.setEnabled(true);
-        mProgressBar.setEnabled(true);
-        mProgressBar.setVisibility(ProgressBar.VISIBLE);
-        mButtonResume.setEnabled(true);
-    }
-
-    private void uiStateError() {
-        uiResetWidgets();
-        mButtonReset.setEnabled(true);
-        mProgressBar.setEnabled(true);
-        mProgressBar.setVisibility(ProgressBar.VISIBLE);
-    }
-
-    private void uiStateRebootRequired() {
-        uiResetWidgets();
-        mButtonReset.setEnabled(true);
+        runOnUiThread(() -> {
+            mProgressBar.setProgress((int) (100 * progress));
+        });
     }
 
     /**
      * loads json configurations from server in {@link R.string.server}.
      */
     private void loadUpdateConfig() {
-        new DownloadJsonTask(this).execute();
+        new DownloadJsonTask(this, mLastUpdate).execute();
     }
 
     private class DownloadJsonTask extends AsyncTask<Void, Void, UpdateConfig> {
-        private Context mContext;
+        private final Context mContext;
+        private final TextView mLastUpdate;
 
-        public DownloadJsonTask(Context context) {
+        public DownloadJsonTask(Context context, TextView lastUpdate) {
             mContext = context;
+            mLastUpdate = lastUpdate;
         }
 
         @Override
@@ -371,31 +244,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(UpdateConfig updateConfig) {
             mConfig = updateConfig;
-            uiResetWidgets();
+            SettingsManager.setLastCheck(mContext);
+            runOnUiThread(() -> {
+                String lastCheck = SettingsManager.getLastCheck(mContext);
+                mLastUpdate.setText(getString(R.string.last_check, lastCheck));
+
+                if (updateConfig != null) {
+                    mMultiButton.setText(R.string.install);
+                    mMultiButton.setOnClickListener(v -> applyUpdate(mConfig));
+                }
+            });
         }
-    }
-
-    /**
-     * @param status update engine status code
-     */
-    private void setUiEngineStatus(int status) {
-        String statusText = UpdateEngineStatuses.getStatusText(status);
-        mTextViewEngineStatus.setText(statusText + "/" + status);
-    }
-
-    /**
-     * @param errorCode update engine error code
-     */
-    private void setUiEngineErrorCode(int errorCode) {
-        String errorText = UpdateEngineErrorCodes.getCodeName(errorCode);
-        mTextViewEngineErrorCode.setText(errorText + "/" + errorCode);
-    }
-
-    /**
-     * @param state updater sample state
-     */
-    private void setUiUpdaterState(int state) {
-        String stateText = UpdaterState.getStateText(state);
-        mTextViewUpdaterState.setText(stateText + "/" + state);
     }
 }
