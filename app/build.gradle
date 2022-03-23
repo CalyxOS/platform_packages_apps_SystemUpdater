@@ -50,4 +50,5 @@ dependencies {
     implementation project.ext.std_libs.androidx_core
     implementation project.ext.std_libs.androidx_appcompat
     implementation project.ext.std_libs.guava
+    implementation project.ext.std_libs.com_google_android_material
 }

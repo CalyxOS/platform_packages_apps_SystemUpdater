@@ -21,6 +21,10 @@ project.ext {
             // https://android.googlesource.com/platform/external/guava/+/refs/tags/android-13.0.0_r3/android/pom.xml
             guava: dependencies.create('com.google.guava:guava') {
                 version { strictly '31.0.1-android' }
-            }
+            },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/extras/material-design-x/Android.bp#6
+            com_google_android_material: dependencies.create('com.google.android.material:material') {
+                version { strictly '1.6.0-alpha03' } // 1.6.0-alpha0301 in AOSP
+            },
     ]
 }
