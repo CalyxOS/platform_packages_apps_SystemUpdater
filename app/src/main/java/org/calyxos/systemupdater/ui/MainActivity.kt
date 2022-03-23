@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The Calyx Institute
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.util;
+package org.calyxos.systemupdater.ui
 
-/**
- * Utility class for properties that will be passed to {@code UpdateEngine#applyPayload}.
- */
-public final class UpdateEngineProperties {
-    private UpdateEngineProperties() {}
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
+import org.calyxos.systemupdater.R
+
+@AndroidEntryPoint(AppCompatActivity::class)
+class MainActivity : Hilt_MainActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
 }

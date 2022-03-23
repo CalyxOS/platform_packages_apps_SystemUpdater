@@ -30,6 +30,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object CommonModule {
 
+    // Last OTA Update Check Key
+    const val lastCheck = "last_check"
+
     // OTA Update Channel Keys
     const val channel = "channel"
     const val defaultChannel = "stable"
