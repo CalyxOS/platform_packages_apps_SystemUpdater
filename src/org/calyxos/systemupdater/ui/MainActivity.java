@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         mMultiButton.setText(R.string.check_update);
         mMultiButton.setOnClickListener(v -> loadUpdateConfig());
 
+		Button settings = findViewById(R.id.settings);
+        settings.setOnClickListener(v -> lunchSettings());
+
         loadUpdateConfig();
 
         this.mUpdateManager.setOnStateChangeCallback(this::onUpdaterStateChange);
@@ -115,6 +118,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         this.mUpdateManager.unbind();
         super.onPause();
+    }
+
+    private void lunchSettings() {
+    	startActivity(new Intent(this, SettingsActivity.class));
     }
 
     private void applyUpdate(UpdateConfig config) {
