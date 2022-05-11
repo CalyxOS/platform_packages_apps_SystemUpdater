@@ -17,5 +17,4 @@
     <string name="default_channel" translatable="false"></string>
     <bool name="default_battery">true</bool>
     <bool name="default_reboot">true</bool>
-    <bool name="default_roaming">true</bool>
 </resources>

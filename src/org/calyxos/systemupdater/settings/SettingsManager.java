@@ -33,7 +33,7 @@ public class SettingsManager {
     private static final String KEY_LAST_CHECK = "last_check";
     private static final String KEY_BATTERY = "battery";
     private static final String KEY_REBOOT = "reboot";
-    private static final String KEY_ROAMING = "roaming";
+    private static final String KEY_NETWORK = "network";
 
     private static SharedPreferences getSharedPrefs(Context context) {
         return context.createDeviceProtectedStorageContext().getSharedPreferences(
@@ -86,7 +86,7 @@ public class SettingsManager {
         return getKey(context, KEY_REBOOT, R.bool.default_reboot);
     }
 
-    public static boolean getRoaming(Context context) {
-        return getKey(context, KEY_ROAMING, R.bool.default_roaming);
+    public static int getNetwork(Context context) {
+        return getInt(context, KEY_ROAMING, 0);
     }
 }
