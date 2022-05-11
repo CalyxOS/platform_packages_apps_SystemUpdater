@@ -28,4 +28,23 @@
     <string name="install">Install</string>
     <string name="server" translatable="false"></string>
     <string name="reboot">Reboot</string>
+
+    <!-- Channel -->
+    <string name="channel_title">Release channel</string>
+    <string name="channel_stable">Stable</string>
+    <string name="channel_beta">Beta</string>
+
+    <!-- Battery -->
+    <string name="battery_not_low_title">Require battery above warning level</string>
+    <string name="battery_not_low_summary">Only download / install updates when the battery is above the warning level</string>
+
+    <!-- Idle Reboot -->
+    <string name="idle_reboot_title">Automatic reboot</string>
+    <string name="idle_reboot_summary">Automatically reboot once the device is idle after successfully installing an update</string>
+
+    <!-- Network -->
+    <string name="network_type_title">Permitted networks</string>
+    <string name="network_type_any">Any</string>
+    <string name="network_type_not_roaming">Not roaming</string>
+    <string name="network_type_unmetered">Unmetered</string>
 </resources>
