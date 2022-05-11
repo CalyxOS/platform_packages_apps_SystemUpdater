@@ -1,0 +1,27 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        app:key="battery"
+        app:summary="@string/battery_not_low_summary"
+        app:title="@string/battery_not_low_title" />
+
+    <SwitchPreferenceCompat
+        app:key="reboot"
+        app:summary="@string/idle_reboot_summary"
+        app:title="@string/idle_reboot_title" />
+
+    <ListPreference
+        app:defaultValue="0"
+        app:entries="@array/entries_network"
+        app:entryValues="@array/entryvalues_network"
+        app:key="network"
+        app:title="@string/network_type_title" />
+
+    <ListPreference
+        app:defaultValue="stable"
+        app:entries="@array/entries_channel"
+        app:entryValues="@array/entryvalues_channel"
+        app:key="channel"
+        app:title="@string/channel_title" />
+
+</PreferenceScreen>
