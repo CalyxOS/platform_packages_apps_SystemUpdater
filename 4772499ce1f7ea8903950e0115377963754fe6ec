@@ -16,6 +16,24 @@
       "message": "android12 branch??",
       "revId": "4772499ce1f7ea8903950e0115377963754fe6ec",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "328202a0_d4045d9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-05-16T11:42:10Z",
+      "side": 1,
+      "message": "Yeah I merged some good to go changes to 12, then created 12L from it and moved the remaining changes (with comments) to 12L",
+      "parentUuid": "a96f7f8f_4079d27e",
+      "revId": "4772499ce1f7ea8903950e0115377963754fe6ec",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
