@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c005b7bf_8fe9dd3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2022-12-29T11:21:38Z",
+      "side": 1,
+      "message": "Fixes build error due to artifact path requirement",
+      "revId": "9d0e1b5475440195f5b4a76444e4269205e74814",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
