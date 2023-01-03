@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "354954b3_61aaab76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-03T17:06:15Z",
+      "side": 1,
+      "message": "This should be done in separate changes. Rename/move in one, actual changes in another. Some of the actual changes come from another change anyways, so that can just get rebased on top of the rename and get updated to account for that.\n\nThat makes it easier to see what changed.",
+      "revId": "2c7c5b9e8b508f8eca5e7c2d5a748e36db55fd0f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
