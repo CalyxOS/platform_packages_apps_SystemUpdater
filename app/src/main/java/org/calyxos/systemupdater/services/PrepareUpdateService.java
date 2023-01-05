@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RecoverySystem;
 import android.os.ResultReceiver;
 import android.os.UpdateEngine;
 import android.util.Log;
@@ -33,16 +32,18 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
 
+import com.google.common.collect.ImmutableSet;
+
 import org.calyxos.systemupdater.PayloadSpec;
 import org.calyxos.systemupdater.UpdateConfig;
 import org.calyxos.systemupdater.util.FileDownloader;
 import org.calyxos.systemupdater.util.PackageFiles;
 import org.calyxos.systemupdater.util.PayloadSpecs;
 import org.calyxos.systemupdater.util.UpdateConfigs;
-import com.google.common.collect.ImmutableSet;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -264,8 +265,14 @@ public class PrepareUpdateService extends JobIntentService {
      */
     private boolean verifyPackageCompatibility(File file) {
         try {
-            return RecoverySystem.verifyPackageCompatibility(file);
-        } catch (IOException e) {
+            // Use reflection as Android Studio cannot find the class
+            Class<?> recoverySystem = Class.forName("android.os.RecoverySystem");
+            Method method = recoverySystem
+                    .getDeclaredMethod("verifyPackageCompatibility", File.class);
+            method.setAccessible(true);
+            Boolean result = (Boolean) method.invoke(recoverySystem, file);
+            return result != null ? result : false;
+        } catch (Exception e) {
             Log.e(TAG, "Failed to verify package compatibility", e);
             return false;
         }
