@@ -16,7 +16,6 @@
 
 package org.calyxos.systemupdater.services;
 
-import static org.calyxos.systemupdater.util.PackageFiles.COMPATIBILITY_ZIP_FILE_NAME;
 import static org.calyxos.systemupdater.util.PackageFiles.OTA_PACKAGE_DIR;
 import static org.calyxos.systemupdater.util.PackageFiles.PAYLOAD_BINARY_FILE_NAME;
 import static org.calyxos.systemupdater.util.PackageFiles.PAYLOAD_PROPERTIES_FILE_NAME;
@@ -25,7 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RecoverySystem;
 import android.os.ResultReceiver;
 import android.os.UpdateEngine;
 import android.util.Log;
@@ -33,15 +31,15 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
 
+import com.google.common.collect.ImmutableSet;
+
 import org.calyxos.systemupdater.PayloadSpec;
 import org.calyxos.systemupdater.UpdateConfig;
 import org.calyxos.systemupdater.util.FileDownloader;
 import org.calyxos.systemupdater.util.PackageFiles;
 import org.calyxos.systemupdater.util.PayloadSpecs;
 import org.calyxos.systemupdater.util.UpdateConfigs;
-import com.google.common.collect.ImmutableSet;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -116,7 +114,6 @@ public class PrepareUpdateService extends JobIntentService {
     private static final ImmutableSet<String> PRE_STREAMING_FILES_SET =
             ImmutableSet.of(
                     PackageFiles.CARE_MAP_FILE_NAME,
-                    PackageFiles.COMPATIBILITY_ZIP_FILE_NAME,
                     PackageFiles.METADATA_FILE_NAME,
                     PackageFiles.PAYLOAD_PROPERTIES_FILE_NAME
             );
@@ -172,15 +169,6 @@ public class PrepareUpdateService extends JobIntentService {
         if (!UpdateConfigs.getPropertyFile(PAYLOAD_PROPERTIES_FILE_NAME, config).isPresent()
                 || !Paths.get(OTA_PACKAGE_DIR, PAYLOAD_PROPERTIES_FILE_NAME).toFile().exists()) {
             throw new IOException(PAYLOAD_PROPERTIES_FILE_NAME + " not found");
-        }
-
-        File compatibilityFile = Paths.get(OTA_PACKAGE_DIR, COMPATIBILITY_ZIP_FILE_NAME).toFile();
-        if (compatibilityFile.isFile()) {
-            Log.i(TAG, "Verifying OTA package for compatibility with the device");
-            if (!verifyPackageCompatibility(compatibilityFile)) {
-                throw new PreparationFailedException(
-                        "OTA package is not compatible with this device");
-            }
         }
 
         return mPayloadSpecs.forStreaming(config.getUrl(),
@@ -255,19 +243,6 @@ public class PrepareUpdateService extends JobIntentService {
                         Paths.get(dir, file.getFilename()).toFile());
                 downloader.download();
             }
-        }
-    }
-
-    /**
-     * @param file physical location of {@link PackageFiles#COMPATIBILITY_ZIP_FILE_NAME}
-     * @return true if OTA package is compatible with this device
-     */
-    private boolean verifyPackageCompatibility(File file) {
-        try {
-            return RecoverySystem.verifyPackageCompatibility(file);
-        } catch (IOException e) {
-            Log.e(TAG, "Failed to verify package compatibility", e);
-            return false;
         }
     }
 

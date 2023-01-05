@@ -49,11 +49,5 @@ public final class PackageFiles {
 
     public static final String METADATA_FILE_NAME = "metadata";
 
-    /**
-     * The zip file that claims the compatibility of the update package to check against the Android
-     * framework to ensure that the package can be installed on the device.
-     */
-    public static final String COMPATIBILITY_ZIP_FILE_NAME = "compatibility.zip";
-
     private PackageFiles() {}
 }
