@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b5bb850_e87fa5ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-05T13:56:04Z",
+      "side": 1,
+      "message": "Tested on device yet?\n\nWonder if it\u0027ll need some sort of allowlisting.",
+      "revId": "ef089c9aaac8072807f3f3b404bed7a0e47f1679",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a02abd39_61e8da2e",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/services/PrepareUpdateService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-05T13:56:04Z",
+      "side": 1,
+      "message": "Add a small comment here too as to why we\u0027re using reflection",
+      "revId": "ef089c9aaac8072807f3f3b404bed7a0e47f1679",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
