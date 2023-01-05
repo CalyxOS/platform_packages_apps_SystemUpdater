@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50bce248_36e0a926",
+        "filename": "gradle/dependencies.gradle",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-05T22:17:09Z",
+      "side": 1,
+      "message": "Why did you remove this?",
+      "revId": "6943445e988e1ed33ebffd6a5ab42ef0b6c4d9b8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7befae4e_942d9235",
+        "filename": "gradle/wrapper/gradle-wrapper.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-05T22:17:09Z",
+      "side": 1,
+      "message": "This is good to keep.",
+      "revId": "6943445e988e1ed33ebffd6a5ab42ef0b6c4d9b8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
