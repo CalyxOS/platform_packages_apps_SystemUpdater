@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45546938_96d87ffb",
+        "filename": "gradle/dependencies.gradle",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-06T11:12:55Z",
+      "side": 1,
+      "message": "For something as critical as Updater it\u0027s better to have this.\n\nEven for Bellis we can add this eventually.\n\nWe should either do gradle only apps (like Lupin), or if we\u0027re doing AOSP apps - make sure libs match like this to avoid surprises.\n\nThat last part is more important for some apps than others. Updater definitely falls into that.",
+      "parentUuid": "2ee78795_eface108",
+      "revId": "6943445e988e1ed33ebffd6a5ab42ef0b6c4d9b8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7befae4e_942d9235",
         "filename": "gradle/wrapper/gradle-wrapper.properties",
         "patchSetId": 2
