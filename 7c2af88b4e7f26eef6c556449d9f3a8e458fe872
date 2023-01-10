@@ -35,6 +35,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91903e20_881bd564",
+        "filename": "res/values/config.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-10T12:52:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87a37f99_c511956e",
+      "revId": "7c2af88b4e7f26eef6c556449d9f3a8e458fe872",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bc68580_7e5cd630",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-12-10T15:39:13Z",
       "side": 1,
       "message": "I think we should set this to false as well.",
+      "revId": "7c2af88b4e7f26eef6c556449d9f3a8e458fe872",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96766b93_2dfe397e",
+        "filename": "res/values/config.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-10T12:52:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bc68580_7e5cd630",
       "revId": "7c2af88b4e7f26eef6c556449d9f3a8e458fe872",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
