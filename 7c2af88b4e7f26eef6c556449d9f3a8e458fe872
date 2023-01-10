@@ -18,6 +18,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b06510c3_506b133b",
+        "filename": "res/values/config.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-10T13:16:38Z",
+      "side": 1,
+      "message": "Done in another commit which introduces support for channels",
+      "parentUuid": "1c8b1013_def74a9b",
+      "revId": "7c2af88b4e7f26eef6c556449d9f3a8e458fe872",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87a37f99_c511956e",
