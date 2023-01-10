@@ -71,6 +71,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e0680df_1bc8ad35",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-10T12:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d18eb54d_0f7f618c",
+      "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "542ae19b_55deb555",
@@ -84,6 +102,24 @@
       "writtenOn": "2021-11-24T17:39:20Z",
       "side": 1,
       "message": "100 chars",
+      "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad98f13f_c3f26b2e",
+        "filename": "src/org/calyxos/systemupdater/services/PrepareUpdateService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-10T12:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "542ae19b_55deb555",
       "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
@@ -119,6 +155,24 @@
       "side": 1,
       "message": "Should just add editorconfig here to avoid these issues.",
       "parentUuid": "fb2eea26_08465534",
+      "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73da0262_767a8c1b",
+        "filename": "src/org/calyxos/systemupdater/util/JsonDownloader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-10T12:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bbcd5c2_0d604b15",
       "revId": "db34acc46158ce0afccb43ff74d58c69f0027d27",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
