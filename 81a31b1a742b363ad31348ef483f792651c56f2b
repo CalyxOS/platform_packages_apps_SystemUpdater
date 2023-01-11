@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f6c7dd5_c5366717",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-11T11:36:47Z",
+      "side": 1,
+      "message": "Our OTAs don\u0027t contain `compatibility.zip` these days.",
+      "revId": "81a31b1a742b363ad31348ef483f792651c56f2b",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
