@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa31d0c0_9cdaef45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-16T06:46:36Z",
+      "side": 1,
+      "message": "Considering we haven\u0027t introduced any major code changes in java yet, seems fine time to do them in Kotlin to avoid introducing more deprecated code that would require addressing in future.",
+      "revId": "c2247a2ba61221eedb3dfc514a11ee193879aa46",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
