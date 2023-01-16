@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cbd39a5_525111e9",
+        "filename": "gradle/wrapper/gradle-wrapper.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-16T05:22:11Z",
+      "side": 1,
+      "message": "Taken from: https://gradle.org/release-checksums/",
+      "revId": "23c5365f73d2ad85e4efa10a89c84b20cd912ce4",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
