@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -35,6 +36,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+        languageVersion = "1.6"
+    }
 
     lint {
         lintConfig file("lint.xml")
@@ -52,6 +57,7 @@ dependencies {
      */
     compileOnly project.ext.aosp_libs
     implementation project.ext.std_libs.androidx_core
+    implementation project.ext.std_libs.androidx_core_ktx
     implementation project.ext.std_libs.androidx_appcompat
     implementation project.ext.std_libs.guava
 }

@@ -28,8 +28,10 @@ android_app {
     manifest: "app/src/main/AndroidManifest.xml",
 
     static_libs: [
-        "androidx.appcompat_appcompat",
+        "kotlin-stdlib-jdk8",
         "androidx.core_core",
+        "androidx.core_core-ktx",
+        "androidx.appcompat_appcompat",
         "guava",
     ],
 
