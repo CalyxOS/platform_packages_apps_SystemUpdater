@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextViewUpdaterState;
     private TextView mTextViewEngineStatus;
     private TextView mTextViewEngineErrorCode;
-    private TextView mTextViewUpdateInfo;
 
     private List<UpdateConfig> mConfigs;
 
@@ -87,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         this.mTextViewUpdaterState = findViewById(R.id.textViewUpdaterState);
         this.mTextViewEngineStatus = findViewById(R.id.textViewEngineStatus);
         this.mTextViewEngineErrorCode = findViewById(R.id.textViewEngineErrorCode);
-        this.mTextViewUpdateInfo = findViewById(R.id.textViewUpdateInfo);
 
         this.mTextViewConfigsDirHint.setText(UpdateConfigs.getConfigsRoot(this));
 
@@ -311,7 +309,6 @@ public class MainActivity extends AppCompatActivity {
         mButtonResume.setEnabled(false);
         mProgressBar.setEnabled(false);
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-        mTextViewUpdateInfo.setTextColor(Color.parseColor("#aaaaaa"));
     }
 
     private void uiResetEngineText() {
