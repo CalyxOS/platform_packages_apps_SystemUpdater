@@ -16,6 +16,24 @@
       "message": "It also removes the launcher icon by default. Mention that, and perhaps that\u0027s something we want to discuss.",
       "revId": "6b613f87b0c53c147667bd94358f467ad953819b",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bb0e90f_1bc45d43",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-16T09:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b092ea21_4f9ba8da",
+      "revId": "6b613f87b0c53c147667bd94358f467ad953819b",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
