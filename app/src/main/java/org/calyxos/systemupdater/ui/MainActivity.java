@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         this.mTextViewUpdaterState = findViewById(R.id.textViewUpdaterState);
         this.mTextViewEngineStatus = findViewById(R.id.textViewEngineStatus);
         this.mTextViewEngineErrorCode = findViewById(R.id.textViewEngineErrorCode);
-        this.mTextViewUpdateInfo = findViewById(R.id.textViewUpdateInfo);
 
         this.mTextViewConfigsDirHint.setText(UpdateConfigs.getConfigsRoot(this));
 
