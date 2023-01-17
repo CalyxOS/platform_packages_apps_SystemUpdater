@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.kapt'
+    id 'com.google.dagger.hilt.android'
+    id 'org.jlleitschuh.gradle.ktlint'
 }
 
 android {
@@ -46,6 +49,10 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes true
+}
+
 apply from: '../gradle/dependencies.gradle'
 dependencies {
     /**
@@ -56,8 +63,15 @@ dependencies {
      * Using the AOSP versions in gradle builds allows us to spot issues early on.
      */
     compileOnly project.ext.aosp_libs
-    implementation project.ext.std_libs.androidx_core
     implementation project.ext.std_libs.androidx_core_ktx
     implementation project.ext.std_libs.androidx_appcompat
-    implementation project.ext.std_libs.guava
+    implementation project.ext.google.guava
+    implementation project.ext.google.gson
+    implementation project.ext.kotlinx.coroutines
+
+    // Hilt is an exception due to lack of any specific version source
+    // https://android.googlesource.com/platform/external/dagger2/+/refs/tags/android-13.0.0_r3
+    def hilt_version = "2.44.2"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
 }
