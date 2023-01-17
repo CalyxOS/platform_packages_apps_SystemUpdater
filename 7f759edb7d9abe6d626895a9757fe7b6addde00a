@@ -16,6 +16,23 @@
       "message": "This fetches configs without any issues.\n\nTODO:\n\n* Use the fetched config to compare system version to decide if an update is available or not\n* Implement update downloads using DownloadManager instead of current implementation to handle long running downloads\n* Connect backend with UI to enable applying updates",
       "revId": "7f759edb7d9abe6d626895a9757fe7b6addde00a",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "495b4796_62d075d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-17T10:22:04Z",
+      "side": 1,
+      "message": "In a perfect world, we would also want repository instead of directly communicating with viewmodel to handle errors.",
+      "revId": "7f759edb7d9abe6d626895a9757fe7b6addde00a",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
