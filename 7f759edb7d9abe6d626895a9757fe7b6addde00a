@@ -50,6 +50,24 @@
       "message": "Forgot that updatenengine streams update, ignore the point about downloads",
       "revId": "7f759edb7d9abe6d626895a9757fe7b6addde00a",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29384561_de8dd1e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-17T12:50:19Z",
+      "side": 1,
+      "message": "FTR we aren\u0027t using streaming updates currently, but I don\u0027t see any reason not to do that.\n\nOne issue might be Tor updates, but we can handle that when we get to it.",
+      "parentUuid": "3d880deb_7fdf18c2",
+      "revId": "7f759edb7d9abe6d626895a9757fe7b6addde00a",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
