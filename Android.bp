@@ -32,7 +32,12 @@ android_app {
         "androidx.core_core",
         "androidx.core_core-ktx",
         "androidx.appcompat_appcompat",
+        "androidx.lifecycle_lifecycle-viewmodel-ktx",
+        "androidx.preference_preference",
         "guava",
+        "gson",
+        "kotlinx-coroutines-android"
+        "hilt_android"
     ],
 
     optimize: {
