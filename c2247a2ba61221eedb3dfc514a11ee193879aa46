@@ -16,6 +16,24 @@
       "message": "Considering we haven\u0027t introduced any major code changes in java yet, seems fine time to do them in Kotlin to avoid introducing more deprecated code that would require addressing in future.",
       "revId": "c2247a2ba61221eedb3dfc514a11ee193879aa46",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a143255_f39aa386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-17T14:40:01Z",
+      "side": 1,
+      "message": "I\u0027ll agree. I was going to say let\u0027s not just add Kotlin for the sake of it, but at the same time it doesn\u0027t make sense to write too much new code in java.\n\nGiven that we\u0027re already shipping multiple Kotlin apps, one more is fine too.",
+      "parentUuid": "aa31d0c0_9cdaef45",
+      "revId": "c2247a2ba61221eedb3dfc514a11ee193879aa46",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
