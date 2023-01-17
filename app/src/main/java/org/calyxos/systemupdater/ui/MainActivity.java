@@ -42,9 +42,12 @@ import org.calyxos.systemupdater.util.UpdateEngineStatuses;
 
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
 /**
  * UI for system updater app.
  */
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
