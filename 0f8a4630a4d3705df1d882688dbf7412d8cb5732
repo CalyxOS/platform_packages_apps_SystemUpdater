@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c92ba645_9a04c662",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-20T15:46:34Z",
+      "side": 1,
+      "message": "We don\u0027t want that.",
+      "revId": "0f8a4630a4d3705df1d882688dbf7412d8cb5732",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52777549_87153585",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-01-20T15:46:34Z",
+      "side": 1,
+      "message": "I\u0027d rather not add it at all tbh.",
+      "revId": "0f8a4630a4d3705df1d882688dbf7412d8cb5732",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
