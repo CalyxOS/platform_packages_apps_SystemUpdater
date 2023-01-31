@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d54bb4_cd855fc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-01-31T09:48:33Z",
+      "side": 1,
+      "message": "The fragment dependency in AOSP as some weirdo bug causing viewmodel fail to init. I am not sure if activity suffers from it as well but I keep noticing weird theme errors stating must use appcompat theme randomly. Need to check.",
+      "revId": "3d9337bc5c1a0614ede14b68e400c41af20e6ea2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
