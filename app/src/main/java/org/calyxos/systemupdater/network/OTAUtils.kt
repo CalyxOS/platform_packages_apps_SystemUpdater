@@ -51,7 +51,9 @@ class OTAUtils @Inject constructor(
         val channel = sharedPreferences.getString(updateChannel, defaultChannel)
         val jsonConfig = fetchJsonConfig("$otaServerURL/$channel/${Build.DEVICE}")
         return if (jsonConfig.isNotEmpty()) {
-            gson.fromJson(jsonConfig, UpdateConfig::class.java)
+            val updateConfig = gson.fromJson(jsonConfig, UpdateConfig::class.java)
+            updateConfig.rawJson = jsonConfig
+            updateConfig
         } else {
             UpdateConfig()
         }
@@ -74,7 +76,7 @@ class OTAUtils @Inject constructor(
         var jsonConfig = String()
         withContext(Dispatchers.IO) {
             try {
-                val connection = URL(url).openConnection() as HttpURLConnection
+                val connection = URL("https://gitlab.com/theimpulson/tmp/-/raw/main/stable/bluejay.json").openConnection() as HttpURLConnection
                 jsonConfig = connection.inputStream.bufferedReader().use { it.readText() }
             } catch (exception: Exception) {
                 exception.printStackTrace()

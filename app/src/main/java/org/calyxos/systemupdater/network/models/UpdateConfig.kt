@@ -26,5 +26,5 @@ data class UpdateConfig(
     val abInstallType: ABInstallType = ABInstallType.NOT_AVAILABLE,
     @SerializedName("ab_config")
     val abConfig: ABConfig = ABConfig(),
-    val rawJson: String = String()
+    var rawJson: String = String()
 )

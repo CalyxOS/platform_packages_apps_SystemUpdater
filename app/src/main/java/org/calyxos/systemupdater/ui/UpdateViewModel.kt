@@ -20,6 +20,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
+import android.os.Handler
+import android.os.UpdateEngine
 import android.text.format.DateFormat
 import android.util.Log
 import androidx.core.content.edit
@@ -39,6 +41,8 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
+import org.calyxos.systemupdater.UpdateManager
 
 @HiltViewModel
 @SuppressLint("StaticFieldLeak") // false positive, see https://github.com/google/dagger/issues/3253
@@ -49,6 +53,8 @@ class UpdateViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val TAG = UpdateViewModel::class.java.simpleName
+
+    val updateManager = UpdateManager(UpdateEngine(), Handler())
 
     val updateConfigFlow: Flow<UpdateConfig>
         get() = _updateConfigFlow
@@ -74,6 +80,18 @@ class UpdateViewModel @Inject constructor(
                 _updateStatus.value = UpdateStatus.IDLE
             }
             _updateLastCheck.value = setLastCheck()
+        }
+    }
+
+    fun applyUpdate() {
+        viewModelScope.launch {
+            updateConfigFlow.collect {
+                if (it.name.isNotBlank()) {
+                    updateManager.applyUpdate(context, it)
+                } else {
+                    Log.d(TAG, "No new update available to install!")
+                }
+            }
         }
     }
 
