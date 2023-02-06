@@ -28,9 +28,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import org.calyxos.systemupdater.R
+import org.calyxos.systemupdater.UpdaterState
 import org.calyxos.systemupdater.util.CommonUtils
 import org.calyxos.systemupdater.util.UpdateStatus
 import javax.inject.Inject
@@ -100,7 +102,13 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
                             updateContainer.visibility = View.VISIBLE
                             infoContainer.visibility = View.GONE
                             updateCheck.visibility = View.GONE
-                            updateButton.visibility = View.VISIBLE
+                            updateButton.apply {
+                                text = getString(R.string.install)
+                                visibility = View.VISIBLE
+                                setOnClickListener {
+                                    viewModel.applyUpdate()
+                                }
+                            }
                             settingButton.visibility = View.VISIBLE
                         }
                         else -> {
@@ -118,6 +126,34 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
             }
             findViewById<Button>(R.id.settingButton).setOnClickListener {
                 findNavController().navigate(R.id.settingsFragment)
+            }
+        }
+
+        // Handle updateEngine callbacks
+        viewModel.updateManager.apply {
+            val updateInstallProgress = view.findViewById<LinearProgressIndicator>(R.id.updateInstallProgress)
+            val updateInstallSteps = view.findViewById<TextView>(R.id.updateInstallSteps)
+
+            setOnStateChangeCallback { it ->
+                when (it) {
+                    UpdaterState.RUNNING, UpdaterState.ERROR, UpdaterState.PAUSED -> {
+                        updateInstallProgress.visibility = View.VISIBLE
+                        updateInstallSteps.visibility = View.VISIBLE
+                    }
+                    UpdaterState.IDLE, UpdaterState.REBOOT_REQUIRED -> {
+                        updateInstallProgress.visibility = View.GONE
+                        updateInstallSteps.visibility = View.GONE
+                    }
+                    else -> {
+                        Log.d(TAG, "Got an unhandled state: $it")
+                    }
+                }
+                updateInstallSteps.text =
+                    UpdaterState.getStateText(it).lowercase().replaceFirstChar { it.uppercase() }
+            }
+
+            setOnProgressUpdateCallback {
+                updateInstallProgress.progress = (100 * it).toInt()
             }
         }
     }

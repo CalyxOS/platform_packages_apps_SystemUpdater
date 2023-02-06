@@ -20,6 +20,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
+import android.os.Handler
+import android.os.UpdateEngine
 import android.text.format.DateFormat
 import android.util.Log
 import androidx.core.content.edit
@@ -29,8 +31,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
+import org.calyxos.systemupdater.UpdateManager
 import org.calyxos.systemupdater.network.OTARepository
 import org.calyxos.systemupdater.network.models.UpdateConfig
 import org.calyxos.systemupdater.util.CommonUtils
@@ -49,6 +53,8 @@ class UpdateViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val TAG = UpdateViewModel::class.java.simpleName
+
+    val updateManager = UpdateManager(UpdateEngine(), Handler())
 
     val updateConfigFlow: Flow<UpdateConfig>
         get() = _updateConfigFlow
@@ -74,6 +80,18 @@ class UpdateViewModel @Inject constructor(
                 _updateStatus.value = UpdateStatus.IDLE
             }
             _updateLastCheck.value = setLastCheck()
+        }
+    }
+
+    fun applyUpdate() {
+        viewModelScope.launch {
+            updateConfigFlow.collect {
+                if (it.name.isNotBlank()) {
+                    updateManager.applyUpdate(context, it)
+                } else {
+                    Log.d(TAG, "No new update available to install!")
+                }
+            }
         }
     }
 
