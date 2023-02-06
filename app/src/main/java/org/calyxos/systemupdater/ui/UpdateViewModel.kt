@@ -111,7 +111,7 @@ class UpdateViewModel @Inject constructor(
     fun applyUpdate() {
         viewModelScope.launch {
             if (_updateConfig.value.name.isNotBlank()) {
-                // TODO: Start the update
+                updateManager.applyUpdate(context, _updateConfig.value)
             } else {
                 Log.d(TAG, "No new update to install!")
             }
