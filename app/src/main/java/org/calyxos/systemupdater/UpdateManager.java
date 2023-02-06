@@ -24,14 +24,17 @@ import android.util.Log;
 
 import androidx.annotation.GuardedBy;
 
-import org.calyxos.systemupdater.services.PrepareUpdateService;
-import org.calyxos.systemupdater.util.UpdateEngineErrorCodes;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.AtomicDouble;
 
+import org.calyxos.systemupdater.update.models.ABInstallType;
+import org.calyxos.systemupdater.update.models.UpdateConfig;
+import org.calyxos.systemupdater.services.PrepareUpdateService;
+import org.calyxos.systemupdater.util.UpdateEngineErrorCodes;
+import org.json.JSONException;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -271,7 +274,7 @@ public class UpdateManager {
      * end of the update.</p>
      */
     public synchronized void applyUpdate(Context context, UpdateConfig config)
-            throws UpdaterState.InvalidTransitionException {
+            throws UpdaterState.InvalidTransitionException, JSONException {
         mEngineErrorCode.set(UpdateEngineErrorCodes.UNKNOWN);
         setUpdaterState(UpdaterState.RUNNING);
 
@@ -281,7 +284,11 @@ public class UpdateManager {
         }
 
         Log.d(TAG, "Starting PrepareUpdateService");
-        PrepareUpdateService.startService(context, config, mHandler, (code, payloadSpec) -> {
+        PrepareUpdateService.startService(
+                context,
+                org.calyxos.systemupdater.UpdateConfig.fromJson(config.getRawJson()),
+                mHandler,
+                (code, payloadSpec) -> {
             if (code != PrepareUpdateService.RESULT_CODE_SUCCESS) {
                 Log.e(TAG, "PrepareUpdateService failed, result code is " + code);
                 setUpdaterStateSilent(UpdaterState.ERROR);
@@ -297,11 +304,11 @@ public class UpdateManager {
     private List<String> prepareExtraProperties(UpdateConfig config) {
         List<String> extraProperties = new ArrayList<>();
 
-        if (config.getInstallType() == UpdateConfig.AB_INSTALL_TYPE_STREAMING) {
+        if (config.getAbInstallType() == ABInstallType.STREAMING) {
             extraProperties.add("USER_AGENT=" + HTTP_USER_AGENT);
-            config.getAbConfig()
-                    .getAuthorization()
-                    .ifPresent(s -> extraProperties.add("AUTHORIZATION=" + s));
+            if (!config.getAbConfig().getAuthorization().isBlank()) {
+                extraProperties.add("AUTHORIZATION=" + config.getAbConfig().getAuthorization());
+            }
         }
         return extraProperties;
     }

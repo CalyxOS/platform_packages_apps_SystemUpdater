@@ -36,7 +36,6 @@ import org.calyxos.systemupdater.UpdateConfig;
 import org.calyxos.systemupdater.util.FileDownloader;
 import org.calyxos.systemupdater.util.PackageFiles;
 import org.calyxos.systemupdater.util.PayloadSpecs;
-import org.calyxos.systemupdater.util.UpdateConfigs;
 import com.google.common.collect.ImmutableSet;
 
 import java.io.IOException;
@@ -158,14 +157,14 @@ public class PrepareUpdateService extends JobIntentService {
         downloadPreStreamingFiles(config, OTA_PACKAGE_DIR);
 
         Optional<UpdateConfig.PackageFile> payloadBinary =
-                UpdateConfigs.getPropertyFile(PAYLOAD_BINARY_FILE_NAME, config);
+                getPropertyFile(PAYLOAD_BINARY_FILE_NAME, config);
 
         if (!payloadBinary.isPresent()) {
             throw new PreparationFailedException(
                     "Failed to find " + PAYLOAD_BINARY_FILE_NAME + " in config");
         }
 
-        if (!UpdateConfigs.getPropertyFile(PAYLOAD_PROPERTIES_FILE_NAME, config).isPresent()
+        if (!getPropertyFile(PAYLOAD_PROPERTIES_FILE_NAME, config).isPresent()
                 || !Paths.get(OTA_PACKAGE_DIR, PAYLOAD_PROPERTIES_FILE_NAME).toFile().exists()) {
             throw new IOException(PAYLOAD_PROPERTIES_FILE_NAME + " not found");
         }
@@ -280,6 +279,21 @@ public class PrepareUpdateService extends JobIntentService {
         PreparationFailedException(String message) {
             super(message);
         }
+    }
+
+    /**
+     * @param filename searches by given filename
+     * @param config searches in {@link UpdateConfig#getAbConfig()}
+     * @return offset and size of {@code filename} in the package zip file
+     *         stored as {@link UpdateConfig.PackageFile}.
+     */
+    private static Optional<UpdateConfig.PackageFile> getPropertyFile(
+            final String filename,
+            UpdateConfig config) {
+        return Arrays
+                .stream(config.getAbConfig().getPropertyFiles())
+                .filter(file -> filename.equals(file.getFilename()))
+                .findFirst();
     }
 
 }
