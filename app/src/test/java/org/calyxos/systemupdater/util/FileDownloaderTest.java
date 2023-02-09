@@ -37,7 +37,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * Tests for {@link FileDownloader}
+ * Tests for {@link CommonExt}
  */
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -71,7 +71,7 @@ public class FileDownloaderTest {
                 .toFile();
         Files.deleteIfExists(outFile.toPath());
         // download a chunk of ota.zip
-        FileDownloader downloader = new FileDownloader(url, 1674, 12, outFile);
+        CommonExt downloader = new CommonExt(url, 1674, 12, outFile);
         downloader.download();
         String downloadedContent = String.join("\n", Files.readAllLines(outFile.toPath()));
         // archive contains text files with uppercase filenames

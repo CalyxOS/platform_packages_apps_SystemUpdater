@@ -43,6 +43,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import javax.inject.Inject
+import org.calyxos.systemupdater.util.download
 
 @HiltViewModel
 @SuppressLint("StaticFieldLeak") // false positive, see https://github.com/google/dagger/issues/3253
@@ -87,7 +88,12 @@ class UpdateViewModel @Inject constructor(
         viewModelScope.launch {
             updateConfigFlow.collect {
                 if (it.name.isNotBlank()) {
-                    updateManager.applyUpdate(context, it)
+                    it.abConfig.propertyFiles.forEach {file ->
+                        if (file.filename == "payload_properties.txt") {
+                            file.download("http://192.168.29.121:8000/calyx_bluejay-ota-eng.theimpulson.zip", context.filesDir)
+                        }
+                    }
+//                    updateManager.applyUpdate(context, it)
                 } else {
                     Log.d(TAG, "No new update available to install!")
                 }
