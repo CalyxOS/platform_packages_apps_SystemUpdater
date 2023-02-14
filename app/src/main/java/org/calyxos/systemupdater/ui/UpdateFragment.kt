@@ -38,8 +38,8 @@ import org.calyxos.systemupdater.util.UpdateStatus
 import javax.inject.Inject
 import javax.inject.Named
 
-@AndroidEntryPoint
-class UpdateFragment : Fragment(R.layout.fragment_update) {
+@AndroidEntryPoint(Fragment::class)
+class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
 
     private val TAG = UpdateFragment::class.java.simpleName
     private val viewModel: UpdateViewModel by viewModels()

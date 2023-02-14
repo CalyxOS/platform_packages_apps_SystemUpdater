@@ -19,5 +19,5 @@ package org.calyxos.systemupdater
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
-@HiltAndroidApp
-class SystemUpdaterApp : Application()
+@HiltAndroidApp(Application::class)
+class SystemUpdaterApp : Hilt_SystemUpdaterApp()

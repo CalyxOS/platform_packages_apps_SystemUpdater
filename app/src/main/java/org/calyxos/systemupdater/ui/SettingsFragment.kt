@@ -29,8 +29,8 @@ import org.calyxos.systemupdater.util.CommonUtils.defaultChannel
 import org.calyxos.systemupdater.util.CommonUtils.updateChannel
 import javax.inject.Inject
 
-@AndroidEntryPoint
-class SettingsFragment : PreferenceFragmentCompat() {
+@AndroidEntryPoint(PreferenceFragmentCompat::class)
+class SettingsFragment : Hilt_SettingsFragment() {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences

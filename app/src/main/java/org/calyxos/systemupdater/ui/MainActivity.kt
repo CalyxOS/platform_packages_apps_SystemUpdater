@@ -21,8 +21,8 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.calyxos.systemupdater.R
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint(AppCompatActivity::class)
+class MainActivity : Hilt_MainActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
