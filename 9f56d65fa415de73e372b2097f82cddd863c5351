@@ -34,6 +34,24 @@
       "parentUuid": "c1e7ffcd_83b1387a",
       "revId": "9f56d65fa415de73e372b2097f82cddd863c5351",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6b519eb_7af195f9",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-14T13:56:55Z",
+      "side": 1,
+      "message": "Example:\n\n- App status: UPDATE_AVAILABLE (Set after checking config from server)\n- engine status: IDLE\n\n- App status: DOWNLOADING (Skipping offset to download pre-streaming files)\n- engine status: IDLE\n\n----- User closes app--------\nor\n\n- App status: DOWNLOADING (Streaming update)\n- engine status: DOWNLOADING\n\n----- User closes app--------\n\n- App status: restoresLastKnownStatus(DOWNLOADING)\n- engine status: Supplied with progress (can be anything, VERIFYING, ERROR, IDLE, etc.)\n\nWe need to handle this DOWNLOADING -\u003e Whatever and restore a good state.",
+      "parentUuid": "b8d65f3a_5dcf1163",
+      "revId": "9f56d65fa415de73e372b2097f82cddd863c5351",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
