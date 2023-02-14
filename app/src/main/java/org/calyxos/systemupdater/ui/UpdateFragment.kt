@@ -32,7 +32,6 @@ import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import org.calyxos.systemupdater.R
-import org.calyxos.systemupdater.UpdaterState
 import org.calyxos.systemupdater.util.CommonUtils
 import org.calyxos.systemupdater.util.UpdateStatus
 import javax.inject.Inject
@@ -87,9 +86,11 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
 
             // TODO: Switch to a better view restore strategy
             lifecycleScope.launchWhenStarted {
-                viewModel.updateStatus.collect {
+
+                viewModel.updateStatus.collect { status ->
                     viewModel.saveLastUpdate()
-                    when (it) {
+                    installSteps.text = status.name.lowercase().replaceFirstChar { it.uppercase() }
+                    when (status) {
                         UpdateStatus.IDLE -> {
                             updateTitle.text = getString(R.string.uptodate)
                             updateContainer.visibility = View.GONE
@@ -156,39 +157,13 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                             }
                         }
                         else -> {
-                            Log.d(TAG, "Got an unexpected status: ${it.name}")
+                            Log.d(TAG, "Got an unexpected status: ${status.name}")
                         }
                     }
                 }
-            }
-        }
 
-        // Handle updateEngine callbacks
-        viewModel.updateManager.apply {
-            val updateInstallProgress = view.findViewById<LinearProgressIndicator>(R.id.updateInstallProgress)
-            val updateInstallSteps = view.findViewById<TextView>(R.id.updateInstallSteps)
-
-            setOnStateChangeCallback { it ->
-                when (it) {
-                    UpdaterState.IDLE, UpdaterState.REBOOT_REQUIRED -> {
-                        updateInstallProgress.apply {
-                            isIndeterminate = false
-                            visibility = View.GONE
-                        }
-                        updateInstallSteps.visibility = View.GONE
-                    }
-                    else -> {
-                        Log.d(TAG, "Got an unhandled state: $it")
-                    }
-                }
-                updateInstallSteps.text =
-                    UpdaterState.getStateText(it).lowercase().replaceFirstChar { it.uppercase() }
-            }
-
-            setOnProgressUpdateCallback {
-                updateInstallProgress.apply {
-                    isIndeterminate = false
-                    progress = (100 * it).toInt()
+                viewModel.updateProgress.collect {
+                    installProgress.progress = (100 * it).toInt()
                 }
             }
         }
