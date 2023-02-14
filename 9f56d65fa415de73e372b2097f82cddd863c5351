@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e7ffcd_83b1387a",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-14T10:58:32Z",
+      "side": 1,
+      "message": "Need to address how to handle mismatch between app and engine\u0027s status",
+      "revId": "9f56d65fa415de73e372b2097f82cddd863c5351",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
