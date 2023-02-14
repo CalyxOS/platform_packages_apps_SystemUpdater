@@ -18,6 +18,7 @@ package org.calyxos.systemupdater.ui
 
 import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -30,13 +31,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import org.calyxos.systemupdater.R
-import org.calyxos.systemupdater.UpdaterState
-import org.calyxos.systemupdater.util.CommonUtils
-import org.calyxos.systemupdater.util.UpdateStatus
 import javax.inject.Inject
 import javax.inject.Named
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
+import org.calyxos.systemupdater.R
+import org.calyxos.systemupdater.util.CommonUtils
+import org.calyxos.systemupdater.util.UpdateStatus
 
 @AndroidEntryPoint(Fragment::class)
 class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
@@ -50,6 +51,8 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.d(TAG, view.context.externalCacheDir!!.absolutePath)
 
         val settingButton = view.findViewById<Button>(R.id.settingButton).apply {
             setOnClickListener {
@@ -84,12 +87,14 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
             val infoContainer = findViewById<LinearLayout>(R.id.infoContainer)
             val installProgress = findViewById<LinearProgressIndicator>(R.id.updateInstallProgress)
             val installSteps = findViewById<TextView>(R.id.updateInstallSteps)
+            val networkWarning = findViewById<TextView>(R.id.networkWarning)
 
             // TODO: Switch to a better view restore strategy
             lifecycleScope.launchWhenStarted {
-                viewModel.updateStatus.collect {
+                viewModel.updateStatus.collect { status ->
                     viewModel.saveLastUpdate()
-                    when (it) {
+                    installSteps.text = status.name.lowercase().replaceFirstChar { it.uppercase() }
+                    when (status) {
                         UpdateStatus.IDLE -> {
                             updateTitle.text = getString(R.string.uptodate)
                             updateContainer.visibility = View.GONE
@@ -125,9 +130,10 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                                 }
                             }
                             settingButton.visibility = View.VISIBLE
+                            networkWarning.visibility = View.VISIBLE
                         }
                         UpdateStatus.DOWNLOADING -> {
-                            updateTitle.text = getString(R.string.update_available)
+                            updateTitle.text = getString(R.string.installing_update)
                             updateContainer.visibility = View.VISIBLE
                             infoContainer.visibility = View.GONE
                             installProgress.apply {
@@ -141,12 +147,17 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                                     viewModel.suspendUpdate()
                                 }
                             }
+                            settingButton.visibility = View.VISIBLE
+                            networkWarning.visibility = View.VISIBLE
                         }
                         UpdateStatus.SUSPENDED -> {
-                            updateTitle.text = getString(R.string.update_available)
+                            updateTitle.text = getString(R.string.installing_update)
                             updateContainer.visibility = View.VISIBLE
                             infoContainer.visibility = View.GONE
-                            installProgress.visibility = View.VISIBLE
+                            installProgress.apply {
+                                isIndeterminate = false
+                                visibility = View.VISIBLE
+                            }
                             installSteps.visibility = View.VISIBLE
                             updateButton.apply {
                                 text = getString(R.string.resume)
@@ -154,43 +165,72 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                                     viewModel.resumeUpdate()
                                 }
                             }
+                            settingButton.visibility = View.VISIBLE
+                            networkWarning.visibility = View.VISIBLE
+                        }
+                        UpdateStatus.VERIFYING, UpdateStatus.FINALIZING -> {
+                            updateTitle.text = getString(R.string.installing_update)
+                            updateContainer.visibility = View.VISIBLE
+                            infoContainer.visibility = View.GONE
+                            installProgress.apply {
+                                isIndeterminate = true
+                                visibility = View.VISIBLE
+                            }
+                            installSteps.visibility = View.VISIBLE
+                            updateButton.apply {
+                                text = getString(R.string.suspend)
+                                isEnabled = false
+                            }
+                            settingButton.visibility = View.VISIBLE
+                            networkWarning.visibility = View.GONE
+                        }
+                        UpdateStatus.UPDATED_NEED_REBOOT -> {
+                            updateTitle.text = getString(R.string.update_done)
+                            updateContainer.visibility = View.VISIBLE
+                            infoContainer.visibility = View.GONE
+                            updateCheck.visibility = View.GONE
+                            installSteps.visibility = View.GONE
+                            installProgress.visibility = View.GONE
+                            updateButton.apply {
+                                text = getString(R.string.reboot)
+                                visibility = View.VISIBLE
+                                setOnClickListener {
+                                    val pm = context.getSystemService(PowerManager::class.java)
+                                    pm.reboot(null)
+                                }
+                            }
+                            settingButton.visibility = View.VISIBLE
+                            networkWarning.visibility = View.GONE
                         }
                         else -> {
-                            Log.d(TAG, "Got an unexpected status: ${it.name}")
+                            Log.d(TAG, "Got an unexpected status: ${status.name}")
                         }
                     }
                 }
             }
-        }
 
-        // Handle updateEngine callbacks
-        viewModel.updateManager.apply {
-            val updateInstallProgress = view.findViewById<LinearProgressIndicator>(R.id.updateInstallProgress)
-            val updateInstallSteps = view.findViewById<TextView>(R.id.updateInstallSteps)
-
-            setOnStateChangeCallback { it ->
-                when (it) {
-                    UpdaterState.IDLE, UpdaterState.REBOOT_REQUIRED -> {
-                        updateInstallProgress.apply {
-                            isIndeterminate = false
-                            visibility = View.GONE
+            lifecycleScope.launchWhenStarted {
+                viewModel.updateProgress.combine(viewModel.updateStatus) { inProgress, status ->
+                    when (status) {
+                        UpdateStatus.IDLE,
+                        UpdateStatus.CHECKING_FOR_UPDATE,
+                        UpdateStatus.UPDATE_AVAILABLE,
+                        UpdateStatus.UPDATED_NEED_REBOOT -> {
+                            // do nothing
                         }
-                        updateInstallSteps.visibility = View.GONE
-                    }
-                    else -> {
-                        Log.d(TAG, "Got an unhandled state: $it")
+                        UpdateStatus.VERIFYING, UpdateStatus.FINALIZING -> {
+                            installProgress.isIndeterminate = false
+                        }
+                        else -> {
+                            installProgress.apply {
+                                isIndeterminate = false
+                                progress = inProgress
+                            }
+                        }
                     }
                 }
-                updateInstallSteps.text =
-                    UpdaterState.getStateText(it).lowercase().replaceFirstChar { it.uppercase() }
             }
 
-            setOnProgressUpdateCallback {
-                updateInstallProgress.apply {
-                    isIndeterminate = false
-                    progress = (100 * it).toInt()
-                }
-            }
         }
     }
 }

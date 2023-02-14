@@ -54,6 +54,12 @@ class UpdateViewModel @Inject constructor(
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
+    private val TAG = UpdateViewModel::class.java.simpleName
+    private val UPDATE_STATUS = "UpdateStatus"
+    private val UPDATE_CONFIG = "UpdateConfig"
+
+    private val updateManager = UpdateManager(UpdateEngine(), Handler(Looper.getMainLooper()))
+
     val updateConfig: Flow<UpdateConfig>
         get() = _updateConfig
     private val _updateConfig = MutableStateFlow(UpdateConfig())
@@ -62,19 +68,23 @@ class UpdateViewModel @Inject constructor(
         get() = _updateStatus
     private val _updateStatus = MutableStateFlow(UpdateStatus.IDLE)
 
-    init {
-        restoreLastUpdate()
-    }
-
-    private val TAG = UpdateViewModel::class.java.simpleName
-    private val UPDATE_STATUS = UpdateStatus::class.java.simpleName
-    private val UPDATE_CONFIG = UpdateConfig::class.java.simpleName
-
-    val updateManager = UpdateManager(UpdateEngine(), Handler(Looper.getMainLooper()))
+    val updateProgress: Flow<Int>
+        get() = _updateProgress
+    private val _updateProgress = MutableStateFlow(0)
 
     val updateLastCheck: Flow<String>
         get() = _updateLastCheck
     private val _updateLastCheck = MutableStateFlow(getLastCheck())
+
+    init {
+        // restore last update status to properly reflect the status
+        restoreLastUpdate()
+
+        // set callbacks and bind the engine with app
+        updateManager.setOnStateChangeCallback { handleEngineStatus(it) }
+        updateManager.setOnProgressUpdateCallback { handleEngineProgress(it) }
+        updateManager.bind()
+    }
 
     fun checkUpdates() {
         _updateStatus.value = UpdateStatus.CHECKING_FOR_UPDATE
@@ -92,19 +102,28 @@ class UpdateViewModel @Inject constructor(
     }
 
     fun saveLastUpdate() {
-        sharedPreferences.edit {
-            putString(UPDATE_STATUS, _updateStatus.value.name)
-            if (_updateConfig.value.name.isNotBlank()) {
-                putString(UPDATE_CONFIG, _updateConfig.value.rawJson)
+        _updateStatus.value.let {
+            when (it) {
+                UpdateStatus.IDLE, UpdateStatus.CHECKING_FOR_UPDATE -> {}
+                else -> {
+                    sharedPreferences.edit(true) {
+                        putString(UPDATE_STATUS, it.name)
+                        if (_updateConfig.value.name.isNotBlank()) {
+                            putString(UPDATE_CONFIG, _updateConfig.value.rawJson)
+                        }
+                    }
+                }
             }
         }
     }
 
     fun suspendUpdate() {
+        _updateStatus.value = UpdateStatus.SUSPENDED
         updateManager.suspend()
     }
 
     fun resumeUpdate() {
+        restoreLastUpdate()
         updateManager.resume()
     }
 
@@ -130,11 +149,24 @@ class UpdateViewModel @Inject constructor(
         val config = sharedPreferences.getString(UPDATE_CONFIG, String()) ?: String()
         if (config.isNotBlank()) {
             _updateConfig.value = gson.fromJson(config, UpdateConfig::class.java)
+            _updateConfig.value.rawJson = config
         }
 
-        val idle = UpdateStatus.IDLE.name
-        _updateStatus.value =
-            UpdateStatus.valueOf(sharedPreferences.getString(UPDATE_STATUS, idle) ?: idle)
+        val status = sharedPreferences.getString(UPDATE_STATUS, UpdateStatus.IDLE.name)
+        status?.let { _updateStatus.value = UpdateStatus.valueOf(it) }
+    }
+
+    private fun handleEngineStatus(status: Int) {
+        when (val upStatus = UpdateStatus.values()[status + 1]) {
+            UpdateStatus.IDLE, UpdateStatus.CHECKING_FOR_UPDATE, UpdateStatus.UPDATE_AVAILABLE -> {
+                // do nothing for these status as they are controlled from app side
+            }
+            else -> { _updateStatus.value = upStatus }
+        }
+    }
+
+    private fun handleEngineProgress(progress: Double) {
+        _updateProgress.value = (100 * progress).toInt()
     }
 
     private fun getLastCheck(): String {

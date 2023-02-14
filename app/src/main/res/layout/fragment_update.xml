@@ -54,6 +54,7 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="20dp"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,11 +107,12 @@
     <LinearLayout
         android:id="@+id/updateContainer"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="0dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginVertical="10dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintBottom_toTopOf="@+id/networkWarning"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateTitle">
@@ -133,13 +135,71 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
-            android:gravity="start"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
             android:textColor="?android:textColorSecondary"
             android:textSize="16sp"
-            android:visibility="gone"
-            tools:text="Step 1 of 2" />
+            tools:text="Downloading" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:gravity="start"
+            android:text="@string/what_is_new"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/updateChangelog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:gravity="start"
+                android:text="@string/tools_changelog"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="15sp"
+                android:lineSpacingExtra="5sp"
+                tools:text="@string/tools_changelog" />
+
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/updateSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:gravity="start"
+            android:text="Update size: 1.46 GB"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="15sp"
+            tools:text="Update size: 1.46 GB"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/networkWarning"
+        android:layout_marginHorizontal="20dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:drawablePadding="10dp"
+        android:gravity="start"
+        android:text="@string/network_warning"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="13sp"
+        app:drawableStartCompat="@drawable/ic_info"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/updateCheck"
