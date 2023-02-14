@@ -53,6 +53,7 @@ class UpdateViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
+    val updateManager = UpdateManager(UpdateEngine(), Handler(Looper.getMainLooper()))
 
     val updateConfig: Flow<UpdateConfig>
         get() = _updateConfig
@@ -62,15 +63,23 @@ class UpdateViewModel @Inject constructor(
         get() = _updateStatus
     private val _updateStatus = MutableStateFlow(UpdateStatus.IDLE)
 
+    val updateProgress: Flow<Double>
+        get() = _updateProgress
+    private val _updateProgress = MutableStateFlow(0.0)
+
     init {
+        // restore last update status to properly reflect the status
         restoreLastUpdate()
+
+        // set callbacks and bind the engine with app
+        updateManager.setOnStateChangeCallback { handleEngineStatus(it) }
+        updateManager.setOnProgressUpdateCallback { _updateProgress.value = it }
+        updateManager.bind()
     }
 
     private val TAG = UpdateViewModel::class.java.simpleName
     private val UPDATE_STATUS = UpdateStatus::class.java.simpleName
     private val UPDATE_CONFIG = UpdateConfig::class.java.simpleName
-
-    val updateManager = UpdateManager(UpdateEngine(), Handler(Looper.getMainLooper()))
 
     val updateLastCheck: Flow<String>
         get() = _updateLastCheck
@@ -136,6 +145,8 @@ class UpdateViewModel @Inject constructor(
         _updateStatus.value =
             UpdateStatus.valueOf(sharedPreferences.getString(UPDATE_STATUS, idle) ?: idle)
     }
+
+    private fun handleEngineStatus(status: Int) {}
 
     private fun getLastCheck(): String {
         val notAvailable = context.getString(R.string.na)
