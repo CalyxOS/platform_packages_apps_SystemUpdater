@@ -186,7 +186,8 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                                 text = getString(R.string.reboot)
                                 visibility = View.VISIBLE
                                 setOnClickListener {
-                                    // TODO: Reboot device
+                                    val pm = context.getSystemService(PowerManager::class.java)
+                                    pm.reboot(null)
                                 }
                             }
                             networkWarning.visibility = View.GONE
