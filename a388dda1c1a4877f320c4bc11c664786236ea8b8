@@ -16,6 +16,24 @@
       "message": "Needs SystemUpdater to be a priv app",
       "revId": "a388dda1c1a4877f320c4bc11c664786236ea8b8",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee7baae_4d5e499e",
+        "filename": "app/src/main/AndroidManifest.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-02-15T10:56:39Z",
+      "side": 1,
+      "message": "That\u0027s ok, ideally do it in a separate commit.",
+      "parentUuid": "eba35911_1bf379f0",
+      "revId": "a388dda1c1a4877f320c4bc11c664786236ea8b8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
