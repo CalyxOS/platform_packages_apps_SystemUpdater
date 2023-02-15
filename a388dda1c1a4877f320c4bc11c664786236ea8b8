@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba35911_1bf379f0",
+        "filename": "app/src/main/AndroidManifest.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-15T09:39:08Z",
+      "side": 1,
+      "message": "Needs SystemUpdater to be a priv app",
+      "revId": "a388dda1c1a4877f320c4bc11c664786236ea8b8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
