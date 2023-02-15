@@ -18,6 +18,7 @@ package org.calyxos.systemupdater.ui
 
 import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
 import android.os.SystemProperties
 import android.util.Log
 import android.view.View
@@ -145,7 +146,8 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                                 text = getString(R.string.reboot)
                                 isEnabled = true
                                 setOnClickListener {
-                                    // TODO: Reboot device
+                                    val pm = context.getSystemService(PowerManager::class.java)
+                                    pm.reboot(null)
                                 }
                             }
                             UpdateStatus.UPDATE_AVAILABLE -> {
