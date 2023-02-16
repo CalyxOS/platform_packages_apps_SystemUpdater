@@ -52,6 +52,24 @@
       "parentUuid": "b8d65f3a_5dcf1163",
       "revId": "9f56d65fa415de73e372b2097f82cddd863c5351",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fb4de74_c2625dcc",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-16T05:39:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d6b519eb_7af195f9",
+      "revId": "9f56d65fa415de73e372b2097f82cddd863c5351",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }

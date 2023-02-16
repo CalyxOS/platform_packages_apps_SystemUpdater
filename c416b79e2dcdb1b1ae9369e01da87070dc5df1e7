@@ -16,6 +16,24 @@
       "message": "1. Need to mark privileged in Android.bp\n2. Need to add perm to privapp-perms",
       "revId": "c416b79e2dcdb1b1ae9369e01da87070dc5df1e7",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc5a19ff_4e5ea3af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-16T05:39:44Z",
+      "side": 1,
+      "message": "The app is already privileged. I added the perm to the list.",
+      "parentUuid": "19af5694_594370b3",
+      "revId": "c416b79e2dcdb1b1ae9369e01da87070dc5df1e7",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
