@@ -34,6 +34,24 @@
       "parentUuid": "d932f5df_e3d0cf39",
       "revId": "b240a97b49406d86c5336a287f65aaa27b218392",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "928521d2_94ee2988",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-02-16T12:41:14Z",
+      "side": 1,
+      "message": "This still renames it. It\u0027s not a big deal, but as a general practice don\u0027t do this, just makes our lives harder in the future.\n\nLess so in this repo (standalone app, our own), more so in AOSP repos or any other forks where we rebase from to time.",
+      "parentUuid": "e8234116_e49e4e23",
+      "revId": "b240a97b49406d86c5336a287f65aaa27b218392",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
