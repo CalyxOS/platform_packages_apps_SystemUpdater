@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "518b180d_24b0e6e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-17T05:49:36Z",
+      "side": 1,
+      "message": "Still has some issues updating UI status but those are related to UpdateManager. I will address those in a separate commit instead of holding it down anymore.",
+      "revId": "eb649799e26ea291ca24b6e5944f6a70d883ea43",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
