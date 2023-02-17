@@ -51,12 +51,12 @@ android_app {
         ],
     },
 
-    required: ["privapp_whitelist_org.calyxos.systemupdater"],
+    required: ["privapp_allowlist_org.calyxos.systemupdater"],
 }
 
 prebuilt_etc {
-    name: "privapp_whitelist_org.calyxos.systemupdater",
-    src: "privapp_whitelist_org.calyxos.systemupdater.xml",
+    name: "privapp_allowlist_org.calyxos.systemupdater",
+    src: "privapp_allowlist_org.calyxos.systemupdater.xml",
     system_ext_specific: true,
     sub_dir: "permissions",
     filename_from_src: true,
