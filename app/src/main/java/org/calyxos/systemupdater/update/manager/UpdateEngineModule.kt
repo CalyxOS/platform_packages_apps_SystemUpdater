@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.util
+package org.calyxos.systemupdater.update.manager
 
-/**
- * Possible status of the Update
- *
- * This enum holds a combination of both status supplied by update_engine and
- * custom ones required for this app. Status from update_engine are followed by custom.
- */
-// Keep in sync with: frameworks/base/core/java/android/os/UpdateEngine.java (UpdateStatusConstants)
-enum class UpdateStatus {
-    IDLE,
-    CHECKING_FOR_UPDATE,
-    UPDATE_AVAILABLE,
-    DOWNLOADING,
-    VERIFYING,
-    FINALIZING,
-    UPDATED_NEED_REBOOT,
-    REPORTING_ERROR_EVENT,
-    ATTEMPTING_ROLLBACK,
-    DISABLED,
-    SUSPENDED
+import android.os.UpdateEngine
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object UpdateEngineModule {
+
+    /**
+     * Provides an instance of UpdateEngine
+     */
+    @Singleton
+    @Provides
+    fun providesUpdateEngineInstance(): UpdateEngine {
+        return UpdateEngine()
+    }
 }
