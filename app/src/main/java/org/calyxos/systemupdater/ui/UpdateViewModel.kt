@@ -20,9 +20,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
-import android.os.UpdateEngine
 import android.text.format.DateFormat
 import android.util.Log
 import androidx.core.content.edit
@@ -33,12 +30,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
-import org.calyxos.systemupdater.UpdateManager
 import org.calyxos.systemupdater.update.config.UpdateConfigRepository
+import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
 import org.calyxos.systemupdater.update.models.UpdateConfig
-import org.calyxos.systemupdater.util.UpdateStatus
+import org.calyxos.systemupdater.update.models.UpdateStatus
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -48,6 +47,7 @@ import javax.inject.Inject
 @SuppressLint("StaticFieldLeak") // false positive, see https://github.com/google/dagger/issues/3253
 class UpdateViewModel @Inject constructor(
     private val updateConfigRepository: UpdateConfigRepository,
+    private val updateManager: UpdateManagerRepository,
     private val gson: Gson,
     private val sharedPreferences: SharedPreferences,
     @ApplicationContext private val context: Context
@@ -56,8 +56,6 @@ class UpdateViewModel @Inject constructor(
     private val TAG = UpdateViewModel::class.java.simpleName
     private val UPDATE_STATUS = "UpdateStatus"
     private val UPDATE_CONFIG = "UpdateConfig"
-
-    private val updateManager = UpdateManager(UpdateEngine(), Handler(Looper.getMainLooper()))
 
     private val _updateConfig = MutableStateFlow(UpdateConfig())
     val updateConfig = _updateConfig.asStateFlow()
@@ -75,10 +73,8 @@ class UpdateViewModel @Inject constructor(
         // restore last update status to properly reflect the status
         restoreLastUpdate()
 
-        // set callbacks and bind the engine with app
-        updateManager.setOnStateChangeCallback { handleEngineStatus(it) }
-        updateManager.setOnProgressUpdateCallback { handleEngineProgress(it) }
-        updateManager.bind()
+        // handle status updates from update_engine
+        handleEngineUpdates()
     }
 
     fun checkUpdates() {
@@ -114,19 +110,19 @@ class UpdateViewModel @Inject constructor(
 
     fun suspendUpdate() {
         _updateStatus.value = UpdateStatus.SUSPENDED
-        updateManager.suspend()
+        updateManager.suspendUpdate()
     }
 
     fun resumeUpdate() {
         restoreLastUpdate()
-        updateManager.resume()
+        updateManager.resumeUpdate()
     }
 
     fun applyUpdate() {
         viewModelScope.launch {
             if (_updateConfig.value.name.isNotBlank()) {
                 _updateStatus.value = UpdateStatus.DOWNLOADING
-                updateManager.applyUpdate(context, _updateConfig.value)
+                updateManager.applyUpdate(_updateConfig.value)
             } else {
                 Log.d(TAG, "No new update to install!")
             }
@@ -151,27 +147,26 @@ class UpdateViewModel @Inject constructor(
         status?.let { _updateStatus.value = UpdateStatus.valueOf(it) }
     }
 
-    private fun handleEngineStatus(status: Int) {
-        when (val upStatus = UpdateStatus.values()[status + 1]) {
-            UpdateStatus.IDLE -> {
-                // update_engine can only get idle either due to error or successful update
-                when (_updateStatus.value) {
-                    UpdateStatus.DOWNLOADING,
-                    UpdateStatus.UPDATED_NEED_REBOOT -> { _updateStatus.value = upStatus }
-                    else -> {
-                        // do nothing
+    private fun handleEngineUpdates() {
+        updateManager.updateStatus.combine(updateManager.updateProgress) { status, progress ->
+            when (status) {
+                UpdateStatus.IDLE -> {
+                    // update_engine can only get idle either due to error or successful update
+                    when (_updateStatus.value) {
+                        UpdateStatus.DOWNLOADING,
+                        UpdateStatus.UPDATED_NEED_REBOOT -> { _updateStatus.value = status }
+                        else -> {
+                            // do nothing
+                        }
                     }
                 }
+                UpdateStatus.CHECKING_FOR_UPDATE, UpdateStatus.UPDATE_AVAILABLE -> {
+                    // do nothing for these status as they are controlled from app side
+                }
+                else -> { _updateStatus.value = status }
             }
-            UpdateStatus.CHECKING_FOR_UPDATE, UpdateStatus.UPDATE_AVAILABLE -> {
-                // do nothing for these status as they are controlled from app side
-            }
-            else -> { _updateStatus.value = upStatus }
-        }
-    }
-
-    private fun handleEngineProgress(progress: Double) {
-        _updateProgress.value = (100 * progress).toInt()
+            _updateProgress.value = progress
+        }.launchIn(viewModelScope)
     }
 
     private fun getLastCheck(): String {
