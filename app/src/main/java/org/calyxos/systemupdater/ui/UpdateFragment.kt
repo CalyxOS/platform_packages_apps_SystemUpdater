@@ -35,7 +35,7 @@ import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import org.calyxos.systemupdater.R
-import org.calyxos.systemupdater.util.UpdateStatus
+import org.calyxos.systemupdater.update.models.UpdateStatus
 
 @AndroidEntryPoint(Fragment::class)
 class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
