@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.util
+package org.calyxos.systemupdater.update.manager.models
 
 /**
  * Possible status of the Update
