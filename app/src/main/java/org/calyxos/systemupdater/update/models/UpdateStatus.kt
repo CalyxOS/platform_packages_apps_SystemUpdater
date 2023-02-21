@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.util
+package org.calyxos.systemupdater.update.models
 
 /**
  * Possible status of the Update
@@ -22,17 +22,19 @@ package org.calyxos.systemupdater.util
  * This enum holds a combination of both status supplied by update_engine and
  * custom ones required for this app. Status from update_engine are followed by custom.
  */
-// Keep in sync with: frameworks/base/core/java/android/os/UpdateEngine.java (UpdateStatusConstants)
+// Keep in sync with: system/update_engine/client_library/include/update_engine/update_status.h
 enum class UpdateStatus {
-    IDLE,
-    CHECKING_FOR_UPDATE,
-    UPDATE_AVAILABLE,
-    DOWNLOADING,
-    VERIFYING,
-    FINALIZING,
-    UPDATED_NEED_REBOOT,
-    REPORTING_ERROR_EVENT,
-    ATTEMPTING_ROLLBACK,
-    DISABLED,
+    IDLE, // 0
+    CHECKING_FOR_UPDATE, // 1
+    UPDATE_AVAILABLE, // 2
+    DOWNLOADING, // 3
+    VERIFYING, // 4
+    FINALIZING, // 5
+    UPDATED_NEED_REBOOT, // 6
+    REPORTING_ERROR_EVENT, // 7
+    ATTEMPTING_ROLLBACK, // 8
+    DISABLED, // 9
+    NEED_PERMISSION_TO_UPDATE, // 10
+    CLEANUP_PREVIOUS_UPDATE, // 11
     SUSPENDED
 }
