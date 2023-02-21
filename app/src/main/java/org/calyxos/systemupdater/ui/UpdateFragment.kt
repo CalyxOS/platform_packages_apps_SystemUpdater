@@ -30,13 +30,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.util.CommonUtils
-import org.calyxos.systemupdater.util.UpdateStatus
+import org.calyxos.systemupdater.local.models.UpdateStatus
 import javax.inject.Inject
 import javax.inject.Named
 

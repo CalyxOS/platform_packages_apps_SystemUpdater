@@ -39,7 +39,7 @@ import org.calyxos.systemupdater.UpdateManager
 import org.calyxos.systemupdater.network.OTARepository
 import org.calyxos.systemupdater.network.models.UpdateConfig
 import org.calyxos.systemupdater.util.CommonUtils
-import org.calyxos.systemupdater.util.UpdateStatus
+import org.calyxos.systemupdater.local.models.UpdateStatus
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale

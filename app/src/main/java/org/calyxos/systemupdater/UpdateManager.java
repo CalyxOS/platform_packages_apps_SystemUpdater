@@ -31,7 +31,6 @@ import com.google.common.util.concurrent.AtomicDouble;
 import org.calyxos.systemupdater.network.models.ABInstallType;
 import org.calyxos.systemupdater.network.models.UpdateConfig;
 import org.calyxos.systemupdater.services.PrepareUpdateService;
-import org.calyxos.systemupdater.util.UpdateEngineErrorCodes;
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -58,7 +57,6 @@ public class UpdateManager {
 
     private AtomicInteger mUpdateEngineStatus =
             new AtomicInteger(UpdateEngine.UpdateStatusConstants.IDLE);
-    private AtomicInteger mEngineErrorCode = new AtomicInteger(UpdateEngineErrorCodes.UNKNOWN);
     private AtomicDouble mProgress = new AtomicDouble(0);
     private UpdaterState mUpdaterState = new UpdaterState(UpdaterState.IDLE);
 
@@ -275,7 +273,6 @@ public class UpdateManager {
      */
     public synchronized void applyUpdate(Context context, UpdateConfig config)
             throws UpdaterState.InvalidTransitionException, JSONException {
-        mEngineErrorCode.set(UpdateEngineErrorCodes.UNKNOWN);
         setUpdaterState(UpdaterState.RUNNING);
 
         synchronized (mLock) {
@@ -455,16 +452,6 @@ public class UpdateManager {
 
     private void onPayloadApplicationComplete(int errorCode) {
         Log.d(TAG, "onPayloadApplicationComplete invoked, errorCode=" + errorCode);
-        mEngineErrorCode.set(errorCode);
-        if (errorCode == UpdateEngine.ErrorCodeConstants.SUCCESS
-                || errorCode == UpdateEngineErrorCodes.UPDATED_BUT_NOT_ACTIVE) {
-            setUpdaterStateSilent(UpdaterState.REBOOT_REQUIRED);
-        } else if (errorCode != UpdateEngineErrorCodes.USER_CANCELLED) {
-            setUpdaterStateSilent(UpdaterState.ERROR);
-        }
-
-        getOnEngineCompleteCallback()
-                .ifPresent(callback -> callback.accept(errorCode));
     }
 
     /**
