@@ -14,25 +14,12 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.util
+package org.calyxos.systemupdater.update.manager
 
-/**
- * Possible status of the Update
- *
- * This enum holds a combination of both status supplied by update_engine and
- * custom ones required for this app. Status from update_engine are followed by custom.
- */
-// Keep in sync with: frameworks/base/core/java/android/os/UpdateEngine.java (UpdateStatusConstants)
-enum class UpdateStatus {
-    IDLE,
-    CHECKING_FOR_UPDATE,
-    UPDATE_AVAILABLE,
-    DOWNLOADING,
-    VERIFYING,
-    FINALIZING,
-    UPDATED_NEED_REBOOT,
-    REPORTING_ERROR_EVENT,
-    ATTEMPTING_ROLLBACK,
-    DISABLED,
-    SUSPENDED
-}
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class UpdateManagerRepository @Inject constructor(
+    val updateManagerImpl: UpdateManagerImpl
+)
