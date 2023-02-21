@@ -38,8 +38,8 @@ import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.UpdateManager
 import org.calyxos.systemupdater.update.config.UpdateConfigRepository
 import org.calyxos.systemupdater.update.config.models.UpdateConfig
+import org.calyxos.systemupdater.update.manager.models.UpdateStatus
 import org.calyxos.systemupdater.util.CommonUtils
-import org.calyxos.systemupdater.util.UpdateStatus
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
