@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.network.models
+package org.calyxos.systemupdater.update.models
 
 data class PackageFile(
     val filename: String = String(),

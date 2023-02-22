@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.network.models
+package org.calyxos.systemupdater.update.models
 
 import com.google.gson.annotations.SerializedName
 
-data class ABConfig(
-    @SerializedName("verify_payload_metadata")
-    val verifyPayloadMetadata: Boolean = false,
-    @SerializedName("property_files")
-    val propertyFiles: List<PackageFile> = emptyList(),
-    val authorization: String = String(),
+data class UpdateConfig(
+    val name: String = String(),
+    val url: String = String(),
+    val version: String = String(),
+    @SerializedName("ab_install_type")
+    val abInstallType: ABInstallType = ABInstallType.NOT_AVAILABLE,
+    @SerializedName("ab_config")
+    val abConfig: ABConfig = ABConfig(),
+    var rawJson: String = String()
 )

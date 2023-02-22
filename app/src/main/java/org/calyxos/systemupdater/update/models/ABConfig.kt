@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.network
+package org.calyxos.systemupdater.update.models
 
-import org.calyxos.systemupdater.network.models.UpdateConfig
-import javax.inject.Inject
-import javax.inject.Singleton
+import com.google.gson.annotations.SerializedName
 
-@Singleton
-class OTARepository @Inject constructor(
-    private val otaUtils: OTAUtils
-) {
-
-    suspend fun getLatestUpdateConfig(): UpdateConfig {
-        return otaUtils.getUpdateConfig()
-    }
-
-    fun newUpdateAvailable(version: String): Boolean {
-        return otaUtils.newUpdateAvailable(version)
-    }
-}
+data class ABConfig(
+    @SerializedName("verify_payload_metadata")
+    val verifyPayloadMetadata: Boolean = false,
+    @SerializedName("property_files")
+    val propertyFiles: List<PackageFile> = emptyList(),
+    val authorization: String = String(),
+)

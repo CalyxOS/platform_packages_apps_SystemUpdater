@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.network
+package org.calyxos.systemupdater.update.config
 
 import android.content.SharedPreferences
 import android.os.Build
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.calyxos.systemupdater.network.models.UpdateConfig
+import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.util.CommonUtils
 import org.calyxos.systemupdater.util.CommonUtils.defaultChannel
 import org.calyxos.systemupdater.util.CommonUtils.updateChannel
@@ -32,7 +32,7 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
-class OTAUtils @Inject constructor(
+class UpdateConfigImpl @Inject constructor(
     private val sharedPreferences: SharedPreferences,
     private val gson: Gson,
     @Named(CommonUtils.calyxOSVersion) private val calyxOSVersion: String,

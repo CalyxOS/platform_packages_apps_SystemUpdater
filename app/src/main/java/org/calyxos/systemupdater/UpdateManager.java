@@ -28,8 +28,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.AtomicDouble;
 
-import org.calyxos.systemupdater.network.models.ABInstallType;
-import org.calyxos.systemupdater.network.models.UpdateConfig;
+import org.calyxos.systemupdater.update.models.ABInstallType;
+import org.calyxos.systemupdater.update.models.UpdateConfig;
 import org.calyxos.systemupdater.services.PrepareUpdateService;
 import org.calyxos.systemupdater.util.UpdateEngineErrorCodes;
 import org.json.JSONException;

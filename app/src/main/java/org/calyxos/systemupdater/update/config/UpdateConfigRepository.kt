@@ -14,10 +14,22 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.network.models
+package org.calyxos.systemupdater.update.config
 
-enum class ABInstallType {
-    NON_STREAMING,
-    STREAMING,
-    NOT_AVAILABLE
+import org.calyxos.systemupdater.update.models.UpdateConfig
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class UpdateConfigRepository @Inject constructor(
+    private val updateConfigImpl: UpdateConfigImpl
+) {
+
+    suspend fun getLatestUpdateConfig(): UpdateConfig {
+        return updateConfigImpl.getUpdateConfig()
+    }
+
+    fun newUpdateAvailable(version: String): Boolean {
+        return updateConfigImpl.newUpdateAvailable(version)
+    }
 }

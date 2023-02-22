@@ -36,8 +36,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.UpdateManager
-import org.calyxos.systemupdater.network.OTARepository
-import org.calyxos.systemupdater.network.models.UpdateConfig
+import org.calyxos.systemupdater.update.config.UpdateConfigRepository
+import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.util.CommonUtils
 import org.calyxos.systemupdater.util.UpdateStatus
 import java.text.SimpleDateFormat
@@ -48,7 +48,7 @@ import javax.inject.Inject
 @HiltViewModel
 @SuppressLint("StaticFieldLeak") // false positive, see https://github.com/google/dagger/issues/3253
 class UpdateViewModel @Inject constructor(
-    private val otaRepository: OTARepository,
+    private val updateConfigRepository: UpdateConfigRepository,
     private val gson: Gson,
     private val sharedPreferences: SharedPreferences,
     @ApplicationContext private val context: Context
@@ -89,8 +89,8 @@ class UpdateViewModel @Inject constructor(
     fun checkUpdates() {
         _updateStatus.value = UpdateStatus.CHECKING_FOR_UPDATE
         viewModelScope.launch {
-            val updateConfig = otaRepository.getLatestUpdateConfig()
-            if (otaRepository.newUpdateAvailable(updateConfig.version)) {
+            val updateConfig = updateConfigRepository.getLatestUpdateConfig()
+            if (updateConfigRepository.newUpdateAvailable(updateConfig.version)) {
                 _updateConfig.value = updateConfig
                 _updateStatus.value = UpdateStatus.UPDATE_AVAILABLE
             } else {
