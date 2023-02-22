@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.network.models
+package org.calyxos.systemupdater.update.config.models
 
-enum class ABInstallType {
-    NON_STREAMING,
-    STREAMING,
-    NOT_AVAILABLE
-}
+import com.google.gson.annotations.SerializedName
+
+data class ABConfig(
+    @SerializedName("verify_payload_metadata")
+    val verifyPayloadMetadata: Boolean = false,
+    @SerializedName("property_files")
+    val propertyFiles: List<PackageFile> = emptyList(),
+    val authorization: String = String(),
+)

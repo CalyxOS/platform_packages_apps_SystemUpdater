@@ -14,14 +14,22 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.network.models
+package org.calyxos.systemupdater.update.config
 
-import com.google.gson.annotations.SerializedName
+import org.calyxos.systemupdater.update.config.models.UpdateConfig
+import javax.inject.Inject
+import javax.inject.Singleton
 
-data class ABConfig(
-    @SerializedName("verify_payload_metadata")
-    val verifyPayloadMetadata: Boolean = false,
-    @SerializedName("property_files")
-    val propertyFiles: List<PackageFile> = emptyList(),
-    val authorization: String = String(),
-)
+@Singleton
+class UpdateConfigRepository @Inject constructor(
+    private val updateConfigImpl: UpdateConfigImpl
+) {
+
+    suspend fun getLatestUpdateConfig(): UpdateConfig {
+        return updateConfigImpl.getUpdateConfig()
+    }
+
+    fun newUpdateAvailable(version: String): Boolean {
+        return updateConfigImpl.newUpdateAvailable(version)
+    }
+}

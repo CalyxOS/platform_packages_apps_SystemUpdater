@@ -14,10 +14,17 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.network.models
+package org.calyxos.systemupdater.update.config.models
 
-data class PackageFile(
-    val filename: String = String(),
-    val offset: Long = 0,
-    val size: Long = 0
+import com.google.gson.annotations.SerializedName
+
+data class UpdateConfig(
+    val name: String = String(),
+    val url: String = String(),
+    val version: String = String(),
+    @SerializedName("ab_install_type")
+    val abInstallType: ABInstallType = ABInstallType.NOT_AVAILABLE,
+    @SerializedName("ab_config")
+    val abConfig: ABConfig = ABConfig(),
+    var rawJson: String = String()
 )

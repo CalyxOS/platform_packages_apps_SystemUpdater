@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-package org.calyxos.systemupdater.network
+package org.calyxos.systemupdater.update.config.models
 
-import org.calyxos.systemupdater.network.models.UpdateConfig
-import javax.inject.Inject
-import javax.inject.Singleton
-
-@Singleton
-class OTARepository @Inject constructor(
-    private val otaUtils: OTAUtils
-) {
-
-    suspend fun getLatestUpdateConfig(): UpdateConfig {
-        return otaUtils.getUpdateConfig()
-    }
-
-    fun newUpdateAvailable(version: String): Boolean {
-        return otaUtils.newUpdateAvailable(version)
-    }
+enum class ABInstallType {
+    NON_STREAMING,
+    STREAMING,
+    NOT_AVAILABLE
 }
