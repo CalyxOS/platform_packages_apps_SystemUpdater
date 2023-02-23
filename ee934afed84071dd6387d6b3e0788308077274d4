@@ -16,6 +16,24 @@
       "message": "unused?",
       "revId": "ee934afed84071dd6387d6b3e0788308077274d4",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81079d7d_a0893520",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-23T06:02:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "33e6ca6c_1af70927",
+      "revId": "ee934afed84071dd6387d6b3e0788308077274d4",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
