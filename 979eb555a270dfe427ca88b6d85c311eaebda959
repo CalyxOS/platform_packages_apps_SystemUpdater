@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7c01899_a59cda27",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-23T14:56:14Z",
+      "side": 1,
+      "message": "It throws an error stating an invalid header. Looking into it.\n\nhttps://cpaste.org/?f0dfc048d1137a6d#DMy4BKf1Ef3pBMuAmQD54WdB413Y4rGU39KgaFHJVQaq",
+      "revId": "979eb555a270dfe427ca88b6d85c311eaebda959",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
