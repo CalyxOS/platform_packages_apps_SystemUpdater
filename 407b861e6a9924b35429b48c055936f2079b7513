@@ -16,6 +16,24 @@
       "message": "Nit: This made me think you changed how the config was done. However it\u0027s just a simple rename.\n\nI suggest \"Move update config handling to it\u0027s own java package\" or something like that.",
       "revId": "407b861e6a9924b35429b48c055936f2079b7513",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a40dce14_799fef1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-23T06:02:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fa158d8_46399379",
+      "revId": "407b861e6a9924b35429b48c055936f2079b7513",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
