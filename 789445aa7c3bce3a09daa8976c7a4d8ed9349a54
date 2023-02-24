@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b710d5f2_46dbd17c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-24T09:44:17Z",
+      "side": 1,
+      "message": "WIP, need to handle UI changes for error and cleanup",
+      "revId": "789445aa7c3bce3a09daa8976c7a4d8ed9349a54",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
