@@ -16,6 +16,23 @@
       "message": "Splited things and added more comments hoping to make it more readable",
       "revId": "416812848e9c9a6665f013f87e18c7b9b7289ba9",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d12fc6_2f8d51b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-24T13:52:56Z",
+      "side": 1,
+      "message": "This should make it one-liner to get rid of update button offering to suspend updates",
+      "revId": "416812848e9c9a6665f013f87e18c7b9b7289ba9",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
