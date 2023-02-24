@@ -100,7 +100,7 @@ class UpdateViewModel @Inject constructor(
     fun saveLastUpdate() {
         _updateStatus.value.let {
             when (it) {
-                UpdateStatus.IDLE, UpdateStatus.CHECKING_FOR_UPDATE -> {}
+                UpdateStatus.CHECKING_FOR_UPDATE -> {}
                 else -> {
                     sharedPreferences.edit(true) {
                         putString(UPDATE_STATUS, it.name)
@@ -126,7 +126,7 @@ class UpdateViewModel @Inject constructor(
     fun applyUpdate() {
         viewModelScope.launch {
             if (_updateConfig.value.name.isNotBlank()) {
-                _updateStatus.value = UpdateStatus.DOWNLOADING
+                _updateStatus.value = UpdateStatus.PREPARING_TO_UPDATE
                 updateManager.applyUpdate(_updateConfig.value)
             } else {
                 Log.d(TAG, "No new update to install!")
@@ -156,17 +156,23 @@ class UpdateViewModel @Inject constructor(
         updateManager.updateStatus.combine(updateManager.updateProgress) { status, progress ->
             when (status) {
                 UpdateStatus.IDLE -> {
-                    // update_engine can only get idle either due to error or successful update
                     when (_updateStatus.value) {
-                        UpdateStatus.DOWNLOADING,
-                        UpdateStatus.UPDATED_NEED_REBOOT -> { _updateStatus.value = status }
+                        UpdateStatus.CHECKING_FOR_UPDATE, UpdateStatus.UPDATE_AVAILABLE -> {
+                            // do nothing for these status as they are controlled from app side
+                        }
                         else -> {
-                            // do nothing
+                            _updateStatus.value = status
                         }
                     }
                 }
                 UpdateStatus.CHECKING_FOR_UPDATE, UpdateStatus.UPDATE_AVAILABLE -> {
                     // do nothing for these status as they are controlled from app side
+                }
+                UpdateStatus.DOWNLOADING -> {
+                    // Ignore if update was suspended as engine will still say downloading
+                    if (_updateStatus.value != UpdateStatus.SUSPENDED) {
+                        _updateStatus.value = status
+                    }
                 }
                 else -> { _updateStatus.value = status }
             }
