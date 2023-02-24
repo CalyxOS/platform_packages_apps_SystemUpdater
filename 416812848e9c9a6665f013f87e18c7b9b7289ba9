@@ -33,6 +33,23 @@
       "message": "This should make it one-liner to get rid of update button offering to suspend updates",
       "revId": "416812848e9c9a6665f013f87e18c7b9b7289ba9",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d8e5fc_1ade56b6",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateFragment.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-24T13:54:01Z",
+      "side": 1,
+      "message": "Remove from view as we need to have discussion on whether to allow user to suspend updates or not",
+      "revId": "416812848e9c9a6665f013f87e18c7b9b7289ba9",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
