@@ -51,8 +51,6 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var updateStatus = UpdateStatus.IDLE
-
         view.findViewById<MaterialToolbar>(R.id.toolbar).apply {
             setOnMenuItemClickListener {
                 if (it.itemId == R.id.settings) {
@@ -91,112 +89,149 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
             val installSteps = findViewById<TextView>(R.id.updateInstallSteps)
             val networkWarning = findViewById<TextView>(R.id.networkWarning)
 
-            // TODO: Switch to a better view restore strategy
             lifecycleScope.launchWhenStarted {
                 viewModel.updateStatus.collect { status ->
-                    updateStatus = status
                     viewModel.saveLastUpdate()
-                    installSteps.text = status.name.lowercase().replaceFirstChar { it.uppercase() }
-                    when (status) {
+
+                    // Set update title based on status
+                    updateTitle.text = when (status) {
                         UpdateStatus.IDLE -> {
-                            updateTitle.text = getString(R.string.uptodate)
-                            updateContainer.visibility = View.GONE
-                            infoContainer.visibility = View.VISIBLE
-                            updateCheck.visibility = View.GONE
-                            updateButton.apply {
+                            getString(R.string.uptodate)
+                        }
+                        UpdateStatus.CHECKING_FOR_UPDATE -> {
+                            getString(R.string.checking_updates)
+                        }
+                        UpdateStatus.UPDATED_NEED_REBOOT -> {
+                            getString(R.string.update_done)
+                        }
+                        UpdateStatus.UPDATE_AVAILABLE -> {
+                            getString(R.string.update_available)
+                        }
+                        UpdateStatus.FAILED_PREPARING_UPDATE,
+                        UpdateStatus.REPORTING_ERROR_EVENT -> {
+                            getString(R.string.updated_failed)
+                        }
+                        UpdateStatus.PREPARING_TO_UPDATE,
+                        UpdateStatus.DOWNLOADING,
+                        UpdateStatus.SUSPENDED,
+                        UpdateStatus.VERIFYING,
+                        UpdateStatus.FINALIZING -> {
+                            getString(R.string.installing_update)
+                        }
+                        else -> {
+                            String()
+                        }
+                    }
+
+                    // Set update stage as normal text in installSteps
+                    // Visibility is handled in the everything else block at the last
+                    installSteps.text = status.name.lowercase()
+                        .replace("_", " ")
+                        .replaceFirstChar { it.uppercase() }
+
+                    // Show or hide network warning
+                    networkWarning.visibility = when (status) {
+                        UpdateStatus.UPDATE_AVAILABLE,
+                        UpdateStatus.DOWNLOADING -> { View.VISIBLE }
+                        else -> { View.GONE }
+                    }
+
+                    // Set update button's behaviour based on status
+                    // Visibility is handled in the everything else block at the last
+                    updateButton.apply {
+                        when (status) {
+                            UpdateStatus.IDLE -> {
                                 text = getString(R.string.check_update)
-                                visibility = View.VISIBLE
+                                isEnabled = true
                                 setOnClickListener {
                                     viewModel.checkUpdates()
                                 }
                             }
-                        }
-                        UpdateStatus.CHECKING_FOR_UPDATE -> {
-                            updateTitle.text = getString(R.string.checking_updates)
-                            updateContainer.visibility = View.GONE
-                            infoContainer.visibility = View.GONE
-                            updateCheck.visibility = View.VISIBLE
-                            updateButton.visibility = View.GONE
-                        }
-                        UpdateStatus.UPDATE_AVAILABLE -> {
-                            updateTitle.text = getString(R.string.update_available)
-                            updateContainer.visibility = View.VISIBLE
-                            infoContainer.visibility = View.GONE
-                            updateCheck.visibility = View.GONE
-                            updateButton.apply {
-                                text = getString(R.string.install)
-                                visibility = View.VISIBLE
-                                setOnClickListener {
-                                    viewModel.applyUpdate()
-                                }
-                            }
-                            networkWarning.visibility = View.VISIBLE
-                        }
-                        UpdateStatus.DOWNLOADING -> {
-                            updateTitle.text = getString(R.string.installing_update)
-                            updateContainer.visibility = View.VISIBLE
-                            infoContainer.visibility = View.GONE
-                            installProgress.apply {
-                                isIndeterminate = true
-                                visibility = View.VISIBLE
-                            }
-                            installSteps.visibility = View.VISIBLE
-                            updateButton.apply {
-                                text = getString(R.string.suspend)
-                                setOnClickListener {
-                                    viewModel.suspendUpdate()
-                                }
-                            }
-                            networkWarning.visibility = View.VISIBLE
-                        }
-                        UpdateStatus.SUSPENDED -> {
-                            updateTitle.text = getString(R.string.installing_update)
-                            updateContainer.visibility = View.VISIBLE
-                            infoContainer.visibility = View.GONE
-                            installProgress.apply {
-                                isIndeterminate = false
-                                visibility = View.VISIBLE
-                            }
-                            installSteps.visibility = View.VISIBLE
-                            updateButton.apply {
-                                text = getString(R.string.resume)
-                                setOnClickListener {
-                                    viewModel.resumeUpdate()
-                                }
-                            }
-                            networkWarning.visibility = View.VISIBLE
-                        }
-                        UpdateStatus.VERIFYING, UpdateStatus.FINALIZING -> {
-                            updateTitle.text = getString(R.string.installing_update)
-                            updateContainer.visibility = View.VISIBLE
-                            infoContainer.visibility = View.GONE
-                            installProgress.apply {
-                                isIndeterminate = true
-                                visibility = View.VISIBLE
-                            }
-                            installSteps.visibility = View.VISIBLE
-                            updateButton.apply {
-                                text = getString(R.string.suspend)
-                                isEnabled = false
-                            }
-                            networkWarning.visibility = View.GONE
-                        }
-                        UpdateStatus.UPDATED_NEED_REBOOT -> {
-                            updateTitle.text = getString(R.string.update_done)
-                            updateContainer.visibility = View.VISIBLE
-                            infoContainer.visibility = View.GONE
-                            updateCheck.visibility = View.GONE
-                            installSteps.visibility = View.GONE
-                            installProgress.visibility = View.GONE
-                            updateButton.apply {
+                            UpdateStatus.UPDATED_NEED_REBOOT -> {
                                 text = getString(R.string.reboot)
-                                visibility = View.VISIBLE
+                                isEnabled = true
                                 setOnClickListener {
                                     val pm = context.getSystemService(PowerManager::class.java)
                                     pm.reboot(null)
                                 }
                             }
-                            networkWarning.visibility = View.GONE
+                            UpdateStatus.UPDATE_AVAILABLE -> {
+                                text = getString(R.string.install)
+                                isEnabled = true
+                                setOnClickListener {
+                                    viewModel.applyUpdate()
+                                }
+                            }
+                            UpdateStatus.FAILED_PREPARING_UPDATE,
+                            UpdateStatus.REPORTING_ERROR_EVENT, -> {
+                                text = getString(R.string.retry)
+                                isEnabled = true
+                                setOnClickListener {
+                                    viewModel.checkUpdates()
+                                }
+                            }
+                            UpdateStatus.SUSPENDED -> {
+                                text = getString(R.string.resume)
+                                isEnabled = true
+                                setOnClickListener {
+                                    viewModel.resumeUpdate()
+                                }
+                            }
+                            UpdateStatus.PREPARING_TO_UPDATE,
+                            UpdateStatus.DOWNLOADING,
+                            UpdateStatus.VERIFYING,
+                            UpdateStatus.FINALIZING -> {
+                                isEnabled = status == UpdateStatus.DOWNLOADING
+                                text = getString(R.string.suspend)
+                                setOnClickListener {
+                                    viewModel.suspendUpdate()
+                                }
+                            }
+                            else -> {
+                                Log.d(TAG, "No update button action for: ${status.name}")
+                            }
+                        }
+                    }
+
+                    // Handle everything else based on status
+                    when (status) {
+                        UpdateStatus.IDLE -> {
+                            updateContainer.visibility = View.GONE
+                            infoContainer.visibility = View.VISIBLE
+                            updateCheck.visibility = View.GONE
+                            updateButton.visibility = View.VISIBLE
+                        }
+                        UpdateStatus.CHECKING_FOR_UPDATE -> {
+                            updateContainer.visibility = View.GONE
+                            infoContainer.visibility = View.GONE
+                            updateCheck.visibility = View.VISIBLE
+                            updateButton.visibility = View.GONE
+                        }
+                        UpdateStatus.FAILED_PREPARING_UPDATE,
+                        UpdateStatus.REPORTING_ERROR_EVENT,
+                        UpdateStatus.UPDATE_AVAILABLE,
+                        UpdateStatus.UPDATED_NEED_REBOOT -> {
+                            updateContainer.visibility = View.VISIBLE
+                            infoContainer.visibility = View.GONE
+                            updateCheck.visibility = View.GONE
+                            installSteps.visibility = View.GONE
+                            installProgress.visibility = View.GONE
+                            updateButton.visibility = View.VISIBLE
+                        }
+                        UpdateStatus.PREPARING_TO_UPDATE,
+                        UpdateStatus.DOWNLOADING,
+                        UpdateStatus.SUSPENDED,
+                        UpdateStatus.VERIFYING,
+                        UpdateStatus.FINALIZING -> {
+                            updateContainer.visibility = View.VISIBLE
+                            infoContainer.visibility = View.GONE
+                            updateCheck.visibility = View.GONE
+                            installProgress.apply {
+                                isIndeterminate = true
+                                visibility = View.VISIBLE
+                            }
+                            installSteps.visibility = View.VISIBLE
+                            updateButton.visibility = View.VISIBLE
                         }
                         else -> {
                             Log.d(TAG, "Got an unexpected status: ${status.name}")
@@ -207,20 +242,10 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
 
             lifecycleScope.launchWhenStarted {
                 viewModel.updateProgress.collect {
-                    when (updateStatus) {
-                        UpdateStatus.IDLE,
-                        UpdateStatus.CHECKING_FOR_UPDATE,
-                        UpdateStatus.UPDATE_AVAILABLE,
-                        UpdateStatus.UPDATED_NEED_REBOOT -> {
-                            // do nothing
-                        }
-                        else -> {
-                            if (it != 0) {
-                                installProgress.apply {
-                                    isIndeterminate = false
-                                    progress = it
-                                }
-                            }
+                    if (it != 0) {
+                        installProgress.apply {
+                            isIndeterminate = false
+                            progress = it
                         }
                     }
                 }
