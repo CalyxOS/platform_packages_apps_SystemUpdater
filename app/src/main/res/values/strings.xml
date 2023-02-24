@@ -25,7 +25,10 @@
     <string name="checking_updates">Checking for updates…</string>
     <string name="installing_update">Installing system update…</string>
     <string name="update_available">System update available</string>
+    <string name="updated_failed">Failed to update system</string>
+    <string name="update_cleanup">Cleaning previous update\' leftover</string>
     <string name="update_done">System update almost done</string>
+    <string name="retry">Retry</string>
     <string name="close">Close</string>
     <string name="resume">Resume</string>
     <string name="suspend">Suspend</string>
