@@ -75,17 +75,23 @@ class UpdateManagerImpl @Inject constructor(
             if (propertiesFile != null && payloadFile != null) {
                 val properties = fetchPayloadProperties(updateConfig.url, propertiesFile)
                 if (properties.isNotBlank()) {
+                    updateStatus.value = UpdateStatus.DOWNLOADING
                     updateEngine.applyPayload(
                         updateConfig.url,
                         payloadFile.offset,
                         payloadFile.size,
                         properties.trim().lines().toTypedArray()
                     )
+                } else {
+                    updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+                    Log.d(TAG, "Payload properties are empty, aborting update!")
                 }
             } else {
+                updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
                 Log.d(TAG, "Failed to find properties or payload in given config!")
             }
         } else {
+            updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
             Log.d(TAG, "Failed to verify payload metadata!")
         }
     }
