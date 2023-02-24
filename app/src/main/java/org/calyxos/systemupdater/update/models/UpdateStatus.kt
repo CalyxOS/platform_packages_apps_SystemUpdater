@@ -36,5 +36,7 @@ enum class UpdateStatus {
     DISABLED, // 9
     NEED_PERMISSION_TO_UPDATE, // 10
     CLEANUP_PREVIOUS_UPDATE, // 11
-    SUSPENDED
+    SUSPENDED, // custom: event when update is suspended
+    PREPARING_TO_UPDATE, // custom: event sent during payload verification, fetching props
+    FAILED_PREPARING_UPDATE // custom: event when payload verification or fetching props fails
 }
