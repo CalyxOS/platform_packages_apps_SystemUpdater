@@ -100,7 +100,12 @@ class UpdateViewModel @Inject constructor(
     fun saveLastUpdate() {
         _updateStatus.value.let {
             when (it) {
-                UpdateStatus.IDLE, UpdateStatus.CHECKING_FOR_UPDATE -> {}
+                UpdateStatus.IDLE,
+                UpdateStatus.CHECKING_FOR_UPDATE,
+                UpdateStatus.CLEANUP_PREVIOUS_UPDATE,
+                UpdateStatus.REPORTING_ERROR_EVENT,
+                UpdateStatus.ATTEMPTING_ROLLBACK,
+                UpdateStatus.NEED_PERMISSION_TO_UPDATE -> {}
                 else -> {
                     sharedPreferences.edit(true) {
                         putString(UPDATE_STATUS, it.name)
