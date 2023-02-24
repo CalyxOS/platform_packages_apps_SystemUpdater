@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2023 Google LLC
+  ~ Copyright (C) 2023 The Calyx Institute
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+  <group android:scaleX="0.4884"
+      android:scaleY="0.4884"
+      android:translateX="245.568"
+      android:translateY="245.568">
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M260,920Q236,920 218,902Q200,884 200,860L200,100Q200,76 218,58Q236,40 260,40L700,40Q724,40 742,58Q760,76 760,100L760,860Q760,884 742,902Q724,920 700,920L260,920ZM260,770L700,770L700,190L260,190L260,770ZM480,642L325,487L368,444L450,526L450,332L510,332L510,526L592,444L635,487L480,642Z"/>
+  </group>
+</vector>
