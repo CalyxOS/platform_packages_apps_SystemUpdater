@@ -192,6 +192,7 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                             updateButton.apply {
                                 text = getString(R.string.reboot)
                                 visibility = View.VISIBLE
+                                isEnabled = true
                                 setOnClickListener {
                                     val pm = context.getSystemService(PowerManager::class.java)
                                     pm.reboot(null)
