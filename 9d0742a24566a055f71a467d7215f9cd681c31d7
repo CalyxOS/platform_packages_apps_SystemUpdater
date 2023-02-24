@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb708ea5_02ddceb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-02-24T11:57:23Z",
+      "side": 1,
+      "message": "Ideally in the future we add our own tests.\n\nGradle only tests would be fine too.",
+      "revId": "9d0742a24566a055f71a467d7215f9cd681c31d7",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
