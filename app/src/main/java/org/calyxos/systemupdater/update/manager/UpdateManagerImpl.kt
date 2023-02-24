@@ -62,6 +62,10 @@ class UpdateManagerImpl @Inject constructor(
     }
 
     suspend fun applyUpdate(updateConfig: UpdateConfig) {
+        // StateFlow doesn't emit same value twice, so send a different status first
+        // otherwise it won't broadcast failure-related status when update fails again
+        updateStatus.value = UpdateStatus.PREPARING_TO_UPDATE
+
         val metadataFile =
             updateConfig.abConfig.propertyFiles.find { it.filename == payloadMetadata }
 
@@ -74,17 +78,23 @@ class UpdateManagerImpl @Inject constructor(
             if (propertiesFile != null && payloadFile != null) {
                 val properties = fetchPayloadProperties(updateConfig.url, propertiesFile)
                 if (properties.isNotEmpty()) {
+                    updateStatus.value = UpdateStatus.DOWNLOADING
                     updateEngine.applyPayload(
                         updateConfig.url,
                         payloadFile.offset,
                         payloadFile.size,
                         properties
                     )
+                } else {
+                    updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+                    Log.d(TAG, "Payload properties are empty, aborting update!")
                 }
             } else {
+                updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
                 Log.d(TAG, "Failed to find properties or payload in given config!")
             }
         } else {
+            updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
             Log.d(TAG, "Failed to verify payload metadata!")
         }
     }
