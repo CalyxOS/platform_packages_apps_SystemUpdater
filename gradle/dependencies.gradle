@@ -9,6 +9,7 @@ project.ext {
     // android.jar: out/target/common/obj/JAVA_LIBRARIES/framework-minus-apex_intermediates/classes.jar
     // libcore.jar: out/target/common/obj/JAVA_LIBRARIES/core-libart.com.android.art_intermediates/classes.jar
     aosp_libs = fileTree(include: ['android.jar','libcore.jar'], dir: "$projectDir/libs")
+    gradle_libs = fileTree(include: ['hilt-work-1.0.0.aar','hilt-common-1.0.0.jar'], dir: "$projectDir/libs")
     std_libs = [
             // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#1727
             androidx_core_ktx: dependencies.create('androidx.core:core-ktx') {
@@ -42,6 +43,10 @@ project.ext {
             androidx_preference: dependencies.create('androidx.preference:preference') {
                 version { strictly '1.2.0-alpha01' }
             },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#4892
+            androidx_work: dependencies.create('androidx.work:work-runtime-ktx') {
+                version { strictly '2.7.0-beta01' }
+            }
     ]
     google = [
             // https://android.googlesource.com/platform/external/gson/+/refs/heads/master/pom.xml
