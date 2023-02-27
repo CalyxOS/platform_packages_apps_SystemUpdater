@@ -37,12 +37,15 @@ android_app {
         "androidx.activity_activity-ktx",
         "androidx.navigation_navigation-fragment-ktx",
         "androidx.navigation_navigation-ui-ktx",
+        "androidx.work_work-runtime-ktx",
         "com.google.android.material_material",
         "guava",
         "gson",
         "kotlinx-coroutines-android",
         "jetbrains-annotations",
-        "hilt_android"
+        "hilt_android",
+        "hilt-common",
+        "hilt_work"
     ],
 
     optimize: {
@@ -72,3 +75,21 @@ prebuilt_etc {
     sub_dir: "permissions",
     filename_from_src: true,
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Additional versions of dependencies needed by AOSP for SystemUpdater.
+// These can be removed once AOSP is updated with them.
+////////////////////////////////////////////////////////////////////////////////
+
+java_import_host {
+    name: "hilt-common",
+    jars: ["app/libs/hilt-common-1.0.0.jar"],
+}
+
+android_library_import {
+    name: "hilt_work",
+    aars: ["app/libs/hilt-work-1.0.0.aar"],
+    sdk_version: "30",
+}
+
