@@ -51,7 +51,18 @@ android_app {
         ],
     },
 
-    required: ["privapp_allowlist_org.calyxos.systemupdater"],
+    required: [
+        "powersave_allowlist_org.calyxos.systemupdater",
+        "privapp_allowlist_org.calyxos.systemupdater"
+    ],
+}
+
+prebuilt_etc {
+    name: "powersave_allowlist_org.calyxos.systemupdater",
+    system_ext_specific: true,
+    sub_dir: "sysconfig",
+    src: "powersave_allowlist_org.calyxos.systemupdater.xml",
+    filename_from_src: true,
 }
 
 prebuilt_etc {
