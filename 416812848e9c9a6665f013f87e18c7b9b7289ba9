@@ -50,6 +50,24 @@
       "message": "Remove from view as we need to have discussion on whether to allow user to suspend updates or not",
       "revId": "416812848e9c9a6665f013f87e18c7b9b7289ba9",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad607a48_1f32b65c",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateFragment.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-02-27T09:05:55Z",
+      "side": 1,
+      "message": "Addressing this in a separate commit",
+      "parentUuid": "d0d8e5fc_1ade56b6",
+      "revId": "416812848e9c9a6665f013f87e18c7b9b7289ba9",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
