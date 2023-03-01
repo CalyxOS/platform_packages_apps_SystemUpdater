@@ -15,9 +15,10 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.calyxos.systemupdater"
-          android:versionCode="31000001"
-          android:versionName="12-1.0">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.calyxos.systemupdater"
+    android:versionCode="31000001"
+    android:versionName="12-1.0">
           <!--
           The version code is the targeted SDK_VERSION plus 6 digits for our own version code.
           The version name is the targeted Android version followed by - and our own version name.
@@ -45,6 +46,21 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".work.BootCompletedReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- needed for hilt worker injection to work -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="org.calyxos.systemupdater.androidx-startup"
+            tools:node="remove" />
+
     </application>
 
 </manifest>

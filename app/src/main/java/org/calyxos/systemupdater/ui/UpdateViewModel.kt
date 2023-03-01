@@ -24,6 +24,10 @@ import android.text.format.DateFormat
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.ExistingWorkPolicy.KEEP
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.OutOfQuotaPolicy
+import androidx.work.WorkManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,6 +36,8 @@ import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
 import org.calyxos.systemupdater.util.CommonModule
+import org.calyxos.systemupdater.work.UpdateWorker
+import org.calyxos.systemupdater.work.UpdateWorker.Companion.WORK_NAME
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -41,6 +47,7 @@ import javax.inject.Inject
 @SuppressLint("StaticFieldLeak") // false positive, see https://github.com/google/dagger/issues/3253
 class UpdateViewModel @Inject constructor(
     private val updateManager: UpdateManagerRepository,
+    private val workManager: WorkManager,
     private val sharedPreferences: SharedPreferences,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
@@ -67,9 +74,10 @@ class UpdateViewModel @Inject constructor(
     }
 
     fun applyUpdate() {
-        viewModelScope.launch {
-            updateManager.applyUpdate()
-        }
+        val oneTimeWorkRequest = OneTimeWorkRequestBuilder<UpdateWorker>()
+            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+            .build()
+        workManager.enqueueUniqueWork(WORK_NAME, KEEP, oneTimeWorkRequest)
     }
 
     fun getASBDate(): String {
