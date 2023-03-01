@@ -16,6 +16,74 @@
       "message": "Still has some issues updating UI status but those are related to UpdateManager. I will address those in a separate commit instead of holding it down anymore.",
       "revId": "eb649799e26ea291ca24b6e5944f6a70d883ea43",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7ee943_43201b14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-03-01T17:58:02Z",
+      "side": 1,
+      "message": "Looks good. Just some nitpicks.",
+      "revId": "eb649799e26ea291ca24b6e5944f6a70d883ea43",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd96e24a_ae45b33f",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateFragment.kt",
+        "patchSetId": 30
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-03-01T17:58:02Z",
+      "side": 1,
+      "message": "Why are we saving this each time a new update status gets collected?",
+      "revId": "eb649799e26ea291ca24b6e5944f6a70d883ea43",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d5db38_354cac85",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 30
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-03-01T17:58:02Z",
+      "side": 1,
+      "message": "Just a hint here for more succient syntax:\n\n`val updateLastCheck \u003d _updateLastCheck.asStateFlow()`",
+      "revId": "eb649799e26ea291ca24b6e5944f6a70d883ea43",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc008805_f78cc53b",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 30
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2023-03-01T17:58:02Z",
+      "side": 1,
+      "message": "Storing JSON in an XML file, classy :P\n\nIdeally this wouldn\u0027t happen on the UI thread though, because serialization can be slow. But well...",
+      "revId": "eb649799e26ea291ca24b6e5944f6a70d883ea43",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
