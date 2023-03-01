@@ -76,6 +76,7 @@ dependencies {
     implementation project.ext.std_libs.androidx_preference
     implementation project.ext.std_libs.androidx_navigation_fragment_ktx
     implementation project.ext.std_libs.androidx_navigation_ui_ktx
+    implementation project.ext.std_libs.androidx_work
     implementation project.ext.google.guava
     implementation project.ext.google.gson
     implementation project.ext.kotlinx.coroutines
@@ -85,4 +86,8 @@ dependencies {
     def hilt_version = "2.44.2"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
+
+    def hilt_work_version = "1.0.0"
+    kapt "androidx.hilt:hilt-compiler:$hilt_work_version"
+    implementation "androidx.hilt:hilt-work:$hilt_work_version"
 }
