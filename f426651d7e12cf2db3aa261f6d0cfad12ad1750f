@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bacd270d_b3473e7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-01T15:59:34Z",
+      "side": 1,
+      "message": "It was used to access `/data/ota_package` which is where the OTA update is downloaded when not streaming.",
+      "revId": "f426651d7e12cf2db3aa261f6d0cfad12ad1750f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
