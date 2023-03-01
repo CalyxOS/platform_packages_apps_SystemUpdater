@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c72521d6_83534fef",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/network/OTAUtils.kt",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-01T18:12:03Z",
+      "side": 1,
+      "message": "In fact, this check shouldn\u0027t rely on the version at all, and instead go by build date.\n\n`ro.build.date.utc` is what\u0027s used to see if there\u0027s an update.\n\nThe version here is user facing and never really meant to be parsed.",
+      "parentUuid": "efb0a02e_95faf50a",
+      "revId": "4d7ac4fd7b73a80d66544555afad436ac5224382",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0844cfa0_51c5cdc1",
         "filename": "app/src/main/java/org/calyxos/systemupdater/network/models/UpdateConfig.kt",
         "patchSetId": 15
