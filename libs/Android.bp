@@ -1,0 +1,33 @@
+////////////////////////////////////////////////////////////////////////////////
+// Additional versions of dependencies needed by AOSP for SystemUpdater.
+// These can be removed once AOSP is updated with them.
+// Source: https://maven.google.com/web/index.html?q=androidx.hilt#androidx.hilt
+////////////////////////////////////////////////////////////////////////////////
+
+// hilt-compiler plugin
+java_import_host {
+    name: "hilt-compiler",
+    jars: ["app/libs/hilt-compiler-1.0.0.jar"],
+}
+
+java_plugin {
+    name: "hilt-compiler",
+    processor_class: "androidx.hilt.AndroidXHiltProcessor",
+    static_libs: ["hilt-compiler"]
+}
+
+// hilt-work dependency (depends upon hilt-common)
+java_import_host {
+    name: "hilt-common",
+    jars: ["app/libs/hilt-common-1.0.0.jar"],
+}
+
+android_library_import {
+    name: "hilt-work",
+    aars: ["app/libs/hilt-work-1.0.0.aar"],
+    sdk_version: "30",
+
+    host_required: [
+        "hilt-common"
+    ],
+}
