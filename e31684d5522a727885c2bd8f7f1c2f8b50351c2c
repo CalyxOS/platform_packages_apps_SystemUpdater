@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "442698bf_3d6bebc0",
+        "filename": "gradle/dependencies.gradle",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-01T10:28:19Z",
+      "side": 1,
+      "message": "I didn\u0027t bothered importing hilt-work related dependencies below and instead used the prebuilt jar and aar here considering they don\u0027t seem to have been updated since 2021 after v1.0.0 release.",
+      "revId": "e31684d5522a727885c2bd8f7f1c2f8b50351c2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
