@@ -46,6 +46,10 @@ project.ext {
             androidx_preference: dependencies.create('androidx.preference:preference') {
                 version { strictly '1.2.0-alpha01' }
             },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#4892
+            androidx_work: dependencies.create('androidx.work:work-runtime-ktx') {
+                version { strictly '2.7.0-beta01' }
+            }
     ]
     google = [
             // https://android.googlesource.com/platform/external/gson/+/refs/heads/master/pom.xml
