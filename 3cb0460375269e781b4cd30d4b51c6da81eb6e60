@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01b23a1d_07bccf6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2023-03-01T15:07:14Z",
+      "side": 1,
+      "message": "It\u0027s at 7.4.2 now",
+      "revId": "3cb0460375269e781b4cd30d4b51c6da81eb6e60",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
