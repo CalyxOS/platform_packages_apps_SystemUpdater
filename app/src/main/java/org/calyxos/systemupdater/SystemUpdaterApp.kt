@@ -17,7 +17,19 @@
 package org.calyxos.systemupdater
 
 import android.app.Application
+import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
+import org.calyxos.systemupdater.work.UpdateWorkerFactory
+import javax.inject.Inject
 
 @HiltAndroidApp(Application::class)
-class SystemUpdaterApp : Hilt_SystemUpdaterApp()
+class SystemUpdaterApp : Hilt_SystemUpdaterApp(), Configuration.Provider {
+
+    @Inject
+    lateinit var updateWorkerFactory: UpdateWorkerFactory
+
+    override fun getWorkManagerConfiguration() =
+        Configuration.Builder()
+            .setWorkerFactory(updateWorkerFactory)
+            .build()
+}
