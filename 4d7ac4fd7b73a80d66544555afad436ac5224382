@@ -70,6 +70,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b52ea2_5119b2ac",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/network/OTAUtils.kt",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-02T10:42:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c72521d6_83534fef",
+      "revId": "4d7ac4fd7b73a80d66544555afad436ac5224382",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0844cfa0_51c5cdc1",
@@ -117,6 +135,24 @@
       "writtenOn": "2023-03-01T17:57:16Z",
       "side": 1,
       "message": "This looks like a simple call. Why do we need to inject this? Could really be a \"Utils\" method instead?",
+      "revId": "4d7ac4fd7b73a80d66544555afad436ac5224382",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "657c02ed_839b19ec",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonUtils.kt",
+        "patchSetId": 15
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-02T10:42:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "870db2fc_0ea061ec",
       "revId": "4d7ac4fd7b73a80d66544555afad436ac5224382",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
