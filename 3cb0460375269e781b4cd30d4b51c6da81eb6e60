@@ -16,6 +16,24 @@
       "message": "It\u0027s at 7.4.2 now",
       "revId": "3cb0460375269e781b4cd30d4b51c6da81eb6e60",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64552a15_3ede984e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-02T08:37:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01b23a1d_07bccf6e",
+      "revId": "3cb0460375269e781b4cd30d4b51c6da81eb6e60",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
