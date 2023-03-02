@@ -122,6 +122,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e671d673_92e0e4fe",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonUtils.kt",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-02T11:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "861977b7_1be5a83c",
+      "revId": "4d7ac4fd7b73a80d66544555afad436ac5224382",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "870db2fc_0ea061ec",
