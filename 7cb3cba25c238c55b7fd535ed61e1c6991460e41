@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "925fc91b_4e0e5cfd",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 35
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-02T16:35:24Z",
+      "side": 1,
+      "message": "variables.",
+      "revId": "7cb3cba25c238c55b7fd535ed61e1c6991460e41",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
