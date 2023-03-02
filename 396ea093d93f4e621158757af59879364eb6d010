@@ -244,6 +244,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c485c6d_122ab12b",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-02T16:46:18Z",
+      "side": 1,
+      "message": "Is this function even used now? If so, for what?",
+      "revId": "396ea093d93f4e621158757af59879364eb6d010",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7971c9eb_ac2431d0",
         "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
         "patchSetId": 14
