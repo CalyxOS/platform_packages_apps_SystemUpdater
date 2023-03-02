@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d565c516_c21c8663",
+        "filename": "privapp_whitelist_org.calyxos.systemupdater.xml",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-02T16:37:52Z",
+      "side": 1,
+      "message": "`s/POWER/REBOOT/`",
+      "revId": "f282dbfdd3df8dbb128626038f08d42526c7793e",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
