@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="XML Files" pattern="file[SystemUpdater.app]:*/*.xml" />
+</component>
