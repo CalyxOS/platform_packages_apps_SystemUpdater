@@ -52,6 +52,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b184741_3dfb805f",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateFragment.kt",
+        "patchSetId": 30
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-02T13:30:45Z",
+      "side": 1,
+      "message": "This is required to figure out the appropriate state the app was in last time. An example case is UPDATE_AVAILABLE status which we emit after parsing JSON sent by remote server and comparing it with system. However, UPDATE_ENGINE also emits this but only after update has started streaming which in that case status should be DOWNLOADING and not UPDATE_AVAILABLE.\n\nSimilarly, while update is DOWNLOADING and if you suspend it, update-engine will still broadcast DOWNLOADING as latest status but the real status in that case would be SUSPENDED (not present in update-engine, used by us to ask user to resume update manually)",
+      "parentUuid": "cd96e24a_ae45b33f",
+      "revId": "eb649799e26ea291ca24b6e5944f6a70d883ea43",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4d5db38_354cac85",
@@ -69,6 +87,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b553caab_67800997",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 30
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-02T13:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4d5db38_354cac85",
+      "revId": "eb649799e26ea291ca24b6e5944f6a70d883ea43",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc008805_f78cc53b",
@@ -82,6 +118,24 @@
       "writtenOn": "2023-03-01T17:58:02Z",
       "side": 1,
       "message": "Storing JSON in an XML file, classy :P\n\nIdeally this wouldn\u0027t happen on the UI thread though, because serialization can be slow. But well...",
+      "revId": "eb649799e26ea291ca24b6e5944f6a70d883ea43",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1e08ffe_d3a8a47b",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 30
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-02T13:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc008805_f78cc53b",
       "revId": "eb649799e26ea291ca24b6e5944f6a70d883ea43",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
