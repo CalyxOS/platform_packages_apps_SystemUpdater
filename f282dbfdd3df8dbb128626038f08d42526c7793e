@@ -16,6 +16,24 @@
       "message": "`s/POWER/REBOOT/`",
       "revId": "f282dbfdd3df8dbb128626038f08d42526c7793e",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e532de9f_f81c855e",
+        "filename": "privapp_whitelist_org.calyxos.systemupdater.xml",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-03T06:23:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d565c516_c21c8663",
+      "revId": "f282dbfdd3df8dbb128626038f08d42526c7793e",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
