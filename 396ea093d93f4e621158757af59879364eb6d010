@@ -208,6 +208,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d1aa540_fd179eea",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-03T06:36:20Z",
+      "side": 1,
+      "message": "Switched to `HttpsURLConnection`",
+      "parentUuid": "5e056e15_bd96b246",
+      "revId": "396ea093d93f4e621158757af59879364eb6d010",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0c19b6b_28200837",
@@ -242,6 +260,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91973546_aaf7d26b",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-03T06:36:20Z",
+      "side": 1,
+      "message": "We display a `Retry` button in UI on failures. I will add logic for auto-retry for workmanager.",
+      "parentUuid": "991b7625_e0af7b0e",
+      "revId": "396ea093d93f4e621158757af59879364eb6d010",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c485c6d_122ab12b",
@@ -255,6 +291,24 @@
       "writtenOn": "2023-03-02T16:46:18Z",
       "side": 1,
       "message": "Is this function even used now? If so, for what?",
+      "revId": "396ea093d93f4e621158757af59879364eb6d010",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d13ffa0e_77be96f2",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-03T06:36:20Z",
+      "side": 1,
+      "message": "This is being used to download `payload_metadata.bin` from `payload.bin`\u0027s header. Range request is somehow corrupting the file resulting in verification failure. We will debug and switch to it after workmanager and notification implementation is done to avoid keeping this open. Skipping doesn\u0027t takes a long time in this case as metadata is always in front unlike properties.",
+      "parentUuid": "4c485c6d_122ab12b",
       "revId": "396ea093d93f4e621158757af59879364eb6d010",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
@@ -293,6 +347,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e7ffad_89ed6f6d",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-03T06:36:20Z",
+      "side": 1,
+      "message": "This is being used to download `payload_metadata.bin` from `payload.bin`\u0027s header. Range request is somehow corrupting the file resulting in verification failure. We will debug and switch to it after workmanager and notification implementation is done to avoid keeping this open. Skipping doesn\u0027t takes a long time in this case as metadata is always in front unlike properties.",
+      "parentUuid": "19a45707_9bdc13b0",
+      "revId": "396ea093d93f4e621158757af59879364eb6d010",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1c085c6_ea1084e9",
@@ -327,6 +399,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "786f03c4_04427ebc",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-03T06:36:20Z",
+      "side": 1,
+      "message": "We work directly on the status updates provided by the engine. Only 3 extra status are added by us that are at the bottom of the list. So this logic is safe.",
+      "parentUuid": "0679f23b_bbd661ab",
+      "revId": "396ea093d93f4e621158757af59879364eb6d010",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68ede6df_29e9247e",
@@ -340,6 +430,24 @@
       "writtenOn": "2023-03-01T17:59:03Z",
       "side": 1,
       "message": "Maybe use more speaking parameter names for both overridden methods?\n\nWhy can we ignore the return values the update engine throws at us here?\nThere\u0027s a long list of error constants defined here at: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/os/UpdateEngine.java#58\n\nHow will we know that the update has failed or needs a reboot for example?\nEdit: Ah I think this all happens in `onStatusUpdate()`, right? Might be good to add some docs above in that case.",
+      "revId": "396ea093d93f4e621158757af59879364eb6d010",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb0f5e60_d0e26c25",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-03T06:36:20Z",
+      "side": 1,
+      "message": "There are actually around 63 status that can be sent by update-engine here if you will check the header file. The java class only mirrors some of them but engine will send any regardless of that. As you say, the above method gives us status we care about. I will add a comment explaining that.\n\nhttps://cs.android.com/android/platform/superproject/+/master:system/update_engine/common/error_code.h",
+      "parentUuid": "68ede6df_29e9247e",
       "revId": "396ea093d93f4e621158757af59879364eb6d010",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
