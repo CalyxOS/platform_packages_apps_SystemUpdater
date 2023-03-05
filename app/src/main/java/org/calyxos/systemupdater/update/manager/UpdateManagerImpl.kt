@@ -23,6 +23,7 @@ import android.os.UpdateEngineCallback
 import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.withContext
 import org.calyxos.systemupdater.update.models.PackageFile
@@ -69,7 +70,11 @@ class UpdateManagerImpl @Inject constructor(
         val metadataFile =
             updateConfig.abConfig.propertyFiles.find { it.filename == payloadMetadata }
 
-        if (metadataFile != null && payloadMetadataVerified(updateConfig.url, metadataFile)) {
+        if (metadataFile != null && payloadMetadataVerified(
+                updateConfig.url,
+                metadataFile
+            ).getOrDefault(false)
+        ) {
             val propertiesFile =
                 updateConfig.abConfig.propertyFiles.find { it.filename == payloadProperties }
             val payloadFile =
@@ -77,32 +82,25 @@ class UpdateManagerImpl @Inject constructor(
 
             if (propertiesFile != null && payloadFile != null) {
                 val properties = fetchPayloadProperties(updateConfig.url, propertiesFile)
-                if (properties.isNotEmpty()) {
+                if (properties.isSuccess) {
                     updateStatus.value = UpdateStatus.DOWNLOADING
                     updateEngine.applyPayload(
                         updateConfig.url,
                         payloadFile.offset,
                         payloadFile.size,
-                        properties
+                        properties.getOrDefault(emptyArray())
                     )
-                } else {
-                    updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-                    Log.d(TAG, "Payload properties are empty, aborting update!")
                 }
-            } else {
-                updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-                Log.d(TAG, "Failed to find properties or payload in given config!")
             }
-        } else {
-            updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-            Log.d(TAG, "Failed to verify payload metadata!")
         }
     }
 
-    private suspend fun payloadMetadataVerified(url: String, packageFile: PackageFile): Boolean {
-        var verified = false
-        val metadataFile = File("${context.filesDir.absolutePath}/${packageFile.filename}")
-        withContext(Dispatchers.IO) {
+    private suspend fun payloadMetadataVerified(
+        url: String,
+        packageFile: PackageFile
+    ): Result<Boolean> {
+        return withContext(Dispatchers.IO) {
+            val metadataFile = File("${context.filesDir.absolutePath}/${packageFile.filename}")
             try {
                 metadataFile.createNewFile()
                 val connection = URL(url).openConnection() as HttpsURLConnection
@@ -115,22 +113,28 @@ class UpdateManagerImpl @Inject constructor(
                 connection.inputStream.use { input ->
                     metadataFile.outputStream().use { input.copyTo(it) }
                 }
-                verified = updateEngine.verifyPayloadMetadata(metadataFile.absolutePath)
+                if (!updateEngine.verifyPayloadMetadata(metadataFile.absolutePath)) {
+                    updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+                    return@withContext Result.failure(Exception("Failed verifying metadata!"))
+                }
+                return@withContext Result.success(true)
             } catch (exception: Exception) {
-                exception.printStackTrace()
+                Log.e(TAG, "Failed to download payload metadata! ", exception)
+                updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+                return@withContext Result.failure(exception)
             } finally {
-                metadataFile.delete()
+                withContext(NonCancellable) {
+                    metadataFile.delete()
+                }
             }
         }
-        return verified
     }
 
     private suspend fun fetchPayloadProperties(
         url: String,
         packageFile: PackageFile
-    ): Array<String> {
-        var properties = String()
-        withContext(Dispatchers.IO) {
+    ): Result<Array<String>> {
+        return withContext(Dispatchers.IO) {
             try {
                 val connection = URL(url).openConnection() as HttpsURLConnection
                 // Request a specific range to avoid skipping through load of data
@@ -139,12 +143,14 @@ class UpdateManagerImpl @Inject constructor(
                     "Range",
                     "bytes=${packageFile.offset}-${packageFile.offset + packageFile.size - 1}"
                 )
-                properties = connection.inputStream.bufferedReader().use { it.readText() }
+                val properties = connection.inputStream.bufferedReader().use { it.readText() }
+                return@withContext Result.success(properties.trim().lines().toTypedArray())
             } catch (exception: Exception) {
-                exception.printStackTrace()
+                Log.e(TAG, "Failed fetching payload properties!", exception)
+                updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+                return@withContext Result.failure(exception)
             }
         }
-        return properties.trim().lines().toTypedArray()
     }
 
     override fun onStatusUpdate(p0: Int, p1: Float) {
