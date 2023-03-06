@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5955b265_c9723179",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateStatus.kt",
+        "patchSetId": 24
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-06T13:46:51Z",
+      "side": 1,
+      "message": "We\u0027ll have to make sure to keep this in sync with update_status.h because otherwise when google adds a 12th here things will go haywire.",
+      "revId": "93a27aecc69f2038d57a8588220f23ee90c35a79",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
