@@ -160,6 +160,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "815d2a1d_6037f715",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-06T05:41:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f5ca551_9e5c583b",
+      "revId": "396ea093d93f4e621158757af59879364eb6d010",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "69dbe67b_ee77938b",
         "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
         "patchSetId": 14
@@ -192,6 +210,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b6489f3_8133a22b",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-06T05:41:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a9e5e8c_79adfc23",
+      "revId": "396ea093d93f4e621158757af59879364eb6d010",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62c3c5d6_4e23b31a",
@@ -205,6 +241,24 @@
       "writtenOn": "2023-03-01T17:59:03Z",
       "side": 1,
       "message": "If fetching fails, you return this. Maybe better to return `null` instead?",
+      "revId": "396ea093d93f4e621158757af59879364eb6d010",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0481f08f_1585c340",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-06T05:41:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62c3c5d6_4e23b31a",
       "revId": "396ea093d93f4e621158757af59879364eb6d010",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
