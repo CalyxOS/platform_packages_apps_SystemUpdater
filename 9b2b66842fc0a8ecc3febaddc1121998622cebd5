@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be31e609_b7e47c9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-06T17:06:26Z",
+      "side": 1,
+      "message": "This is still required as we need to download payload_metadata.bin file for verification",
+      "revId": "9b2b66842fc0a8ecc3febaddc1121998622cebd5",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
