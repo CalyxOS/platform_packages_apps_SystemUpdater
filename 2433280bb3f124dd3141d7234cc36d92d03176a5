@@ -33,6 +33,24 @@
       "message": "Apparently `@HiltWorker` annotation is not available in AOSP",
       "revId": "2433280bb3f124dd3141d7234cc36d92d03176a5",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "762b3578_177faab9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-07T13:10:00Z",
+      "side": 1,
+      "message": "I\u0027m open to revisiting this in the future and just having all deps be here as prebuilts, perhaps using a setup similar to Aperture. But that\u0027d be a project on it\u0027s own so let\u0027s do it when we have some breathing room.",
+      "parentUuid": "da267b02_f5731505",
+      "revId": "2433280bb3f124dd3141d7234cc36d92d03176a5",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
