@@ -70,6 +70,24 @@
       "parentUuid": "5785567b_10711063",
       "revId": "7cb3cba25c238c55b7fd535ed61e1c6991460e41",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f297aec9_0964102f",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 35
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-07T13:35:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0f553ab_4883d9bf",
+      "revId": "7cb3cba25c238c55b7fd535ed61e1c6991460e41",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
