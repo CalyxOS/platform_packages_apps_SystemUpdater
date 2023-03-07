@@ -52,6 +52,24 @@
       "parentUuid": "e2d5747d_f437a70b",
       "revId": "7cb3cba25c238c55b7fd535ed61e1c6991460e41",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0f553ab_4883d9bf",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 35
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-07T13:18:01Z",
+      "side": 1,
+      "message": "It can still be an issue. What if the user changes timezone.\n\nWhy not do the conversion when showing it. That way we can also easily tweak how it\u0027s shown in the future if needed without having to muck around with or migrate the value.",
+      "parentUuid": "5785567b_10711063",
+      "revId": "7cb3cba25c238c55b7fd535ed61e1c6991460e41",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
