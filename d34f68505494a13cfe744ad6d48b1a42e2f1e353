@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e147b85b_c06e6dac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-07T12:49:28Z",
+      "side": 1,
+      "message": "I will squash this class into UpdateManager later on. Makes no sense to keep a separate one just for something that can be contained in a single function. Also need access to flows to indicate error to UI.",
+      "revId": "d34f68505494a13cfe744ad6d48b1a42e2f1e353",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
