@@ -35,6 +35,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "498b2086_4cee94a5",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/network/OTAUtils.kt",
+        "patchSetId": 15
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-07T12:41:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e080ebb0_ff7c7f58",
+      "revId": "4d7ac4fd7b73a80d66544555afad436ac5224382",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efb0a02e_95faf50a",
@@ -101,6 +119,24 @@
       "writtenOn": "2023-03-01T17:57:16Z",
       "side": 1,
       "message": "Do we really need to default all those to the empty string? Are they all expected to be optional? Usually, I\u0027d say `null` is better to signal the absence of a string than the empty one. More type-safe and you can use stuff like `?:`.",
+      "revId": "4d7ac4fd7b73a80d66544555afad436ac5224382",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc0ec186_ac446185",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/network/models/UpdateConfig.kt",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-07T12:41:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0844cfa0_51c5cdc1",
       "revId": "4d7ac4fd7b73a80d66544555afad436ac5224382",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },

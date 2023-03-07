@@ -16,6 +16,24 @@
       "message": "These could be variables. Or set via xml even but eh that\u0027s not needed right now.",
       "revId": "dad767fe3c7bfc8346a4697caa3fa7759f8bf63c",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34cde32_f9acac62",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/config/UpdateConfigImpl.kt",
+        "patchSetId": 18
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-07T12:41:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b5784a9_a41d43cd",
+      "revId": "dad767fe3c7bfc8346a4697caa3fa7759f8bf63c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
