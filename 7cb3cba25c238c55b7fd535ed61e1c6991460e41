@@ -34,6 +34,24 @@
       "parentUuid": "925fc91b_4e0e5cfd",
       "revId": "7cb3cba25c238c55b7fd535ed61e1c6991460e41",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5785567b_10711063",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt",
+        "patchSetId": 35
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-07T12:41:12Z",
+      "side": 1,
+      "message": "Moved as a variable. Storing the formatted string shouldn\u0027t be an issue as we don\u0027t rely on that anywhere other than showing in UI.",
+      "parentUuid": "e2d5747d_f437a70b",
+      "revId": "7cb3cba25c238c55b7fd535ed61e1c6991460e41",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
