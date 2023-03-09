@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d33f138_6fb1ce7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-09T19:40:49Z",
+      "side": 1,
+      "message": "_may_ have minor conflicts with 15730: Support automated updates check | https://review.calyxos.org/c/CalyxOS/platform_packages_apps_SystemUpdater/+/15730 but gerrit doesn\u0027t seem to think so, we\u0027ll see.",
+      "revId": "8dc236d691be497df31889802f795ab83bbc3e86",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
