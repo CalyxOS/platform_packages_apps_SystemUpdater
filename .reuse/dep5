@@ -1,0 +1,27 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: SystemUpdater
+Upstream-Contact: The Calyx Institute
+Source: https://gitlab.com/CalyxOS/platform_packages_apps_SystemUpdater
+
+Files: .gitignore README.md
+Copyright: 2018 The Android Open Source Project, 2021-2023 The Calyx Institute
+License: Apache-2.0
+
+Files: .gitreview .idea/*
+       app/src/main/res/values-*/strings.xml
+       app/testkey.jks
+Copyright: 2021-2023 The Calyx Institute
+License: Apache-2.0
+
+Files: app/libs/android.jar
+       app/libs/libcore.jar
+Copyright: TODO
+License: TODO
+
+Files: gradle/wrapper/*
+Copyright: 2007-2023 Gradle, Inc.
+License: Apache-2.0
+
+Files: gradlew*
+Copyright: 2007-2023 Gradle, Inc.
+License: Apache-2.0
