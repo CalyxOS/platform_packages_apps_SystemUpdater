@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "094e13e7_dd573343",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-09T15:08:23Z",
+      "side": 1,
+      "message": "```\norg/calyxos/systemupdater/work/UpdateWorker.java:11: error: error.NonExistentClass is not an annotation\n@error.NonExistentClass()\n^\n08:53:37 ninja failed with: exit status 1\n\n#### failed to build some targets (38 seconds) ####\n```\n\nPossible Fix that I am not sure how to apply in AOSP: https://kotlinlang.org/docs/kapt.html#non-existent-type-correction",
+      "revId": "8a3b3ee407f2d7c7a0d6ee89f261a991d939aff6",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
