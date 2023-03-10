@@ -48,6 +48,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 import javax.net.ssl.HttpsURLConnection
+import org.calyxos.systemupdater.update.notification.UpdateNotificationRepository
 
 @OptIn(DelicateCoroutinesApi::class)
 @Singleton
@@ -55,7 +56,8 @@ class UpdateManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val updateEngine: UpdateEngine,
     private val sharedPreferences: SharedPreferences,
-    private val gson: Gson
+    private val gson: Gson,
+    private val updateNotificationRepository: UpdateNotificationRepository
 ) : UpdateEngineCallback() {
 
     private val TAG = UpdateManagerImpl::class.java.simpleName
@@ -87,6 +89,8 @@ class UpdateManagerImpl @Inject constructor(
                         sharedPreferences.edit(true) { putString(UPDATE_STATUS, it.name) }
                     }
                 }
+                // Notify user about status change via notification
+                updateNotificationRepository.postUpdateNotification(it)
             }.collect()
             updateProgress.collect()
         }
