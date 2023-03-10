@@ -24,7 +24,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
-import org.calyxos.systemupdater.update.config.UpdateConfigRepository
 import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
@@ -37,7 +36,6 @@ import javax.inject.Inject
 @HiltViewModel
 @SuppressLint("StaticFieldLeak") // false positive, see https://github.com/google/dagger/issues/3253
 class UpdateViewModel @Inject constructor(
-    private val updateConfigRepository: UpdateConfigRepository,
     private val updateManager: UpdateManagerRepository,
     private val gson: Gson,
     private val sharedPreferences: SharedPreferences,
@@ -71,10 +69,8 @@ class UpdateViewModel @Inject constructor(
     fun checkUpdates() {
         _updateStatus.value = UpdateStatus.CHECKING_FOR_UPDATE
         viewModelScope.launch {
-            val updateConfig = updateConfigRepository.getLatestUpdateConfig()
-            if (updateConfig != null &&
-                updateConfigRepository.newUpdateAvailable(updateConfig.buildDateUTC)
-            ) {
+            val updateConfig = updateManager.getLatestUpdateConfig()
+            if (updateConfig != null) {
                 _updateConfig.value = updateConfig
                 _updateStatus.value = UpdateStatus.UPDATE_AVAILABLE
             } else {
