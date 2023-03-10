@@ -117,7 +117,12 @@ class UpdateManagerImpl @Inject constructor(
 
     suspend fun applyUpdate() {
         _updateStatus.value = UpdateStatus.PREPARING_TO_UPDATE
-        val updateConfig = getUpdateConfig() ?: return // Shouldn't be null but doesn't hurts
+
+        val updateConfig = getUpdateConfig()
+        if (updateConfig == null) {
+            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+            return
+        }
 
         val metadataFile =
             updateConfig.abConfig.propertyFiles.find { it.filename == payloadMetadata }
