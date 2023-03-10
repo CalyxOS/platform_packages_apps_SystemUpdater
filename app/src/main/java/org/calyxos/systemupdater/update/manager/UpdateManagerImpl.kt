@@ -40,6 +40,7 @@ import kotlinx.coroutines.withContext
 import org.calyxos.systemupdater.update.models.PackageFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
+import org.calyxos.systemupdater.update.notification.UpdateNotificationRepository
 import org.calyxos.systemupdater.util.CommonModule
 import java.io.File
 import java.net.URL
@@ -55,7 +56,8 @@ class UpdateManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val updateEngine: UpdateEngine,
     private val sharedPreferences: SharedPreferences,
-    private val gson: Gson
+    private val gson: Gson,
+    private val updateNotificationRepository: UpdateNotificationRepository
 ) : UpdateEngineCallback() {
 
     private val TAG = UpdateManagerImpl::class.java.simpleName
@@ -87,6 +89,8 @@ class UpdateManagerImpl @Inject constructor(
                         sharedPreferences.edit(true) { putString(UPDATE_STATUS, it.name) }
                     }
                 }
+                // Notify user about status change via notification
+                updateNotificationRepository.postUpdateNotification(it)
             }.collect()
             updateProgress.collect()
         }
