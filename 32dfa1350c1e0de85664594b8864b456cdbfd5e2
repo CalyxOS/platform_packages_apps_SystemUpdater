@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "274c75f5_f0c69b4f",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/work/UpdateWorker.kt",
+        "patchSetId": 25
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-10T13:25:50Z",
+      "side": 1,
+      "message": "Feels wrong for it to be just one liner 😎",
+      "revId": "32dfa1350c1e0de85664594b8864b456cdbfd5e2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
