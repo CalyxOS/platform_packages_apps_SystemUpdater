@@ -17,9 +17,11 @@
 package org.calyxos.systemupdater.ui
 
 import android.os.Bundle
+import android.os.PowerManager
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.calyxos.systemupdater.R
+import org.calyxos.systemupdater.notification.NotificationAction
 
 @AndroidEntryPoint(AppCompatActivity::class)
 class MainActivity : Hilt_MainActivity() {
@@ -27,5 +29,12 @@ class MainActivity : Hilt_MainActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        when (intent.action) {
+            NotificationAction.REBOOT.name -> {
+                val pm = this.getSystemService(PowerManager::class.java)
+                pm.reboot(null)
+            }
+        }
     }
 }

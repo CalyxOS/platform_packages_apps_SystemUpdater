@@ -34,9 +34,10 @@ import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.calyxos.systemupdater.notification.NotificationRepository
 import org.calyxos.systemupdater.update.models.PackageFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
@@ -55,7 +56,8 @@ class UpdateManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val updateEngine: UpdateEngine,
     private val sharedPreferences: SharedPreferences,
-    private val gson: Gson
+    private val gson: Gson,
+    private val notificationRepository: NotificationRepository
 ) : UpdateEngineCallback() {
 
     private val TAG = UpdateManagerImpl::class.java.simpleName
@@ -80,27 +82,36 @@ class UpdateManagerImpl @Inject constructor(
         // handle status updates from update_engine
         updateEngine.bind(this)
         GlobalScope.launch {
-            updateStatus.onEach {
-                when (it) {
+            updateStatus.combine(updateProgress) { status, progress ->
+                when (status) {
+                    UpdateStatus.DOWNLOADING,
+                    UpdateStatus.SUSPENDED,
+                    UpdateStatus.VERIFYING,
+                    UpdateStatus.FINALIZING -> {
+                        notificationRepository.postNotification(status, progress)
+                        sharedPreferences.edit(true) { putString(UPDATE_STATUS, status.name) }
+                    }
                     UpdateStatus.CHECKING_FOR_UPDATE -> {}
                     else -> {
-                        sharedPreferences.edit(true) { putString(UPDATE_STATUS, it.name) }
+                        sharedPreferences.edit(true) { putString(UPDATE_STATUS, status.name) }
                     }
                 }
             }.collect()
-            updateProgress.collect()
         }
     }
 
     suspend fun checkUpdates(): Boolean {
         _updateStatus.value = UpdateStatus.CHECKING_FOR_UPDATE
+        notificationRepository.postNotification(UpdateStatus.CHECKING_FOR_UPDATE)
         return if (getUpdateConfig() != null) {
             Log.i(TAG, "New update available!")
             _updateStatus.value = UpdateStatus.UPDATE_AVAILABLE
+            notificationRepository.postNotification(UpdateStatus.UPDATE_AVAILABLE)
             true
         } else {
             Log.i(TAG, "No new update available!")
             _updateStatus.value = UpdateStatus.IDLE
+            notificationRepository.removeNotification(UpdateStatus.CHECKING_FOR_UPDATE)
             false
         }
     }
@@ -117,7 +128,13 @@ class UpdateManagerImpl @Inject constructor(
 
     suspend fun applyUpdate() {
         _updateStatus.value = UpdateStatus.PREPARING_TO_UPDATE
-        val updateConfig = getUpdateConfig() ?: return // Shouldn't be null but doesn't hurts
+
+        val updateConfig = getUpdateConfig()
+        if (updateConfig == null) {
+            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+            notificationRepository.postNotification(UpdateStatus.FAILED_PREPARING_UPDATE)
+            return
+        }
 
         val metadataFile =
             updateConfig.abConfig.propertyFiles.find { it.filename == payloadMetadata }
@@ -224,12 +241,14 @@ class UpdateManagerImpl @Inject constructor(
                 }
                 if (!updateEngine.verifyPayloadMetadata(metadataFile.absolutePath)) {
                     _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+                    notificationRepository.postNotification(UpdateStatus.FAILED_PREPARING_UPDATE)
                     return@withContext Result.failure(Exception("Failed verifying metadata!"))
                 }
                 return@withContext Result.success(true)
             } catch (exception: Exception) {
                 Log.e(TAG, "Failed to download payload metadata! ", exception)
                 _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+                notificationRepository.postNotification(UpdateStatus.FAILED_PREPARING_UPDATE)
                 return@withContext Result.failure(exception)
             } finally {
                 withContext(NonCancellable) {
@@ -257,6 +276,7 @@ class UpdateManagerImpl @Inject constructor(
             } catch (exception: Exception) {
                 Log.e(TAG, "Failed fetching payload properties!", exception)
                 _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+                notificationRepository.postNotification(UpdateStatus.FAILED_PREPARING_UPDATE)
                 return@withContext Result.failure(exception)
             }
         }
@@ -289,10 +309,18 @@ class UpdateManagerImpl @Inject constructor(
     }
 
     override fun onPayloadApplicationComplete(p0: Int) {
-        // This can emit any status present in system/update_engine/common/error_code.h
+        // This function emits a one-time event unlike above where status is emitted
+        // everytime [bind] method is called on update-engine.
+        // Any status present in system/update_engine/common/error_code.h can be emitted.
         // However, the status we care about are emitted in onStatusUpdate function.
-        // Thus, simply log this and ignore.
         Log.d(TAG, "Payload completed with error code: $p0")
+
+        // Notify user on payload completion, SUCCESS is 0, rest are failures
+        if (p0 == 0) {
+            notificationRepository.postNotification(UpdateStatus.UPDATED_NEED_REBOOT)
+        } else {
+            notificationRepository.postNotification(UpdateStatus.REPORTING_ERROR_EVENT)
+        }
     }
 
     private fun restoreLastUpdate() {
