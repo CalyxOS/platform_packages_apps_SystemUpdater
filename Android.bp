@@ -32,6 +32,7 @@ android_app {
         "androidx.core_core-ktx",
         "androidx.appcompat_appcompat",
         "androidx.lifecycle_lifecycle-viewmodel-ktx",
+        "androidx.lifecycle_lifecycle-service",
         "androidx.preference_preference",
         "androidx.fragment_fragment-ktx",
         "androidx.activity_activity-ktx",
@@ -56,9 +57,18 @@ android_app {
     ],
 
     required: [
+        "default_perms_org.calyxos.systemupdater",
         "powersave_allowlist_org.calyxos.systemupdater",
         "privapp_allowlist_org.calyxos.systemupdater"
     ],
+}
+
+prebuilt_etc {
+    name: "default_perms_org.calyxos.systemupdater",
+    system_ext_specific: true,
+    sub_dir: "default-permissions",
+    src: "default_perms_org.calyxos.systemupdater.xml",
+    filename_from_src: true,
 }
 
 prebuilt_etc {

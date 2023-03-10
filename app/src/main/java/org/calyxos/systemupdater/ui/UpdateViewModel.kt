@@ -18,18 +18,18 @@ package org.calyxos.systemupdater.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.text.format.DateFormat
 import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
+import org.calyxos.systemupdater.service.SystemUpdaterService
 import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
 import org.calyxos.systemupdater.util.CommonModule
 import java.text.SimpleDateFormat
@@ -52,10 +52,11 @@ class UpdateViewModel @Inject constructor(
     val updateLastCheck = _updateLastCheck.asStateFlow()
 
     fun checkUpdates() {
-        viewModelScope.launch {
-            updateManager.checkUpdates()
-            _updateLastCheck.value = setLastCheck()
+        Intent(context, SystemUpdaterService::class.java).also {
+            it.action = SystemUpdaterService.CHECK_UPDATES
+            context.startService(it)
         }
+        _updateLastCheck.value = setLastCheck()
     }
 
     fun suspendUpdate() {
@@ -67,8 +68,9 @@ class UpdateViewModel @Inject constructor(
     }
 
     fun applyUpdate() {
-        viewModelScope.launch {
-            updateManager.applyUpdate()
+        Intent(context, SystemUpdaterService::class.java).also {
+            it.action = SystemUpdaterService.APPLY_UPDATE
+            context.startService(it)
         }
     }
 
