@@ -18,7 +18,7 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="40dp"
     android:height="40dp"
-    android:tint="?android:attr/colorAccent"
+    android:tint="?android:attr/colorControlNormal"
     android:viewportWidth="40"
     android:viewportHeight="40">
     <path
