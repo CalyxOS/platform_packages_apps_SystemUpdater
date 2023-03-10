@@ -24,7 +24,7 @@ class UpdateWorker @AssistedInject constructor(
         val updateConfig = updateManagerRepository.getLatestUpdateConfig()
         if (updateConfig != null) {
             Log.i(TAG, "New update available, applying!")
-            updateManagerRepository.applyUpdate(updateConfig)
+            updateManagerRepository.applyUpdate()
         } else {
             Log.i(TAG, "No new update available!")
         }

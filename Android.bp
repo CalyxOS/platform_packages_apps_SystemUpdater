@@ -52,6 +52,10 @@ android_app {
         ],
     },
 
+    kotlincflags: [
+        "-Xopt-in=kotlin.RequiresOptIn",
+    ],
+
     required: [
         "powersave_allowlist_org.calyxos.systemupdater",
         "privapp_allowlist_org.calyxos.systemupdater"
