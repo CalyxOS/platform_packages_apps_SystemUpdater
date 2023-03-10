@@ -48,4 +48,15 @@
         <item>beta</item>
     </string-array>
 
+    <!-- Notification -->
+    <string name="update_group_title">Updates</string>
+    <string name="update_group_desc">Displays notifications regarding system updates check, availability, installation and errors</string>
+    <string name="low_priority_update_channel_title">Updates (Low Priority)</string>
+    <string name="low_priority_update_channel_desc">Displays notifications regarding regular system updates check and installation</string>
+    <string name="high_priority_update_channel_title">Updates (High Priority)</string>
+    <string name="high_priority_update_channel_desc">Displays notifications regarding new available system updates and errors</string>
+    <string name="update_available_desc">Update now to keep device safe and improve stability</string>
+    <string name="updated_failed_desc">An error occurred when trying to update the system</string>
+    <string name="update_done_desc">Reboot your device to boot into updated system</string>
+
 </resources>
