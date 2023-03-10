@@ -6,13 +6,11 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import org.calyxos.systemupdater.update.config.UpdateConfigRepository
 import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
 
 class UpdateWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted workerParams: WorkerParameters,
-    private val updateConfigRepository: UpdateConfigRepository,
     private val updateManagerRepository: UpdateManagerRepository
 ) : CoroutineWorker(appContext, workerParams) {
 
@@ -23,10 +21,8 @@ class UpdateWorker @AssistedInject constructor(
     private val TAG = UpdateWorker::class.java.simpleName
 
     override suspend fun doWork(): Result {
-        val updateConfig = updateConfigRepository.getLatestUpdateConfig()
-        if (updateConfig != null &&
-            updateConfigRepository.newUpdateAvailable(updateConfig.buildDateUTC)
-        ) {
+        val updateConfig = updateManagerRepository.getLatestUpdateConfig()
+        if (updateConfig != null) {
             Log.i(TAG, "New update available, applying!")
             updateManagerRepository.applyUpdate(updateConfig)
         } else {
