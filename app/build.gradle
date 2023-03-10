@@ -47,6 +47,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
         languageVersion = "1.6"
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
 
     lint {
