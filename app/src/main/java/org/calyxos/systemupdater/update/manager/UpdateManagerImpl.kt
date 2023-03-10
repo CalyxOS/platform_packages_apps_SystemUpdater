@@ -18,9 +18,13 @@
 package org.calyxos.systemupdater.update.manager
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.os.Build
+import android.os.SystemProperties
 import android.os.UpdateEngine
 import android.os.UpdateEngineCallback
 import android.util.Log
+import com.google.gson.Gson
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
@@ -29,6 +33,7 @@ import kotlinx.coroutines.withContext
 import org.calyxos.systemupdater.update.models.PackageFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
+import org.calyxos.systemupdater.util.CommonModule
 import java.io.File
 import java.net.URL
 import javax.inject.Inject
@@ -38,10 +43,14 @@ import javax.net.ssl.HttpsURLConnection
 @Singleton
 class UpdateManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val updateEngine: UpdateEngine
+    private val updateEngine: UpdateEngine,
+    private val sharedPreferences: SharedPreferences,
+    private val gson: Gson
 ) : UpdateEngineCallback() {
 
     private val TAG = UpdateManagerImpl::class.java.simpleName
+
+    private val otaServerURL = "https://release.calyxinstitute.org"
 
     private val payloadBinary = "payload.bin"
     private val payloadMetadata = "payload_metadata.bin"
@@ -52,6 +61,25 @@ class UpdateManagerImpl @Inject constructor(
 
     init {
         updateEngine.bind(this)
+    }
+
+    /**
+     * Returns an instance of [UpdateConfig] to fetch OTA from
+     *
+     * Fetches the config from remote server from the channel chosen by user
+     * @return An instance of [UpdateConfig], null if remote update is N/A or old
+     */
+    suspend fun getUpdateConfig(): UpdateConfig? {
+        val channel = sharedPreferences.getString(CommonModule.channel, CommonModule.defaultChannel)
+        val jsonConfig = fetchJsonConfig("$otaServerURL/$channel/${Build.DEVICE}")
+        if (jsonConfig.isSuccess) {
+            val updateConfig = gson.fromJson(jsonConfig.getOrThrow(), UpdateConfig::class.java)
+            if (updateConfig.buildDateUTC > SystemProperties.get("ro.build.date.utc").toLong()) {
+                updateConfig.rawJson = jsonConfig.getOrDefault("")
+                return updateConfig
+            }
+        }
+        return null
     }
 
     fun suspendUpdate() {
@@ -91,6 +119,22 @@ class UpdateManagerImpl @Inject constructor(
                         properties.getOrDefault(emptyArray())
                     )
                 }
+            }
+        }
+    }
+
+    private suspend fun fetchJsonConfig(url: String): Result<String> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val connection = URL(url).openConnection() as HttpsURLConnection
+                val jsonConfig = connection.inputStream.bufferedReader().use { it.readText() }
+                if (jsonConfig.isNotBlank()) {
+                    return@withContext Result.success(jsonConfig)
+                }
+                return@withContext Result.failure(Exception("Update config is empty!"))
+            } catch (exception: Exception) {
+                Log.e(TAG, "Failed to fetch update config!", exception)
+                return@withContext Result.failure(exception)
             }
         }
     }
