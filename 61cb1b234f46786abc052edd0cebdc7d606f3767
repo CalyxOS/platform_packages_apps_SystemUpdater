@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab0f6902_529ec6b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-10T05:07:38Z",
+      "side": 1,
+      "message": "Please assume below chain is ready from my side",
+      "revId": "61cb1b234f46786abc052edd0cebdc7d606f3767",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
