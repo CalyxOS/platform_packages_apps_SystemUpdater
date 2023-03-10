@@ -18,6 +18,10 @@ class UpdateManagerRepository @Inject constructor(
     val updateStatus = updateManagerImpl.updateStatus.asStateFlow()
     val updateProgress = updateManagerImpl.updateProgress.asStateFlow()
 
+    suspend fun getLatestUpdateConfig(): UpdateConfig? {
+        return updateManagerImpl.getUpdateConfig()
+    }
+
     fun suspendUpdate() {
         updateManagerImpl.suspendUpdate()
     }
