@@ -24,6 +24,7 @@ import org.calyxos.systemupdater.R
 @AndroidEntryPoint(AppCompatActivity::class)
 class MainActivity : Hilt_MainActivity() {
 
+    // TODO: Handle notification action intents
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

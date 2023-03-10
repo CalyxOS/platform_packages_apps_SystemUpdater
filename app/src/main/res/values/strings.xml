@@ -47,5 +47,10 @@
         <item>stable</item>
         <item>beta</item>
     </string-array>
+    
+    <!-- Notification -->
+    <string name="update_channel_title">Updates</string>
+    <string name="update_channel_desc">Displays notifications regarding new available system updates and their installation progress</string>
+    <string name="update_available_desc">Update now to keep device safe and improve stability</string>
 
 </resources>
