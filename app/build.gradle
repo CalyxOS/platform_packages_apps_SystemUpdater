@@ -79,6 +79,7 @@ dependencies {
     implementation project.ext.std_libs.androidx_activity_ktx
     implementation project.ext.google.com_google_android_material
     implementation project.ext.std_libs.androidx_lifecycle_viewmodel_ktx
+    implementation project.ext.std_libs.androidx_lifecycle_lifecycle_service
     implementation project.ext.std_libs.androidx_preference
     implementation project.ext.std_libs.androidx_navigation_fragment_ktx
     implementation project.ext.std_libs.androidx_navigation_ui_ktx
