@@ -28,7 +28,9 @@
         android:targetSdkVersion="33" />
 
     <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.REBOOT" />
 
     <application
@@ -44,6 +46,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".service.SystemUpdaterService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+
+        <receiver
+            android:name=".util.NotificationActionReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>
