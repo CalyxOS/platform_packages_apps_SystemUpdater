@@ -5,11 +5,14 @@
 
 package org.calyxos.systemupdater.ui
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.preference.ListPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.appbar.MaterialToolbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +43,16 @@ class SettingsFragment : Hilt_SettingsFragment() {
                 true
             }
             summary = sharedPreferences.getString(CommonModule.channel, CommonModule.defaultChannel)
+        }
+
+        findPreference<Preference>("notifications")?.apply {
+            setOnPreferenceClickListener {
+                Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).also {
+                    it.putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                    startActivity(it)
+                }
+                true
+            }
         }
     }
 }
