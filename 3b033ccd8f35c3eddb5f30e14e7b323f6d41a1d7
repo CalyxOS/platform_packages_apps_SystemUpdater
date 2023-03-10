@@ -18,6 +18,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6c1c745_79c0abae",
+        "filename": "app/src/main/res/values-night/themes.xml",
+        "patchSetId": 40
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-10T05:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "500e492b_29a1aac7",
+      "revId": "3b033ccd8f35c3eddb5f30e14e7b323f6d41a1d7",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d95bfcb_8d3a517b",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-03-09T19:08:58Z",
       "side": 1,
       "message": "Unused file",
+      "revId": "3b033ccd8f35c3eddb5f30e14e7b323f6d41a1d7",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3b37ef5_4b4929c9",
+        "filename": "app/src/main/res/values/arrays.xml",
+        "patchSetId": 40
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-10T05:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d95bfcb_8d3a517b",
       "revId": "3b033ccd8f35c3eddb5f30e14e7b323f6d41a1d7",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
