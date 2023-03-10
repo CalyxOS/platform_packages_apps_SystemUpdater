@@ -5,8 +5,6 @@
 
 package org.calyxos.systemupdater.update.manager
 
-import kotlinx.coroutines.flow.asStateFlow
-import org.calyxos.systemupdater.update.models.UpdateConfig
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,11 +13,11 @@ class UpdateManagerRepository @Inject constructor(
     private val updateManagerImpl: UpdateManagerImpl
 ) {
 
-    val updateStatus = updateManagerImpl.updateStatus.asStateFlow()
-    val updateProgress = updateManagerImpl.updateProgress.asStateFlow()
+    val updateStatus = updateManagerImpl.updateStatus
+    val updateProgress = updateManagerImpl.updateProgress
 
-    suspend fun getLatestUpdateConfig(): UpdateConfig? {
-        return updateManagerImpl.getUpdateConfig()
+    suspend fun checkUpdates(): Boolean {
+        return updateManagerImpl.checkUpdates()
     }
 
     fun suspendUpdate() {
@@ -30,7 +28,7 @@ class UpdateManagerRepository @Inject constructor(
         updateManagerImpl.resumeUpdate()
     }
 
-    suspend fun applyUpdate(updateConfig: UpdateConfig) {
-        updateManagerImpl.applyUpdate(updateConfig)
+    suspend fun applyUpdate() {
+        updateManagerImpl.applyUpdate()
     }
 }

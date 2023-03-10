@@ -75,7 +75,6 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
 
             lifecycleScope.launchWhenStarted {
                 viewModel.updateStatus.collect { status ->
-                    viewModel.saveLastUpdate()
 
                     // Set update title based on status
                     updateTitle.text = when (status) {
