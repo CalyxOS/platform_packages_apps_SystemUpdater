@@ -40,6 +40,7 @@ import kotlinx.coroutines.withContext
 import org.calyxos.systemupdater.update.models.PackageFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
+import org.calyxos.systemupdater.update.notification.UpdateNotificationRepository
 import org.calyxos.systemupdater.util.CommonModule
 import java.io.File
 import java.net.URL
@@ -55,7 +56,8 @@ class UpdateManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val updateEngine: UpdateEngine,
     private val sharedPreferences: SharedPreferences,
-    private val gson: Gson
+    private val gson: Gson,
+    private val updateNotificationRepository: UpdateNotificationRepository
 ) : UpdateEngineCallback() {
 
     private val TAG = UpdateManagerImpl::class.java.simpleName
@@ -94,13 +96,16 @@ class UpdateManagerImpl @Inject constructor(
 
     suspend fun checkUpdates(): Boolean {
         _updateStatus.value = UpdateStatus.CHECKING_FOR_UPDATE
+        updateNotificationRepository.postNotification(UpdateStatus.CHECKING_FOR_UPDATE)
         return if (getUpdateConfig() != null) {
             Log.i(TAG, "New update available!")
             _updateStatus.value = UpdateStatus.UPDATE_AVAILABLE
+            updateNotificationRepository.postNotification(UpdateStatus.UPDATE_AVAILABLE)
             true
         } else {
             Log.i(TAG, "No new update available!")
             _updateStatus.value = UpdateStatus.IDLE
+            updateNotificationRepository.removeNotification(UpdateStatus.CHECKING_FOR_UPDATE)
             false
         }
     }
