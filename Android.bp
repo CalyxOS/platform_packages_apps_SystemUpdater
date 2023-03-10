@@ -63,6 +63,14 @@ android_app {
 }
 
 prebuilt_etc {
+    name: "default_perms_org.calyxos.systemupdater",
+    system_ext_specific: true,
+    sub_dir: "default-permissions",
+    src: "default_perms_org.calyxos.systemupdater.xml",
+    filename_from_src: true,
+}
+
+prebuilt_etc {
     name: "powersave_allowlist_org.calyxos.systemupdater",
     system_ext_specific: true,
     sub_dir: "sysconfig",
