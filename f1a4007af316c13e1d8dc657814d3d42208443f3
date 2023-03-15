@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fe00a38_03069968",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/MainActivity.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-15T12:55:58Z",
+      "side": 1,
+      "message": "TODO: Handle notification action intents",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 47
+      },
+      "revId": "f1a4007af316c13e1d8dc657814d3d42208443f3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
