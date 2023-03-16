@@ -46,6 +46,30 @@
       },
       "revId": "f1a4007af316c13e1d8dc657814d3d42208443f3",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c26d2d8_6567603c",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/MainActivity.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-16T12:23:41Z",
+      "side": 1,
+      "message": "What actions are you thinking of?",
+      "parentUuid": "245885fb_be82d101",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 47
+      },
+      "revId": "f1a4007af316c13e1d8dc657814d3d42208443f3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
