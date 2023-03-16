@@ -1,4 +1,4 @@
-package org.calyxos.systemupdater.work
+package org.calyxos.systemupdater.work.workers
 
 import android.content.Context
 import androidx.work.CoroutineWorker
@@ -7,14 +7,14 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
 
-class UpdateWorker @AssistedInject constructor(
+class AutoUpdateWorker @AssistedInject constructor(
     @Assisted appContext: Context,
     @Assisted workerParams: WorkerParameters,
     private val updateManagerRepository: UpdateManagerRepository
 ) : CoroutineWorker(appContext, workerParams) {
 
     companion object {
-        const val WORK_NAME_PERIODIC = "periodic"
+        const val WORK_NAME = "autoUpdateWork"
     }
 
     override suspend fun doWork(): Result {

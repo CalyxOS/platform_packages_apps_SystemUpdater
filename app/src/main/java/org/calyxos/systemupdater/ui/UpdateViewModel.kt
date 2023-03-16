@@ -36,12 +36,14 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import javax.inject.Inject
+import org.calyxos.systemupdater.work.WorkManagerRepository
 
 @HiltViewModel
 @SuppressLint("StaticFieldLeak") // false positive, see https://github.com/google/dagger/issues/3253
 class UpdateViewModel @Inject constructor(
     private val updateManager: UpdateManagerRepository,
     private val sharedPreferences: SharedPreferences,
+    private val workManagerRepository: WorkManagerRepository,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
@@ -52,10 +54,8 @@ class UpdateViewModel @Inject constructor(
     val updateLastCheck = _updateLastCheck.asStateFlow()
 
     fun checkUpdates() {
-        viewModelScope.launch {
-            updateManager.checkUpdates()
-            _updateLastCheck.value = setLastCheck()
-        }
+        workManagerRepository.expeditedUpdatesCheck()
+        _updateLastCheck.value = setLastCheck()
     }
 
     fun suspendUpdate() {

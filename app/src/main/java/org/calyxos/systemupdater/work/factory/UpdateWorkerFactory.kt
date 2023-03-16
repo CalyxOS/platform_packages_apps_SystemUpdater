@@ -10,7 +10,8 @@ class UpdateWorkerFactory @Inject constructor(
     private val updateAssistedFactory: UpdateAssistedFactory
 ) : WorkerFactory() {
 
-    private val updateWorker = "UpdateWorker"
+    private val autoUpdateWorker = "AutoUpdateWorker"
+    private val updatesCheckWorker = "UpdatesCheckWorker"
 
     override fun createWorker(
         appContext: Context,
@@ -18,7 +19,11 @@ class UpdateWorkerFactory @Inject constructor(
         workerParameters: WorkerParameters
     ): ListenableWorker? {
         return when (workerClassName) {
-            updateWorker -> updateAssistedFactory.updateWorker(appContext, workerParameters)
+            autoUpdateWorker -> updateAssistedFactory.autoUpdateWorker(appContext, workerParameters)
+            updatesCheckWorker -> updateAssistedFactory.updatesCheckWorker(
+                appContext,
+                workerParameters
+            )
             else -> null
         }
     }
