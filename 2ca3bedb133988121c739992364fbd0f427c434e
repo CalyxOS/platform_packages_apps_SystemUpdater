@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8952a2ed_e0c6f86e",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-16T12:23:34Z",
+      "side": 1,
+      "message": "In an ideal world you don\u0027t re-fetch and just see if the server has a newer file.\n\nOne way to do it is etags.\n\nThis is fine for now, just making a note, don\u0027t have to change it right away.",
+      "revId": "2ca3bedb133988121c739992364fbd0f427c434e",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
