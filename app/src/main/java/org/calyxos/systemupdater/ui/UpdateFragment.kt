@@ -225,7 +225,7 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                                 visibility = View.VISIBLE
                             }
                             installSteps.visibility = View.VISIBLE
-                            updateButton.visibility = View.VISIBLE
+                            updateButton.visibility = View.GONE
                         }
                         else -> {
                             Log.d(TAG, "Got an unexpected status: ${status.name}")
