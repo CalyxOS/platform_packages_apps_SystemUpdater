@@ -49,6 +49,10 @@ project.ext {
             // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#4892
             androidx_work: dependencies.create('androidx.work:work-runtime-ktx') {
                 version { strictly '2.7.0-beta01' }
+            },
+            // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#749
+            androidx_browser_browser: dependencies.create('androidx.browser:browser') {
+                version { strictly '1.4.0-alpha01' }
             }
     ]
     google = [

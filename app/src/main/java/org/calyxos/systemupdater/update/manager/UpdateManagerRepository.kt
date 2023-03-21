@@ -16,6 +16,7 @@
 
 package org.calyxos.systemupdater.update.manager
 
+import org.calyxos.systemupdater.update.models.UpdateConfig
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,6 +30,10 @@ class UpdateManagerRepository @Inject constructor(
 
     suspend fun checkUpdates(): Boolean {
         return updateManagerImpl.checkUpdates()
+    }
+
+    suspend fun getUpdateConfig(): UpdateConfig? {
+        return updateManagerImpl.getUpdateConfig()
     }
 
     fun suspendUpdate() {

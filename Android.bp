@@ -39,6 +39,7 @@ android_app {
         "androidx.navigation_navigation-fragment-ktx",
         "androidx.navigation_navigation-ui-ktx",
         "androidx.work_work-runtime-ktx",
+        "androidx.browser_browser",
         "com.google.android.material_material",
         "guava",
         "gson",
