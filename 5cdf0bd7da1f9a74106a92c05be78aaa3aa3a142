@@ -16,6 +16,24 @@
       "message": "I honestly don\u0027t want to add so much complexity for a simple feature. Why can it not just be a link?\n\nWe add an additional dependency, additional code, additional complexity - all for something that we talked about is temporary because we do eventually want changelogs inside the app.\n\nhttps://developer.android.com/guide/components/intents-common#ViewUrl\n\n```\nfun openWebPage(url: String) {\n    val webpage: Uri \u003d Uri.parse(url)\n    val intent \u003d Intent(Intent.ACTION_VIEW, webpage)\n    if (intent.resolveActivity(packageManager) !\u003d null) {\n        startActivity(intent)\n    }\n}\n```\n\nKeep it simple, please. Updater is the app where we only add what\u0027s absolutely required, and nothing more. Any other app and it\u0027s different - but this one is critical.",
       "revId": "5cdf0bd7da1f9a74106a92c05be78aaa3aa3a142",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9864efa_5e7a9f35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-21T12:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28e9d37e_0bbc80b3",
+      "revId": "5cdf0bd7da1f9a74106a92c05be78aaa3aa3a142",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
