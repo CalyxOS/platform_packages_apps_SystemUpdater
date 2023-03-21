@@ -147,7 +147,7 @@ class UpdateManagerImpl @Inject constructor(
      * Fetches the config from remote server from the channel chosen by user
      * @return An instance of [UpdateConfig], null if remote update is N/A or old
      */
-    private suspend fun getUpdateConfig(): UpdateConfig? {
+    suspend fun getUpdateConfig(): UpdateConfig? {
         val channel = sharedPreferences.getString(CommonModule.channel, CommonModule.defaultChannel)
         val jsonFile = File("${context.filesDir.absolutePath}/${Build.DEVICE}.json")
 
