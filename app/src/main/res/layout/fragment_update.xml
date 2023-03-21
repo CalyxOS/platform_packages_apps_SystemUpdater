@@ -140,44 +140,42 @@
             tools:text="Downloading" />
 
         <TextView
+            android:id="@+id/updateChangelog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
             android:gravity="start"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/tools_changelog"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/updateChangelogButton"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
             android:text="@string/what_is_new"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical">
-
-            <TextView
-                android:id="@+id/updateChangelog"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="5dp"
-                android:gravity="start"
-                android:lineSpacingExtra="5sp"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="15sp"
-                tools:text="@string/tools_changelog" />
-
-        </ScrollView>
-
-        <TextView
-            android:id="@+id/updateSize"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:gravity="start"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="15sp"
-            tools:text="Update size: 1.46 GB" />
+            android:textSize="16sp"
+            app:icon="@drawable/ic_tips" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/updateSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="13sp"
+        android:visibility="gone"
+        app:drawableStartCompat="@drawable/ic_cloud_download"
+        app:layout_constraintBottom_toTopOf="@+id/networkWarning"
+        tools:text="Update size: 1.46 GB" />
 
     <TextView
         android:id="@+id/networkWarning"

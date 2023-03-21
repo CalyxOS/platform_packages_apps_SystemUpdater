@@ -29,7 +29,7 @@
     <string name="update_size">Update size: <xliff:g id="size">%1$s</xliff:g></string>
     <string name="network_warning">Downloading updates over a mobile network, metered Wi-Fi or while roaming may cause additional charges</string>
 
-    <string name="tools_changelog" translatable="false">&#8226; CalyxOS 4.6.0\n&#8226; February 2023 Security update\n&#8226; Chromium 109.0.5414.117 (110 work in progress)\n&#8226; Fix Firewall VPN handling, again\n&#8226; Set “Play Store” as installer when installing from Aurora Store to make some apps work</string>
+    <string name="tools_changelog" translatable="false">A new system update is now available for your device.\n\nThe update process may take several minutes to complete. It is recommended that you use high-speed, unmetered data, ensure your device is charged to at least 50% and back up your important data before proceeding.</string>
 
     <!-- Settings Fragment -->
     <string name="general">General</string>
