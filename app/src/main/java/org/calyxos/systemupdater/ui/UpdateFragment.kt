@@ -83,6 +83,8 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
             val installProgress = findViewById<LinearProgressIndicator>(R.id.updateInstallProgress)
             val installSteps = findViewById<TextView>(R.id.updateInstallSteps)
             val networkWarning = findViewById<TextView>(R.id.networkWarning)
+            val updateSize = findViewById<TextView>(R.id.updateSize)
+            val updateChangelogButton = findViewById<Button>(R.id.updateChangelogButton)
 
             lifecycleScope.launchWhenStarted {
                 viewModel.updateStatus.collect { status ->
@@ -124,10 +126,15 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                         .replaceFirstChar { it.uppercase() }
 
                     // Show or hide network warning
-                    networkWarning.visibility = when (status) {
+                    when (status) {
                         UpdateStatus.UPDATE_AVAILABLE,
-                        UpdateStatus.DOWNLOADING -> { View.VISIBLE }
-                        else -> { View.GONE }
+                        UpdateStatus.DOWNLOADING -> {
+                            networkWarning.visibility = View.VISIBLE
+
+                            // Try to fetch update size
+                            viewModel.getPayloadSize()
+                        }
+                        else -> networkWarning.visibility = View.GONE
                     }
 
                     // Set update button's behaviour based on status
@@ -206,6 +213,9 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                         UpdateStatus.UPDATE_AVAILABLE,
                         UpdateStatus.UPDATED_NEED_REBOOT -> {
                             updateContainer.visibility = View.VISIBLE
+                            updateChangelogButton.setOnClickListener {
+                                viewModel.loadChangelog(it.context)
+                            }
                             infoContainer.visibility = View.GONE
                             updateCheck.visibility = View.GONE
                             installSteps.visibility = View.GONE
@@ -218,6 +228,9 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                         UpdateStatus.VERIFYING,
                         UpdateStatus.FINALIZING -> {
                             updateContainer.visibility = View.VISIBLE
+                            updateChangelogButton.setOnClickListener {
+                                viewModel.loadChangelog(it.context)
+                            }
                             infoContainer.visibility = View.GONE
                             updateCheck.visibility = View.GONE
                             installProgress.apply {
@@ -240,6 +253,17 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                         installProgress.apply {
                             isIndeterminate = false
                             progress = it
+                        }
+                    }
+                }
+            }
+
+            lifecycleScope.launchWhenStarted {
+                viewModel.updateSize.collect {
+                    if (it.isNotBlank()) {
+                        updateSize.apply {
+                            visibility = View.VISIBLE
+                            text = context.getString(R.string.update_size, it)
                         }
                     }
                 }
