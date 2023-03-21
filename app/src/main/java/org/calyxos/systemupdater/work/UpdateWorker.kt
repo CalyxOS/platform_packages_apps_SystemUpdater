@@ -2,15 +2,10 @@ package org.calyxos.systemupdater.work
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.core.content.edit
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
-import org.calyxos.systemupdater.util.CommonModule
-import java.util.Calendar
 import org.calyxos.systemupdater.service.SystemUpdaterService
 
 class UpdateWorker @AssistedInject constructor(
