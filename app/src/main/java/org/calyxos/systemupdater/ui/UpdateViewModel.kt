@@ -63,9 +63,9 @@ class UpdateViewModel @Inject constructor(
     private val _updateSize = MutableStateFlow("")
     val updateSize = _updateSize.asStateFlow()
 
-    fun checkUpdates() {
+    fun checkAndApplyUpdates() {
         Intent(context, SystemUpdaterService::class.java).also {
-            it.action = SystemUpdaterService.CHECK_UPDATES
+            it.action = SystemUpdaterService.CHECK_AND_APPLY_UPDATES
             context.startService(it)
         }
         _updateLastCheck.value = setLastCheck()

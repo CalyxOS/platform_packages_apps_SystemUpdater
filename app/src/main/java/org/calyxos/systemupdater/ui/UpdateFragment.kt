@@ -145,7 +145,7 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                                 text = getString(R.string.check_update)
                                 isEnabled = true
                                 setOnClickListener {
-                                    viewModel.checkUpdates()
+                                    viewModel.checkAndApplyUpdates()
                                 }
                             }
                             UpdateStatus.UPDATED_NEED_REBOOT -> {
@@ -168,7 +168,7 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                                 text = getString(R.string.retry)
                                 isEnabled = true
                                 setOnClickListener {
-                                    viewModel.checkUpdates()
+                                    viewModel.checkAndApplyUpdates()
                                 }
                             }
                             UpdateStatus.SUSPENDED -> {
