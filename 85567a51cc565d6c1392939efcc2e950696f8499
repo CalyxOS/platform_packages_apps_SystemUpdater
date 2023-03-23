@@ -16,6 +16,29 @@
       "message": "Ok for testing.",
       "revId": "85567a51cc565d6c1392939efcc2e950696f8499",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3bba431_3a710155",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-23T15:51:15Z",
+      "side": 1,
+      "message": "The part where the file is deleted. Action is non-cancellable as well.",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 13
+      },
+      "revId": "85567a51cc565d6c1392939efcc2e950696f8499",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
