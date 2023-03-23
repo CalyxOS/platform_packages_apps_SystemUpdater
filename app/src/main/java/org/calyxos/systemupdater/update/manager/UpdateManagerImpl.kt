@@ -217,6 +217,8 @@ class UpdateManagerImpl @Inject constructor(
                 connection.inputStream.use { input ->
                     metadataFile.outputStream().use { input.copyTo(it) }
                 }
+                // TODO: Find a better way to do this
+                metadataFile.setReadable(true, false)
                 if (!updateEngine.verifyPayloadMetadata(metadataFile.absolutePath)) {
                     _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
                     return@withContext Result.failure(Exception("Failed verifying metadata!"))
