@@ -52,6 +52,7 @@ class UpdateManagerImpl @Inject constructor(
 
     private val otaServerURL = "https://release.calyxinstitute.org"
 
+    private val otaDir = "/data/ota_package"
     private val payloadBinary = "payload.bin"
     private val payloadMetadata = "payload_metadata.bin"
     private val payloadProperties = "payload_properties.txt"
@@ -203,7 +204,7 @@ class UpdateManagerImpl @Inject constructor(
         packageFile: PackageFile
     ): Result<Boolean> {
         return withContext(Dispatchers.IO) {
-            val metadataFile = File("${context.filesDir.absolutePath}/${packageFile.filename}")
+            val metadataFile = File("$otaDir/${packageFile.filename}")
             try {
                 metadataFile.createNewFile()
                 val connection = URL(url).openConnection() as HttpsURLConnection
