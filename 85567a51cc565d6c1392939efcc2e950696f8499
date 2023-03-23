@@ -39,6 +39,30 @@
       },
       "revId": "85567a51cc565d6c1392939efcc2e950696f8499",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee2525e7_e1557779",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-23T15:52:44Z",
+      "side": 1,
+      "message": "Should be safe. We could ship this in theory, but at the very least I\u0027d like to revisit and perhaps try a few things before that.",
+      "parentUuid": "a3bba431_3a710155",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 13
+      },
+      "revId": "85567a51cc565d6c1392939efcc2e950696f8499",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
