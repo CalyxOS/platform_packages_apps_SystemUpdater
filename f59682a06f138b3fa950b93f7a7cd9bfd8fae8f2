@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "804da661_363eb99a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-27T18:28:04Z",
+      "side": 1,
+      "message": "It\u0027s in the commit message - fetching! not setting. Why set it?",
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32d37e3c_2b96279f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
