@@ -6,7 +6,6 @@
 package org.calyxos.systemupdater.ui
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -17,14 +16,14 @@ import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.appbar.MaterialToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.calyxos.systemupdater.R
-import org.calyxos.systemupdater.util.CommonModule
+import org.calyxos.systemupdater.util.CommonUtil
 import javax.inject.Inject
 
 @AndroidEntryPoint(PreferenceFragmentCompat::class)
 class SettingsFragment : Hilt_SettingsFragment() {
 
     @Inject
-    lateinit var sharedPreferences: SharedPreferences
+    lateinit var commonUtil: CommonUtil
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +41,8 @@ class SettingsFragment : Hilt_SettingsFragment() {
                 summary = newValue.toString()
                 true
             }
-            summary = sharedPreferences.getString(CommonModule.channel, CommonModule.defaultChannel)
+            summary = commonUtil.currentOTAChannel()
+            isEnabled = commonUtil.currentOTAChannel() in commonUtil.channels
         }
 
         findPreference<Preference>("notifications")?.apply {
