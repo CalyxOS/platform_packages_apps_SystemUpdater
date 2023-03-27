@@ -17,8 +17,8 @@
 package org.calyxos.systemupdater.ui
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.SystemProperties
 import android.provider.Settings
 import android.view.View
 import androidx.navigation.findNavController
@@ -28,14 +28,14 @@ import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.appbar.MaterialToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.calyxos.systemupdater.R
-import org.calyxos.systemupdater.util.CommonModule
+import org.calyxos.systemupdater.util.CommonUtil
 import javax.inject.Inject
 
 @AndroidEntryPoint(PreferenceFragmentCompat::class)
 class SettingsFragment : Hilt_SettingsFragment() {
 
     @Inject
-    lateinit var sharedPreferences: SharedPreferences
+    lateinit var commonUtil: CommonUtil
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,9 +51,16 @@ class SettingsFragment : Hilt_SettingsFragment() {
         findPreference<ListPreference>("channel")?.apply {
             setOnPreferenceChangeListener { _, newValue ->
                 summary = newValue.toString()
+                SystemProperties.set(CommonUtil.updateChannelProp, newValue.toString())
                 true
             }
-            summary = sharedPreferences.getString(CommonModule.channel, CommonModule.defaultChannel)
+            summary = commonUtil.getCurrentOTAChannel()
+            setValueIndex(commonUtil.channels.indexOf(commonUtil.getCurrentOTAChannel()))
+        }
+
+        // Refresh summary when system property changes
+        SystemProperties.addChangeCallback {
+            findPreference<ListPreference>("channel")?.summary = commonUtil.getCurrentOTAChannel()
         }
 
         findPreference<Preference>("notifications")?.apply {

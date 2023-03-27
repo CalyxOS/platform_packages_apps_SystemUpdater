@@ -40,7 +40,7 @@ import kotlinx.coroutines.withContext
 import org.calyxos.systemupdater.update.models.PackageFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
-import org.calyxos.systemupdater.util.CommonModule
+import org.calyxos.systemupdater.util.CommonUtil
 import java.io.File
 import java.net.URL
 import java.util.Calendar
@@ -55,7 +55,8 @@ class UpdateManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val updateEngine: UpdateEngine,
     private val sharedPreferences: SharedPreferences,
-    private val gson: Gson
+    private val gson: Gson,
+    private val commonUtil: CommonUtil
 ) : UpdateEngineCallback() {
 
     private val TAG = UpdateManagerImpl::class.java.simpleName
@@ -160,7 +161,7 @@ class UpdateManagerImpl @Inject constructor(
      * @return An instance of [UpdateConfig], null if remote update is N/A or old
      */
     suspend fun getUpdateConfig(): UpdateConfig? {
-        val channel = sharedPreferences.getString(CommonModule.channel, CommonModule.defaultChannel)
+        val channel = commonUtil.getCurrentOTAChannel()
         val jsonFile = File("${context.filesDir.absolutePath}/${Build.DEVICE}.json")
 
         //
