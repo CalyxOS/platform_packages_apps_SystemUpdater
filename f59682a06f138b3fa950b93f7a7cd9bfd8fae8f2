@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32d37e3c_2b96279f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-27T18:27:11Z",
+      "side": 1,
+      "message": "sys.updater.channel\n\nIntentionally different.",
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eaca4790_800fe5ab",
         "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
         "patchSetId": 2
@@ -14,6 +31,24 @@
       "writtenOn": "2023-03-27T18:11:26Z",
       "side": 1,
       "message": "Need to allow SELinux",
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b91ac4_d024b0f5",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-27T18:27:11Z",
+      "side": 1,
+      "message": "No need to set it.",
+      "parentUuid": "eaca4790_800fe5ab",
       "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
@@ -37,6 +72,64 @@
         "endLine": 64,
         "endChar": 9
       },
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ff883f8_f14ce615",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-27T18:27:11Z",
+      "side": 1,
+      "message": "What happens? How do you even listen for property changes in app? Not needed anyways.\n\nAnyways for now UI doesn\u0027t have to reflect state of channel. not ideal but good enough for shipping",
+      "parentUuid": "457b5eda_f6d38c55",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 9
+      },
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19e5f968_d9efac26",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonUtil.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-27T18:27:11Z",
+      "side": 1,
+      "message": "sys.updater.channel",
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d47bb200_291eb478",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonUtil.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-27T18:27:11Z",
+      "side": 1,
+      "message": "Nope, that\u0027d make it useless. We use the prop to test the channels not mentioned here. Otherwise we could just set them from UI",
       "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
