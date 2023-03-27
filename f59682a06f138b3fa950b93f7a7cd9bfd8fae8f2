@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaca4790_800fe5ab",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-27T18:11:26Z",
+      "side": 1,
+      "message": "Need to allow SELinux",
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "457b5eda_f6d38c55",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-27T18:11:26Z",
+      "side": 1,
+      "message": "Doesn\u0027t seems to work",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 9
+      },
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
