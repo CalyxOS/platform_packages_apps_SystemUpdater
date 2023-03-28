@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "661b1eae_b724e728",
+        "filename": "Android.bp",
+        "patchSetId": 22
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2023-03-28T14:32:26Z",
+      "side": 1,
+      "message": "Alphabetical order",
+      "revId": "f27404756a1875830d139bb4bee2fc0ff29a0478",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc96e48c_dd800abf",
+        "filename": "app/build.gradle",
+        "patchSetId": 22
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2023-03-28T14:32:26Z",
+      "side": 1,
+      "message": "Alphabetical order",
+      "revId": "f27404756a1875830d139bb4bee2fc0ff29a0478",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be9cfdea_f4fd2ab9",
+        "filename": "app/src/main/res/drawable/ic_restart.xml",
+        "patchSetId": 22
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2023-03-28T14:32:26Z",
+      "side": 1,
+      "message": "Extra newline",
+      "revId": "f27404756a1875830d139bb4bee2fc0ff29a0478",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70844867_710105c9",
+        "filename": "gradle/dependencies.gradle",
+        "patchSetId": 22
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2023-03-28T14:32:26Z",
+      "side": 1,
+      "message": "Alphabetical order, it goes before androidx_lifecycle_viewmodel_ktx",
+      "revId": "f27404756a1875830d139bb4bee2fc0ff29a0478",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
