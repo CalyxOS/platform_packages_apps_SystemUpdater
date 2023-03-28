@@ -22,6 +22,30 @@
       },
       "revId": "e9814ac7de35c39e8d53d762c36ea6e8aff8adf5",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fc22c2d_43645074",
+        "filename": "app/src/main/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-28T17:00:46Z",
+      "side": 1,
+      "message": "We should also update the string in that case.\n\nIt takes longer than several minutes.\n\nCan drop \"high-speed\"",
+      "parentUuid": "2e51428c_94659f31",
+      "range": {
+        "startLine": 32,
+        "startChar": 34,
+        "endLine": 32,
+        "endChar": 55
+      },
+      "revId": "e9814ac7de35c39e8d53d762c36ea6e8aff8adf5",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
