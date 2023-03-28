@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30d4699a_63e37c19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-28T16:59:18Z",
+      "side": 1,
+      "message": "This is intentional, I think.",
+      "revId": "ebcd10355771370d9b0fe6f721f07ecb1d6db904",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
