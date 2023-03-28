@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e51428c_94659f31",
+        "filename": "app/src/main/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2023-03-28T14:34:45Z",
+      "side": 1,
+      "message": "Should this be translatable now?",
+      "range": {
+        "startLine": 32,
+        "startChar": 34,
+        "endLine": 32,
+        "endChar": 55
+      },
+      "revId": "e9814ac7de35c39e8d53d762c36ea6e8aff8adf5",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
