@@ -18,6 +18,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b90b58b1_40025d07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-28T05:47:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "804da661_363eb99a",
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32d37e3c_2b96279f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-03-27T18:27:11Z",
       "side": 1,
       "message": "sys.updater.channel\n\nIntentionally different.",
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9bc5a92_3925063d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-28T05:47:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "32d37e3c_2b96279f",
       "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
@@ -66,6 +102,24 @@
       "side": 1,
       "message": "No need to set it.",
       "parentUuid": "eaca4790_800fe5ab",
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0a531c_0c178d88",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-28T05:47:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "77b91ac4_d024b0f5",
       "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
@@ -117,6 +171,30 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b1b8c94_9132ee0f",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-28T05:47:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1ff883f8_f14ce615",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 9
+      },
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19e5f968_d9efac26",
@@ -134,6 +212,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8502b97_f6b24855",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonUtil.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-28T05:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19e5f968_d9efac26",
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d47bb200_291eb478",
@@ -147,6 +243,24 @@
       "writtenOn": "2023-03-27T18:27:11Z",
       "side": 1,
       "message": "Nope, that\u0027d make it useless. We use the prop to test the channels not mentioned here. Otherwise we could just set them from UI",
+      "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eef30386_ec7a27b3",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonUtil.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-03-28T05:47:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d47bb200_291eb478",
       "revId": "f59682a06f138b3fa950b93f7a7cd9bfd8fae8f2",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
