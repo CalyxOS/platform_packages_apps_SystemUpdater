@@ -70,6 +70,30 @@
       },
       "revId": "a14ba3aab716d7e53d89dd92c183a91610fdc9d0",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6e35e97_43280022",
+        "filename": ".reuse/dep5",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-03-28T16:59:03Z",
+      "side": 1,
+      "message": "Let\u0027s deal with these outside this chain to avoid blocking the entire thing.\n\nWe need to do it for other apps anyway.\n\nCan modify commit message",
+      "parentUuid": "4762bfdf_f311d839",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 13
+      },
+      "revId": "a14ba3aab716d7e53d89dd92c183a91610fdc9d0",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
