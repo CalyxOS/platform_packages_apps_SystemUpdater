@@ -16,6 +16,24 @@
       "message": "Please assume below chain is ready from my side",
       "revId": "61cb1b234f46786abc052edd0cebdc7d606f3767",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b65c0c5d_6808c238",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-06-29T12:39:44Z",
+      "side": 1,
+      "message": "Sorry it took so long to merge such that it\u0027s no longer the latest stable version, but we\u0027ll update it again and keep it updated going forward.",
+      "parentUuid": "ab0f6902_529ec6b9",
+      "revId": "61cb1b234f46786abc052edd0cebdc7d606f3767",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
