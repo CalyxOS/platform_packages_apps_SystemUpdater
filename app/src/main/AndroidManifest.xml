@@ -23,6 +23,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.REBOOT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".SystemUpdaterApp"
@@ -52,6 +53,14 @@
             android:name="androidx.startup.InitializationProvider"
             android:authorities="org.calyxos.systemupdater.androidx-startup"
             tools:node="remove" />
+
+        <receiver
+            android:name=".work.BootCompletedReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
