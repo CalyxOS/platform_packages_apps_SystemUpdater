@@ -50,7 +50,7 @@ android_app {
     },
 
     kotlincflags: [
-        "-Xopt-in=kotlin.RequiresOptIn",
+        "-opt-in=kotlin.RequiresOptIn",
     ],
 
     required: [
