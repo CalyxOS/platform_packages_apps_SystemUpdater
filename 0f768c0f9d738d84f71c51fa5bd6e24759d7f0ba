@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de982f02_451c5783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-10-18T12:18:09Z",
+      "side": 1,
+      "message": "Merged dependencies.gradle in the app/ gradle file as it using version catalog makes no sense considering this is a single module app and these versions are used in a single place anyway.",
+      "revId": "0f768c0f9d738d84f71c51fa5bd6e24759d7f0ba",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
