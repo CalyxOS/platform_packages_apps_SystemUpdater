@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68e4543d_2dbcddf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-10-18T16:44:20Z",
+      "side": 1,
+      "message": "I typically avoid uploading open changes to both branches at the same time because it makes it harder to keep in sync.\n\nI\u0027d just stay with one branch, can be android13 for now. Keep this open, don\u0027t update it. Once 13 is reviewed and merged, update this, and it can be merged right away.",
+      "revId": "c30c38ce8c0282cded498339acf690247455cb69",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
