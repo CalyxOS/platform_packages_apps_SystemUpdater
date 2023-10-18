@@ -18,4 +18,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "SystemUpdater"
-include ':app'
+include(":app")
