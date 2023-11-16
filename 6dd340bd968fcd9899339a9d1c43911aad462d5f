@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac255d7c_a11cc6f5",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2023-11-16T12:25:32Z",
+      "side": 1,
+      "message": "Seems `Runtime.getRuntime().exec(\"chmod 440\" + PATH);` might be better",
+      "revId": "6dd340bd968fcd9899339a9d1c43911aad462d5f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
