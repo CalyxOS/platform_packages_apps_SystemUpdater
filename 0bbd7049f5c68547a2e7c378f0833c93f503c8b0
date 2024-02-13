@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30758a4d_f4d3618e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-02-13T16:26:55Z",
+      "side": 1,
+      "message": "I\u0027d test an update with this, although Android.bp will do it by default unless we hardcode versions",
+      "revId": "0bbd7049f5c68547a2e7c378f0833c93f503c8b0",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
