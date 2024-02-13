@@ -15,7 +15,7 @@ import androidx.work.ExistingPeriodicWorkPolicy.KEEP
 import androidx.work.NetworkType.UNMETERED
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import androidx.work.WorkRequest.DEFAULT_BACKOFF_DELAY_MILLIS
+import androidx.work.WorkRequest.Companion.DEFAULT_BACKOFF_DELAY_MILLIS
 import dagger.hilt.android.AndroidEntryPoint
 import org.calyxos.systemupdater.work.UpdateWorker.Companion.WORK_NAME
 import java.util.concurrent.TimeUnit.HOURS

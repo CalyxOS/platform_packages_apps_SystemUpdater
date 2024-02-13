@@ -17,8 +17,8 @@ class SystemUpdaterApp : Hilt_SystemUpdaterApp(), Configuration.Provider {
     @Inject
     lateinit var updateWorkerFactory: UpdateWorkerFactory
 
-    override fun getWorkManagerConfiguration() =
-        Configuration.Builder()
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder()
             .setWorkerFactory(updateWorkerFactory)
             .build()
 }
