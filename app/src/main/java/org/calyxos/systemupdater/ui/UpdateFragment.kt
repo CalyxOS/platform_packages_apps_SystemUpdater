@@ -22,7 +22,7 @@ import androidx.navigation.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.update.models.UpdateStatus
 
@@ -53,7 +53,7 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
             findViewById<TextView>(R.id.securityVersion).text =
                 getString(R.string.security_version, viewModel.getASBDate())
 
-            lifecycleScope.launchWhenStarted {
+            lifecycleScope.launch {
                 viewModel.updateLastCheck.collect {
                     findViewById<TextView>(R.id.lastUpdateCheck).text =
                         getString(R.string.last_check, it)
@@ -75,7 +75,7 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
             val updateSize = findViewById<TextView>(R.id.updateSize)
             val updateChangelogButton = findViewById<Button>(R.id.updateChangelogButton)
 
-            lifecycleScope.launchWhenStarted {
+            lifecycleScope.launch {
                 viewModel.updateStatus.collect { status ->
 
                     // Set update title based on status
@@ -236,7 +236,7 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                 }
             }
 
-            lifecycleScope.launchWhenStarted {
+            lifecycleScope.launch {
                 viewModel.updateProgress.collect {
                     if (it != 0) {
                         installProgress.apply {
@@ -247,7 +247,7 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                 }
             }
 
-            lifecycleScope.launchWhenStarted {
+            lifecycleScope.launch {
                 viewModel.updateSize.collect {
                     if (it.isNotBlank()) {
                         updateSize.apply {
