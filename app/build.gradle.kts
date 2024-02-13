@@ -13,11 +13,11 @@ plugins {
 
 android {
     namespace = "org.calyxos.systemupdater"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = 33
-        targetSdk = 33
+        minSdk = 34
+        targetSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
