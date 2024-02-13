@@ -78,65 +78,65 @@ dependencies {
     compileOnly(fileTree(mapOf("dir" to "libs", "include" to listOf("android.jar", "libcore.jar"))))
 
     // AndroidX
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#1727
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/androidx/Android.bp#2741
     implementation("androidx.core:core-ktx") {
-        version { strictly("1.9.0") }
+        version { strictly("1.12.0-alpha05") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#195
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/androidx/Android.bp#243
     implementation("androidx.appcompat:appcompat") {
-        version { strictly("1.4.0-alpha03") } // should be 1.4.0-alpha04, but that is not available via maven
+        version { strictly("1.7.0-alpha03") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#2159
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/androidx/Android.bp#3245
     implementation("androidx.fragment:fragment-ktx") {
-        version { strictly("1.5.1") } // should be 1.4.0-alpha09, but that has ViewModel issues
+        version { strictly("1.6.0-alpha08") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#57
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/androidx/Android.bp#61
     implementation("androidx.activity:activity-ktx") {
-        version { strictly("1.4.0-alpha02") }
+        version { strictly("1.7.0-beta01") } // 1.7.0-alpha05 in AOSP but was never released
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#2722
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/androidx/Android.bp#4012
     implementation("androidx.lifecycle:lifecycle-service") {
-        version { strictly("2.4.0") } // 2.4.0-alpha04 in AOSP but was never released
+        version { strictly("2.6.0-alpha04") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#2754
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/androidx/Android.bp#4084
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx") {
-        version { strictly("2.4.0") } // 2.4.0-alpha04 in AOSP but was never released
+        version { strictly("2.6.0-alpha04") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#3597
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/androidx/Android.bp#5023
     implementation("androidx.preference:preference") {
         version { strictly("1.2.0-alpha01") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#3220
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/androidx/Android.bp#4608
     implementation("androidx.navigation:navigation-fragment-ktx") {
-        version { strictly("2.4.0-alpha09") }
-    }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#3358
-    implementation("androidx.navigation:navigation-ui-ktx") {
-        version { strictly("2.4.0-alpha09") }
-    }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/androidx/Android.bp#4892
-    implementation("androidx.work:work-runtime-ktx") {
         version { strictly("2.7.0-beta01") }
+    }
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/androidx/Android.bp#4750
+    implementation("androidx.navigation:navigation-ui-ktx") {
+        version { strictly("2.7.0-beta01") }
+    }
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/androidx/Android.bp#7029
+    implementation("androidx.work:work-runtime-ktx") {
+        version { strictly("2.9.0-alpha01") }
     }
 
     // Google
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-13.0.0_r3/current/extras/material-design-x/Android.bp#6
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r25/current/extras/material-design-x/Android.bp#15
     implementation("com.google.android.material:material") {
-        version { strictly("1.6.0") } // 1.6.0-alpha0301 in AOSP but that has minSDK issues
+        version { strictly("1.7.0-alpha03") }
     }
-    // https://android.googlesource.com/platform/external/guava/+/refs/tags/android-13.0.0_r3/android/pom.xml
+    // https://android.googlesource.com/platform/external/guava/+/refs/tags/android-14.0.0_r25/android/pom.xml
     implementation("com.google.guava:guava") {
-        version { strictly("31.0.1-android") }
+        version { strictly("31.1-android") }
     }
     // https://android.googlesource.com/platform/external/gson/+/refs/heads/master/pom.xml
     implementation("com.google.code.gson:gson") {
-        version { strictly("2.10") }
+        version { strictly("2.10.1") }
     }
 
     // JetBrains
-    // https://android.googlesource.com/platform/external/kotlinx.coroutines/+/refs/tags/android-13.0.0_r3/CHANGES.md
+    // https://android.googlesource.com/platform/external/kotlinx.coroutines/+/refs/tags/android-14.0.0_r25/CHANGES.md
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android") {
-        version { strictly("1.5.2") }
+        version { strictly("1.7.2") }
     }
 
     // Hilt is an exception due to lack of any specific version source
