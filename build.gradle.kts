@@ -5,9 +5,9 @@
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id("com.android.application") version "8.2.2" apply false
-    // https://android.googlesource.com/platform/external/kotlinc/+/refs/tags/android-14.0.0_r25/build.txt
-    id("org.jetbrains.kotlin.android") version "1.8.10" apply false
-    id("com.google.dagger.hilt.android") version "2.44.2" apply false
+    id("com.android.application") version "8.5.2" apply false
+    // https://android.googlesource.com/platform/external/kotlinc/+/refs/tags/android-14.0.0_r61/build.txt
+    id("org.jetbrains.kotlin.android") version "1.9.22" apply false
+    id("com.google.dagger.hilt.android") version "2.51.1" apply false
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0" apply false
 }
