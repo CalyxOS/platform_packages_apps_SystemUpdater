@@ -16,6 +16,24 @@
       "message": "Seems `Runtime.getRuntime().exec(\"chmod 440\" + PATH);` might be better",
       "revId": "6dd340bd968fcd9899339a9d1c43911aad462d5f",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b50410c8_e03a69dd",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-08-01T20:21:49Z",
+      "side": 1,
+      "message": "Yes, at least it won\u0027t be world readable then.",
+      "parentUuid": "ac255d7c_a11cc6f5",
+      "revId": "6dd340bd968fcd9899339a9d1c43911aad462d5f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
