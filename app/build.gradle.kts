@@ -50,7 +50,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
-        languageVersion = "1.7"
+        languageVersion = "1.9"
         freeCompilerArgs = listOf("-opt-in=kotlin.RequiresOptIn")
     }
 
