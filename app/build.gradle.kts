@@ -6,7 +6,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt")
+    id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     id("org.jlleitschuh.gradle.ktlint")
 }
@@ -57,10 +57,6 @@ android {
     lint {
         lintConfig = file("lint.xml")
     }
-}
-
-kapt {
-    correctErrorTypes = true
 }
 
 hilt {
@@ -142,6 +138,6 @@ dependencies {
     // Hilt is an exception due to lack of any specific version source
     // https://android.googlesource.com/platform/external/dagger2/+/refs/tags/android-13.0.0_r3
     val hiltVersion = "2.51.1"
-    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+    ksp("com.google.dagger:hilt-compiler:$hiltVersion")
     implementation("com.google.dagger:hilt-android:$hiltVersion")
 }
