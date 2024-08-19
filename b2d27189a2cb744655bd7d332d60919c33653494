@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90556b86_1154bb9e",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2024-08-19T13:11:28Z",
+      "side": 1,
+      "message": "Is this formatted with studio? Should it wrap at 100 chars?",
+      "revId": "b2d27189a2cb744655bd7d332d60919c33653494",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
