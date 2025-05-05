@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88b98eb3_004e2501",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-05T20:43:19Z",
+      "side": 1,
+      "message": "This change conflicts with this one: https://review.calyxos.org/c/CalyxOS/platform_packages_apps_SystemUpdater/+/16301\n\nThat change moves stuff into CommonUtil.kt.\n\nIn this change, we handle null by using `sharedPreferences?.` instead of `sharedPreferences.`, but in the linked change, this doesn\u0027t happen.\n\nShould this change be abandoned? If so, should the linked change be updated to use `?.` too?",
+      "revId": "b2d27189a2cb744655bd7d332d60919c33653494",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90556b86_1154bb9e",
         "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
         "patchSetId": 2
