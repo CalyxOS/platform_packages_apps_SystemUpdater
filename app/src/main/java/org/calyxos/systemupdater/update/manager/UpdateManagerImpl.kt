@@ -111,35 +111,74 @@ class UpdateManagerImpl @Inject constructor(
 
         val updateConfig = getUpdateConfig()
         if (updateConfig == null) {
+            Log.e(TAG, "Tried to applyUpdate when no applicable update was available")
             _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
             return
         }
 
-        val metadataFile =
-            updateConfig.abConfig.propertyFiles.find { it.filename == payloadMetadata }
+        val propertyFiles = updateConfig.abConfig.propertyFiles
 
-        if (metadataFile != null && payloadMetadataVerified(
+        val metadataFile = propertyFiles.find { it.filename == payloadMetadata }
+        if (metadataFile == null) {
+            Log.e(TAG, "Could not find metadata properties file $payloadMetadata in "
+                + "propertyFiles: $propertyFiles")
+            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+            return
+        }
+
+        // Verify payload metadata.
+        if (!payloadMetadataVerified(
                 updateConfig.url,
                 metadataFile
             ).getOrDefault(false)
         ) {
-            val propertiesFile =
-                updateConfig.abConfig.propertyFiles.find { it.filename == payloadProperties }
-            val payloadFile =
-                updateConfig.abConfig.propertyFiles.find { it.filename == payloadBinary }
+            Log.e(TAG, "Failed to verify payload metadata using file $payloadMetadata, "
+                + " url ${updateConfig.url}")
+            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+            return
+        }
 
-            if (propertiesFile != null && payloadFile != null) {
-                val properties = fetchPayloadProperties(updateConfig.url, propertiesFile)
-                if (properties.isSuccess) {
-                    _updateStatus.value = UpdateStatus.DOWNLOADING
-                    updateEngine.applyPayload(
-                        updateConfig.url,
-                        payloadFile.offset,
-                        payloadFile.size,
-                        properties.getOrDefault(emptyArray())
-                    )
-                }
-            }
+        // Continue making sure expected file details are available.
+        val propertiesFile = propertyFiles.find { it.filename == payloadProperties }
+        val payloadFile = propertyFiles.find { it.filename == payloadBinary }
+        if (propertiesFile == null) {
+            Log.e(TAG, "Could not find payload properties file $payloadProperties in "
+                    + "propertyFiles: $propertyFiles")
+            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+            return
+        }
+        if (payloadFile == null) {
+            Log.e(TAG, "Could not find binary properties file $payloadBinary in "
+                + "propertyFiles: $propertyFiles")
+            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+            return
+        }
+
+        // Fetch payload properties.
+        val properties = fetchPayloadProperties(updateConfig.url, propertiesFile)
+        if (!properties.isSuccess) {
+            Log.e(TAG, "Failed to fetch payload properties based on payload properties "
+                    + "$propertiesFile and url ${updateConfig.url}")
+            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+            return
+        }
+
+        // Apply the payload in update_engine.
+        val headerKeyValuePairs = properties.getOrDefault(emptyArray())
+        Log.i(TAG, "Applying updateEngine payload: url=${updateConfig.url} offset="
+            + "${payloadFile.offset} size=${payloadFile.size} headerKeyValuePairs="
+            + "$headerKeyValuePairs")
+        _updateStatus.value = UpdateStatus.DOWNLOADING
+        try {
+            updateEngine.applyPayload(
+                updateConfig.url,
+                payloadFile.offset,
+                payloadFile.size,
+                headerKeyValuePairs
+            )
+        } catch (e: Exception) {
+            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
+            Log.e(TAG, "Failed applying updateEngine payload", e)
         }
     }
 
@@ -150,6 +189,8 @@ class UpdateManagerImpl @Inject constructor(
      * @return An instance of [UpdateConfig], null if remote update is N/A or old
      */
     suspend fun getUpdateConfig(): UpdateConfig? {
+        // TODO: There may be errors in this process! Devise a way to alert the caller.
+
         val channel = commonUtil.currentOTAChannel()
         val jsonFile = File("${context.filesDir.absolutePath}/${Build.DEVICE}.json")
 
@@ -170,13 +211,25 @@ class UpdateManagerImpl @Inject constructor(
             withContext(Dispatchers.IO) {
                 Log.i(TAG, "Returning config from existing file")
                 val jsonConfig = jsonFile.inputStream().bufferedReader().readText()
-                return@withContext json.decodeFromString<UpdateConfig>(jsonConfig)
+                try {
+                    return@withContext json.decodeFromString<UpdateConfig>(jsonConfig)
+                } catch (e: Exception) {
+                    Log.e(TAG, "Failed to parse jsonConfig: $jsonConfig", e)
+                    return@withContext null
+                }
             }
         }
 
-        return if (updateConfig.buildDateUTC > SystemProperties.get("ro.build.date.utc").toLong()) {
+        if (updateConfig == null) {
+            return null
+        }
+
+        val currentBuildDateUtc = SystemProperties.get("ro.build.date.utc").toLong()
+        return if (updateConfig.buildDateUTC > currentBuildDateUtc) {
             updateConfig
         } else {
+            Log.i(TAG, "Available update build date ${updateConfig.buildDateUTC}"
+                + " is older than current build date $currentBuildDateUtc; will not update")
             null
         }
     }
