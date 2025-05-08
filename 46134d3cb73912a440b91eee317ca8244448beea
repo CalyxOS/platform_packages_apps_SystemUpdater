@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41af3c18_39abdfbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-08T05:38:53Z",
+      "side": 1,
+      "message": "I would suggest to instead move to https://android.googlesource.com/platform/external/kotlinx.serialization/ as that better than gson to avoid weird bugs like this.",
+      "revId": "46134d3cb73912a440b91eee317ca8244448beea",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
