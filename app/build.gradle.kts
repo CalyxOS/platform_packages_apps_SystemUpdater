@@ -13,7 +13,7 @@ plugins {
 
 android {
     namespace = "org.calyxos.systemupdater"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 34
@@ -74,53 +74,53 @@ dependencies {
     compileOnly(fileTree(mapOf("dir" to "libs", "include" to listOf("android.jar", "libcore.jar"))))
 
     // AndroidX
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/androidx/m2repository/androidx/core/core-ktx/1.13.0-beta01/Android.bp
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/android15-qpr2-release/current/androidx/m2repository/androidx/core/core-ktx?autodive=0
     implementation("androidx.core:core-ktx") {
-        version { strictly("1.13.0-beta01") }
+        version { strictly("1.16.0-alpha01") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/androidx/m2repository/androidx/appcompat/appcompat/1.7.0-alpha04/Android.bp
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/android15-qpr2-release/current/androidx/m2repository/androidx/appcompat/appcompat?autodive=0
     implementation("androidx.appcompat:appcompat") {
-        version { strictly("1.7.0-alpha03") } // 1.7.0-alpha04 in AOSP but was never released
+        version { strictly("1.7.0") } // 1.8.0-alpha01 in AOSP but not released
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/androidx/m2repository/androidx/fragment/fragment-ktx/1.7.0-beta01/Android.bp
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/android15-qpr2-release/current/androidx/m2repository/androidx/fragment/fragment-ktx?autodive=0
     implementation("androidx.fragment:fragment-ktx") {
-        version { strictly("1.7.0-beta01") }
+        version { strictly("1.8.6") } // 1.9.0-alpha01 in AOSP but not released
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/androidx/m2repository/androidx/activity/activity-ktx/1.9.0-alpha03/Android.bp
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/android15-qpr2-release/current/androidx/m2repository/androidx/activity/activity-ktx?autodive=0
     implementation("androidx.activity:activity-ktx") {
-        version { strictly("1.9.0-alpha03") }
+        version { strictly("1.10.0-rc01") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/androidx/m2repository/androidx/lifecycle/lifecycle-service/2.8.0-alpha02/Android.bp
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/android15-qpr2-release/current/androidx/m2repository/androidx/lifecycle/lifecycle-service?autodive=0
     implementation("androidx.lifecycle:lifecycle-service") {
-        version { strictly("2.8.0-alpha02") }
+        version { strictly("2.9.0-alpha08") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/androidx/m2repository/androidx/lifecycle/lifecycle-viewmodel-ktx/2.8.0-alpha02/Android.bp
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/android15-qpr2-release/current/androidx/m2repository/androidx/lifecycle/lifecycle-viewmodel-ktx?autodive=0
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx") {
-        version { strictly("2.8.0-alpha02") }
+        version { strictly("2.9.0-alpha08") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/androidx/m2repository/androidx/preference/preference/1.3.0-alpha01/Android.bp
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/android15-qpr2-release/current/androidx/m2repository/androidx/preference/preference?autodive=0
     implementation("androidx.preference:preference") {
         version { strictly("1.2.1") } // 1.3.0-alpha01 in AOSP but as not been released
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/androidx/m2repository/androidx/navigation/navigation-fragment-ktx/2.8.0-alpha03/Android.bp
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/android15-qpr2-release/current/androidx/m2repository/androidx/navigation/navigation-fragment-ktx?autodive=0
     implementation("androidx.navigation:navigation-fragment-ktx") {
-        version { strictly("2.8.0-alpha03") }
+        version { strictly("2.9.0-alpha04") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/androidx/m2repository/androidx/navigation/navigation-ui-ktx/2.8.0-alpha03/Android.bp
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/android15-qpr2-release/current/androidx/m2repository/androidx/navigation/navigation-ui-ktx?autodive=0
     implementation("androidx.navigation:navigation-ui-ktx") {
-        version { strictly("2.8.0-alpha03") }
+        version { strictly("2.9.0-alpha04") }
     }
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/androidx/m2repository/androidx/work/work-runtime-ktx/2.10.0-alpha01/Android.bp
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/android15-qpr2-release/current/androidx/m2repository/androidx/work/work-runtime-ktx?autodive=0
     implementation("androidx.work:work-runtime-ktx") {
-        version { strictly("2.10.0-alpha01") }
+        version { strictly("2.10.0-rc01") }
     }
 
     // Google
-    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/tags/android-14.0.0_r61/current/extras/material-design-x/Android.bp#15
+    // https://android.googlesource.com/platform/prebuilts/sdk/+/refs/heads/android15-qpr2-release/current/extras/material-design-x/Android.bp#7
     implementation("com.google.android.material:material") {
-        version { strictly("1.7.0-alpha03") }
+        version { strictly("1.13.0-alpha08") }
     }
-    // https://android.googlesource.com/platform/external/guava/+/refs/tags/android-14.0.0_r25/android/pom.xml
+    // https://android.googlesource.com/platform/external/guava/+/refs/heads/android15-qpr2-release/android/pom.xml
     implementation("com.google.guava:guava") {
         version { strictly("32.1.2-android") }
     }
@@ -130,13 +130,13 @@ dependencies {
     }
 
     // JetBrains
-    // https://android.googlesource.com/platform/external/kotlinx.coroutines/+/refs/tags/android-14.0.0_r61/CHANGES.md
+    // https://android.googlesource.com/platform/external/kotlinx.coroutines/+/refs/heads/android15-qpr2-release/CHANGES.md
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android") {
-        version { strictly("1.7.2") }
+        version { strictly("1.8.1") }
     }
 
-    // Hilt is an exception due to lack of any specific version source
-    // https://android.googlesource.com/platform/external/dagger2/+/refs/tags/android-13.0.0_r3
+    // Hilt is an exception due to lack of any specific version source though newer versions requires newer kotlin releases
+    // https://android.googlesource.com/platform/external/dagger2/+/refs/heads/android15-qpr2-release
     val hiltVersion = "2.51.1"
     ksp("com.google.dagger:hilt-compiler:$hiltVersion")
     implementation("com.google.dagger:hilt-android:$hiltVersion")
