@@ -36,8 +36,8 @@ work = { strictly = "2.10.0-rc01" }
 material = { strictly = "1.13.0-alpha08" }
 # https://android.googlesource.com/platform/external/guava/+/refs/heads/android15-qpr2-release/android/pom.xml
 guava = { strictly = "32.1.2-android" }
-# https://android.googlesource.com/platform/external/gson/+/refs/heads/master/pom.xml
-gson = { strictly = "2.10.1" }
+# https://android.googlesource.com/platform/external/kotlinx.serialization/+/refs/heads/android15-qpr2-release/CHANGELOG.md
+serialization = { strictly = "1.6.3" }
 # https://android.googlesource.com/platform/external/kotlinx.coroutines/+/refs/heads/android15-qpr2-release/CHANGES.md
 coroutines = { strictly = "1.8.1" }
 
@@ -54,14 +54,15 @@ androidx-preference = { module = "androidx.preference:preference-ktx", version.r
 androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 google-android-material = { module = "com.google.android.material:material", version.ref = "material" }
 google-guava = { module = "com.google.guava:guava", version.ref = "guava" }
-google-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-android-core = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 jetbrains-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+jetbrains-kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android  = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 google-ksp  = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt-android-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 jlleitschuh-ktlint  = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
