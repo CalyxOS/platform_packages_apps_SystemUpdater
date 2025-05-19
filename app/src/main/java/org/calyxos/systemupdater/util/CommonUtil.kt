@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2023 The Calyx Institute
+ * SPDX-FileCopyrightText: 2023-2025 The Calyx Institute
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -11,24 +11,22 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CommonUtil @Inject constructor(
-    private val sharedPreferences: SharedPreferences
-) {
+class CommonUtil @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
     companion object {
-        const val updateChannelProp = "sys.updater.channel"
+        private const val UPDATE_CHANNEL_PROP = "sys.updater.channel"
+
+        // OTA Update Channel Keys
+        private const val CHANNEL = "channel"
+        private const val CHANNEL_STABLE = "stable"
+        private const val CHANNEL_BETA = "beta"
     }
 
-    // OTA Update Channel Keys
-    private val channel = "channel"
-    private val stableChannel = "stable"
-    private val betaChannel = "beta"
-
     // Keep channel order synced with string array used by preference
-    val channels = listOf(stableChannel, betaChannel)
+    val channels = listOf(CHANNEL_STABLE, CHANNEL_BETA)
 
     fun currentOTAChannel(): String {
-        val savedChannel = sharedPreferences.getString(channel, stableChannel) ?: stableChannel
-        return SystemProperties.get(updateChannelProp, savedChannel)
+        val savedChannel = sharedPreferences.getString(CHANNEL, CHANNEL_STABLE) ?: CHANNEL_STABLE
+        return SystemProperties.get(UPDATE_CHANNEL_PROP, savedChannel)
     }
 }
