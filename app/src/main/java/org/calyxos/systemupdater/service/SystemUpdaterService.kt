@@ -16,6 +16,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.edit
+import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.LifecycleService
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,7 +55,8 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
     private val defaultPriorityUpdatesChannelID = "high-updates"
     private val highPriorityUpdatesChannelID = "low-updates"
 
-    private lateinit var notificationManager: NotificationManager
+    private val notificationManager: NotificationManager
+        get() = this.getSystemService<NotificationManager>()!!
 
     // Coroutine
     private val job = SupervisorJob()
@@ -68,7 +70,6 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
 
     override fun onCreate() {
         super.onCreate()
-        notificationManager = this.getSystemService(NotificationManager::class.java)
         createNotificationChannel()
     }
 
