@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e898e616_0c42f855",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-19T07:33:36Z",
+      "side": 1,
+      "message": "Please check the defaults",
+      "revId": "07121cfdbb62c193b056ef9d8fde01672397290b",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4e35897_6d7ae171",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonModule.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-19T07:33:36Z",
+      "side": 1,
+      "message": "https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json-builder/pretty-print.html",
+      "revId": "07121cfdbb62c193b056ef9d8fde01672397290b",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe1c1538_2299d37e",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonModule.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-19T07:33:36Z",
+      "side": 1,
+      "message": "https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json-builder/ignore-unknown-keys.html",
+      "revId": "07121cfdbb62c193b056ef9d8fde01672397290b",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f0d5fea_da78bb20",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonModule.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-19T07:33:36Z",
+      "side": 1,
+      "message": "https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/-json-builder/coerce-input-values.html",
+      "revId": "07121cfdbb62c193b056ef9d8fde01672397290b",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
