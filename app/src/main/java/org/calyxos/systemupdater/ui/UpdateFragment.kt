@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -141,8 +142,9 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                                 text = getString(R.string.reboot)
                                 isEnabled = true
                                 setOnClickListener {
-                                    val pm = context.getSystemService(PowerManager::class.java)
-                                    pm.reboot(null)
+                                    context.getSystemService<PowerManager>()?.apply {
+                                        reboot(null)
+                                    }
                                 }
                             }
                             UpdateStatus.UPDATE_AVAILABLE -> {
