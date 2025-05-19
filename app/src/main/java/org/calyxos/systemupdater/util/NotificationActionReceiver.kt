@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.PowerManager
 import android.util.Log
+import androidx.core.content.getSystemService
 
 class NotificationActionReceiver : BroadcastReceiver() {
 
@@ -19,8 +20,9 @@ class NotificationActionReceiver : BroadcastReceiver() {
         if (context != null) {
             when (intent?.action) {
                 NotificationAction.REBOOT.name -> {
-                    val pm = context.getSystemService(PowerManager::class.java)
-                    pm.reboot(null)
+                    context.getSystemService<PowerManager>()?.apply {
+                        reboot(null)
+                    }
                 }
                 else -> Log.i(TAG, "Got Unhandled Intent: ${intent?.action}")
             }
