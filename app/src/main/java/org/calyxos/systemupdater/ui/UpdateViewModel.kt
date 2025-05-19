@@ -5,7 +5,6 @@
 
 package org.calyxos.systemupdater.ui
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -33,7 +32,6 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-@SuppressLint("StaticFieldLeak") // false positive, see https://github.com/google/dagger/issues/3253
 class UpdateViewModel @Inject constructor(
     private val updateManager: UpdateManagerRepository,
     private val sharedPreferences: SharedPreferences,
