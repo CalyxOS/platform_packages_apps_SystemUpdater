@@ -1,6 +1,6 @@
 //
 // SPDX-FileCopyrightText: 2018 The Android Open Source Project
-// SPDX-FileCopyrightText: 2021 The Calyx Institute
+// SPDX-FileCopyrightText: 2021-2025 The Calyx Institute
 // SPDX-License-Identifier: Apache-2.0
 //
 
@@ -37,7 +37,7 @@ android_app {
         "androidx.work_work-runtime-ktx",
         "com.google.android.material_material",
         "guava",
-        "gson",
+        "kotlinx_serialization_json",
         "kotlinx-coroutines-android",
         "jetbrains-annotations",
         "hilt_android"
@@ -48,6 +48,10 @@ android_app {
             "app/proguard-rules.pro",
         ],
     },
+
+    kotlin_plugins: [
+        "kotlin-serialize-compiler-plugin",
+    ],
 
     kotlincflags: [
         "-opt-in=kotlin.RequiresOptIn",

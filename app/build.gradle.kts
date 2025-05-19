@@ -6,6 +6,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.hilt.android.plugin)
     alias(libs.plugins.jlleitschuh.ktlint)
@@ -82,10 +83,10 @@ dependencies {
     // Google
     implementation(libs.google.android.material)
     implementation(libs.google.guava)
-    implementation(libs.google.gson)
 
     // JetBrains
     implementation(libs.jetbrains.kotlin.coroutines)
+    implementation(libs.jetbrains.kotlin.serialization)
 
     // Hilt
     ksp(libs.hilt.android.compiler)
