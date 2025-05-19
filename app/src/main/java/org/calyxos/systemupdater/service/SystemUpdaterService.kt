@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2023 The Calyx Institute
+ * SPDX-FileCopyrightText: 2023-2025 The Calyx Institute
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -197,7 +197,9 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
         }
 
         // Update last check date
-        sharedPreferences.edit { putLong(CommonModule.lastCheck, Calendar.getInstance().time.time) }
+        sharedPreferences.edit {
+            putLong(CommonModule.PREF_LAST_CHECK, Calendar.getInstance().time.time)
+        }
     }
 
     private fun getNotification(
