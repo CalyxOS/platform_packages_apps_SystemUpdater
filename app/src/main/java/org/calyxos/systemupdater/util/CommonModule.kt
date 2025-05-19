@@ -20,7 +20,7 @@ import javax.inject.Singleton
 object CommonModule {
 
     // Last OTA Update Check Key
-    const val lastCheck = "last_check"
+    const val PREF_LAST_CHECK = "last_check"
 
     /**
      * Provides an instance of SharedPreferences
