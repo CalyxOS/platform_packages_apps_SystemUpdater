@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2023 The Calyx Institute
+ * SPDX-FileCopyrightText: 2023-2025 The Calyx Institute
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -106,7 +106,7 @@ class UpdateViewModel @Inject constructor(
     }
 
     private fun getLastCheck(): String {
-        val lastCheck = sharedPreferences.getLong(CommonModule.lastCheck, 0)
+        val lastCheck = sharedPreferences.getLong(CommonModule.PREF_LAST_CHECK, 0)
         if (lastCheck != 0L) {
             val simpleDateFormat = SimpleDateFormat("MMMM dd, yyyy kk:mm", Locale.getDefault())
             return simpleDateFormat.format(lastCheck)
@@ -115,7 +115,9 @@ class UpdateViewModel @Inject constructor(
     }
 
     private fun setLastCheck(): String {
-        sharedPreferences.edit { putLong(CommonModule.lastCheck, Calendar.getInstance().time.time) }
+        sharedPreferences.edit {
+            putLong(CommonModule.PREF_LAST_CHECK, Calendar.getInstance().time.time)
+        }
         return getLastCheck()
     }
 }
