@@ -7,12 +7,12 @@ package org.calyxos.systemupdater.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
 @Module
@@ -32,11 +32,15 @@ object CommonModule {
     }
 
     /**
-     * Provides an instance of SharedPreferences
+     * Provides an instance of [Json]
      */
     @Singleton
     @Provides
-    fun provideGsonInstance(): Gson {
-        return Gson()
+    fun provideJsonInstance(): Json {
+        return Json {
+            prettyPrint = true
+            ignoreUnknownKeys = true
+            coerceInputValues = true
+        }
     }
 }

@@ -14,7 +14,6 @@ import android.os.UpdateEngine
 import android.os.UpdateEngineCallback
 import android.util.Log
 import androidx.core.content.edit
-import com.google.gson.Gson
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +25,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
 import org.calyxos.systemupdater.update.models.PackageFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
@@ -44,7 +44,7 @@ class UpdateManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val updateEngine: UpdateEngine,
     private val sharedPreferences: SharedPreferences,
-    private val gson: Gson,
+    private val json: Json,
     private val commonUtil: CommonUtil
 ) : UpdateEngineCallback() {
 
@@ -161,10 +161,7 @@ class UpdateManagerImpl @Inject constructor(
             if (jsonConfig.isSuccess) {
                 withContext(Dispatchers.IO) {
                     jsonFile.writeText(jsonConfig.getOrThrow())
-                    return@withContext gson.fromJson(
-                        jsonConfig.getOrThrow(),
-                        UpdateConfig::class.java
-                    )
+                    return@withContext json.decodeFromString<UpdateConfig>(jsonConfig.getOrThrow())
                 }
             } else {
                 UpdateConfig()
@@ -173,7 +170,7 @@ class UpdateManagerImpl @Inject constructor(
             withContext(Dispatchers.IO) {
                 Log.i(TAG, "Returning config from existing file")
                 val jsonConfig = jsonFile.inputStream().bufferedReader().readText()
-                return@withContext gson.fromJson(jsonConfig, UpdateConfig::class.java)
+                return@withContext json.decodeFromString<UpdateConfig>(jsonConfig)
             }
         }
 

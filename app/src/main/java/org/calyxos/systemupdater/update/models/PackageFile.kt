@@ -5,6 +5,9 @@
 
 package org.calyxos.systemupdater.update.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PackageFile(
     val filename: String = String(),
     val offset: Long = 0,
