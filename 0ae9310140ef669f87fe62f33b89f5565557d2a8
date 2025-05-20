@@ -16,6 +16,23 @@
       "message": "I didn\u0027t test but it looks good",
       "revId": "0ae9310140ef669f87fe62f33b89f5565557d2a8",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72bf6b18_9d2adef5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-20T18:23:28Z",
+      "side": 1,
+      "message": "Building in gradle is working fine, but I see this in Android Studio around the new `decodeFromString` calls:\n```\nCannot inline bytecode built with JVM target 17 into bytecode that is being built with JVM target 1.8. Please specify proper \u0027-jvm-target\u0027 option\n```\n\nIs this something we can/should do anything about? Something on my end?",
+      "revId": "0ae9310140ef669f87fe62f33b89f5565557d2a8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
