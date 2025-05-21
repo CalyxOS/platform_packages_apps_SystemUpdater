@@ -18,6 +18,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1804d868_9c2b6fc2",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-21T12:23:01Z",
+      "side": 1,
+      "message": "Thanks, I confused myself into thinking catching Exception wouldn\u0027t catch RuntimeException but that\u0027s wrong.",
+      "parentUuid": "bfab818b_24a287c7",
+      "revId": "d34a3dd4c5690fb56215b165297c31170baccb89",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b06e272_6f9bec72",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-21T07:30:22Z",
       "side": 1,
       "message": "Same recommendation as above",
+      "revId": "d34a3dd4c5690fb56215b165297c31170baccb89",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6a116e_8db3507b",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-21T12:23:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b06e272_6f9bec72",
       "revId": "d34a3dd4c5690fb56215b165297c31170baccb89",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
