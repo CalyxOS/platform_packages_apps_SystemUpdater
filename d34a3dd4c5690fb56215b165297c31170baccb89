@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfab818b_24a287c7",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-21T07:30:22Z",
+      "side": 1,
+      "message": "Please use `exception: Exception` for consistency",
+      "revId": "d34a3dd4c5690fb56215b165297c31170baccb89",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b06e272_6f9bec72",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-21T07:30:22Z",
+      "side": 1,
+      "message": "Same recommendation as above",
+      "revId": "d34a3dd4c5690fb56215b165297c31170baccb89",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
