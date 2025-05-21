@@ -70,6 +70,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6e30bf0_0626b66e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-21T07:25:23Z",
+      "side": 1,
+      "message": "Done, thank you (Ref: https://github.com/Kotlin/kotlinx.serialization/issues/993)",
+      "parentUuid": "62c830f9_368f6509",
+      "revId": "0ae9310140ef669f87fe62f33b89f5565557d2a8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be60ea81_bee16075",
