@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78ecd249_e23a4249",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-21T12:31:04Z",
+      "side": 1,
+      "message": "With gradle I am using Java 17, and with Android Studio for Platform (forgot to mention it\u0027s ASfP) I didn\u0027t make any adjustments.",
+      "parentUuid": "730be245_385be661",
+      "revId": "0ae9310140ef669f87fe62f33b89f5565557d2a8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be60ea81_bee16075",
         "filename": "Android.bp",
         "patchSetId": 2
