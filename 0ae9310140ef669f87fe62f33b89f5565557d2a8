@@ -88,6 +88,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b371697_27a8c485",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000034
+      },
+      "writtenOn": "2025-05-21T07:40:11Z",
+      "side": 1,
+      "message": "The reference by itself is correct as it tells you what to do, as for the actual issue it\u0027s related to soong and the way the kotlinc plugin extracts the version information.\n\nThe information lives in MANIFEST under META-INF but Android due to hermetic/deterministic requirements has to re-zip most of the stuff that gets pulled in, but in one of those steps the manifest gets lost and overriden, and you loose that information.\n\nThere\u0027s no real implications other than maybe worse code gen, but the way we use the serializer shouldn\u0027t require any of that functionality.\n\nGoogle was working on that before they killed aosp/main so I wouldn\u0027t know if there was any progress",
+      "parentUuid": "d6e30bf0_0626b66e",
+      "revId": "0ae9310140ef669f87fe62f33b89f5565557d2a8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be60ea81_bee16075",
