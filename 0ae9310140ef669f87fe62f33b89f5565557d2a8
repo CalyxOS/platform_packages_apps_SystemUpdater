@@ -67,6 +67,24 @@
       "message": "Prolly need https://github.com/LineageOS/android_packages_apps_Twelve/commit/e045bd133ddd7c7b66bdcfc182de3824bff8bfbe",
       "revId": "0ae9310140ef669f87fe62f33b89f5565557d2a8",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a03c244_b7063995",
+        "filename": "Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-21T06:59:45Z",
+      "side": 1,
+      "message": "Done, thank you",
+      "parentUuid": "be60ea81_bee16075",
+      "revId": "0ae9310140ef669f87fe62f33b89f5565557d2a8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
