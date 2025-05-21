@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "730be245_385be661",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-21T07:01:20Z",
+      "side": 1,
+      "message": "I don\u0027t see this on my side. Are you sure you are building with Java 17 and not 8?",
+      "parentUuid": "72bf6b18_9d2adef5",
+      "revId": "0ae9310140ef669f87fe62f33b89f5565557d2a8",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be60ea81_bee16075",
         "filename": "Android.bp",
         "patchSetId": 2
