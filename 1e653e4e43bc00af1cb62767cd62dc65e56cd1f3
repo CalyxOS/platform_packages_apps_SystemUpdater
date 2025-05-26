@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3fdf9d2_0d0ab376",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-26T07:44:44Z",
+      "side": 1,
+      "message": "I remember Chirayu mentioning about using ETag for checking whether there is a new update available or not. I switched to that and simplified logic to fetch and decode the config while addressing issue Tommy mentioned about notifying user about failure of checking updates.",
+      "revId": "1e653e4e43bc00af1cb62767cd62dc65e56cd1f3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
