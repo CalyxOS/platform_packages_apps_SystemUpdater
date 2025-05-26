@@ -289,7 +289,7 @@ class UpdateManagerImpl @Inject constructor(
     }
 
     override fun onStatusUpdate(p0: Int, p1: Float) {
-        when (val status = UpdateStatus.values()[p0]) {
+        when (val status = UpdateStatus.entries[p0]) {
             UpdateStatus.IDLE -> {
                 when (_updateStatus.value) {
                     UpdateStatus.CHECKING_FOR_UPDATE, UpdateStatus.UPDATE_AVAILABLE -> {
