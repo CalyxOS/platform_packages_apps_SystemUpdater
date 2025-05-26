@@ -25,15 +25,16 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromStream
 import org.calyxos.systemupdater.update.models.PackageFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
 import org.calyxos.systemupdater.util.CommonUtil
 import java.io.File
 import java.net.URL
-import java.util.Calendar
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 import javax.net.ssl.HttpsURLConnection
@@ -50,6 +51,7 @@ class UpdateManagerImpl @Inject constructor(
 
     private val TAG = UpdateManagerImpl::class.java.simpleName
     private val UPDATE_STATUS = "UpdateStatus"
+    private val ETAG = "ETag"
 
     private val otaServerURL = "https://release.calyxinstitute.org"
 
@@ -85,14 +87,26 @@ class UpdateManagerImpl @Inject constructor(
 
     suspend fun checkUpdates(): Boolean {
         _updateStatus.value = UpdateStatus.CHECKING_FOR_UPDATE
-        return if (getUpdateConfig() != null) {
-            Log.i(TAG, "New update available!")
-            _updateStatus.value = UpdateStatus.UPDATE_AVAILABLE
-            true
-        } else {
-            Log.i(TAG, "No new update available!")
-            _updateStatus.value = UpdateStatus.IDLE
-            false
+        return when (val updateConfig = getUpdateConfig()) {
+            null -> {
+                _updateStatus.value = UpdateStatus.FAILED_CHECKING_UPDATE
+                false
+            }
+
+            else -> {
+                val currentBuildDateUtc = SystemProperties.get("ro.build.date.utc").toLong()
+                return if (updateConfig.buildDateUTC > currentBuildDateUtc) {
+                    Log.i(TAG, "New update available!")
+                    _updateStatus.value = UpdateStatus.UPDATE_AVAILABLE
+                    true
+                } else {
+                    Log.i(TAG, "Available update build date ${updateConfig.buildDateUTC}"
+                        + " is older than current build date $currentBuildDateUtc; will not update"
+                    )
+                    _updateStatus.value = UpdateStatus.IDLE
+                    false
+                }
+            }
         }
     }
 
@@ -183,69 +197,38 @@ class UpdateManagerImpl @Inject constructor(
     }
 
     /**
-     * Returns an instance of [UpdateConfig] to fetch OTA from
-     *
-     * Fetches the config from remote server from the channel chosen by user
-     * @return An instance of [UpdateConfig], null if remote update is N/A or old
+     * Returns [UpdateConfig] containing required properties and files to fetch OTA
      */
+    @OptIn(ExperimentalSerializationApi::class)
     suspend fun getUpdateConfig(): UpdateConfig? {
-        // TODO: There may be errors in this process! Devise a way to alert the caller.
-
         val channel = commonUtil.currentOTAChannel()
+        val url = "$otaServerURL/$channel/${Build.DEVICE}"
         val jsonFile = File("${context.filesDir.absolutePath}/${Build.DEVICE}.json")
 
-        //
-        val timePassed = Calendar.getInstance().time.time - jsonFile.lastModified()
-        val updateConfig = if (timePassed > TimeUnit.HOURS.toMillis(3)) {
-            Log.i(TAG, "Existing JSON config is old, fetching again!")
-            val jsonConfig = fetchJsonConfig("$otaServerURL/$channel/${Build.DEVICE}")
-            if (jsonConfig.isSuccess) {
-                withContext(Dispatchers.IO) {
-                    jsonFile.writeText(jsonConfig.getOrThrow())
-                    return@withContext json.decodeFromString<UpdateConfig>(jsonConfig.getOrThrow())
-                }
-            } else {
-                UpdateConfig()
-            }
-        } else {
-            withContext(Dispatchers.IO) {
-                Log.i(TAG, "Returning config from existing file")
-                val jsonConfig = jsonFile.inputStream().bufferedReader().readText()
-                try {
-                    return@withContext json.decodeFromString<UpdateConfig>(jsonConfig)
-                } catch (e: Exception) {
-                    Log.e(TAG, "Failed to parse jsonConfig: $jsonConfig", e)
-                    return@withContext null
-                }
-            }
-        }
-
-        if (updateConfig == null) {
-            return null
-        }
-
-        val currentBuildDateUtc = SystemProperties.get("ro.build.date.utc").toLong()
-        return if (updateConfig.buildDateUTC > currentBuildDateUtc) {
-            updateConfig
-        } else {
-            Log.i(TAG, "Available update build date ${updateConfig.buildDateUTC}"
-                + " is older than current build date $currentBuildDateUtc; will not update")
-            null
-        }
-    }
-
-    private suspend fun fetchJsonConfig(url: String): Result<String> {
         return withContext(Dispatchers.IO) {
             try {
                 val connection = URL(url).openConnection() as HttpsURLConnection
-                val jsonConfig = connection.inputStream.bufferedReader().use { it.readText() }
-                if (jsonConfig.isNotBlank()) {
-                    return@withContext Result.success(jsonConfig)
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-None-Match
+                sharedPreferences.getString(ETAG, null)?.let { eTag ->
+                    connection.setRequestProperty("If-None-Match", eTag)
                 }
-                return@withContext Result.failure(Exception("Update config is empty!"))
+
+                connection.connect()
+
+                if (connection.responseCode == HttpsURLConnection.HTTP_NOT_MODIFIED) {
+                    Log.i(TAG, "No new config available, returning existing config!")
+                    return@withContext json.decodeFromStream(jsonFile.inputStream())
+                }
+
+                // Save the new update config (and ETag header) before returning it
+                val updateConfig = json.decodeFromStream<UpdateConfig>(connection.inputStream)
+                sharedPreferences.edit { putString(ETAG, connection.getHeaderField(ETAG)) }
+                return@withContext updateConfig.also {
+                    jsonFile.writeText(json.encodeToString(updateConfig))
+                }
             } catch (exception: Exception) {
                 Log.e(TAG, "Failed to fetch update config!", exception)
-                return@withContext Result.failure(exception)
+                return@withContext null
             }
         }
     }
