@@ -8,13 +8,13 @@ package org.calyxos.systemupdater.ui
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Build
 import android.text.format.DateFormat
 import android.text.format.Formatter
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.edit
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -73,7 +73,7 @@ class UpdateViewModel @Inject constructor(
         viewModelScope.launch {
             val updateConfig = updateManager.getUpdateConfig()
             try {
-                Intent(Intent.ACTION_VIEW, Uri.parse(updateConfig!!.changelogUrl)).also {
+                Intent(Intent.ACTION_VIEW, updateConfig!!.changelogUrl.toUri()).also {
                     viewContext.startActivity(it)
                 }
             } catch (exception: Exception) {
