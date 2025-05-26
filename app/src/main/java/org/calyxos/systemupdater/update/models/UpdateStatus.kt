@@ -27,5 +27,6 @@ enum class UpdateStatus {
     CLEANUP_PREVIOUS_UPDATE, // 11
     SUSPENDED, // custom: event when update is suspended
     PREPARING_TO_UPDATE, // custom: event sent during payload verification, fetching props
-    FAILED_PREPARING_UPDATE // custom: event when payload verification or fetching props fails
+    FAILED_PREPARING_UPDATE, // custom: event when payload verification or fetching props fails
+    FAILED_CHECKING_UPDATE // custom: event when checking for updates fails
 }
