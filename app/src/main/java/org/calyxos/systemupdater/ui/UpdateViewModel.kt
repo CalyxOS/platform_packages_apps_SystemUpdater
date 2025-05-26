@@ -13,21 +13,21 @@ import android.text.format.DateFormat
 import android.text.format.Formatter
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
+import org.calyxos.systemupdater.extensions.lastUpdateCheck
 import org.calyxos.systemupdater.service.SystemUpdaterService
 import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
-import org.calyxos.systemupdater.util.CommonModule
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Locale
 import javax.inject.Inject
 
@@ -44,8 +44,8 @@ class UpdateViewModel @Inject constructor(
     val updateStatus = updateManager.updateStatus
     val updateProgress = updateManager.updateProgress
 
-    private val _updateLastCheck = MutableStateFlow(getLastCheck())
-    val updateLastCheck = _updateLastCheck.asStateFlow()
+    val updateLastCheck = sharedPreferences.lastUpdateCheck
+        .stateIn(viewModelScope, SharingStarted.Eagerly, -1)
 
     private val _updateSize = MutableStateFlow("")
     val updateSize = _updateSize.asStateFlow()
@@ -55,7 +55,6 @@ class UpdateViewModel @Inject constructor(
             it.action = SystemUpdaterService.CHECK_AND_APPLY_UPDATES
             context.startService(it)
         }
-        _updateLastCheck.value = setLastCheck()
     }
 
     fun getPayloadSize() {
@@ -103,21 +102,5 @@ class UpdateViewModel @Inject constructor(
         val securityVersionDate = simpleDateFormat.parse(Build.VERSION.SECURITY_PATCH)
         val dateFormat = DateFormat.getLongDateFormat(context)
         return dateFormat.format(securityVersionDate!!)
-    }
-
-    private fun getLastCheck(): String {
-        val lastCheck = sharedPreferences.getLong(CommonModule.PREF_LAST_CHECK, 0)
-        if (lastCheck != 0L) {
-            val simpleDateFormat = SimpleDateFormat("MMMM dd, yyyy kk:mm", Locale.getDefault())
-            return simpleDateFormat.format(lastCheck)
-        }
-        return context.getString(R.string.na)
-    }
-
-    private fun setLastCheck(): String {
-        sharedPreferences.edit {
-            putLong(CommonModule.PREF_LAST_CHECK, Calendar.getInstance().time.time)
-        }
-        return getLastCheck()
     }
 }

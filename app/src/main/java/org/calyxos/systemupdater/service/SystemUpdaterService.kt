@@ -15,7 +15,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.LifecycleService
@@ -30,10 +29,8 @@ import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.ui.MainActivity
 import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
 import org.calyxos.systemupdater.update.models.UpdateStatus
-import org.calyxos.systemupdater.util.CommonModule
 import org.calyxos.systemupdater.util.NotificationAction
 import org.calyxos.systemupdater.util.NotificationActionReceiver
-import java.util.Calendar
 import javax.inject.Inject
 
 @AndroidEntryPoint(LifecycleService::class)
@@ -195,11 +192,6 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
             } else {
                 stopForeground(STOP_FOREGROUND_REMOVE)
             }
-        }
-
-        // Update last check date
-        sharedPreferences.edit {
-            putLong(CommonModule.PREF_LAST_CHECK, Calendar.getInstance().time.time)
         }
     }
 

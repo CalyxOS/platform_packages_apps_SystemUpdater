@@ -32,9 +32,11 @@ import kotlinx.serialization.json.decodeFromStream
 import org.calyxos.systemupdater.update.models.PackageFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
+import org.calyxos.systemupdater.util.CommonModule.PREF_LAST_CHECK
 import org.calyxos.systemupdater.util.CommonUtil
 import java.io.File
 import java.net.URL
+import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Singleton
 import javax.net.ssl.HttpsURLConnection
@@ -94,6 +96,10 @@ class UpdateManagerImpl @Inject constructor(
             }
 
             else -> {
+                sharedPreferences.edit {
+                    putLong(PREF_LAST_CHECK, Calendar.getInstance().time.time)
+                }
+
                 val currentBuildDateUtc = SystemProperties.get("ro.build.date.utc").toLong()
                 return if (updateConfig.buildDateUTC > currentBuildDateUtc) {
                     Log.i(TAG, "New update available!")
