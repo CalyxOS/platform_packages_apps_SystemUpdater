@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
 import android.os.SystemProperties
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -23,9 +24,12 @@ import androidx.navigation.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.update.models.UpdateStatus
+import org.calyxos.systemupdater.util.CommonModule.DATE_UTILS_FLAGS
 
 @AndroidEntryPoint(Fragment::class)
 class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
@@ -54,12 +58,15 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
             findViewById<TextView>(R.id.securityVersion).text =
                 getString(R.string.security_version, viewModel.getASBDate())
 
-            lifecycleScope.launch {
-                viewModel.updateLastCheck.collect {
-                    findViewById<TextView>(R.id.lastUpdateCheck).text =
-                        getString(R.string.last_check, it)
+            viewModel.updateLastCheck.onEach { rawDate ->
+                val date = if (rawDate != -1L) {
+                    DateUtils.formatDateTime(context, rawDate, DATE_UTILS_FLAGS)
+                } else {
+                    getString(R.string.na)
                 }
-            }
+                findViewById<TextView>(R.id.lastUpdateCheck).text =
+                    getString(R.string.last_check, date)
+            }.launchIn(lifecycleScope)
         }
 
         // Update views based on update' status

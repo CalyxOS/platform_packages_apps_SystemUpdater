@@ -7,6 +7,7 @@ package org.calyxos.systemupdater.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.text.format.DateUtils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +22,10 @@ object CommonModule {
 
     // Last OTA Update Check Key
     const val PREF_LAST_CHECK = "last_check"
+
+    // Flags to format date using DateUtils class
+    const val DATE_UTILS_FLAGS = DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_TIME or
+        DateUtils.FORMAT_SHOW_YEAR or DateUtils.FORMAT_ABBREV_ALL
 
     /**
      * Provides an instance of SharedPreferences
