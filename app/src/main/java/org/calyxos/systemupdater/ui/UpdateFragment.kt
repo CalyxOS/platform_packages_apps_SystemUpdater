@@ -87,6 +87,9 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                         UpdateStatus.CHECKING_FOR_UPDATE -> {
                             getString(R.string.checking_updates)
                         }
+                        UpdateStatus.FAILED_CHECKING_UPDATE -> {
+                            getString(R.string.checking_updates_failed)
+                        }
                         UpdateStatus.UPDATED_NEED_REBOOT -> {
                             getString(R.string.update_done)
                         }
@@ -154,6 +157,7 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                                     viewModel.applyUpdate()
                                 }
                             }
+                            UpdateStatus.FAILED_CHECKING_UPDATE,
                             UpdateStatus.FAILED_PREPARING_UPDATE,
                             UpdateStatus.REPORTING_ERROR_EVENT, -> {
                                 text = getString(R.string.retry)
@@ -187,6 +191,7 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
 
                     // Handle everything else based on status
                     when (status) {
+                        UpdateStatus.FAILED_CHECKING_UPDATE,
                         UpdateStatus.IDLE -> {
                             updateContainer.visibility = View.GONE
                             infoContainer.visibility = View.VISIBLE
