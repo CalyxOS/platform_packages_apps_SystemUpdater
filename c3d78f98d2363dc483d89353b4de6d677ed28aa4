@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aac6530_dde3ab82",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-05-27T14:35:28Z",
+      "side": 1,
+      "message": "`ABConfig`: https://review.calyxos.org/c/CalyxOS/platform_packages_apps_SystemUpdater/+/39191/4/app/src/main/java/org/calyxos/systemupdater/update/models/ABConfig.kt",
+      "revId": "c3d78f98d2363dc483d89353b4de6d677ed28aa4",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
