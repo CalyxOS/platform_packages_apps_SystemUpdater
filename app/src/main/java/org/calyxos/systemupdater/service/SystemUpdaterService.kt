@@ -49,8 +49,8 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
     // Notification
     private val serviceID = 1
     private val updatesGroupID = "updates"
-    private val defaultPriorityUpdatesChannelID = "high-updates"
-    private val highPriorityUpdatesChannelID = "low-updates"
+    private val lowPriorityUpdatesChannelID = "lowPriorityUpdates"
+    private val highPriorityUpdatesChannelID = "highPriorityUpdates"
 
     private val notificationManager: NotificationManager
         get() = this.getSystemService<NotificationManager>()!!
@@ -215,7 +215,7 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
             UpdateStatus.REPORTING_ERROR_EVENT,
             UpdateStatus.FAILED_PREPARING_UPDATE,
             UpdateStatus.UPDATE_AVAILABLE -> highPriorityUpdatesChannelID
-            else -> defaultPriorityUpdatesChannelID
+            else -> lowPriorityUpdatesChannelID
         }
 
         val notification = NotificationCompat.Builder(this, channelID)
@@ -261,10 +261,10 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
             this.getString(R.string.update_group_title)
         )
 
-        val defaultPriorityNotificationChannel = NotificationChannel(
-            defaultPriorityUpdatesChannelID,
+        val lowPriorityNotificationChannel = NotificationChannel(
+            lowPriorityUpdatesChannelID,
             this.getString(R.string.default_priority_update_channel_title),
-            NotificationManager.IMPORTANCE_DEFAULT
+            NotificationManager.IMPORTANCE_LOW
         ).also {
             it.description = this.getString(R.string.default_priority_update_channel_desc)
             it.group = updatesGroupID
@@ -284,7 +284,7 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
             createNotificationChannelGroup(updateGroup)
             createNotificationChannels(
                 listOf(
-                    defaultPriorityNotificationChannel,
+                    lowPriorityNotificationChannel,
                     highPriorityNotificationChannel
                 )
             )
