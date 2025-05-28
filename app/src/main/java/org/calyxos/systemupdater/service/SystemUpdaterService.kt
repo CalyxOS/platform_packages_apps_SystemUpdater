@@ -13,6 +13,10 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkCapabilities.NET_CAPABILITY_NOT_METERED
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.getSystemService
@@ -22,8 +26,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.ui.MainActivity
@@ -52,12 +62,37 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
     private val lowPriorityUpdatesChannelID = "lowPriorityUpdates"
     private val highPriorityUpdatesChannelID = "highPriorityUpdates"
 
+    private val connectivityManager: ConnectivityManager
+        get() = this.getSystemService<ConnectivityManager>()!!
+
     private val notificationManager: NotificationManager
         get() = this.getSystemService<NotificationManager>()!!
 
     // Coroutine
     private val job = SupervisorJob()
     private val serviceScope = CoroutineScope(Dispatchers.IO + job)
+
+    // Network status
+    private enum class NetworkStatus {
+        METERED,
+        NOT_METERED
+    }
+
+    private val networkStatus: StateFlow<NetworkStatus?>
+        get() = callbackFlow {
+            val networkCallback = object : ConnectivityManager.NetworkCallback() {
+                override fun onCapabilitiesChanged(
+                    network: Network,
+                    networkCapabilities: NetworkCapabilities
+                ) {
+                    val isNotMetered = networkCapabilities.hasCapability(NET_CAPABILITY_NOT_METERED)
+                    trySend(if (isNotMetered) NetworkStatus.NOT_METERED else NetworkStatus.METERED)
+                }
+            }
+
+            connectivityManager.registerDefaultNetworkCallback(networkCallback)
+            awaitClose { connectivityManager.unregisterNetworkCallback(networkCallback) }
+        }.stateIn(serviceScope, SharingStarted.WhileSubscribed(), null)
 
     @Inject
     lateinit var updateManager: UpdateManagerRepository
@@ -80,36 +115,50 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
             else -> Log.d(TAG, "Got Unknown Intent!")
         }
 
-        updateManager.updateStatus.combine(updateManager.updateProgress) { status, progress ->
-            when (status) {
+        combine(
+            updateManager.updateStatus,
+            updateManager.updateProgress,
+            networkStatus.filterNotNull()
+        ) { updateStatus, progress, networkStatus ->
+            when (updateStatus) {
                 UpdateStatus.UPDATE_AVAILABLE -> {
                     val notification = getNotification(
-                        updateStatus = status,
+                        updateStatus = updateStatus,
                         title = R.string.update_available,
                         desc = R.string.update_available_desc
                     )
-                    notificationManager.notify(status.ordinal, notification)
+                    notificationManager.notify(updateStatus.ordinal, notification)
+                }
+                UpdateStatus.SUSPENDED -> {
+                    when (networkStatus) {
+                        NetworkStatus.METERED -> notificationManager.cancel(serviceID)
+                        NetworkStatus.NOT_METERED -> updateManager.resumeUpdate()
+                    }
                 }
                 UpdateStatus.PREPARING_TO_UPDATE,
                 UpdateStatus.DOWNLOADING,
-                UpdateStatus.SUSPENDED,
                 UpdateStatus.VERIFYING,
                 UpdateStatus.FINALIZING -> {
-                    val notification = getNotification(
-                        updateStatus = status,
-                        title = R.string.installing_update,
-                        progress = progress
-                    )
-                    notificationManager.notify(serviceID, notification)
+                    when (networkStatus) {
+                        NetworkStatus.METERED -> updateManager.suspendUpdate()
+                        NetworkStatus.NOT_METERED -> {
+                            val notification = getNotification(
+                                updateStatus = updateStatus,
+                                title = R.string.installing_update,
+                                progress = progress
+                            )
+                            notificationManager.notify(serviceID, notification)
+                        }
+                    }
                 }
                 UpdateStatus.FAILED_PREPARING_UPDATE,
                 UpdateStatus.REPORTING_ERROR_EVENT -> {
                     val notification = getNotification(
-                        updateStatus = status,
+                        updateStatus = updateStatus,
                         title = R.string.updated_failed,
                         desc = R.string.updated_failed_desc
                     )
-                    notificationManager.notify(status.ordinal, notification)
+                    notificationManager.notify(updateStatus.ordinal, notification)
                     stopForeground(STOP_FOREGROUND_REMOVE)
                 }
                 UpdateStatus.UPDATED_NEED_REBOOT -> {
@@ -117,7 +166,7 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
                         putExtra(NotificationAction.REBOOT.name, NotificationAction.REBOOT.name)
                     }
                     val notification = getNotification(
-                        updateStatus = status,
+                        updateStatus = updateStatus,
                         title = R.string.update_done,
                         desc = R.string.update_done_desc,
                         action = NotificationCompat.Action.Builder(
@@ -131,7 +180,7 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
                             )
                         ).build()
                     )
-                    notificationManager.notify(status.ordinal, notification)
+                    notificationManager.notify(updateStatus.ordinal, notification)
                     stopForeground(STOP_FOREGROUND_REMOVE)
                 }
                 else -> null
