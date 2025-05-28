@@ -71,6 +71,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bf517b3_26c5c4a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-28T20:24:15Z",
+      "side": 1,
+      "message": "The update installation keeps progressing whether I am on Wi-Fi or on mobile data (although, as noted in another comment, it says \"Suspended\" on the app screen all the time). I turned off Wi-Fi and it is still going.",
+      "revId": "ef81294e8f1cc7fc343b0d2bfa990b4e391cab28",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2dc08a4e_73e6eb22",
         "filename": "app/src/main/java/org/calyxos/systemupdater/service/SystemUpdaterService.kt",
         "patchSetId": 1
