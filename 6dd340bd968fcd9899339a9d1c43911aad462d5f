@@ -34,6 +34,24 @@
       "parentUuid": "ac255d7c_a11cc6f5",
       "revId": "6dd340bd968fcd9899339a9d1c43911aad462d5f",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6046e53c_2a7c7b13",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-28T20:35:43Z",
+      "side": 1,
+      "message": "How crucial is it to resolve this comment before shipping? It\u0027s nice to avoid executing shell commands when there are programmatic alternatives, but I haven\u0027t really looked at this.",
+      "parentUuid": "b50410c8_e03a69dd",
+      "revId": "6dd340bd968fcd9899339a9d1c43911aad462d5f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
