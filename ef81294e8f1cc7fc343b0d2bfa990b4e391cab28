@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "640b7ff2_993ffb87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-05-28T16:24:30Z",
+      "side": 1,
+      "message": "Since there\u0027s no network preference yet, that\u0027s not taken into account, right?\n\nShould be, for parity, as a follow-up",
+      "revId": "ef81294e8f1cc7fc343b0d2bfa990b4e391cab28",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc08a4e_73e6eb22",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/service/SystemUpdaterService.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-05-28T16:24:30Z",
+      "side": 1,
+      "message": "When talking about VPNs, the question was: What other callbacks do we get here, and can we use those to handle that?",
+      "revId": "ef81294e8f1cc7fc343b0d2bfa990b4e391cab28",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
