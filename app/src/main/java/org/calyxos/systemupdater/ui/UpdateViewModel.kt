@@ -7,7 +7,6 @@ package org.calyxos.systemupdater.ui
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import android.text.format.DateFormat
 import android.text.format.Formatter
@@ -24,9 +23,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
-import org.calyxos.systemupdater.extensions.lastUpdateCheck
 import org.calyxos.systemupdater.service.SystemUpdaterService
 import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
+import org.calyxos.systemupdater.util.PreferenceUtil
 import java.text.SimpleDateFormat
 import java.util.Locale
 import javax.inject.Inject
@@ -34,7 +33,7 @@ import javax.inject.Inject
 @HiltViewModel
 class UpdateViewModel @Inject constructor(
     private val updateManager: UpdateManagerRepository,
-    private val sharedPreferences: SharedPreferences,
+    private val preferenceUtil: PreferenceUtil,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
@@ -44,7 +43,7 @@ class UpdateViewModel @Inject constructor(
     val updateStatus = updateManager.updateStatus
     val updateProgress = updateManager.updateProgress
 
-    val updateLastCheck = sharedPreferences.lastUpdateCheck
+    val updateLastCheck = preferenceUtil.lastUpdateCheckFlow
         .stateIn(viewModelScope, SharingStarted.Eagerly, -1)
 
     private val _updateSize = MutableStateFlow("")
