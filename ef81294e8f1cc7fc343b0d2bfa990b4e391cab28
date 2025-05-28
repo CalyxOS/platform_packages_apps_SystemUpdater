@@ -88,6 +88,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f82f7e66_c49a3952",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-28T20:24:29Z",
+      "side": 1,
+      "message": "The notification itself doesn\u0027t show actual progress, just an indefinite progress bar that keeps cycling along with the text \"Downloading\", but the app screen itself does reflect progress.",
+      "revId": "ef81294e8f1cc7fc343b0d2bfa990b4e391cab28",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2dc08a4e_73e6eb22",
         "filename": "app/src/main/java/org/calyxos/systemupdater/service/SystemUpdaterService.kt",
         "patchSetId": 1
