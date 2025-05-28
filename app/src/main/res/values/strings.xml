@@ -34,7 +34,7 @@
 
     <!-- Settings Fragment -->
     <string name="general">General</string>
-    <string name="channel_title">Update Channel</string>
+    <string name="channel_title">Release channel</string>
     <string-array name="update_channel">
         <item>stable</item>
         <item>beta</item>
