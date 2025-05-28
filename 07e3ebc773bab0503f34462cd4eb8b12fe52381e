@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "485f0237_f71c351a",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonUtil.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-05-28T21:31:27Z",
+      "side": 1,
+      "message": "unused now, I think.",
+      "revId": "07e3ebc773bab0503f34462cd4eb8b12fe52381e",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
