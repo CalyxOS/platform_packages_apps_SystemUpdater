@@ -7,13 +7,11 @@
 package org.calyxos.systemupdater.update.manager
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.SystemProperties
 import android.os.UpdateEngine
 import android.os.UpdateEngineCallback
 import android.util.Log
-import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -32,8 +30,7 @@ import kotlinx.serialization.json.decodeFromStream
 import org.calyxos.systemupdater.update.models.PackageFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
-import org.calyxos.systemupdater.util.CommonModule.PREF_LAST_CHECK
-import org.calyxos.systemupdater.util.CommonUtil
+import org.calyxos.systemupdater.util.PreferenceUtil
 import java.io.File
 import java.net.URL
 import java.util.Calendar
@@ -46,14 +43,11 @@ import javax.net.ssl.HttpsURLConnection
 class UpdateManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val updateEngine: UpdateEngine,
-    private val sharedPreferences: SharedPreferences,
     private val json: Json,
-    private val commonUtil: CommonUtil
+    private val preferenceUtil: PreferenceUtil
 ) : UpdateEngineCallback() {
 
     private val TAG = UpdateManagerImpl::class.java.simpleName
-    private val UPDATE_STATUS = "UpdateStatus"
-    private val ETAG = "ETag"
 
     private val otaServerURL = "https://release.calyxinstitute.org"
 
@@ -70,7 +64,7 @@ class UpdateManagerImpl @Inject constructor(
 
     init {
         // restore last update status to properly reflect the status
-        restoreLastUpdate()
+        _updateStatus.value = preferenceUtil.updateStatus
 
         // handle status updates from update_engine
         updateEngine.bind(this)
@@ -78,9 +72,7 @@ class UpdateManagerImpl @Inject constructor(
             updateStatus.onEach {
                 when (it) {
                     UpdateStatus.CHECKING_FOR_UPDATE -> {}
-                    else -> {
-                        sharedPreferences.edit(true) { putString(UPDATE_STATUS, it.name) }
-                    }
+                    else -> preferenceUtil.updateStatus = it
                 }
             }.collect()
             updateProgress.collect()
@@ -96,9 +88,7 @@ class UpdateManagerImpl @Inject constructor(
             }
 
             else -> {
-                sharedPreferences.edit {
-                    putLong(PREF_LAST_CHECK, Calendar.getInstance().time.time)
-                }
+                preferenceUtil.lastUpdateCheck = Calendar.getInstance().time.time
 
                 val currentBuildDateUtc = SystemProperties.get("ro.build.date.utc").toLong()
                 return if (updateConfig.buildDateUTC > currentBuildDateUtc) {
@@ -122,7 +112,7 @@ class UpdateManagerImpl @Inject constructor(
     }
 
     fun resumeUpdate() {
-        restoreLastUpdate()
+        _updateStatus.value = preferenceUtil.updateStatus
         updateEngine.resume()
     }
 
@@ -207,7 +197,7 @@ class UpdateManagerImpl @Inject constructor(
      */
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun getUpdateConfig(): UpdateConfig? {
-        val channel = commonUtil.currentOTAChannel()
+        val channel = preferenceUtil.currentChannel
         val url = "$otaServerURL/$channel/${Build.DEVICE}"
         val jsonFile = File("${context.filesDir.absolutePath}/${Build.DEVICE}.json")
 
@@ -215,9 +205,7 @@ class UpdateManagerImpl @Inject constructor(
             try {
                 val connection = URL(url).openConnection() as HttpsURLConnection
                 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-None-Match
-                sharedPreferences.getString(ETAG, null)?.let { eTag ->
-                    connection.setRequestProperty("If-None-Match", eTag)
-                }
+                preferenceUtil.eTag?.let { connection.setRequestProperty("If-None-Match", it) }
 
                 connection.connect()
 
@@ -228,7 +216,7 @@ class UpdateManagerImpl @Inject constructor(
 
                 // Save the new update config (and ETag header) before returning it
                 val updateConfig = json.decodeFromStream<UpdateConfig>(connection.inputStream)
-                sharedPreferences.edit { putString(ETAG, connection.getHeaderField(ETAG)) }
+                preferenceUtil.eTag = connection.getHeaderField("ETag")
                 return@withContext updateConfig.also {
                     jsonFile.writeText(json.encodeToString(updateConfig))
                 }
@@ -330,10 +318,5 @@ class UpdateManagerImpl @Inject constructor(
         // However, the status we care about are emitted in onStatusUpdate function.
         // Thus, simply log this and ignore.
         Log.d(TAG, "Payload completed with error code: $p0")
-    }
-
-    private fun restoreLastUpdate() {
-        val status = sharedPreferences.getString(UPDATE_STATUS, UpdateStatus.IDLE.name)
-        status?.let { _updateStatus.value = UpdateStatus.valueOf(it) }
     }
 }
