@@ -12,7 +12,6 @@ import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.getSystemService
@@ -61,9 +60,6 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
 
     @Inject
     lateinit var updateManager: UpdateManagerRepository
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate() {
         super.onCreate()
