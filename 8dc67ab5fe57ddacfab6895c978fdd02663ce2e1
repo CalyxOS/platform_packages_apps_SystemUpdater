@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4313c6ff_d5650c33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-28T20:33:50Z",
+      "side": 1,
+      "message": "Is this change because update_engine expect the payload metadata to be here, or what is the reason?\n\nDoesn\u0027t matter, just wondering. Might be nice to have info in commit message or something.",
+      "revId": "8dc67ab5fe57ddacfab6895c978fdd02663ce2e1",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
