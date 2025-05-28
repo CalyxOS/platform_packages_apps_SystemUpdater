@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a16f51bc_84e7a32d",
+        "filename": "app/src/main/res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-05-28T21:34:57Z",
+      "side": 1,
+      "message": "Unrelated, but need to add `security-express` here!",
+      "revId": "0cfa0d4e6a1442debbd472b82055bfaf8bf635c6",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
