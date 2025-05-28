@@ -34,6 +34,23 @@
       "parentUuid": "d73384db_aab5000f",
       "revId": "495892403d2183062203f0138054dc0024d1f31e",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2055d50d_1fe1cc45",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-28T20:12:48Z",
+      "side": 1,
+      "message": "In this patchset, the jsonFile we intend to cache locally is never actually saved, so now, if it hasn\u0027t changed, we get an ENOENT exception here. In practice, as part of the update process, this method is called again, and when it is, we get that error, so the update doesn\u0027t proceed and we see either \"Failed to update system\" or \"Failed to check for updates\".",
+      "revId": "495892403d2183062203f0138054dc0024d1f31e",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
