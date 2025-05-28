@@ -52,6 +52,24 @@
       "parentUuid": "b50410c8_e03a69dd",
       "revId": "6dd340bd968fcd9899339a9d1c43911aad462d5f",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42bcf8c6_de026892",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-05-28T21:28:35Z",
+      "side": 1,
+      "message": "https://developer.android.com/reference/java/io/File#setReadable(boolean,%20boolean)\n\nPer that, I guess `setReadable(true, true)` would be `chmod 400`?\n\nI think we could try that, and if not, leave it as TODO for now.",
+      "parentUuid": "6046e53c_2a7c7b13",
+      "revId": "6dd340bd968fcd9899339a9d1c43911aad462d5f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
