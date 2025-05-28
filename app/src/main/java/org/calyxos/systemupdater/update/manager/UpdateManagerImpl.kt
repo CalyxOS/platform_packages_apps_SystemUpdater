@@ -32,8 +32,9 @@ import kotlinx.serialization.json.decodeFromStream
 import org.calyxos.systemupdater.update.models.PackageFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
-import org.calyxos.systemupdater.util.CommonModule.PREF_LAST_CHECK
-import org.calyxos.systemupdater.util.CommonUtil
+import org.calyxos.systemupdater.util.PreferenceUtil
+import org.calyxos.systemupdater.util.PreferenceUtil.Companion.E_TAG
+import org.calyxos.systemupdater.util.PreferenceUtil.Companion.UPDATE_STATUS
 import java.io.File
 import java.net.URL
 import java.util.Calendar
@@ -48,12 +49,10 @@ class UpdateManagerImpl @Inject constructor(
     private val updateEngine: UpdateEngine,
     private val sharedPreferences: SharedPreferences,
     private val json: Json,
-    private val commonUtil: CommonUtil
+    private val preferenceUtil: PreferenceUtil
 ) : UpdateEngineCallback() {
 
     private val TAG = UpdateManagerImpl::class.java.simpleName
-    private val UPDATE_STATUS = "UpdateStatus"
-    private val ETAG = "ETag"
 
     private val otaServerURL = "https://release.calyxinstitute.org"
 
@@ -96,9 +95,7 @@ class UpdateManagerImpl @Inject constructor(
             }
 
             else -> {
-                sharedPreferences.edit {
-                    putLong(PREF_LAST_CHECK, Calendar.getInstance().time.time)
-                }
+                preferenceUtil.lastUpdateCheck = Calendar.getInstance().time.time
 
                 val currentBuildDateUtc = SystemProperties.get("ro.build.date.utc").toLong()
                 return if (updateConfig.buildDateUTC > currentBuildDateUtc) {
@@ -207,7 +204,7 @@ class UpdateManagerImpl @Inject constructor(
      */
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun getUpdateConfig(): UpdateConfig? {
-        val channel = commonUtil.currentOTAChannel()
+        val channel = preferenceUtil.currentChannel
         val url = "$otaServerURL/$channel/${Build.DEVICE}"
         val jsonFile = File("${context.filesDir.absolutePath}/${Build.DEVICE}.json")
 
@@ -215,7 +212,7 @@ class UpdateManagerImpl @Inject constructor(
             try {
                 val connection = URL(url).openConnection() as HttpsURLConnection
                 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-None-Match
-                sharedPreferences.getString(ETAG, null)?.let { eTag ->
+                sharedPreferences.getString(E_TAG, null)?.let { eTag ->
                     connection.setRequestProperty("If-None-Match", eTag)
                 }
 
@@ -228,7 +225,7 @@ class UpdateManagerImpl @Inject constructor(
 
                 // Save the new update config (and ETag header) before returning it
                 val updateConfig = json.decodeFromStream<UpdateConfig>(connection.inputStream)
-                sharedPreferences.edit { putString(ETAG, connection.getHeaderField(ETAG)) }
+                sharedPreferences.edit { putString(E_TAG, connection.getHeaderField(E_TAG)) }
                 return@withContext updateConfig.also {
                     jsonFile.writeText(json.encodeToString(updateConfig))
                 }
