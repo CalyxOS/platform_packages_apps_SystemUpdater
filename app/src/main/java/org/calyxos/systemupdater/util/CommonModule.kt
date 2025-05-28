@@ -8,6 +8,7 @@ package org.calyxos.systemupdater.util
 import android.content.Context
 import android.content.SharedPreferences
 import android.text.format.DateUtils
+import androidx.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,9 +21,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object CommonModule {
 
-    // Last OTA Update Check Key
-    const val PREF_LAST_CHECK = "last_check"
-
     // Flags to format date using DateUtils class
     const val DATE_UTILS_FLAGS = DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_TIME or
         DateUtils.FORMAT_SHOW_YEAR or DateUtils.FORMAT_ABBREV_ALL
@@ -33,7 +31,7 @@ object CommonModule {
     @Singleton
     @Provides
     fun provideSharedPrefInstance(@ApplicationContext context: Context): SharedPreferences {
-        return context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
+        return PreferenceManager.getDefaultSharedPreferences(context)
     }
 
     /**
