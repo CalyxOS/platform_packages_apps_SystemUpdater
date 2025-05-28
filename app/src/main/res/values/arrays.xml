@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SPDX-FileCopyrightText: 2025 The Calyx Institute
+  SPDX-License-Identifier: Apache-2.0
+  -->
+<resources>
+    <string-array name="channel_entries" translatable="false">
+        <item>@string/channel_security_express</item>
+        <item>@string/channel_stable</item>
+        <item>@string/channel_beta</item>
+    </string-array>
+    <string-array name="channel_values" translatable="false">
+        <item>security-express</item>
+        <item>stable</item>
+        <item>beta</item>
+    </string-array>
+</resources>
