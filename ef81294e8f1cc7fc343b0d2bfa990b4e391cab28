@@ -50,6 +50,24 @@
       "message": "When talking about VPNs, the question was: What other callbacks do we get here, and can we use those to handle that?",
       "revId": "ef81294e8f1cc7fc343b0d2bfa990b4e391cab28",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7504cc35_22a4c487",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/service/SystemUpdaterService.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-28T16:51:24Z",
+      "side": 1,
+      "message": "We can get all capabilities mentioned [here](https://developer.android.com/reference/android/net/NetworkCapabilities)",
+      "parentUuid": "2dc08a4e_73e6eb22",
+      "revId": "ef81294e8f1cc7fc343b0d2bfa990b4e391cab28",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
