@@ -7,15 +7,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ListPreference
-        app:defaultValue="stable"
-        app:entries="@array/update_channel"
-        app:entryValues="@array/update_channel"
+        android:summary="@string/channel_stable"
+        app:defaultValue="@string/channel_default"
+        app:entries="@array/channel_entries"
+        app:entryValues="@array/channel_values"
         app:icon="@drawable/ic_alt_route"
-        app:key="channel"
+        app:key="PREF_CHANNEL"
         app:title="@string/channel_title" />
 
     <Preference
-        app:key="notifications"
+        app:key="PREF_NOTIFICATION"
         app:summary="@string/notifications_desc"
         app:icon="@drawable/ic_notifications"
         app:title="@string/notifications" />
