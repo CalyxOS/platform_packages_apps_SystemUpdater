@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4109e48e_51ac6a2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-28T20:22:54Z",
+      "side": 1,
+      "message": "After going metered and unmetered a few times (because cuttlefish\u0027s Wi-Fi is kind of unstable), I am seeing the updater show \"Suspended\" on the update screen, even though the progress bar is moving and I am on unmetered Wi-Fi.",
+      "revId": "ef81294e8f1cc7fc343b0d2bfa990b4e391cab28",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2dc08a4e_73e6eb22",
         "filename": "app/src/main/java/org/calyxos/systemupdater/service/SystemUpdaterService.kt",
         "patchSetId": 1
