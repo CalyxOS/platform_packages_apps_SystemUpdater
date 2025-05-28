@@ -9,18 +9,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import androidx.work.BackoffPolicy.EXPONENTIAL
-import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy.KEEP
-import androidx.work.NetworkType.UNMETERED
-import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import androidx.work.WorkRequest.Companion.DEFAULT_BACKOFF_DELAY_MILLIS
 import dagger.hilt.android.AndroidEntryPoint
-import org.calyxos.systemupdater.work.UpdateWorker.Companion.WORK_NAME
-import java.util.concurrent.TimeUnit.HOURS
-import java.util.concurrent.TimeUnit.MILLISECONDS
-import java.util.concurrent.TimeUnit.MINUTES
+import org.calyxos.systemupdater.work.UpdateWorker.Companion.UPDATE_WORKER
+import org.calyxos.systemupdater.work.UpdateWorker.Companion.buildUpdateWork
 import javax.inject.Inject
 
 @AndroidEntryPoint(BroadcastReceiver::class)
@@ -36,16 +29,12 @@ class BootCompletedReceiver : Hilt_BootCompletedReceiver() {
         if (context != null && intent?.action == Intent.ACTION_BOOT_COMPLETED) {
             Log.i(TAG, "Scheduling automatic system updates!")
 
-            val constraints = Constraints.Builder()
-                .setRequiredNetworkType(UNMETERED)
-                .setRequiresBatteryNotLow(true)
-                .build()
-            val workRequest = PeriodicWorkRequestBuilder<UpdateWorker>(3, HOURS, 30, MINUTES)
-                .setBackoffCriteria(EXPONENTIAL, DEFAULT_BACKOFF_DELAY_MILLIS, MILLISECONDS)
-                .setInitialDelay(10, MINUTES)
-                .setConstraints(constraints)
-                .build()
-            workManager.enqueueUniquePeriodicWork(WORK_NAME, KEEP, workRequest)
+            WorkManager.getInstance(context)
+                .enqueueUniquePeriodicWork(
+                    UPDATE_WORKER,
+                    KEEP,
+                    buildUpdateWork(requiresBatteryNotLow = true)
+                )
         }
     }
 }

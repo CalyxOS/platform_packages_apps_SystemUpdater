@@ -6,18 +6,27 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <Preference
+        app:key="PREF_NOTIFICATION"
+        app:summary="@string/notifications_desc"
+        app:iconSpaceReserved="false"
+        app:title="@string/notifications" />
+
     <ListPreference
-        app:defaultValue="stable"
-        app:entries="@array/update_channel"
-        app:entryValues="@array/update_channel"
-        app:icon="@drawable/ic_alt_route"
-        app:key="channel"
+        android:summary="@string/channel_stable"
+        app:defaultValue="@string/channel_default"
+        app:entries="@array/channel_entries"
+        app:entryValues="@array/channel_values"
+        app:iconSpaceReserved="false"
+        app:key="PREF_CHANNEL"
         app:title="@string/channel_title" />
 
-    <Preference
-        app:key="notifications"
-        app:summary="@string/notifications_desc"
-        app:icon="@drawable/ic_notifications"
-        app:title="@string/notifications" />
+    <SwitchPreferenceCompat
+        app:iconSpaceReserved="false"
+        app:defaultValue="true"
+        app:key="PREF_BATTERY"
+        app:singleLineTitle="false"
+        app:summary="@string/battery_level_summary"
+        app:title="@string/battery_level_title" />
 
 </PreferenceScreen>
