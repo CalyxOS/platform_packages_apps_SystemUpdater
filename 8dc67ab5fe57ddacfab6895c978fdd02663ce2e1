@@ -34,6 +34,24 @@
       "parentUuid": "4313c6ff_d5650c33",
       "revId": "8dc67ab5fe57ddacfab6895c978fdd02663ce2e1",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b06507ec_dc3c4cbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-29T06:05:04Z",
+      "side": 1,
+      "message": "I think current sepolicy for old updater allowed this directory to be accessible which is why it was being used. Otherwise, there is no specific reason. We could try storing it in app\u0027s internal data dir and see if update_engine can access that later.",
+      "parentUuid": "7f4ef59c_da3c8c77",
+      "revId": "8dc67ab5fe57ddacfab6895c978fdd02663ce2e1",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
