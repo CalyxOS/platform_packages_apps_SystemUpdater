@@ -51,6 +51,24 @@
       "message": "In this patchset, the jsonFile we intend to cache locally is never actually saved, so now, if it hasn\u0027t changed, we get an ENOENT exception here. In practice, as part of the update process, this method is called again, and when it is, we get that error, so the update doesn\u0027t proceed and we see either \"Failed to update system\" or \"Failed to check for updates\".",
       "revId": "495892403d2183062203f0138054dc0024d1f31e",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "027f66a3_d253cf43",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-29T06:38:41Z",
+      "side": 1,
+      "message": "Thank you. I think that was the reason why I had marked it as -1 originally but forgot to comment about it. I think it would be better to not ping server at all when an update process is already running but probably can do that in followups.",
+      "parentUuid": "2055d50d_1fe1cc45",
+      "revId": "495892403d2183062203f0138054dc0024d1f31e",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
