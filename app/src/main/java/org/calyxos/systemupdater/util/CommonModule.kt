@@ -31,7 +31,8 @@ object CommonModule {
     @Singleton
     @Provides
     fun provideSharedPrefInstance(@ApplicationContext context: Context): SharedPreferences {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        val deviceProtectedStorageContext = context.createDeviceProtectedStorageContext()
+        return PreferenceManager.getDefaultSharedPreferences(deviceProtectedStorageContext)
     }
 
     /**

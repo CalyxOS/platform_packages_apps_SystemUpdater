@@ -19,8 +19,11 @@ class BootCompletedReceiver : Hilt_BootCompletedReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         super.onReceive(context, intent)
-        if (context != null && intent?.action == Intent.ACTION_BOOT_COMPLETED) {
+        if (context != null && intent?.isBootCompletedAction() == true) {
             UpdateWorker.scheduleAutomatedUpdates(context)
         }
     }
+
+    fun Intent.isBootCompletedAction(): Boolean =
+        action == Intent.ACTION_BOOT_COMPLETED || action == Intent.ACTION_LOCKED_BOOT_COMPLETED
 }
