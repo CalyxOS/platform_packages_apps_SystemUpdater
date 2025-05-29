@@ -70,6 +70,24 @@
       "parentUuid": "6046e53c_2a7c7b13",
       "revId": "6dd340bd968fcd9899339a9d1c43911aad462d5f",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3b3d342_bc88be7e",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-29T06:06:30Z",
+      "side": 1,
+      "message": "Marking as resolved to come back to it later. File is deleted immediately after verification anyways and we have sepolicy rules in place so I don\u0027t think there is any sort of risk here other than good to have hard rules.",
+      "parentUuid": "42bcf8c6_de026892",
+      "revId": "6dd340bd968fcd9899339a9d1c43911aad462d5f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
