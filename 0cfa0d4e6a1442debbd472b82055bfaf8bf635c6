@@ -16,6 +16,24 @@
       "message": "Unrelated, but need to add `security-express` here!",
       "revId": "0cfa0d4e6a1442debbd472b82055bfaf8bf635c6",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8420275_797c8e03",
+        "filename": "app/src/main/res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-29T06:40:30Z",
+      "side": 1,
+      "message": "This needs to be handled in code as we want to localize but keep the keys same.",
+      "parentUuid": "a16f51bc_84e7a32d",
+      "revId": "0cfa0d4e6a1442debbd472b82055bfaf8bf635c6",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
