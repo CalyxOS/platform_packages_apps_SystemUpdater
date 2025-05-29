@@ -97,4 +97,10 @@ class PreferenceUtil @Inject constructor(
             // Use preferred channel set by system or user (via ADB), fallback to app otherwise
             return SystemProperties.get(PROP_CHANNEL, currentChannelApp)
         }
+
+    /**
+     * Whether device should automatically reboot (if idle) once system update has been installed
+     */
+    val shouldAutoReboot: Boolean
+        get() = sharedPreferences.getBoolean(PREF_REBOOT, false)
 }

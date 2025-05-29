@@ -31,7 +31,7 @@
 
     <SwitchPreferenceCompat
         app:iconSpaceReserved="false"
-        app:defaultValue="true"
+        app:defaultValue="false"
         app:key="PREF_REBOOT"
         app:singleLineTitle="false"
         app:summary="@string/reboot_summary"

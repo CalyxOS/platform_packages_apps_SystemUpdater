@@ -30,6 +30,8 @@ import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
 import org.calyxos.systemupdater.update.models.UpdateStatus
 import org.calyxos.systemupdater.util.NotificationAction
 import org.calyxos.systemupdater.util.NotificationActionReceiver
+import org.calyxos.systemupdater.util.PreferenceUtil
+import org.calyxos.systemupdater.work.RebootWorker
 import javax.inject.Inject
 
 @AndroidEntryPoint(LifecycleService::class)
@@ -58,6 +60,9 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
 
     @Inject
     lateinit var updateManager: UpdateManagerRepository
+
+    @Inject
+    lateinit var preferenceUtil: PreferenceUtil
 
     override fun onCreate() {
         super.onCreate()
@@ -107,6 +112,9 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
                     stopForeground(STOP_FOREGROUND_REMOVE)
                 }
                 UpdateStatus.UPDATED_NEED_REBOOT -> {
+                    if (preferenceUtil.shouldAutoReboot) {
+                        RebootWorker.scheduleAutomaticReboot(this)
+                    }
                     val actionIntent = Intent(this, NotificationActionReceiver::class.java).apply {
                         putExtra(NotificationAction.REBOOT.name, NotificationAction.REBOOT.name)
                     }
