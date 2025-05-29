@@ -103,4 +103,10 @@ class PreferenceUtil @Inject constructor(
      */
     val requiresBatteryNotLow: Boolean
         get() = sharedPreferences.getBoolean(PREF_BATTERY, true)
+
+    /**
+     * Whether device should automatically reboot (if idle) once system update has been installed
+     */
+    val shouldAutoReboot: Boolean
+        get() = sharedPreferences.getBoolean(PREF_REBOOT, false)
 }
