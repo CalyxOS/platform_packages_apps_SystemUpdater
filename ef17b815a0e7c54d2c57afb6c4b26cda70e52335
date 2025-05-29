@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7522c71f_fbf10c81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-29T17:45:35Z",
+      "side": 1,
+      "message": "`E AndroidRuntime: Caused by: java.lang.IllegalStateException: Cannot initialize WorkManager in direct boot mode`",
+      "revId": "ef17b815a0e7c54d2c57afb6c4b26cda70e52335",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
