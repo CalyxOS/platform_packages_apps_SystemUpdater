@@ -16,6 +16,23 @@
       "message": "I will handle the new mobile data in a follow up change as this change is too big at this point.",
       "revId": "a4d519816d5d1214cf391f93b88b4ffd990b6f58",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0b7da2a_32c2ddae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-29T15:29:27Z",
+      "side": 1,
+      "message": "Those hilt hacks are probably still relevant, need to test",
+      "revId": "a4d519816d5d1214cf391f93b88b4ffd990b6f58",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
