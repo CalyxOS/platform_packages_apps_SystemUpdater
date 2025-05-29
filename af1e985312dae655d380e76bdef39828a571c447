@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "767fd3a0_9f9f4951",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-29T20:46:04Z",
+      "side": 1,
+      "message": "When I tap Reboot on the notification for the finished update, nothing happens, and the log shows `I NotificationActionReceiver: Got Unhandled Intent: null`. Looks like it is not getting an action from the intent?",
+      "revId": "af1e985312dae655d380e76bdef39828a571c447",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3fec5cd_36b01cf9",
         "filename": "app/src/main/res/xml/settings_preferences.xml",
         "patchSetId": 14
