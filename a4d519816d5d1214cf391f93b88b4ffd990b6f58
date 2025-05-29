@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8a791be_f3629d9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-29T15:26:34Z",
+      "side": 1,
+      "message": "I will handle the new mobile data in a follow up change as this change is too big at this point.",
+      "revId": "a4d519816d5d1214cf391f93b88b4ffd990b6f58",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
