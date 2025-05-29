@@ -30,6 +30,8 @@ import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
 import org.calyxos.systemupdater.update.models.UpdateStatus
 import org.calyxos.systemupdater.util.NotificationAction
 import org.calyxos.systemupdater.util.NotificationActionReceiver
+import org.calyxos.systemupdater.util.PreferenceUtil
+import org.calyxos.systemupdater.work.RebootWorker
 import javax.inject.Inject
 
 @AndroidEntryPoint(LifecycleService::class)
@@ -58,6 +60,9 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
 
     @Inject
     lateinit var updateManager: UpdateManagerRepository
+
+    @Inject
+    lateinit var preferenceUtil: PreferenceUtil
 
     override fun onCreate() {
         super.onCreate()
@@ -107,25 +112,29 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
                     stopForeground(STOP_FOREGROUND_REMOVE)
                 }
                 UpdateStatus.UPDATED_NEED_REBOOT -> {
-                    val actionIntent = Intent(this, NotificationActionReceiver::class.java).apply {
-                        putExtra(NotificationAction.REBOOT.name, NotificationAction.REBOOT.name)
+                    if (preferenceUtil.shouldAutoReboot) {
+                        RebootWorker.scheduleAutomaticReboot(this)
+                    } else {
+                        val actionIntent = Intent(this, NotificationActionReceiver::class.java).apply {
+                            putExtra(NotificationAction.REBOOT.name, NotificationAction.REBOOT.name)
+                        }
+                        val notification = getNotification(
+                            updateStatus = status,
+                            title = R.string.update_done,
+                            desc = R.string.update_done_desc,
+                            action = NotificationCompat.Action.Builder(
+                                IconCompat.createWithResource(this, R.drawable.ic_restart),
+                                this.getString(R.string.reboot),
+                                PendingIntent.getBroadcast(
+                                    this,
+                                    0,
+                                    actionIntent,
+                                    PendingIntent.FLAG_IMMUTABLE
+                                )
+                            ).build()
+                        )
+                        notificationManager.notify(status.ordinal, notification)
                     }
-                    val notification = getNotification(
-                        updateStatus = status,
-                        title = R.string.update_done,
-                        desc = R.string.update_done_desc,
-                        action = NotificationCompat.Action.Builder(
-                            IconCompat.createWithResource(this, R.drawable.ic_restart),
-                            this.getString(R.string.reboot),
-                            PendingIntent.getBroadcast(
-                                this,
-                                0,
-                                actionIntent,
-                                PendingIntent.FLAG_IMMUTABLE
-                            )
-                        ).build()
-                    )
-                    notificationManager.notify(status.ordinal, notification)
                     stopForeground(STOP_FOREGROUND_REMOVE)
                 }
                 else -> null
