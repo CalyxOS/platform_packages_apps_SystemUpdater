@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffc00a73_8dc20071",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-30T05:52:21Z",
+      "side": 1,
+      "message": "That\u0027s strange. is it with direct boot?",
+      "parentUuid": "767fd3a0_9f9f4951",
+      "revId": "af1e985312dae655d380e76bdef39828a571c447",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3fec5cd_36b01cf9",
         "filename": "app/src/main/res/xml/settings_preferences.xml",
         "patchSetId": 14
