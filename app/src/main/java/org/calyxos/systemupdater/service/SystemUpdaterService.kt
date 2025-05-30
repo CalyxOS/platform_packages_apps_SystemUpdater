@@ -14,6 +14,7 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.LifecycleService
@@ -28,8 +29,7 @@ import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.ui.MainActivity
 import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
 import org.calyxos.systemupdater.update.models.UpdateStatus
-import org.calyxos.systemupdater.util.NotificationAction
-import org.calyxos.systemupdater.util.NotificationActionReceiver
+import org.calyxos.systemupdater.receiver.RebootReceiver
 import org.calyxos.systemupdater.util.PreferenceUtil
 import org.calyxos.systemupdater.work.RebootWorker
 import javax.inject.Inject
@@ -115,9 +115,6 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
                     if (preferenceUtil.shouldAutoReboot) {
                         RebootWorker.scheduleAutomaticReboot(this)
                     } else {
-                        val actionIntent = Intent(this, NotificationActionReceiver::class.java).apply {
-                            putExtra(NotificationAction.REBOOT.name, NotificationAction.REBOOT.name)
-                        }
                         val notification = getNotification(
                             updateStatus = status,
                             title = R.string.update_done,
@@ -125,11 +122,12 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
                             action = NotificationCompat.Action.Builder(
                                 IconCompat.createWithResource(this, R.drawable.ic_restart),
                                 this.getString(R.string.reboot),
-                                PendingIntent.getBroadcast(
+                                PendingIntentCompat.getBroadcast(
                                     this,
                                     0,
-                                    actionIntent,
-                                    PendingIntent.FLAG_IMMUTABLE
+                                    Intent(this, RebootReceiver::class.java),
+                                    0,
+                                    false
                                 )
                             ).build()
                         )
