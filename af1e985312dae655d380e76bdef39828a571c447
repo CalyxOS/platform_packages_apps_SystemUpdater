@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "212953e8_e66b81af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-05-30T13:12:09Z",
+      "side": 1,
+      "message": "Considering notifications use pending intent, once it has been posted, it wouldn\u0027t matter if device was unlocked or not as when it was constructed and posted it originated from direct boot which might not be allowing actions. A better way would be to simply and always use a dedicated broadcast receiver instead of a generic one.",
+      "parentUuid": "56725ebc_d3f9a518",
+      "revId": "af1e985312dae655d380e76bdef39828a571c447",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3fec5cd_36b01cf9",
         "filename": "app/src/main/res/xml/settings_preferences.xml",
         "patchSetId": 14
