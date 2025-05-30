@@ -18,6 +18,9 @@
         android:id="@+id/settingsFragment"
         android:name="org.calyxos.systemupdater.ui.SettingsFragment"
         android:label="Settings Fragment"
-        tools:layout="@layout/fragment_settings"/>
+        tools:layout="@layout/fragment_settings">
+        <deepLink
+            app:action="android.settings.SYSTEM_UPDATE_SETTINGS" />
+    </fragment>
 
 </navigation>
