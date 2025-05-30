@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56725ebc_d3f9a518",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-05-30T12:12:44Z",
+      "side": 1,
+      "message": "Yes. After that, I think I tried unlocking and tapping Reboot on the same notification (which originated from direct boot), and the same thing happened. But I haven\u0027t yet tried it when direct boot wasn\u0027t involved at all. So we could always hold off and see if it is reproducible from regular unlocked mode later if you suspect that\u0027s the problem.",
+      "parentUuid": "ffc00a73_8dc20071",
+      "revId": "af1e985312dae655d380e76bdef39828a571c447",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3fec5cd_36b01cf9",
         "filename": "app/src/main/res/xml/settings_preferences.xml",
         "patchSetId": 14
