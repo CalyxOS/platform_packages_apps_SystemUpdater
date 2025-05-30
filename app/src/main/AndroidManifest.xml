@@ -47,7 +47,7 @@
             android:foregroundServiceType="specialUse" />
 
         <receiver
-            android:name=".util.NotificationActionReceiver"
+            android:name=".receiver.RebootReceiver"
             android:exported="false" />
 
         <receiver
