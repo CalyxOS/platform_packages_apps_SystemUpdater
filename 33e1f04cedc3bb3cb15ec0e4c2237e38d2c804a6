@@ -16,6 +16,24 @@
       "message": "I\u0027ve been unsuccessfully trying some things to get test_gen_update_config to work, too, but so far it always says it can\u0027t find gen_update_config, even if I add it in srcs or create a python_library_host for it and add it as libs.",
       "revId": "33e1f04cedc3bb3cb15ec0e4c2237e38d2c804a6",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "680c8be1_86083997",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T21:15:36Z",
+      "side": 1,
+      "message": "Thanks, that\u0027s ok for now.",
+      "parentUuid": "01440633_975d43b6",
+      "revId": "33e1f04cedc3bb3cb15ec0e4c2237e38d2c804a6",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
