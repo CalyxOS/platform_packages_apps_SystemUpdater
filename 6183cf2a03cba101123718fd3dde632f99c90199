@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "311f9250_9d2a3811",
+        "filename": "sample-metadata-minimal.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T14:02:14Z",
+      "side": 1,
+      "message": "```suggestion\n            \"type\": \"full\",\n```",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "6183cf2a03cba101123718fd3dde632f99c90199",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65108c45_16e9511e",
+        "filename": "sample-metadata-minimal.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T14:02:14Z",
+      "side": 1,
+      "message": "kotlin serialization does not tolerate unnecessary commas out of the box; it throws an exception. (This isn\u0027t the only instance of one.)\n\n```suggestion\n            ]\n```",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "6183cf2a03cba101123718fd3dde632f99c90199",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "170200d8_2a613786",
+        "filename": "sample-metadata.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T14:02:14Z",
+      "side": 1,
+      "message": "Nit: They\u0027re all streaming updates, so this line can be removed wherever present in both samples, unless we plan to add support for non-streaming.",
+      "revId": "6183cf2a03cba101123718fd3dde632f99c90199",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ee6016_27fd81b2",
+        "filename": "sample-metadata.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T14:02:14Z",
+      "side": 1,
+      "message": "```suggestion\n            \"type\": \"full\",\n```",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "6183cf2a03cba101123718fd3dde632f99c90199",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
