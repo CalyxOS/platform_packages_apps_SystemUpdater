@@ -1,0 +1,41 @@
+{
+    "__": "The bare minimum metadata needed to perform an update",
+    "__build_date_utc": "ro.build.version.incremental",
+    "build_date_utc": 1746543608,
+    "__zips": "All the zips / ab_configs for this update",
+    "zips": [
+        {
+            "__property_files": "name, offset and size of files",
+            "__type": "full or incremental",
+            "__filename": "the name of the zipfile on the server",
+            "type": "full",
+            "filename": "ota_update.zip",
+            "property_files": [
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload.bin",
+                    "offset": 3723,
+                    "size": 1676295732
+                },
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload_metadata.bin",
+                    "offset": 3723,
+                    "size": 112235
+                },
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload_properties.txt",
+                    "offset": 1676299513,
+                    "size": 156
+                }
+            ],
+        }
+    ]
+}
