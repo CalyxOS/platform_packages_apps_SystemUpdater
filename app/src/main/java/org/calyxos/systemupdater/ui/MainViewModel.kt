@@ -39,7 +39,6 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val TAG = MainViewModel::class.java.simpleName
-    private val payloadBinary = "payload.bin"
 
     val updateStatus = updateManager.updateStatus
     val updateProgress = updateManager.updateProgress
@@ -56,20 +55,18 @@ class MainViewModel @Inject constructor(
 
     fun getPayloadSize() {
         viewModelScope.launch {
-            val updateConfig = updateManager.getUpdateConfig()
-            val payloadFile =
-                updateConfig?.abConfig?.propertyFiles?.find { it.filename == payloadBinary }
-            payloadFile?.let {
-                _updateSize.value = Formatter.formatFileSize(context, payloadFile.size)
+            val updateConfig = updateManager.fetchUpdateConfig()
+            updateConfig?.applicableUpdate?.payload?.let { payload ->
+                _updateSize.value = Formatter.formatFileSize(context, payload.size)
             }
         }
     }
 
     fun loadChangelog(viewContext: Context) {
         viewModelScope.launch {
-            val updateConfig = updateManager.getUpdateConfig()
+            val updateConfig = updateManager.fetchUpdateConfig()
             try {
-                Intent(Intent.ACTION_VIEW, updateConfig!!.changelogUrl.toUri()).also {
+                Intent(Intent.ACTION_VIEW, updateConfig!!.changelogUrl!!.toUri()).also {
                     viewContext.startActivity(it)
                 }
             } catch (exception: Exception) {
