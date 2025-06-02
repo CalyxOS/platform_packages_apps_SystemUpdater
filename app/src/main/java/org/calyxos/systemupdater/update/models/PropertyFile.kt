@@ -9,8 +9,8 @@ import kotlinx.serialization.Serializable
 
 @Suppress("PROVIDED_RUNTIME_TOO_LOW")
 @Serializable
-data class PackageFile(
-    val filename: String = String(),
-    val offset: Long = 0,
-    val size: Long = 0
+data class PropertyFile(
+    val filename: String,
+    val offset: Long,
+    val size: Long
 )
