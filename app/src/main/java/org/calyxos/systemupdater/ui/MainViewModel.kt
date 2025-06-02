@@ -56,7 +56,7 @@ class MainViewModel @Inject constructor(
 
     fun getPayloadSize() {
         viewModelScope.launch {
-            val updateConfig = updateManager.getUpdateConfig()
+            val updateConfig = updateManager.fetchUpdateConfig()
             val payloadFile =
                 updateConfig?.abConfig?.propertyFiles?.find { it.filename == payloadBinary }
             payloadFile?.let {
@@ -67,7 +67,7 @@ class MainViewModel @Inject constructor(
 
     fun loadChangelog(viewContext: Context) {
         viewModelScope.launch {
-            val updateConfig = updateManager.getUpdateConfig()
+            val updateConfig = updateManager.fetchUpdateConfig()
             try {
                 Intent(Intent.ACTION_VIEW, updateConfig!!.changelogUrl.toUri()).also {
                     viewContext.startActivity(it)
