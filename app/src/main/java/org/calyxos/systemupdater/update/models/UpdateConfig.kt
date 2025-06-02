@@ -12,14 +12,23 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class UpdateConfig(
     val name: String = String(),
-    val url: String = String(),
-    @SerialName("changelog_url")
-    val changelogUrl: String = String(),
+    @SerialName("calyxos_version")
+    val calyxosVersion: String = String(),
+    @SerialName("android_version")
+    val androidVersion: String = String(),
     @SerialName("build_date_utc")
     val buildDateUTC: Long = 0L,
-    @SerialName("ab_install_type")
-    val abInstallType: ABInstallType = ABInstallType.NOT_AVAILABLE,
-    @SerialName("ab_config")
-    val abConfig: ABConfig = ABConfig(),
+    @SerialName("build_id")
+    val buildId: String = String(),
+    @SerialName("build_number")
+    val buildNumber: String = String(),
+    @SerialName("changelog_url")
+    val changelogUrl: String = String(),
+    @SerialName("security_patch_level")
+    val securityPatchLevel: String = String(),
+    @SerialName("required_builds")
+    val requiredBuilds List<String> = emptyList(),
+    @SerialName("zips")
+    val zips: Zips = Zips(),
     var rawJson: String = String()
 )
