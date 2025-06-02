@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53455d15_ba4eb84e",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/service/SystemUpdaterService.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T15:29:18Z",
+      "side": 1,
+      "message": "nit: line length? Granted, this gets replaced in a follow-up patch so maybe probably who cares. Feel free to resolve and leave as-is.",
+      "revId": "ba2a09f68f1f794def3aac234541ffc0ea52ca62",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
