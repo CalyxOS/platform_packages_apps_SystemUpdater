@@ -35,6 +35,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e4178c6_fd0cd195",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T15:00:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "155ca584_60658671",
+      "revId": "15f15e1496a31e3346fc3ecfff4c81841677553f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12d57b69_0798ccc6",
@@ -48,6 +66,30 @@
       "writtenOn": "2025-06-02T14:54:39Z",
       "side": 1,
       "message": "Drop?",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 34
+      },
+      "revId": "15f15e1496a31e3346fc3ecfff4c81841677553f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "402944fd_c66d8257",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T15:00:51Z",
+      "side": 1,
+      "message": "I was about to ask that. Not used, will do.",
+      "parentUuid": "12d57b69_0798ccc6",
       "range": {
         "startLine": 33,
         "startChar": 4,
