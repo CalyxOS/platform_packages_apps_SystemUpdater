@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6a27655_4123060f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T21:03:22Z",
+      "side": 1,
+      "message": "@aayushgupta219@gmail.com bump",
+      "parentUuid": "88b98eb3_004e2501",
+      "revId": "b2d27189a2cb744655bd7d332d60919c33653494",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90556b86_1154bb9e",
         "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
         "patchSetId": 2
