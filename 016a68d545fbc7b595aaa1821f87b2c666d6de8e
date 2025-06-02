@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa9c806_bd4a6370",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/receiver/RebootReceiver.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T14:04:44Z",
+      "side": 1,
+      "message": "`error: [Hilt] @AndroidEntryPoint class expected to extend Hilt_RebootReceiver. Found: BroadcastReceiver`",
+      "revId": "016a68d545fbc7b595aaa1821f87b2c666d6de8e",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
