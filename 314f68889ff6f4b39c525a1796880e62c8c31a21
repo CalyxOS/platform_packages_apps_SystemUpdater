@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd35a69_0a7dfa24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T14:57:43Z",
+      "side": 1,
+      "message": "Not sure if the three slashes in `systemupdater:///settings` is intentional, but it\u0027s under the hood so doesn\u0027t really matter unless someone wants it to be different.",
+      "revId": "314f68889ff6f4b39c525a1796880e62c8c31a21",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
