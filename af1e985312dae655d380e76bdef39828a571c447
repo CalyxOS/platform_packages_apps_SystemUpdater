@@ -110,6 +110,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd8335ba_e2eb8e90",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T18:56:30Z",
+      "side": 1,
+      "message": "Won\u0027t this cause a reboot to happen when idle even if there is no update to apply?\n\nRebootWorker doesn\u0027t check if there\u0027s an update pending to apply. It just reboots.",
+      "revId": "af1e985312dae655d380e76bdef39828a571c447",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2753ae6a_289410f3",
         "filename": "app/src/main/java/org/calyxos/systemupdater/work/UpdateWorker.kt",
         "patchSetId": 14
