@@ -18,6 +18,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50f0cb77_c4854f5a",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T15:11:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad2067d9_85ac7098",
+      "revId": "15f15e1496a31e3346fc3ecfff4c81841677553f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "155ca584_60658671",
@@ -113,6 +131,24 @@
       "writtenOn": "2025-06-02T14:54:39Z",
       "side": 1,
       "message": "Please serialize it using enums too like ABInstallType",
+      "revId": "15f15e1496a31e3346fc3ecfff4c81841677553f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b6dfa99_e3558b92",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/Zips.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T15:11:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b5b886c_09dc8c50",
       "revId": "15f15e1496a31e3346fc3ecfff4c81841677553f",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
