@@ -18,15 +18,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
-import org.calyxos.systemupdater.update.models.PackageFile
+import org.calyxos.systemupdater.update.models.PropertyFile
 import org.calyxos.systemupdater.update.models.UpdateConfig
 import org.calyxos.systemupdater.update.models.UpdateStatus
 import org.calyxos.systemupdater.util.PreferenceUtil
@@ -43,17 +42,15 @@ class UpdateManager @Inject constructor(
     @ApplicationContext private val context: Context,
     private val updateEngine: UpdateEngine,
     private val json: Json,
-    private val preferenceUtil: PreferenceUtil
+    private val preferenceUtil: PreferenceUtil,
 ) : UpdateEngineCallback() {
 
+    companion object {
+        private const val URL_SERVER_OTA = "https://release.calyxinstitute.org"
+        private const val PATH_METADATA = "/data/ota_package/payload_metadata.bin"
+    }
+
     private val TAG = UpdateManager::class.java.simpleName
-
-    private val otaServerURL = "https://release.calyxinstitute.org"
-
-    private val otaDir = "/data/ota_package"
-    private val payloadBinary = "payload.bin"
-    private val payloadMetadata = "payload_metadata.bin"
-    private val payloadProperties = "payload_properties.txt"
 
     private val _updateStatus = MutableStateFlow(UpdateStatus.IDLE)
     val updateStatus = _updateStatus.asStateFlow()
@@ -67,20 +64,18 @@ class UpdateManager @Inject constructor(
 
         // handle status updates from update_engine
         updateEngine.bind(this)
-        GlobalScope.launch {
-            updateStatus.onEach {
-                when (it) {
-                    UpdateStatus.CHECKING_FOR_UPDATE -> {}
-                    else -> preferenceUtil.updateStatus = it
-                }
-            }.collect()
-            updateProgress.collect()
-        }
+        updateStatus.onEach {
+            when (it) {
+                UpdateStatus.CHECKING_FOR_UPDATE -> {}
+                else -> preferenceUtil.updateStatus = it
+            }
+        }.launchIn(GlobalScope)
+        updateProgress.launchIn(GlobalScope)
     }
 
     suspend fun checkUpdates(): Boolean {
         _updateStatus.value = UpdateStatus.CHECKING_FOR_UPDATE
-        return when (val updateConfig = getUpdateConfig()) {
+        return when (val updateConfig = fetchUpdateConfig()) {
             null -> {
                 _updateStatus.value = UpdateStatus.FAILED_CHECKING_UPDATE
                 false
@@ -95,8 +90,9 @@ class UpdateManager @Inject constructor(
                     _updateStatus.value = UpdateStatus.UPDATE_AVAILABLE
                     true
                 } else {
-                    Log.i(TAG, "Available update build date ${updateConfig.buildDateUTC}"
-                        + " is older than current build date $currentBuildDateUtc; will not update"
+                    Log.i(
+                        TAG, "Available update build date ${updateConfig.buildDateUTC}"
+                            + " is older than current build date $currentBuildDateUtc; will not update"
                     )
                     _updateStatus.value = UpdateStatus.IDLE
                     false
@@ -118,86 +114,48 @@ class UpdateManager @Inject constructor(
     suspend fun applyUpdate() {
         _updateStatus.value = UpdateStatus.PREPARING_TO_UPDATE
 
-        val updateConfig = getUpdateConfig()
+        val updateConfig = fetchUpdateConfig()
         if (updateConfig == null) {
             Log.e(TAG, "Tried to applyUpdate when no applicable update was available")
             _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
             return
         }
 
-        val propertyFiles = updateConfig.abConfig.propertyFiles
-
-        val metadataFile = propertyFiles.find { it.filename == payloadMetadata }
-        if (metadataFile == null) {
-            Log.e(TAG, "Could not find metadata properties file $payloadMetadata in "
-                + "propertyFiles: $propertyFiles")
-            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-            return
-        }
-
-        // Verify payload metadata.
-        if (!payloadMetadataVerified(
-                updateConfig.url,
-                metadataFile
-            ).getOrDefault(false)
-        ) {
-            Log.e(TAG, "Failed to verify payload metadata using file $payloadMetadata, "
-                + " url ${updateConfig.url}")
-            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-            return
-        }
-
-        // Continue making sure expected file details are available.
-        val propertiesFile = propertyFiles.find { it.filename == payloadProperties }
-        val payloadFile = propertyFiles.find { it.filename == payloadBinary }
-        if (propertiesFile == null) {
-            Log.e(TAG, "Could not find payload properties file $payloadProperties in "
-                    + "propertyFiles: $propertyFiles")
-            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-            return
-        }
-        if (payloadFile == null) {
-            Log.e(TAG, "Could not find binary properties file $payloadBinary in "
-                + "propertyFiles: $propertyFiles")
-            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-            return
-        }
-
-        // Fetch payload properties.
-        val properties = fetchPayloadProperties(updateConfig.url, propertiesFile)
-        if (!properties.isSuccess) {
-            Log.e(TAG, "Failed to fetch payload properties based on payload properties "
-                    + "$propertiesFile and url ${updateConfig.url}")
-            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-            return
-        }
-
-        // Apply the payload in update_engine.
-        val headerKeyValuePairs = properties.getOrDefault(emptyArray())
-        Log.i(TAG, "Applying updateEngine payload: url=${updateConfig.url} offset="
-            + "${payloadFile.offset} size=${payloadFile.size} headerKeyValuePairs="
-            + "$headerKeyValuePairs")
-        _updateStatus.value = UpdateStatus.DOWNLOADING
         try {
-            updateEngine.applyPayload(
-                updateConfig.url,
-                payloadFile.offset,
-                payloadFile.size,
-                headerKeyValuePairs
+            val update = updateConfig.applicableUpdate
+            val url = "$URL_SERVER_OTA/${update.filename}"
+            val properties = fetchPayloadProperties(url, update.properties)!!
+
+            // Verify payload metadata
+            require(verifyPayloadMetadata(url, update.metadata))
+
+            // Apply the payload in update_engine.
+            Log.i(
+                TAG, "Applying updateEngine payload: url=$url offset="
+                    + "${update.payload.offset} size=${update.payload.size} headerKeyValuePairs="
+                    + "$properties"
             )
-        } catch (e: Exception) {
+            _updateStatus.value = UpdateStatus.DOWNLOADING
+
+            updateEngine.applyPayload(
+                url,
+                update.payload.offset,
+                update.payload.size,
+                properties
+            )
+        } catch (exception: Exception) {
             _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-            Log.e(TAG, "Failed applying updateEngine payload", e)
+            Log.e(TAG, "Failed applying updateEngine payload", exception)
         }
     }
 
     /**
-     * Returns [UpdateConfig] containing required properties and files to fetch OTA
+     * Fetches [UpdateConfig] containing required properties and files to fetch OTA
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun getUpdateConfig(): UpdateConfig? {
+    suspend fun fetchUpdateConfig(): UpdateConfig? {
         val channel = preferenceUtil.currentChannel
-        val url = "$otaServerURL/$channel/${Build.DEVICE}"
+        val url = "$URL_SERVER_OTA/$channel/${Build.DEVICE}"
         val jsonFile = File("${context.filesDir.absolutePath}/${Build.DEVICE}.json")
 
         return withContext(Dispatchers.IO) {
@@ -226,35 +184,34 @@ class UpdateManager @Inject constructor(
         }
     }
 
-    private suspend fun payloadMetadataVerified(
-        url: String,
-        packageFile: PackageFile
-    ): Result<Boolean> {
+    /**
+     * Downloads and verifies payload metadata of a given OTA
+     */
+    private suspend fun verifyPayloadMetadata(url: String, file: PropertyFile): Boolean {
+        val metadataFile = File(PATH_METADATA).apply {
+            createNewFile()
+            setReadable(true, false) // TODO: Find a better way to do this
+        }
+
         return withContext(Dispatchers.IO) {
-            val metadataFile = File("$otaDir/${packageFile.filename}")
             try {
-                metadataFile.createNewFile()
                 val connection = URL(url).openConnection() as HttpsURLConnection
-                // Request a specific range to avoid skipping through load of data
-                // Also do a [-1] to the range end to adjust the file size
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Range
                 connection.setRequestProperty(
                     "Range",
-                    "bytes=${packageFile.offset}-${packageFile.offset + packageFile.size - 1}"
+                    "bytes=${file.offset}-${file.offset + file.size - 1}"
                 )
+
                 connection.inputStream.use { input ->
-                    metadataFile.outputStream().use { input.copyTo(it) }
+                    metadataFile.outputStream().use { output ->
+                        input.copyTo(output)
+                    }
                 }
-                // TODO: Find a better way to do this
-                metadataFile.setReadable(true, false)
-                if (!updateEngine.verifyPayloadMetadata(metadataFile.absolutePath)) {
-                    _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-                    return@withContext Result.failure(Exception("Failed verifying metadata!"))
-                }
-                return@withContext Result.success(true)
+
+                return@withContext updateEngine.verifyPayloadMetadata(metadataFile.absolutePath)
             } catch (exception: Exception) {
-                Log.e(TAG, "Failed to download payload metadata! ", exception)
-                _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-                return@withContext Result.failure(exception)
+                Log.e(TAG, "Failed to verify payload metadata! ", exception)
+                return@withContext false
             } finally {
                 withContext(NonCancellable) {
                     metadataFile.delete()
@@ -263,25 +220,24 @@ class UpdateManager @Inject constructor(
         }
     }
 
-    private suspend fun fetchPayloadProperties(
-        url: String,
-        packageFile: PackageFile
-    ): Result<Array<String>> {
+    /**
+     * Fetches payload properties of a given OTA
+     */
+    @OptIn(ExperimentalSerializationApi::class)
+    private suspend fun fetchPayloadProperties(url: String, file: PropertyFile): Array<String>? {
         return withContext(Dispatchers.IO) {
             try {
                 val connection = URL(url).openConnection() as HttpsURLConnection
-                // Request a specific range to avoid skipping through load of data
-                // Also do a [-1] to the range end to adjust the file size
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Range
                 connection.setRequestProperty(
                     "Range",
-                    "bytes=${packageFile.offset}-${packageFile.offset + packageFile.size - 1}"
+                    "bytes=${file.offset}-${file.offset + file.size - 1}"
                 )
-                val properties = connection.inputStream.bufferedReader().use { it.readText() }
-                return@withContext Result.success(properties.trim().lines().toTypedArray())
+
+                return@withContext json.decodeFromStream<Array<String>>(connection.inputStream)
             } catch (exception: Exception) {
-                Log.e(TAG, "Failed fetching payload properties!", exception)
-                _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-                return@withContext Result.failure(exception)
+                Log.e(TAG, "Failed to fetch payload properties!", exception)
+                return@withContext null
             }
         }
     }
@@ -293,21 +249,27 @@ class UpdateManager @Inject constructor(
                     UpdateStatus.CHECKING_FOR_UPDATE, UpdateStatus.UPDATE_AVAILABLE -> {
                         // do nothing for these status as they are controlled from app side
                     }
+
                     else -> {
                         _updateStatus.value = status
                     }
                 }
             }
+
             UpdateStatus.CHECKING_FOR_UPDATE, UpdateStatus.UPDATE_AVAILABLE -> {
                 // do nothing for these status as they are controlled from app side
             }
+
             UpdateStatus.DOWNLOADING -> {
                 // Ignore if update was suspended as engine will still say downloading
                 if (_updateStatus.value != UpdateStatus.SUSPENDED) {
                     _updateStatus.value = status
                 }
             }
-            else -> { _updateStatus.value = status }
+
+            else -> {
+                _updateStatus.value = status
+            }
         }
         _updateProgress.value = (100 * p1).toInt()
     }
@@ -316,6 +278,6 @@ class UpdateManager @Inject constructor(
         // This can emit any status present in system/update_engine/common/error_code.h
         // However, the status we care about are emitted in onStatusUpdate function.
         // Thus, simply log this and ignore.
-        Log.d(TAG, "Payload completed with error code: $p0")
+        Log.i(TAG, "Payload completed with error code: $p0")
     }
 }
