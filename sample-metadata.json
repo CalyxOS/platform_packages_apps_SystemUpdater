@@ -1,0 +1,129 @@
+{
+    "__name": "Name will be shown to the user",
+    "__calyxos_version": "Reduntant, given it can be calculated from build_number",
+    "__android_version": "Android version of this update",
+    "__build_date_utc": "ro.build.version.incremental",
+    "__build_id": "Just because stock has it, not really used / needed",
+    "__build_number": "CalyxOS BUILD_NUMBER",
+    "__changelog_url": "Link to changelog",
+    "__security_patch_level": "SPL",
+    "name": "CalyxOS May 2025 Feature update",
+    "calyxos_version": "6.7.23",
+    "android_version": "15",
+    "build_date_utc": 1746543608,
+    "build_id": "BP1A.250505.005",
+    "build_number": "25607230",
+    "changelog_url": "https://calyxos.org/changelogs/6.7.22.md",
+    "__required_builds": "An array of builds required to be installed before this one should be installed. Used for update path / migrations",
+    "required_builds": [
+        "24501230",
+        "25601230"
+    ],
+    "security_patch_level": "2025-05-05",
+    "__zips": "All the zips / ab_configs for this update",
+    "zips": [
+        {
+            "__type": "full or incremental",
+            "__from": "previous build for incremental",
+            "__filename": "the name of the zipfile on the server",
+            "__property_files": "name, offset and size of files",
+            "type": "incremental",
+            "from": "25607200",
+            "filename": "akita-incremental-25607200-25607230.zip",
+            "property_files": [
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload.bin",
+                    "offset": 3723,
+                    "size": 1676295732
+                },
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload_metadata.bin",
+                    "offset": 3723,
+                    "size": 112235
+                },
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload_properties.txt",
+                    "offset": 1676299513,
+                    "size": 156
+                }
+            ]
+        },
+        {
+            "__type": "full or incremental",
+            "__from": "previous build for incremental",
+            "__filename": "the name of the zipfile on the server",
+            "__property_files": "name, offset and size of files",
+            "type": "incremental",
+            "from": "25606200",
+            "filename": "akita-incremental-25606200-25607230.zip",
+            "property_files": [
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload.bin",
+                    "offset": 3723,
+                    "size": 1676295732
+                },
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload_metadata.bin",
+                    "offset": 3723,
+                    "size": 112235
+                },
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload_properties.txt",
+                    "offset": 1676299513,
+                    "size": 156
+                }
+            ]
+        },
+        {
+            "__property_files": "name, offset and size of files",
+            "__type": "full or incremental",
+            "__filename": "the name of the zipfile on the server",
+            "type": "full",
+            "filename": "akita-ota_update-25607230.zip",
+            "property_files": [
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload.bin",
+                    "offset": 3723,
+                    "size": 1676295732
+                },
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload_metadata.bin",
+                    "offset": 3723,
+                    "size": 112235
+                },
+                {
+                    "__filename": "name of the file in package",
+                    "__offset": "defines beginning of the file in package",
+                    "__size": "size of the file in package",
+                    "filename": "payload_properties.txt",
+                    "offset": 1676299513,
+                    "size": 156
+                }
+            ]
+        }
+    ]
+}
