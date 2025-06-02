@@ -51,6 +51,24 @@
       "message": "nit: line length? Granted, this gets replaced in a follow-up patch so maybe probably who cares. Feel free to resolve and leave as-is.",
       "revId": "ba2a09f68f1f794def3aac234541ffc0ea52ca62",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff54190_34496cab",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/service/SystemUpdaterService.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T15:53:49Z",
+      "side": 1,
+      "message": "I just missed an opportunity to fix it. I\u0027ll resolve this since it\u0027s not a big deal; if anyone disagrees that\u0027s fine too.",
+      "parentUuid": "53455d15_ba4eb84e",
+      "revId": "ba2a09f68f1f794def3aac234541ffc0ea52ca62",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
