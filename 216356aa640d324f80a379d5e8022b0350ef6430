@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c688361_1569718f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T16:21:20Z",
+      "side": 1,
+      "message": "Based on discussion and to preserve previous behavior, the idle reboot shouldn\u0027t prevent a reboot notification. The change is simple; I can upload it shortly.",
+      "revId": "216356aa640d324f80a379d5e8022b0350ef6430",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
