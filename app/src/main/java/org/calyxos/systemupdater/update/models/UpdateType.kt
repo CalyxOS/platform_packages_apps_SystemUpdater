@@ -5,8 +5,8 @@
 
 package org.calyxos.systemupdater.update.models
 
-enum class ABInstallType {
-    NON_STREAMING,
-    STREAMING,
+enum class UpdateType {
+    FULL,
+    INCREMENTAL,
     NOT_AVAILABLE
 }
