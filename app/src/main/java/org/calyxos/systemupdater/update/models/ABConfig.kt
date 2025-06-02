@@ -11,9 +11,25 @@ import kotlinx.serialization.Serializable
 @Suppress("PROVIDED_RUNTIME_TOO_LOW")
 @Serializable
 data class ABConfig(
-    @SerialName("verify_payload_metadata")
-    val verifyPayloadMetadata: Boolean = false,
+    val type: UpdateType = UpdateType.NOT_AVAILABLE,
+    val from: String? = null,
+    val filename: String,
     @SerialName("property_files")
-    val propertyFiles: List<PackageFile> = emptyList(),
-    val authorization: String = String(),
-)
+    val propertyFiles: List<PropertyFile>,
+) {
+
+    companion object {
+        private const val FILENAME_BINARY_PAYLOAD = "payload.bin"
+        private const val FILENAME_BINARY_METADATA = "payload_metadata.bin"
+        private const val FILENAME_TXT_PROPERTIES = "payload_properties.txt"
+    }
+
+    val payload: PropertyFile
+        get() = propertyFiles.find { it.filename == FILENAME_BINARY_PAYLOAD }!!
+
+    val metadata: PropertyFile
+        get() = propertyFiles.find { it.filename == FILENAME_BINARY_METADATA }!!
+
+    val properties: PropertyFile
+        get() = propertyFiles.find { it.filename == FILENAME_TXT_PROPERTIES }!!
+}
