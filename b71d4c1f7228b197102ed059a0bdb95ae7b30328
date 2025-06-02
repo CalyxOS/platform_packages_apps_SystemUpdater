@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4e93b5f_29d0e42f",
+        "filename": "sample-metadata.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T14:14:42Z",
+      "side": 1,
+      "message": "We moved away from URLs for the builds, could do the same here potentially.",
+      "revId": "b71d4c1f7228b197102ed059a0bdb95ae7b30328",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
