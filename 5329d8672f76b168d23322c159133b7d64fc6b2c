@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e7a02f_9ff04bc7",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/ABConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T15:13:50Z",
+      "side": 1,
+      "message": "This is build number. Update this as per any changes to `UpdateConfig.buildNumber`",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e40ee2d_28708661",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T15:13:50Z",
+      "side": 1,
+      "message": "This is a number. It doesn\u0027t have to be, but we\u0027ve been using it like that since years.",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46033d8e_61bc6ea6",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T15:13:50Z",
+      "side": 1,
+      "message": "This could be a date, but that\u0027s not a blocker.",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65c9d31a_9dcd0d72",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T15:13:50Z",
+      "side": 1,
+      "message": "The String here is build number. Change as per what we use for `buildNumber` above.",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c0e37a_ad7ba009",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-02T15:13:50Z",
+      "side": 1,
+      "message": "This is what\u0027s causing the build failure.",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
