@@ -11,9 +11,12 @@ import kotlinx.serialization.Serializable
 @Suppress("PROVIDED_RUNTIME_TOO_LOW")
 @Serializable
 data class ABConfig(
-    @SerialName("verify_payload_metadata")
-    val verifyPayloadMetadata: Boolean = false,
+    @SerialName("type")
+    val type: UpdateType = UpdateType.NOT_AVAILABLE,
+    @SerialName("from")
+    val from: String = String(),
+    @SerialName("filename")
+    val filename: String = String(),
     @SerialName("property_files")
     val propertyFiles: List<PackageFile> = emptyList(),
-    val authorization: String = String(),
 )
