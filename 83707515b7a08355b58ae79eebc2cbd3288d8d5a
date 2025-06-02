@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29053b04_94b0af84",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/service/SystemUpdaterService.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-02T16:28:57Z",
+      "side": 1,
+      "message": "Is there anything that could cause scheduling auto reboot to fail / throw some exception?",
+      "revId": "83707515b7a08355b58ae79eebc2cbd3288d8d5a",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
