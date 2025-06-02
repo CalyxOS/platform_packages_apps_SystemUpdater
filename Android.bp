@@ -83,3 +83,10 @@ prebuilt_etc {
     sub_dir: "permissions",
     filename_from_src: true,
 }
+
+python_binary_host {
+    name: "gen_update_config",
+    main: "tools/gen_update_config.py",
+    srcs: ["tools/gen_update_config.py"],
+    libs: ["releasetools_ota_from_target_files"],
+}
