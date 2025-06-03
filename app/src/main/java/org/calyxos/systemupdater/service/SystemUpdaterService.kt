@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.ui.MainActivity
-import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
+import org.calyxos.systemupdater.update.UpdateManager
 import org.calyxos.systemupdater.update.models.UpdateStatus
 import org.calyxos.systemupdater.receiver.RebootReceiver
 import org.calyxos.systemupdater.util.PreferenceUtil
@@ -59,7 +59,7 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
     private val serviceScope = CoroutineScope(Dispatchers.IO + job)
 
     @Inject
-    lateinit var updateManager: UpdateManagerRepository
+    lateinit var updateManager: UpdateManager
 
     @Inject
     lateinit var preferenceUtil: PreferenceUtil

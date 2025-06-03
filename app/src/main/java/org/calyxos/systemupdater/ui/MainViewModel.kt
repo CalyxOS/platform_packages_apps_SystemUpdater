@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.service.SystemUpdaterService
-import org.calyxos.systemupdater.update.manager.UpdateManagerRepository
+import org.calyxos.systemupdater.update.UpdateManager
 import org.calyxos.systemupdater.util.PreferenceUtil
 import org.calyxos.systemupdater.work.UpdateWorker
 import java.text.SimpleDateFormat
@@ -34,7 +34,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     val preferenceUtil: PreferenceUtil,
-    private val updateManager: UpdateManagerRepository,
+    private val updateManager: UpdateManager,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 

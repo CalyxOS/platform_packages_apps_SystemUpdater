@@ -1,10 +1,9 @@
 /*
- * SPDX-FileCopyrightText: 2018 The Android Open Source Project
- * SPDX-FileCopyrightText: 2023-2025 The Calyx Institute
+ * SPDX-FileCopyrightText: 2025 The Calyx Institute
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.calyxos.systemupdater.update.manager
+package org.calyxos.systemupdater.update
 
 import android.content.Context
 import android.os.Build
@@ -40,14 +39,14 @@ import javax.net.ssl.HttpsURLConnection
 
 @OptIn(DelicateCoroutinesApi::class)
 @Singleton
-class UpdateManagerImpl @Inject constructor(
+class UpdateManager @Inject constructor(
     @ApplicationContext private val context: Context,
     private val updateEngine: UpdateEngine,
     private val json: Json,
     private val preferenceUtil: PreferenceUtil
 ) : UpdateEngineCallback() {
 
-    private val TAG = UpdateManagerImpl::class.java.simpleName
+    private val TAG = UpdateManager::class.java.simpleName
 
     private val otaServerURL = "https://release.calyxinstitute.org"
 
