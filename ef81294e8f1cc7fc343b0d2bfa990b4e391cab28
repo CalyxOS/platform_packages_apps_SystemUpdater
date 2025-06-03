@@ -103,6 +103,23 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0520d68_6e54886a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-03T05:47:29Z",
+      "side": 1,
+      "message": "This needs to be reworked as per decisions from the UX meeting",
+      "revId": "ef81294e8f1cc7fc343b0d2bfa990b4e391cab28",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dc08a4e_73e6eb22",
