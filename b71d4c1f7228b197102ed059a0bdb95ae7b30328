@@ -34,6 +34,24 @@
       "parentUuid": "c4e93b5f_29d0e42f",
       "revId": "b71d4c1f7228b197102ed059a0bdb95ae7b30328",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "191e916f_c18b890a",
+        "filename": "sample-metadata.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-03T12:48:54Z",
+      "side": 1,
+      "message": "I think we should move away from a full URL for the changelog for the same reasons as we did for the zips, at least for now.\n\nBut this reminds me: if we ever change something like this, how do we maintain compatibility for older updaters? Is that where adding /v2/ or something to the URL for the new updaters comes into play?",
+      "parentUuid": "21ad2b96_a5c25e7c",
+      "revId": "b71d4c1f7228b197102ed059a0bdb95ae7b30328",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
