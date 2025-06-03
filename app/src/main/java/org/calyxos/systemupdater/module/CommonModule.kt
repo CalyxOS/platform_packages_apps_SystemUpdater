@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.calyxos.systemupdater.util
+package org.calyxos.systemupdater.module
 
 import android.content.Context
 import android.content.SharedPreferences

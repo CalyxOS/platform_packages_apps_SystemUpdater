@@ -29,7 +29,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.update.models.UpdateStatus
-import org.calyxos.systemupdater.util.CommonModule.DATE_UTILS_FLAGS
+import org.calyxos.systemupdater.module.CommonModule.DATE_UTILS_FLAGS
 
 @AndroidEntryPoint(Fragment::class)
 class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {

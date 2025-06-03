@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.calyxos.systemupdater.update.manager
+package org.calyxos.systemupdater.module
 
 import android.os.UpdateEngine
 import dagger.Module
