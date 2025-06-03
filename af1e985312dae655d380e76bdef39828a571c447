@@ -143,6 +143,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4af1747_a082c224",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-03T06:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f90a61f_6491e758",
+      "revId": "af1e985312dae655d380e76bdef39828a571c447",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2753ae6a_289410f3",
@@ -156,6 +174,24 @@
       "writtenOn": "2025-06-02T16:11:34Z",
       "side": 1,
       "message": "Shouldn\u0027t we supply requiresBatteryNotLow from preferences, so that it takes effect? If not, why not?\n\nIf we should supply it, then we can also remove the default value `true` for requiresBatteryNotLow in the functions below.",
+      "revId": "af1e985312dae655d380e76bdef39828a571c447",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c874f7f5_719f3166",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/work/UpdateWorker.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-03T06:18:16Z",
+      "side": 1,
+      "message": "There is no strong need to do so. The schedule function is only used in boot receiver and is supposed to be a one shot function. We can go ahead with our defaults in this case without reading preferences file. The update function reads from preferences as want that to be user controlled.",
+      "parentUuid": "2753ae6a_289410f3",
       "revId": "af1e985312dae655d380e76bdef39828a571c447",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
