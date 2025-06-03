@@ -16,6 +16,24 @@
       "message": "These are unused but not arguments. I\u0027ll put them back in case we want to use them for something. Right now the generated update json has more than is needed.",
       "revId": "f30e164293bba8a390c64be239b9310c4611526f",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "351db287_c90113db",
+        "filename": "tools/gen_update_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-03T14:31:25Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "8d56780f_c3208c9d",
+      "revId": "f30e164293bba8a390c64be239b9310c4611526f",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
