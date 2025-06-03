@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e4424d7_428760d6",
+        "filename": "sample-metadata.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-03T07:43:31Z",
+      "side": 1,
+      "message": "How do we choose which zip from this list we are going to install?",
+      "revId": "66d1c8e3e9f3feab65f218ad539162664d0506e1",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
