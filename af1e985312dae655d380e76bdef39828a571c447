@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7210fac4_8bd2b138",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/work/UpdateWorker.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-03T11:48:18Z",
+      "side": 1,
+      "message": "Okay, but if the user turns off the battery requirement, and then somehow spends all their time with a low battery (maybe there is something wrong with their battery, who knows), will an automatic update check ever happen, as it stands? Where is the part that makes it happen in this case?",
+      "parentUuid": "c874f7f5_719f3166",
+      "revId": "af1e985312dae655d380e76bdef39828a571c447",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3fec5cd_36b01cf9",
         "filename": "app/src/main/res/xml/settings_preferences.xml",
         "patchSetId": 14
