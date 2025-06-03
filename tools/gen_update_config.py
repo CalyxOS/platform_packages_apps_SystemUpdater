@@ -23,6 +23,7 @@ import sys
 import zipfile
 
 import ota_from_target_files  # pylint: disable=import-error
+import ota_metadata_pb2       # pylint: disable=import-error
 import ota_utils              # pylint: disable=import-error
 
 
@@ -35,11 +36,9 @@ class GenUpdateConfig(object):
     """
 
     def __init__(self,
-                 package,
-                 url,
+                 packages,
                  changelog_url):
-        self.package = package
-        self.url = url
+        self.packages = packages
         self.changelog_url = changelog_url
         self.streaming_required = (
             # payload.bin and payload_properties.txt must exist.
@@ -63,20 +62,49 @@ class GenUpdateConfig(object):
         """Generates config."""
         self._config = {
             '__': '*** Generated using tools/gen_update_config.py ***',
-            'name': os.path.basename(self.package)[:-4],
-            'url': self.url,
-            'ab_config': self._gen_ab_config(),
             'changelog_url': self.changelog_url
         }
+        self._update_config_from_packages()
 
-    def _gen_ab_config(self):
+    def _update_config_from_packages(self):
         """Builds config required for A/B update."""
-        with zipfile.ZipFile(self.package, 'r') as package_zip:
-            config = {
-                'property_files': self._get_property_files(package_zip),
-            }
+        num_full_otas = 0
+        zips = []
+        for package in self.packages:
+            with zipfile.ZipFile(package, 'r') as package_zip:
+                metadata = ota_metadata_pb2.OtaMetadata()
+                metadata.ParseFromString(package_zip.read(ota_utils.METADATA_PROTO_NAME))
+                pre_update = metadata.precondition
+                update = metadata.postcondition
+                is_full_ota = not pre_update.build_incremental
 
-        return config
+                this_zip = {}
+
+                if is_full_ota:
+                    if num_full_otas > 0:
+                        raise RuntimeError("Expected at most a single full ota zip!")
+                    num_full_otas += 1
+                else:
+                    this_zip['from'] = pre_update.build_incremental
+
+                # Get overall build information from the first zip.
+                # If the first zip isn't a full OTA, replace the build info later with that
+                # of a full OTA, if any.
+                if is_full_ota or not "build_date_utc" in self._config:
+                    # TODO: Check if any of this info differs among provided OTAs to prevent
+                    #       silly mistakes?
+                    self._config.update({
+                        "build_date_utc": update.timestamp,
+                        "build_number": update.build_incremental,
+                        "security_patch_level": update.security_patch_level,
+                    })
+
+                this_zip.update({
+                    'filename': os.path.basename(package),
+                    'property_files': self._get_property_files(package_zip),
+                })
+                zips.append(this_zip)
+        self._config["zips"] = zips
 
     @staticmethod
     def _get_property_files(package_zip):
@@ -105,18 +133,16 @@ class GenUpdateConfig(object):
 def main():  # pylint: disable=missing-docstring
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('package',
-                        type=str,
-                        help='OTA package zip file')
     parser.add_argument('out',
                         type=str,
                         help='Update configuration JSON file')
-    parser.add_argument('url',
-                        type=str,
-                        help='OTA package download url')
     parser.add_argument('changelog_url',
                         type=str,
                         help='OTA package changelog url')
+    parser.add_argument('package',
+                        type=str,
+                        help='OTA package zip file',
+                        nargs='+')
     args = parser.parse_args()
 
     if not args.out.endswith('.json'):
@@ -124,8 +150,7 @@ def main():  # pylint: disable=missing-docstring
         sys.exit(1)
 
     gen = GenUpdateConfig(
-        package=args.package,
-        url=args.url,
+        packages=args.package,
         changelog_url=args.changelog_url)
     gen.run()
     gen.write(args.out)
