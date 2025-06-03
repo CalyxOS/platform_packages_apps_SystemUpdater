@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "769adb5d_e22dd979",
+        "filename": "tools/gen_update_config.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-03T17:35:32Z",
+      "side": 1,
+      "message": "build_ids and devices are both arrays, because apparently multiple devices can be supported. https://cs.android.com/android/platform/superproject/main/+/main:build/make/tools/releasetools/ota_metadata.proto;l\u003d42-68;drc\u003da5fca03e0a22492c907b00986962c263695b1f89\n\nWe don\u0027t necessarily want or need either of those right now.",
+      "revId": "5c1a842440808577e78b4a1fad1de3c44c4b4e26",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
