@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fbd7e7f_cda9a065",
+        "filename": "tools/gen_update_config.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-03T14:32:59Z",
+      "side": 1,
+      "message": "Note: I didn\u0027t seem to need to include this as a library or something in Android.bp. I assume it\u0027s included as part of releasetools_ota_from_target_files.",
+      "revId": "8219c0ed649376a49f48a91ffb5679c1c1d08415",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
