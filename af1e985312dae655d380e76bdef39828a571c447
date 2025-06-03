@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f90a61f_6491e758",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/ui/SettingsFragment.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-03T05:50:23Z",
+      "side": 1,
+      "message": "Oh, that\u0027s true. this should be removed as we want to schedule reboots in the service and not here.",
+      "parentUuid": "dd8335ba_e2eb8e90",
+      "revId": "af1e985312dae655d380e76bdef39828a571c447",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2753ae6a_289410f3",
         "filename": "app/src/main/java/org/calyxos/systemupdater/work/UpdateWorker.kt",
         "patchSetId": 14
