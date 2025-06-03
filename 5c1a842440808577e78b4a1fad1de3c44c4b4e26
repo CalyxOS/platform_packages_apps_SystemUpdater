@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1289ff76_af66d863",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-03T18:21:24Z",
+      "side": 1,
+      "message": "Yes, I\u0027ll update the commit message since otherwise it\u0027s confusing why this would be wanted.",
+      "parentUuid": "b43f1a3f_195125a4",
+      "revId": "5c1a842440808577e78b4a1fad1de3c44c4b4e26",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "769adb5d_e22dd979",
         "filename": "tools/gen_update_config.py",
         "patchSetId": 2
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "https://review.calyxos.org/c/CalyxOS/platform_packages_apps_SystemUpdater/+/39570/11/sample-metadata.json only has `build_id`.\n\nYou\u0027re right as in we don\u0027t want or need either of those, right now we only have single-device single-build id zips.",
       "parentUuid": "769adb5d_e22dd979",
+      "revId": "5c1a842440808577e78b4a1fad1de3c44c4b4e26",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "889c8d7d_96bee150",
+        "filename": "tools/gen_update_config.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-03T18:21:24Z",
+      "side": 1,
+      "message": "Makes sense. If we do want build_id later, we can take the first build_id from the array if we want.",
+      "parentUuid": "c888bebe_affec532",
       "revId": "5c1a842440808577e78b4a1fad1de3c44c4b4e26",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
