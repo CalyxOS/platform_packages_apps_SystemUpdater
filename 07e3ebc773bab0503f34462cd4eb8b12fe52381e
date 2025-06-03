@@ -16,6 +16,24 @@
       "message": "unused now, I think.",
       "revId": "07e3ebc773bab0503f34462cd4eb8b12fe52381e",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2292b99b_61595e04",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/util/CommonUtil.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-03T05:46:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "485f0237_f71c351a",
+      "revId": "07e3ebc773bab0503f34462cd4eb8b12fe52381e",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
