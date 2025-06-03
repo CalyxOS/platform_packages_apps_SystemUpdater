@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2023 The Calyx Institute
+ * SPDX-FileCopyrightText: 2023-2025 The Calyx Institute
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -18,7 +18,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.google.android.material.appbar.MaterialToolbar
@@ -35,7 +35,7 @@ import org.calyxos.systemupdater.util.CommonModule.DATE_UTILS_FLAGS
 class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
 
     private val TAG = UpdateFragment::class.java.simpleName
-    private val viewModel: UpdateViewModel by viewModels()
+    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
