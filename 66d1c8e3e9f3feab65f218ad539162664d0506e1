@@ -24,6 +24,30 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a45ca17_bf6e8d6d",
+        "filename": "sample-metadata.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-03T18:17:25Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "fa665486_9ee00656",
+      "range": {
+        "startLine": 3,
+        "startChar": 26,
+        "endLine": 3,
+        "endChar": 35
+      },
+      "revId": "66d1c8e3e9f3feab65f218ad539162664d0506e1",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cfb8cc9_4a875958",
@@ -89,6 +113,24 @@
       "writtenOn": "2025-06-03T16:33:25Z",
       "side": 1,
       "message": "Isn\u0027t incremental implied if \"from\" is present? Would a full ota ever have \"from\"? And would it even make a difference if it did, since update_engine doesn\u0027t make a distinction from our perspective?\n\nGiven this, do we need \"type\" at all?",
+      "revId": "66d1c8e3e9f3feab65f218ad539162664d0506e1",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7949a61_c5716bfb",
+        "filename": "sample-metadata.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-03T18:17:25Z",
+      "side": 1,
+      "message": "Yes, that\u0027s right.\n\nIt comes down to picking one of two options, implementation wise\n1: `if type is incremental, check from to get previous build`\n2: `if from is present, assume incremental, and that\u0027s previous build`\n\nIt\u0027ll boil down to personal preference I\u0027d say, I\u0027m fine either way, so I\u0027d leave this upto @aayushgupta219@gmail.com given he\u0027s the one writing the code for this.",
+      "parentUuid": "2059e43e_fb3ecc55",
       "revId": "66d1c8e3e9f3feab65f218ad539162664d0506e1",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
