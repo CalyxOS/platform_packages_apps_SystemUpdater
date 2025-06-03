@@ -16,6 +16,24 @@
       "message": "We moved away from URLs for the builds, could do the same here potentially.",
       "revId": "b71d4c1f7228b197102ed059a0bdb95ae7b30328",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ad2b96_a5c25e7c",
+        "filename": "sample-metadata.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-06-03T12:38:45Z",
+      "side": 1,
+      "message": "We should also take into account that we want to show the changelog in the actual app in the future.",
+      "parentUuid": "c4e93b5f_29d0e42f",
+      "revId": "b71d4c1f7228b197102ed059a0bdb95ae7b30328",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
