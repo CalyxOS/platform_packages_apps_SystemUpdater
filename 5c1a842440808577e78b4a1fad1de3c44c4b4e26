@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b43f1a3f_195125a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-03T18:19:08Z",
+      "side": 1,
+      "message": "That\u0027s to support full and incremental, right?",
+      "revId": "5c1a842440808577e78b4a1fad1de3c44c4b4e26",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "769adb5d_e22dd979",
         "filename": "tools/gen_update_config.py",
         "patchSetId": 2
@@ -14,6 +31,24 @@
       "writtenOn": "2025-06-03T17:35:32Z",
       "side": 1,
       "message": "build_ids and devices are both arrays, because apparently multiple devices can be supported. https://cs.android.com/android/platform/superproject/main/+/main:build/make/tools/releasetools/ota_metadata.proto;l\u003d42-68;drc\u003da5fca03e0a22492c907b00986962c263695b1f89\n\nWe don\u0027t necessarily want or need either of those right now.",
+      "revId": "5c1a842440808577e78b4a1fad1de3c44c4b4e26",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c888bebe_affec532",
+        "filename": "tools/gen_update_config.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-03T18:19:08Z",
+      "side": 1,
+      "message": "https://review.calyxos.org/c/CalyxOS/platform_packages_apps_SystemUpdater/+/39570/11/sample-metadata.json only has `build_id`.\n\nYou\u0027re right as in we don\u0027t want or need either of those, right now we only have single-device single-build id zips.",
+      "parentUuid": "769adb5d_e22dd979",
       "revId": "5c1a842440808577e78b4a1fad1de3c44c4b4e26",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
