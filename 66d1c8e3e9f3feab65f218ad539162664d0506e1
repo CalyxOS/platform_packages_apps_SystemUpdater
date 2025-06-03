@@ -33,6 +33,24 @@
       "message": "How do we choose which zip from this list we are going to install?",
       "revId": "66d1c8e3e9f3feab65f218ad539162664d0506e1",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4510bc0c_29e1b6c5",
+        "filename": "sample-metadata.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-03T15:56:44Z",
+      "side": 1,
+      "message": "It\u0027s in the incremental ticket",
+      "parentUuid": "9e4424d7_428760d6",
+      "revId": "66d1c8e3e9f3feab65f218ad539162664d0506e1",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }

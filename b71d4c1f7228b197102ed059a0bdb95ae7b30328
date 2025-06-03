@@ -52,6 +52,24 @@
       "parentUuid": "21ad2b96_a5c25e7c",
       "revId": "b71d4c1f7228b197102ed059a0bdb95ae7b30328",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09cfddff_b8e15bbb",
+        "filename": "sample-metadata.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-03T15:56:44Z",
+      "side": 1,
+      "message": "We don\u0027t need a /v2/ for most things.\n\nUnless we change what the same variable means, we can easily maintain backwards compatibility by using new variables.\n\nToday: changelog_url\nTomorrow: changelog_filepath\nLater: changelog_contents\n\netc.\n\nAnd in the Updater we\u0027d have to retain support for the above, and gradually remove it. Some work there, but less work than having to deal with a new URL or version, as that then indirectly forces an update path when not needed.",
+      "parentUuid": "191e916f_c18b890a",
+      "revId": "b71d4c1f7228b197102ed059a0bdb95ae7b30328",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
