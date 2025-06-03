@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cfb8cc9_4a875958",
+        "filename": "sample-metadata.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-03T14:14:55Z",
+      "side": 1,
+      "message": "required_builds will lead to fetching an update json associated with a prior build when the build version is older, right? And that json may include a required_builds of its own.\n\nWe discussed wanting to include the full list of required_builds in every update json to avoid some issues associated with nesting (e.g. a misconfig that could lead to endless fetching). This means we should be sure to ignore the required_builds in configs fetched from required_builds.",
+      "revId": "66d1c8e3e9f3feab65f218ad539162664d0506e1",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e4424d7_428760d6",
         "filename": "sample-metadata.json",
         "patchSetId": 10
