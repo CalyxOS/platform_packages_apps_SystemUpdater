@@ -37,8 +37,10 @@ class GenUpdateConfig(object):
 
     def __init__(self,
                  packages,
+                 required_builds,
                  changelog_url):
         self.packages = packages
+        self.required_builds = required_builds
         self.changelog_url = changelog_url
         self.streaming_required = (
             # payload.bin and payload_properties.txt must exist.
@@ -64,6 +66,9 @@ class GenUpdateConfig(object):
             '__': '*** Generated using tools/gen_update_config.py ***',
             'changelog_url': self.changelog_url
         }
+        if len(self.required_builds) > 0:
+            self._config['required_builds'] = self.required_builds
+
         self._update_config_from_packages()
 
     def _update_config_from_packages(self):
@@ -137,6 +142,10 @@ def main():  # pylint: disable=missing-docstring
     parser.add_argument('out',
                         type=str,
                         help='Update configuration JSON file')
+    parser.add_argument('--required_builds',
+                        type=str,
+                        default='',
+                        help='Comma-separated list of prerequisite builds')
     parser.add_argument('changelog_url',
                         type=str,
                         help='OTA package changelog url')
@@ -152,6 +161,7 @@ def main():  # pylint: disable=missing-docstring
 
     gen = GenUpdateConfig(
         packages=args.package,
+        required_builds=[] if not args.required_builds else args.required_builds.split(','),
         changelog_url=args.changelog_url)
     gen.run()
     gen.write(args.out)
