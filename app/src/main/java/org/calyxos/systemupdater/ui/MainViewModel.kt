@@ -32,13 +32,13 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class UpdateViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
+    val preferenceUtil: PreferenceUtil,
     private val updateManager: UpdateManagerRepository,
-    private val preferenceUtil: PreferenceUtil,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
-    private val TAG = UpdateViewModel::class.java.simpleName
+    private val TAG = MainViewModel::class.java.simpleName
     private val payloadBinary = "payload.bin"
 
     val updateStatus = updateManager.updateStatus

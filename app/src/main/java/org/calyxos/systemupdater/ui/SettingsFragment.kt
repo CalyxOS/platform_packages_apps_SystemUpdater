@@ -9,6 +9,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -17,18 +18,15 @@ import androidx.preference.SwitchPreferenceCompat
 import com.google.android.material.appbar.MaterialToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import org.calyxos.systemupdater.R
-import org.calyxos.systemupdater.util.PreferenceUtil
 import org.calyxos.systemupdater.util.PreferenceUtil.Companion.PREF_BATTERY
 import org.calyxos.systemupdater.util.PreferenceUtil.Companion.PREF_CHANNEL
 import org.calyxos.systemupdater.util.PreferenceUtil.Companion.PREF_NOTIFICATION
 import org.calyxos.systemupdater.work.UpdateWorker
-import javax.inject.Inject
 
 @AndroidEntryPoint(PreferenceFragmentCompat::class)
 class SettingsFragment : Hilt_SettingsFragment() {
 
-    @Inject
-    lateinit var preferenceUtil: PreferenceUtil
+    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +40,7 @@ class SettingsFragment : Hilt_SettingsFragment() {
         setPreferencesFromResource(R.xml.settings_preferences, rootKey)
 
         findPreference<ListPreference>(PREF_CHANNEL)?.apply {
-            when (val currentChannel = preferenceUtil.currentChannel) {
+            when (val currentChannel = viewModel.preferenceUtil.currentChannel) {
                 in resources.getStringArray(R.array.channel_values) -> {
                     isEnabled = true
                     summary = resources.getStringArray(R.array.channel_entries)[
@@ -85,7 +83,7 @@ class SettingsFragment : Hilt_SettingsFragment() {
     private fun updateAutomatedCheck() {
         UpdateWorker.updateAutomatedCheck(
             context = requireContext(),
-            requiresBatteryNotLow = preferenceUtil.requiresBatteryNotLow
+            requiresBatteryNotLow = viewModel.preferenceUtil.requiresBatteryNotLow
         )
     }
 }
