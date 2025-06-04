@@ -214,6 +214,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ab2d7fd_44da5668",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/work/UpdateWorker.kt",
+        "patchSetId": 14
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-04T05:59:33Z",
+      "side": 1,
+      "message": "Added an ID to the work and logging for failure. Seems to work fine so far.",
+      "parentUuid": "7210fac4_8bd2b138",
+      "revId": "af1e985312dae655d380e76bdef39828a571c447",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3fec5cd_36b01cf9",
