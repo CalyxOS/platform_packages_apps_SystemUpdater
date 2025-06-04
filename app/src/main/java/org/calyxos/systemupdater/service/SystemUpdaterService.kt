@@ -5,18 +5,10 @@
 
 package org.calyxos.systemupdater.service
 
-import android.app.Notification
-import android.app.Notification.FOREGROUND_SERVICE_IMMEDIATE
-import android.app.NotificationChannel
-import android.app.NotificationChannelGroup
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Intent
 import android.util.Log
-import androidx.core.app.NotificationCompat
-import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
-import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.LifecycleService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -26,10 +18,9 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
-import org.calyxos.systemupdater.ui.MainActivity
 import org.calyxos.systemupdater.update.UpdateManager
 import org.calyxos.systemupdater.update.models.UpdateStatus
-import org.calyxos.systemupdater.receiver.RebootReceiver
+import org.calyxos.systemupdater.util.NotificationUtil
 import org.calyxos.systemupdater.util.PreferenceUtil
 import org.calyxos.systemupdater.work.RebootWorker
 import javax.inject.Inject
@@ -41,15 +32,11 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
         const val CHECK_UPDATES = "CheckUpdates"
         const val APPLY_UPDATE = "ApplyUpdate"
         const val CHECK_AND_APPLY_UPDATES = "${CHECK_UPDATES}And$APPLY_UPDATE"
+
+        private const val NOTIFICATION_ID_FGS = 1
     }
 
     private val TAG = SystemUpdaterService::class.java.simpleName
-
-    // Notification
-    private val serviceID = 1
-    private val updatesGroupID = "updates"
-    private val lowPriorityUpdatesChannelID = "lowPriorityUpdates"
-    private val highPriorityUpdatesChannelID = "highPriorityUpdates"
 
     private val notificationManager: NotificationManager
         get() = this.getSystemService<NotificationManager>()!!
@@ -64,11 +51,6 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
     @Inject
     lateinit var preferenceUtil: PreferenceUtil
 
-    override fun onCreate() {
-        super.onCreate()
-        createNotificationChannel()
-    }
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
 
@@ -82,58 +64,57 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
         updateManager.updateStatus.combine(updateManager.updateProgress) { status, progress ->
             when (status) {
                 UpdateStatus.UPDATE_AVAILABLE -> {
-                    val notification = getNotification(
-                        updateStatus = status,
-                        title = R.string.update_available,
-                        desc = R.string.update_available_desc
+                    val notification = NotificationUtil.getNotification(
+                        context = this,
+                        status = status,
+                        title = getString(R.string.update_available),
+                        desc = getString(R.string.update_available_desc)
                     )
                     notificationManager.notify(status.ordinal, notification)
                 }
+
                 UpdateStatus.PREPARING_TO_UPDATE,
                 UpdateStatus.DOWNLOADING,
                 UpdateStatus.SUSPENDED,
                 UpdateStatus.VERIFYING,
-                UpdateStatus.FINALIZING -> {
-                    val notification = getNotification(
-                        updateStatus = status,
-                        title = R.string.installing_update,
+                UpdateStatus.FINALIZING,
+                    -> {
+                    val notification = NotificationUtil.getNotification(
+                        context = this,
+                        status = status,
+                        title = getString(R.string.installing_update),
                         progress = progress
                     )
-                    notificationManager.notify(serviceID, notification)
+                    notificationManager.notify(NOTIFICATION_ID_FGS, notification)
                 }
+
                 UpdateStatus.FAILED_PREPARING_UPDATE,
-                UpdateStatus.REPORTING_ERROR_EVENT -> {
-                    val notification = getNotification(
-                        updateStatus = status,
-                        title = R.string.updated_failed,
-                        desc = R.string.updated_failed_desc
+                UpdateStatus.REPORTING_ERROR_EVENT,
+                    -> {
+                    val notification = NotificationUtil.getNotification(
+                        context = this,
+                        status = status,
+                        title = getString(R.string.updated_failed),
+                        desc = getString(R.string.updated_failed_desc)
                     )
                     notificationManager.notify(status.ordinal, notification)
                     stopForeground(STOP_FOREGROUND_REMOVE)
                 }
+
                 UpdateStatus.UPDATED_NEED_REBOOT -> {
                     if (preferenceUtil.shouldAutoReboot) {
                         RebootWorker.scheduleAutomaticReboot(this)
                     }
-                    val notification = getNotification(
-                        updateStatus = status,
-                        title = R.string.update_done,
-                        desc = R.string.update_done_desc,
-                        action = NotificationCompat.Action.Builder(
-                            IconCompat.createWithResource(this, R.drawable.ic_restart),
-                            this.getString(R.string.reboot),
-                            PendingIntentCompat.getBroadcast(
-                                this,
-                                0,
-                                Intent(this, RebootReceiver::class.java),
-                                0,
-                                false
-                            )
-                        ).build()
+                    val notification = NotificationUtil.getNotification(
+                        context = this,
+                        status = status,
+                        title = getString(R.string.update_done),
+                        desc = getString(R.string.update_done_desc),
                     )
                     notificationManager.notify(status.ordinal, notification)
                     stopForeground(STOP_FOREGROUND_REMOVE)
                 }
+
                 else -> null
             }
         }.launchIn(serviceScope)
@@ -148,10 +129,11 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
 
     private fun checkUpdates() {
         startForeground(
-            serviceID,
-            getNotification(
-                updateStatus = UpdateStatus.CHECKING_FOR_UPDATE,
-                title = R.string.checking_updates,
+            NOTIFICATION_ID_FGS,
+            NotificationUtil.getNotification(
+                context = this,
+                status = UpdateStatus.CHECKING_FOR_UPDATE,
+                title = getString(R.string.checking_updates),
                 progress = 0
             )
         )
@@ -164,10 +146,11 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
 
     private fun applyUpdate() {
         startForeground(
-            serviceID,
-            getNotification(
-                updateStatus = UpdateStatus.PREPARING_TO_UPDATE,
-                title = R.string.installing_update,
+            NOTIFICATION_ID_FGS,
+            NotificationUtil.getNotification(
+                context = this,
+                status = UpdateStatus.PREPARING_TO_UPDATE,
+                title = getString(R.string.installing_update),
                 progress = 0
             )
         )
@@ -177,10 +160,11 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
 
     private fun checkAndApplyUpdate() {
         startForeground(
-            serviceID,
-            getNotification(
-                updateStatus = UpdateStatus.CHECKING_FOR_UPDATE,
-                title = R.string.checking_updates,
+            NOTIFICATION_ID_FGS,
+            NotificationUtil.getNotification(
+                context = this,
+                status = UpdateStatus.CHECKING_FOR_UPDATE,
+                title = getString(R.string.checking_updates),
                 progress = 0
             )
         )
@@ -191,102 +175,6 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
             } else {
                 stopForeground(STOP_FOREGROUND_REMOVE)
             }
-        }
-    }
-
-    private fun getNotification(
-        updateStatus: UpdateStatus,
-        title: Int,
-        desc: Int? = null,
-        progress: Int? = null,
-        action: NotificationCompat.Action? = null
-    ): Notification {
-        val contentIntent = PendingIntent.getActivity(
-            this,
-            0,
-            Intent(this, MainActivity::class.java),
-            PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // Channel based on priority
-        val channelID = when (updateStatus) {
-            UpdateStatus.UPDATED_NEED_REBOOT,
-            UpdateStatus.REPORTING_ERROR_EVENT,
-            UpdateStatus.FAILED_PREPARING_UPDATE,
-            UpdateStatus.UPDATE_AVAILABLE -> highPriorityUpdatesChannelID
-            else -> lowPriorityUpdatesChannelID
-        }
-
-        val notification = NotificationCompat.Builder(this, channelID)
-            .setSmallIcon(R.drawable.ic_update)
-            .setContentTitle(this.getString(title))
-            .setContentIntent(contentIntent)
-            .setCategory(NotificationCompat.CATEGORY_SYSTEM)
-            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-
-        // Add action button
-        if (action != null) {
-            notification.addAction(action)
-        }
-
-        // Description can be optional, for e.g. in case of ongoing notification
-        if (desc != null) {
-            notification.setContentText(this.getString(desc))
-        } else {
-            if (updateStatus != UpdateStatus.CHECKING_FOR_UPDATE) {
-                notification.setContentText(
-                    updateStatus.name.lowercase().replace("_", " ")
-                        .replaceFirstChar { it.uppercase() })
-            }
-        }
-
-        // If progress is 0, switch to indeterminate
-        if (progress != null) {
-            notification
-                .setOngoing(true)
-                .setForegroundServiceBehavior(FOREGROUND_SERVICE_IMMEDIATE)
-                .setProgress(100, progress, progress == 0)
-        } else {
-            // Allow non-ongoing notifications to be removed on user click
-            notification.setAutoCancel(true)
-        }
-
-        return notification.build()
-    }
-
-    private fun createNotificationChannel() {
-        val updateGroup = NotificationChannelGroup(
-            updatesGroupID,
-            this.getString(R.string.update_group_title)
-        )
-
-        val lowPriorityNotificationChannel = NotificationChannel(
-            lowPriorityUpdatesChannelID,
-            this.getString(R.string.default_priority_update_channel_title),
-            NotificationManager.IMPORTANCE_LOW
-        ).also {
-            it.description = this.getString(R.string.default_priority_update_channel_desc)
-            it.group = updatesGroupID
-        }
-
-        val highPriorityNotificationChannel = NotificationChannel(
-            highPriorityUpdatesChannelID,
-            this.getString(R.string.high_priority_update_channel_title),
-            NotificationManager.IMPORTANCE_HIGH
-        ).also {
-            it.description = this.getString(R.string.high_priority_update_channel_desc)
-            it.group = updatesGroupID
-        }
-
-        // Create notification group and related channels
-        with(notificationManager) {
-            createNotificationChannelGroup(updateGroup)
-            createNotificationChannels(
-                listOf(
-                    lowPriorityNotificationChannel,
-                    highPriorityNotificationChannel
-                )
-            )
         }
     }
 }
