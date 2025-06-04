@@ -34,6 +34,24 @@
       "parentUuid": "29053b04_94b0af84",
       "revId": "83707515b7a08355b58ae79eebc2cbd3288d8d5a",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "622a1a00_5c7b8ddc",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/service/SystemUpdaterService.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-04T12:49:52Z",
+      "side": 1,
+      "message": "It should be fine. I recently learned that WorkManager generally doesn\u0027t throw exceptions synchronously, and we don\u0027t handle the ListenableFutures at all currently, so there shouldn\u0027t be anything uncaught here that will cause a crash.",
+      "parentUuid": "be2bcc80_f0991d35",
+      "revId": "83707515b7a08355b58ae79eebc2cbd3288d8d5a",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
