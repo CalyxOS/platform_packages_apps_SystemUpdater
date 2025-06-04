@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d84dee2_0d7a117c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-04T18:02:59Z",
+      "side": 1,
+      "message": "I\u0027m seeing that the batteryNotLow value in job scheduler is the opposite of how it is set in the preferences.\n\n1. Try changing the preference.\n2. `adb shell dumpsys jobscheduler | grep -A50 \u0027JOB .*systemupdater\u0027`",
+      "revId": "4539e024cf7023f5fee6e614dd908373aaa5dc96",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
