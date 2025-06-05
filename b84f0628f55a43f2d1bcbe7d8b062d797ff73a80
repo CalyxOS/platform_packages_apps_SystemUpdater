@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eace35ee_db6ade0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-05T15:56:45Z",
+      "side": 1,
+      "message": "This seems fine. Only note I have right now is for backup.\n\nBecause our preferences assume that WorkManager\u0027s state is as expected, and WorkManager\u0027s databases are stored in no_backup, if SystemUpdater is restored from backup, there can be a desync. Right now, this should only affect the battery setting. It is minor enough that we can perhaps fix it later, but I do think we should fix it at some point.",
+      "revId": "b84f0628f55a43f2d1bcbe7d8b062d797ff73a80",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
