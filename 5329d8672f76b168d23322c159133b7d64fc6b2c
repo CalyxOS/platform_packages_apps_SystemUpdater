@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb775aa1_35c45bd1",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-05T15:36:33Z",
+      "side": 1,
+      "message": "gen_update_config outputs this as a string because internally it\u0027s a string. Sounds like I should I change that so that it parses it as a number?\n\n`2147483647`\n`_250620210`\n\nJust randomly noting that this will need to be a Long rather than an Int if we ever add another digit vs what has been [proposed](https://gitlab.com/CalyxOS/calyxos/-/issues/3310).",
+      "parentUuid": "0e40ee2d_28708661",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46033d8e_61bc6ea6",
         "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2025-06-02T15:13:50Z",
       "side": 1,
       "message": "This could be a date, but that\u0027s not a blocker.",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "806655e4_d0ce4c5c",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-05T15:36:33Z",
+      "side": 1,
+      "message": "As with my last comment, if we want to make any type changes we should also update gen_update_config.",
+      "parentUuid": "46033d8e_61bc6ea6",
       "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
