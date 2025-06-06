@@ -119,6 +119,30 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fa1aa1b_ad90b0e9",
+        "filename": "sample-metadata-minimal.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-06T11:40:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "19b417ca_6e7159c5",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "6183cf2a03cba101123718fd3dde632f99c90199",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "170200d8_2a613786",
