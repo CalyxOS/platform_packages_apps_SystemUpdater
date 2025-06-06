@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19b417ca_6e7159c5",
+        "filename": "sample-metadata-minimal.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-06T10:51:03Z",
+      "side": 1,
+      "message": "We can always enable support for it if desired in serialization. Up to server people\u0027s preference.",
+      "parentUuid": "a8a78c0e_7d444655",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "6183cf2a03cba101123718fd3dde632f99c90199",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "170200d8_2a613786",
         "filename": "sample-metadata.json",
         "patchSetId": 2
