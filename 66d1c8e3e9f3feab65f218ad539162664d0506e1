@@ -151,6 +151,24 @@
       "parentUuid": "d7949a61_c5716bfb",
       "revId": "66d1c8e3e9f3feab65f218ad539162664d0506e1",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ab54337_d5421df4",
+        "filename": "sample-metadata.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-06T10:48:53Z",
+      "side": 1,
+      "message": "I will add a check to refer to \"from\" based on type as suggestion 1 but I would prefer to have both fields regardless.",
+      "parentUuid": "e68b301b_380083cc",
+      "revId": "66d1c8e3e9f3feab65f218ad539162664d0506e1",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
