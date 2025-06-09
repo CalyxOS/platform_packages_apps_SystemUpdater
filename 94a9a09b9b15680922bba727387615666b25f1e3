@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad5f2813_a45e340a",
+        "filename": "sample-metadata.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-09T07:16:06Z",
+      "side": 1,
+      "message": "This can be an Int, no?",
+      "range": {
+        "startLine": 12,
+        "startChar": 23,
+        "endLine": 12,
+        "endChar": 27
+      },
+      "revId": "94a9a09b9b15680922bba727387615666b25f1e3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ccd37f9_c8b11118",
+        "filename": "sample-metadata.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-09T07:16:06Z",
+      "side": 1,
+      "message": "This can be an Int, no?",
+      "range": {
+        "startLine": 15,
+        "startChar": 20,
+        "endLine": 15,
+        "endChar": 30
+      },
+      "revId": "94a9a09b9b15680922bba727387615666b25f1e3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48137356_14fd5ae1",
+        "filename": "sample-metadata.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-09T07:16:06Z",
+      "side": 1,
+      "message": "Same comment as above, can be an Int, no?",
+      "range": {
+        "startLine": 31,
+        "startChar": 20,
+        "endLine": 31,
+        "endChar": 30
+      },
+      "revId": "94a9a09b9b15680922bba727387615666b25f1e3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
