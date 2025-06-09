@@ -48,6 +48,30 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4ead47c_120b76cc",
+        "filename": "sample-metadata.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-06-09T13:05:14Z",
+      "side": 1,
+      "message": "Or \"15.0\", \"15.0\"\n\nWe also aren\u0027t really using it for anything, I envision only using it for display, so let\u0027s keep it a string.",
+      "parentUuid": "73d3bb2f_551e20e1",
+      "range": {
+        "startLine": 12,
+        "startChar": 23,
+        "endLine": 12,
+        "endChar": 27
+      },
+      "revId": "94a9a09b9b15680922bba727387615666b25f1e3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ccd37f9_c8b11118",
