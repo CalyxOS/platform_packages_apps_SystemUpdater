@@ -47,6 +47,30 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b23215e7_40192be3",
+        "filename": "sample-metadata.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-09T08:59:36Z",
+      "side": 1,
+      "message": "Nvm, public API says it can be git hash too which won\u0027t be an integer then.",
+      "parentUuid": "7ccd37f9_c8b11118",
+      "range": {
+        "startLine": 15,
+        "startChar": 20,
+        "endLine": 15,
+        "endChar": 30
+      },
+      "revId": "94a9a09b9b15680922bba727387615666b25f1e3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48137356_14fd5ae1",
@@ -60,6 +84,30 @@
       "writtenOn": "2025-06-09T07:16:06Z",
       "side": 1,
       "message": "Same comment as above, can be an Int, no?",
+      "range": {
+        "startLine": 31,
+        "startChar": 20,
+        "endLine": 31,
+        "endChar": 30
+      },
+      "revId": "94a9a09b9b15680922bba727387615666b25f1e3",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2c4d8d9_15f68bfe",
+        "filename": "sample-metadata.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-09T08:59:36Z",
+      "side": 1,
+      "message": "Ignore.",
+      "parentUuid": "48137356_14fd5ae1",
       "range": {
         "startLine": 31,
         "startChar": 20,
