@@ -120,6 +120,24 @@
       "message": "This is what\u0027s causing the build failure.",
       "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1473995e_6366fc1e",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-09T13:58:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08c0e37a_ad7ba009",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }

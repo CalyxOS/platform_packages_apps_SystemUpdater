@@ -16,6 +16,24 @@
       "message": "```\napp/src/main/java/org/calyxos/systemupdater/ui/UpdateViewModel.kt:61:31 Unresolved reference: abConfig\napp/src/main/java/org/calyxos/systemupdater/update/manager/UpdateManagerImpl.kt:129:42 Unresolved reference: abConfig\n```",
       "revId": "361cdd7574541decd07a70ff3c694691f4d9dcf2",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86c74ed3_e64ddd02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-09T13:58:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8734f29c_61bfb7e7",
+      "revId": "361cdd7574541decd07a70ff3c694691f4d9dcf2",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
