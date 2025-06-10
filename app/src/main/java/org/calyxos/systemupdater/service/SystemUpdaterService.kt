@@ -7,6 +7,10 @@ package org.calyxos.systemupdater.service
 
 import android.app.NotificationManager
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkCapabilities.TRANSPORT_CELLULAR
 import android.util.Log
 import androidx.core.content.getSystemService
 import androidx.lifecycle.LifecycleService
@@ -14,8 +18,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.update.UpdateManager
@@ -38,12 +47,39 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
 
     private val TAG = SystemUpdaterService::class.java.simpleName
 
+    private val connectivityManager: ConnectivityManager
+        get() = this.getSystemService<ConnectivityManager>()!!
+
     private val notificationManager: NotificationManager
         get() = this.getSystemService<NotificationManager>()!!
 
     // Coroutine
     private val job = SupervisorJob()
     private val serviceScope = CoroutineScope(Dispatchers.IO + job)
+
+    private val shouldUpdateOnMobileData
+        get() = preferenceUtil.shouldUpdateOnMobileDataFlow
+            .stateIn(serviceScope, SharingStarted.WhileSubscribed(), false)
+
+    private val isUsingMobileData: StateFlow<Boolean>
+        get() = callbackFlow {
+            val networkCallback = object : ConnectivityManager.NetworkCallback() {
+                override fun onCapabilitiesChanged(
+                    network: Network,
+                    networkCapabilities: NetworkCapabilities,
+                ) {
+                    trySend(networkCapabilities.hasTransport(TRANSPORT_CELLULAR))
+                }
+            }
+
+            connectivityManager.activeNetwork?.let { activeNetwork ->
+                val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
+                trySend(capabilities?.hasTransport(TRANSPORT_CELLULAR) ?: true)
+            }
+
+            connectivityManager.registerDefaultNetworkCallback(networkCallback)
+            awaitClose { connectivityManager.unregisterNetworkCallback(networkCallback) }
+        }.stateIn(serviceScope, SharingStarted.WhileSubscribed(), true)
 
     @Inject
     lateinit var updateManager: UpdateManager
@@ -61,7 +97,19 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
             else -> Log.d(TAG, "Got Unknown Intent!")
         }
 
-        updateManager.updateStatus.combine(updateManager.updateProgress) { status, progress ->
+        combine(isUsingMobileData, shouldUpdateOnMobileData, updateManager.updateStatus) {
+            usingMobileData, updateOnMobileData, status ->
+
+            when {
+                usingMobileData && !updateOnMobileData && status in UpdateStatus.UPDATING -> {
+                    updateManager.suspendUpdate()
+                }
+
+                else -> updateManager.resumeUpdate()
+            }
+        }
+
+        combine(updateManager.updateStatus, updateManager.updateProgress) { status, progress ->
             when (status) {
                 UpdateStatus.UPDATE_AVAILABLE -> {
                     val notification = NotificationUtil.getNotification(
