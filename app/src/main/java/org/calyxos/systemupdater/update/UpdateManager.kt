@@ -52,6 +52,18 @@ class UpdateManager @Inject constructor(
 
     private val TAG = UpdateManager::class.java.simpleName
 
+    private val rawUpdateConfig = File("${context.filesDir.absolutePath}/${Build.DEVICE}.json")
+
+    @OptIn(ExperimentalSerializationApi::class)
+    private val _updateConfig = MutableStateFlow(
+        if (rawUpdateConfig.exists()) {
+            json.decodeFromStream<UpdateConfig>(rawUpdateConfig.inputStream())
+        } else {
+            null
+        }
+    )
+    val updateConfig = _updateConfig.asStateFlow()
+
     private val _updateStatus = MutableStateFlow(UpdateStatus.IDLE)
     val updateStatus = _updateStatus.asStateFlow()
 
@@ -73,29 +85,31 @@ class UpdateManager @Inject constructor(
         updateProgress.launchIn(GlobalScope)
     }
 
-    suspend fun checkUpdates(): Boolean {
+    suspend fun checkUpdates(): UpdateConfig? {
+        _updateConfig.value = fetchUpdateConfig()
         _updateStatus.value = UpdateStatus.CHECKING_FOR_UPDATE
-        return when (val updateConfig = fetchUpdateConfig()) {
+
+        return when (val config = updateConfig.value) {
             null -> {
                 _updateStatus.value = UpdateStatus.FAILED_CHECKING_UPDATE
-                false
+                null
             }
 
             else -> {
                 preferenceUtil.lastUpdateCheck = Calendar.getInstance().time.time
 
                 val currentBuildDateUtc = SystemProperties.get("ro.build.date.utc").toLong()
-                return if (updateConfig.buildDateUTC > currentBuildDateUtc) {
+                return if (config.buildDateUTC > currentBuildDateUtc) {
                     Log.i(TAG, "New update available!")
                     _updateStatus.value = UpdateStatus.UPDATE_AVAILABLE
-                    true
+                    config
                 } else {
                     Log.i(
-                        TAG, "Available update build date ${updateConfig.buildDateUTC} is older"
+                        TAG, "Available update build date ${config.buildDateUTC} is older"
                             + " than current build date $currentBuildDateUtc; will not update"
                     )
                     _updateStatus.value = UpdateStatus.IDLE
-                    false
+                    null
                 }
             }
         }
@@ -111,18 +125,11 @@ class UpdateManager @Inject constructor(
         updateEngine.resume()
     }
 
-    suspend fun applyUpdate() {
+    suspend fun applyUpdate(config: UpdateConfig) {
         _updateStatus.value = UpdateStatus.PREPARING_TO_UPDATE
 
-        val updateConfig = fetchUpdateConfig()
-        if (updateConfig == null) {
-            Log.e(TAG, "Tried to applyUpdate when no applicable update was available")
-            _updateStatus.value = UpdateStatus.FAILED_PREPARING_UPDATE
-            return
-        }
-
         try {
-            val update = updateConfig.applicableUpdate
+            val update = config.applicableUpdate
             val url = "$URL_SERVER_OTA/${update.filename}"
             val properties = fetchPayloadProperties(url, update.properties)!!
 
@@ -153,10 +160,9 @@ class UpdateManager @Inject constructor(
      * Fetches [UpdateConfig] containing required properties and files to fetch OTA
      */
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun fetchUpdateConfig(): UpdateConfig? {
+    private suspend fun fetchUpdateConfig(): UpdateConfig? {
         val channel = preferenceUtil.currentChannel
         val url = "$URL_SERVER_OTA/$channel/${Build.DEVICE}"
-        val jsonFile = File("${context.filesDir.absolutePath}/${Build.DEVICE}.json")
 
         return withContext(Dispatchers.IO) {
             try {
@@ -168,14 +174,14 @@ class UpdateManager @Inject constructor(
 
                 if (connection.responseCode == HttpsURLConnection.HTTP_NOT_MODIFIED) {
                     Log.i(TAG, "No new config available, returning existing config!")
-                    return@withContext json.decodeFromStream(jsonFile.inputStream())
+                    return@withContext json.decodeFromStream(rawUpdateConfig.inputStream())
                 }
 
                 // Save the new update config (and ETag header) before returning it
                 val updateConfig = json.decodeFromStream<UpdateConfig>(connection.inputStream)
                 preferenceUtil.eTag = connection.getHeaderField("ETag")
                 return@withContext updateConfig.also {
-                    jsonFile.writeText(json.encodeToString(updateConfig))
+                    rawUpdateConfig.writeText(json.encodeToString(updateConfig))
                 }
             } catch (exception: Exception) {
                 Log.e(TAG, "Failed to fetch update config!", exception)
