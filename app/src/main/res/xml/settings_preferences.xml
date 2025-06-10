@@ -37,4 +37,11 @@
         app:summary="@string/reboot_summary"
         app:title="@string/reboot_title" />
 
+    <SwitchPreferenceCompat
+        app:iconSpaceReserved="false"
+        app:defaultValue="false"
+        app:key="PREF_REBOOT"
+        app:singleLineTitle="false"
+        app:summary="@string/cellular_summary"
+        app:title="@string/cellular_title" />
 </PreferenceScreen>

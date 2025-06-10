@@ -42,6 +42,8 @@
     <string name="battery_level_summary">Only check updates when the battery is above the warning level</string>
     <string name="reboot_title">Automatic reboot</string>
     <string name="reboot_summary">Automatically reboot once the device is idle after successfully installing an update</string>
+    <string name="cellular_title">Mobile data</string>
+    <string name="cellular_summary">Install updates when using mobile data</string>
 
     <!-- Notification -->
     <string name="notifications">Notifications</string>

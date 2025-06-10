@@ -28,5 +28,15 @@ enum class UpdateStatus {
     SUSPENDED, // custom: event when update is suspended
     PREPARING_TO_UPDATE, // custom: event sent during payload verification, fetching props
     FAILED_PREPARING_UPDATE, // custom: event when payload verification or fetching props fails
-    FAILED_CHECKING_UPDATE // custom: event when checking for updates fails
+    FAILED_CHECKING_UPDATE; // custom: event when checking for updates fails
+
+    companion object {
+        val UPDATING = listOf(
+            PREPARING_TO_UPDATE,
+            DOWNLOADING,
+            SUSPENDED,
+            VERIFYING,
+            FINALIZING
+        )
+    }
 }

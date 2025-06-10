@@ -30,6 +30,7 @@ class PreferenceUtil @Inject constructor(
         const val PREF_NOTIFICATION = "PREF_NOTIFICATION"
         const val PREF_BATTERY = "PREF_BATTERY"
         const val PREF_REBOOT = "PREF_REBOOT"
+        const val PREF_CELLULAR = "PREF_CELLULAR"
 
         // Misc
         private const val PREF_LAST_CHECK = "PREF_LAST_CHECK"
@@ -87,6 +88,26 @@ class PreferenceUtil @Inject constructor(
         }
 
     /**
+     * Flow emitting whether we should install updates when using mobile data
+     * @see lastUpdateCheck
+     */
+    val shouldUpdateOnMobileDataFlow: Flow<Boolean>
+        get() {
+            return callbackFlow {
+                val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
+                    if (changedKey == PREF_CELLULAR) trySend(shouldUpdateOnMobileData)
+                }
+
+                trySend(shouldUpdateOnMobileData)
+
+                sharedPreferences.registerOnSharedPreferenceChangeListener(listener)
+                awaitClose {
+                    sharedPreferences.unregisterOnSharedPreferenceChangeListener(listener)
+                }
+            }
+        }
+
+    /**
      * Currently preferred release channel
      */
     val currentChannel: String
@@ -103,4 +124,10 @@ class PreferenceUtil @Inject constructor(
      */
     val shouldAutoReboot: Boolean
         get() = sharedPreferences.getBoolean(PREF_REBOOT, false)
+
+    /**
+     * Whether we should install updates when using mobile data
+     */
+    private val shouldUpdateOnMobileData: Boolean
+        get() = sharedPreferences.getBoolean(PREF_CELLULAR, false)
 }
