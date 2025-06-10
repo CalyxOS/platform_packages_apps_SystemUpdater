@@ -16,6 +16,23 @@
       "message": "Needs testing, probably won\u0027t work",
       "revId": "d787df3b6647ec24223c660ceabeb439fc4886b5",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a080012_7df9bdbf",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/service/SystemUpdaterService.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-10T11:40:41Z",
+      "side": 1,
+      "message": "From [NetworkCapabilities](https://developer.android.com/reference/android/net/NetworkCapabilities):\n\u003e Generally, apps should normally have little reason to check for the type of transport ; for example, to query whether a network costs money to the user, do not look at the transport, but instead look at the absence or presence of NET_CAPABILITY_NOT_METERED which will correctly account for metered Wi-Fis and free of charge cell connections.\n\nCould we use inverted `hasCapability(NET_CAPABILITY_NOT_METERED)`?",
+      "revId": "d787df3b6647ec24223c660ceabeb439fc4886b5",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
