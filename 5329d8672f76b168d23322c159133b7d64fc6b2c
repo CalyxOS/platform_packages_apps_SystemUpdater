@@ -18,6 +18,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a74c2e_099b9aea",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/ABConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-10T13:45:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e7e7a02f_9ff04bc7",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e40ee2d_28708661",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "gen_update_config outputs this as a string because internally it\u0027s a string. Sounds like I should I change that so that it parses it as a number?\n\n`2147483647`\n`_250620210`\n\nJust randomly noting that this will need to be a Long rather than an Int if we ever add another digit vs what has been [proposed](https://gitlab.com/CalyxOS/calyxos/-/issues/3310).",
       "parentUuid": "0e40ee2d_28708661",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2480a957_13125462",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-10T13:45:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bb775aa1_35c45bd1",
       "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
@@ -88,6 +124,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6dc5d18_79c8781e",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-10T13:45:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "806655e4_d0ce4c5c",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65c9d31a_9dcd0d72",
@@ -101,6 +155,24 @@
       "writtenOn": "2025-06-02T15:13:50Z",
       "side": 1,
       "message": "The String here is build number. Change as per what we use for `buildNumber` above.",
+      "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb8c1b37_947a6ac0",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-10T13:45:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "65c9d31a_9dcd0d72",
       "revId": "5329d8672f76b168d23322c159133b7d64fc6b2c",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
