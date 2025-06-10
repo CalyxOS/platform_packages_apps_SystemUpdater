@@ -65,6 +65,24 @@
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03c9f310_c4491611",
+        "filename": "sample-metadata.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-10T13:45:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8cfb8cc9_4a875958",
+      "revId": "66d1c8e3e9f3feab65f218ad539162664d0506e1",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e4424d7_428760d6",
