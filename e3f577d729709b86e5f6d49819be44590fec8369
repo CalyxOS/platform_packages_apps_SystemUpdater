@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f14fa52_9a348faa",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2025-06-10T13:43:37Z",
+      "side": 1,
+      "message": "is this check correct for incremental builds or should it be `\u003e\u003d`?",
+      "range": {
+        "startLine": 42,
+        "startChar": 76,
+        "endLine": 42,
+        "endChar": 78
+      },
+      "revId": "e3f577d729709b86e5f6d49819be44590fec8369",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
