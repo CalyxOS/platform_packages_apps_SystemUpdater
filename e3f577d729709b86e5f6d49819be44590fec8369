@@ -22,6 +22,30 @@
       },
       "revId": "e3f577d729709b86e5f6d49819be44590fec8369",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b4b9471_f02b580c",
+        "filename": "app/src/main/java/org/calyxos/systemupdater/update/models/UpdateConfig.kt",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2025-06-10T13:46:23Z",
+      "side": 1,
+      "message": "This looks correct because a delta update, as a kind of binary patch, depends on the *from* and the *to* versions being the same.",
+      "parentUuid": "7f14fa52_9a348faa",
+      "range": {
+        "startLine": 42,
+        "startChar": 76,
+        "endLine": 42,
+        "endChar": 78
+      },
+      "revId": "e3f577d729709b86e5f6d49819be44590fec8369",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
