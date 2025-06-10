@@ -86,10 +86,22 @@ class UpdateManager @Inject constructor(
     }
 
     suspend fun checkUpdates(): UpdateConfig? {
-        _updateConfig.value = fetchUpdateConfig()
+        val channel = preferenceUtil.currentChannel
+        val url = "$URL_SERVER_OTA/$channel/${Build.DEVICE}"
+
+        // Fetch the update config
         _updateStatus.value = UpdateStatus.CHECKING_FOR_UPDATE
 
-        return when (val config = updateConfig.value) {
+        val config = fetchUpdateConfig(url)
+        _updateConfig.value = when {
+            !config?.requiredBuilds.isNullOrEmpty() -> {
+                // TODO: Handle fetching required build's update config and emit that
+                config
+            }
+            else -> config
+        }
+
+        return when (config) {
             null -> {
                 _updateStatus.value = UpdateStatus.FAILED_CHECKING_UPDATE
                 null
@@ -160,10 +172,7 @@ class UpdateManager @Inject constructor(
      * Fetches [UpdateConfig] containing required properties and files to fetch OTA
      */
     @OptIn(ExperimentalSerializationApi::class)
-    private suspend fun fetchUpdateConfig(): UpdateConfig? {
-        val channel = preferenceUtil.currentChannel
-        val url = "$URL_SERVER_OTA/$channel/${Build.DEVICE}"
-
+    private suspend fun fetchUpdateConfig(url: String): UpdateConfig? {
         return withContext(Dispatchers.IO) {
             try {
                 val connection = URL(url).openConnection() as HttpsURLConnection

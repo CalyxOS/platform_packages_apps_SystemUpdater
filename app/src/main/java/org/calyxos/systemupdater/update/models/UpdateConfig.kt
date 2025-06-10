@@ -37,7 +37,6 @@ data class UpdateConfig(
      */
     val applicableUpdate: ABConfig
         get() {
-            // TODO: Handle required builds
             val buildNumber = Build.VERSION.INCREMENTAL
             return zips.find { it.type == UpdateType.INCREMENTAL && it.from == buildNumber }
                 ?: zips.find { it.type == UpdateType.FULL }!!
