@@ -5,18 +5,23 @@
 
 package org.calyxos.systemupdater.ui
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
 import android.os.SystemProperties
 import android.text.format.DateUtils
+import android.text.format.Formatter
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.getSystemService
+import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -24,6 +29,7 @@ import androidx.navigation.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -130,9 +136,6 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                         UpdateStatus.UPDATE_AVAILABLE,
                         UpdateStatus.DOWNLOADING -> {
                             networkWarning.visibility = View.VISIBLE
-
-                            // Try to fetch update size
-                            viewModel.getPayloadSize()
                         }
                         else -> networkWarning.visibility = View.GONE
                     }
@@ -216,9 +219,6 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                         UpdateStatus.UPDATE_AVAILABLE,
                         UpdateStatus.UPDATED_NEED_REBOOT -> {
                             updateContainer.visibility = View.VISIBLE
-                            updateChangelogButton.setOnClickListener {
-                                viewModel.loadChangelog(it.context)
-                            }
                             infoContainer.visibility = View.GONE
                             updateCheck.visibility = View.GONE
                             installSteps.visibility = View.GONE
@@ -231,9 +231,6 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                         UpdateStatus.VERIFYING,
                         UpdateStatus.FINALIZING -> {
                             updateContainer.visibility = View.VISIBLE
-                            updateChangelogButton.setOnClickListener {
-                                viewModel.loadChangelog(it.context)
-                            }
                             infoContainer.visibility = View.GONE
                             updateCheck.visibility = View.GONE
                             installProgress.apply {
@@ -261,16 +258,34 @@ class UpdateFragment : Hilt_UpdateFragment(R.layout.fragment_update) {
                 }
             }
 
-            lifecycleScope.launch {
-                viewModel.updateSize.collect {
-                    if (it.isNotBlank()) {
-                        updateSize.apply {
-                            visibility = View.VISIBLE
-                            text = context.getString(R.string.update_size, it)
-                        }
-                    }
+            viewModel.updateConfig.filterNotNull().onEach { config ->
+                updateSize.apply {
+                    visibility = View.VISIBLE
+                    text = context.getString(
+                        R.string.update_size,
+                        Formatter.formatShortFileSize(
+                            requireContext(),
+                            config.applicableUpdate.payload.size
+                        )
+                    )
                 }
+                updateChangelogButton.apply {
+                    isVisible = !config.changelogUrl.isNullOrBlank()
+                    setOnClickListener { loadChangelog(config.changelogUrl!!) }
+                }
+            }.launchIn(lifecycleScope)
+        }
+    }
+
+    private fun loadChangelog(changelogUrl: String) {
+        try {
+            Intent(Intent.ACTION_VIEW, changelogUrl.toUri()).also {
+                requireContext().startActivity(it)
             }
+        } catch (exception: Exception) {
+            Log.e(TAG, "Unable to load changelog!", exception)
+            Toast.makeText(context, requireContext().getString(R.string.na), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }

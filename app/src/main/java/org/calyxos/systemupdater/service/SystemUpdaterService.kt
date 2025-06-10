@@ -155,7 +155,7 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
             )
         )
 
-        serviceScope.launch { updateManager.applyUpdate() }
+        serviceScope.launch { updateManager.applyUpdate(updateManager.updateConfig.value!!) }
     }
 
     private fun checkAndApplyUpdate() {
@@ -170,11 +170,9 @@ class SystemUpdaterService : Hilt_SystemUpdaterService() {
         )
 
         serviceScope.launch {
-            if (updateManager.checkUpdates()) {
-                updateManager.applyUpdate()
-            } else {
-                stopForeground(STOP_FOREGROUND_REMOVE)
-            }
+            updateManager.checkUpdates()?.let { config ->
+                updateManager.applyUpdate(config)
+            } ?: stopForeground(STOP_FOREGROUND_REMOVE)
         }
     }
 }

@@ -9,20 +9,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.text.format.DateFormat
-import android.text.format.Formatter
-import android.util.Log
-import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
-import org.calyxos.systemupdater.R
 import org.calyxos.systemupdater.service.SystemUpdaterService
 import org.calyxos.systemupdater.update.UpdateManager
 import org.calyxos.systemupdater.util.PreferenceUtil
@@ -35,45 +27,19 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     val preferenceUtil: PreferenceUtil,
     private val updateManager: UpdateManager,
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
-    private val TAG = MainViewModel::class.java.simpleName
+    val updateConfig get() = updateManager.updateConfig
+    val updateStatus get() = updateManager.updateStatus
+    val updateProgress get() = updateManager.updateProgress
 
-    val updateStatus = updateManager.updateStatus
-    val updateProgress = updateManager.updateProgress
-
-    val updateLastCheck = preferenceUtil.lastUpdateCheckFlow
-        .stateIn(viewModelScope, SharingStarted.Eagerly, -1)
-
-    private val _updateSize = MutableStateFlow("")
-    val updateSize = _updateSize.asStateFlow()
+    val updateLastCheck
+        get() = preferenceUtil.lastUpdateCheckFlow
+            .stateIn(viewModelScope, SharingStarted.Eagerly, -1)
 
     fun checkAndApplyUpdates() {
         UpdateWorker.triggerUpdate(context)
-    }
-
-    fun getPayloadSize() {
-        viewModelScope.launch {
-            val updateConfig = updateManager.fetchUpdateConfig()
-            updateConfig?.applicableUpdate?.payload?.let { payload ->
-                _updateSize.value = Formatter.formatFileSize(context, payload.size)
-            }
-        }
-    }
-
-    fun loadChangelog(viewContext: Context) {
-        viewModelScope.launch {
-            val updateConfig = updateManager.fetchUpdateConfig()
-            try {
-                Intent(Intent.ACTION_VIEW, updateConfig!!.changelogUrl!!.toUri()).also {
-                    viewContext.startActivity(it)
-                }
-            } catch (exception: Exception) {
-                Log.e(TAG, "Unable to load changelog!", exception)
-                Toast.makeText(context, context.getString(R.string.na), Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
     fun suspendUpdate() {
